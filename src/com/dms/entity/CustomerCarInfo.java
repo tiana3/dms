@@ -2,19 +2,19 @@ package com.dms.entity;
 
 public class CustomerCarInfo {
 		
-	private int customerCraInfo ;						//客户车辆信息
-	private String customerName ;						//客户名
-	private String gender ; 							//客户性别
-	private String address ;							//客户地址
-	private String phone ; 								//手机号
-	private String idCard ; 							//客户身份证号
-	private String plateNumber ;						//车牌号
-	private String vin ; 								//车架号	
-	private String color ;								//车颜色
-	private String gearBox ;							//变速箱
-	private String buyDate ;							//购买日期
-	private String poilcyDate ;							//保险日期
-	private int modelid ; 								//车型号id
+	private int customerCraInfoId;						//客户车辆信息
+	private String customerName;						//客户名
+	private String gender; 							//客户性别
+	private String address;							//客户地址
+	private String phone; 								//手机号
+	private String idCard; 							//客户身份证号
+	private String plateNumber;						//车牌号
+	private String vin; 								//车架号	
+	private String color;								//车颜色
+	private String gearBox;							//变速箱
+	private String buyDate;							//购买日期
+	private String poilcyDate;							//保险日期
+	private int modelid; 								//车型号id
 	
 	public CustomerCarInfo(){}
 
@@ -22,7 +22,7 @@ public class CustomerCarInfo {
 			String idCard, String plateNumber, String vin, String color, String gearBox, String buyDate,
 			String poilcyDate, int modelid) {
 		super();
-		this.customerCraInfo = customerCraInfo;
+		this.customerCraInfoId = customerCraInfo;
 		this.customerName = customerName;
 		this.gender = gender;
 		this.address = address;
@@ -38,11 +38,11 @@ public class CustomerCarInfo {
 	}
 
 	public int getCustomerCraInfo() {
-		return customerCraInfo;
+		return customerCraInfoId;
 	}
 
 	public void setCustomerCraInfo(int customerCraInfo) {
-		this.customerCraInfo = customerCraInfo;
+		this.customerCraInfoId = customerCraInfo;
 	}
 
 	public String getCustomerName() {
