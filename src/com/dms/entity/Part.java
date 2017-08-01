@@ -9,9 +9,6 @@ public class Part {
 	private int modelId;
 
 	
-	
-	
-	
 	public Part() {
 		super();
 	}
