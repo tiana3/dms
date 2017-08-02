@@ -2,7 +2,7 @@ package com.dms.entity;
 
 public class CustomerCarInfo {
 		
-	private int customerCraInfoId;						//客户车辆信息
+	private int customerCraInfoId;						//客户车辆信息id
 	private String customerName;						//客户名
 	private String gender; 							//客户性别
 	private String address;							//客户地址
