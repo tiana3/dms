@@ -15,6 +15,13 @@ public class WorkHour {
 	public WorkHour() {
 		super();
 	}
+	public WorkHour(int workplaceId, String workplaceName, double workhour, double workpay) {
+		super();
+		this.workplaceId = workplaceId;
+		this.workplaceName = workplaceName;
+		this.workhour = workhour;
+		this.workpay = workpay;
+	}
 	public WorkHour(int standardHourId, double standardHour, int workplaceId, String workplaceName, double workhour,
 			double workpay, int modelId) {
 		super();
