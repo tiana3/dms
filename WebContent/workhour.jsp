@@ -317,17 +317,7 @@
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-$('.table-sort').dataTable({
-	"lengthMenu":false,
-	"bFilter": false,
-	"bPaginate": false,
-	"bInfo": false,
-	"aaSorting": [[ 1, "desc" ]],
-	"bStateSave": true,
-	"aoColumnDefs": [
-	  {"orderable":false,"aTargets":[0,7]}
-	]
-});
+
 </script>
 
 </body>
