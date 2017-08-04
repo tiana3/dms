@@ -22,7 +22,7 @@ import com.dms.service.WorkHourService;
 /**
  * Servlet implementation class WorkHourServlet
  */
-@WebServlet("/WorkHourServlet")
+@WebServlet("/WorkHourAddUpdateServlet")
 public class WorkHourAddUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
