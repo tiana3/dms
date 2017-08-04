@@ -7,12 +7,13 @@ public class Part {
 	private double buyingPrice;
 	private double sellingPrice;
 	private int modelId;
+	private String model;
 
 	
 	public Part() {
 		super();
 	}
-	public Part(int partId, String partName, String partNo, double buyingPrice, double sellingPrice, int modelId) {
+	public Part(int partId, String partName, String partNo, double buyingPrice, double sellingPrice, int modelId ,String model) {
 		super();
 		this.partId = partId;
 		this.partName = partName;
@@ -20,6 +21,7 @@ public class Part {
 		this.buyingPrice = buyingPrice;
 		this.sellingPrice = sellingPrice;
 		this.modelId = modelId;
+		this.model = model ;
 	}
 	public int getPartId() {
 		return partId;
@@ -57,7 +59,12 @@ public class Part {
 	public void setModelId(int modelId) {
 		this.modelId = modelId;
 	}
-	
-	
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+		
 	
 }
