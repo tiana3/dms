@@ -34,6 +34,7 @@ public class WorkHourRemoveServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String str = request.getParameter("workhourId");
+		System.out.println(str);
 		int workhourId = Integer.parseInt(str);
 		WorkHourDao work = new WorkHourService();
 		work.removeWorkHour(workhourId);
