@@ -1,7 +1,6 @@
 package com.dms.dao.impl;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,12 +16,13 @@ public class EmployeeDaoImlp {
 	}
 	public static void addEmployee(Employee employee){
 		Connection conn = JdbcUtil.getConnection();
-		String sql = "insert into employee set employeeId='" + employee.getEmployeeId() + "',name='" + 
+		String sql = "insert into employee set employee.`name`='" + 
 				employee.getEmployeeName() + "',gender='" + employee.getGender() + "',phone='" + 
 				employee.getPhone() + "',idCard='" + employee.getIdCard() + "',jobId='" + employee.getJobId() + "'";
 		PreparedStatement statment;
 		try {
 			statment = conn.prepareStatement(sql);
+			statment.execute(sql);
 			statment.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -32,16 +32,13 @@ public class EmployeeDaoImlp {
 	}
 	public static void updateEmployee(Employee employee){
 		Connection conn = JdbcUtil.getConnection();
-		String sql = "UPDATE job,employee,department SET job.`NAME`='"
-				+ employee.getJobName() + "',department.`name`='"
-						+ employee.getDepartmentName() + "',employee.`name`='"
-								+ employee.getEmployeeName() + "',employee.`gender`='"
-										+ employee.getGender() + "',employee.`phone`='"
-												+ employee.getPhone() + "',employee.`idCard`='"
-														+ employee.getIdCard() + "' WHERE job.`jobId` ='"
-										+ employee.getJobId() + "' AND department.`departmentId`='"
-												+ employee.getDepartmentId() + "' AND employee.`employeeId`='"
-														+ employee.getEmployeeId() + "'";
+		String sql = "UPDATE employee SET employee.`name`='"
+				+ employee.getEmployeeName() + "',employee.`gender`='"
+				+ employee.getGender() + "',employee.`phone`='"
+				+ employee.getPhone() + "',employee.`idCard`='"
+				+ employee.getIdCard() + "',employee.`jobId`='"
+				+ employee.getJobId() + "' WHERE employee.`employeeId`='"
+				+ employee.getEmployeeId() + "'";
 				
 		PreparedStatement statment;
 		try {
@@ -60,6 +57,7 @@ public class EmployeeDaoImlp {
 		PreparedStatement statment;
 		try {
 			statment = conn.prepareStatement(sql);
+			statment.executeUpdate();
 			statment.close();
 			conn.close();
 		} catch (SQLException e) {

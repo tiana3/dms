@@ -35,6 +35,14 @@
 <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
+<script type="text/javascript">
+function myFunction(x){
+    x.style.background="skyblue";
+}
+function myfunction(x){
+    x.style.background="white";
+}
+</script>
 <!--_header 作为公共模版分离出去-->
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
@@ -179,7 +187,8 @@
 		<article class="cl pd-20">
             <div class="span12" >
             <form class="form-search form-inline" action="employeeSelect" >
-				<input class="input-medium search-query" type="text" name="selectname"> <button type="submit" class="btn btn-primary">查找</button>
+				<input class="input-medium search-query" type="text" name="selectname" onfocus="myFunction(this)" onblur="myfunction(this)"> <button type="submit" class="btn btn-primary">查找</button>
+				<a href="employeeinsert.jsp"><input type="button" class="btn btn-info" value="添加"></a>
 			</form>
                 <table class="table table-bordered table-hover">
                     <thead>
