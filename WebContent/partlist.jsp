@@ -213,7 +213,7 @@
                 </ul>
                 <ul>
                     <li>
-                        <a href="charts-8.jsp" title="材料目录管理">材料目录管理</a>
+                        <a href="partlist.jsp" title="材料目录管理">材料目录管理</a>
                     </li>
                 </ul>
                 <ul>
