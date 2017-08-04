@@ -30,39 +30,39 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add" action="PartServlet" method="post">
+	<form class="form form-horizontal" id="form-article-add" action="PartUpateServlet" method="get">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partname">
+				<input type="text" class="input-text" value="${param.partName} " placeholder="" id="" name="partname">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">配件号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partno">
+				<input type="text" class="input-text" value="${param.partNo}" placeholder="" id="" name="partno">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<select name="modelid" class="select">
-					<option value="1" >RVC</option>
-					<option value="2">RvE</option>
-					<option value="3">BWM</option>
+					<option value="1" ${param.modelId == 1 ? "selected" : "" }>RVC</option>
+					<option value="2" ${param.modelId == 2 ? "selected" : "" }>RvE</option>
+					<option value="3" ${param.modelId == 3 ? "selected" : "" }>BWM</option>
 				</select>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>进货成本：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="" id="" name="buyingprice">
+                    <input type="text" class="input-text" value="${param.buyingPrice}" placeholder="" id="" name="buyingprice">
 				</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">销售价：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="sellingprice">
+				<input type="text" class="input-text" value="${param.sellingPrice}" placeholder="" id="" name="sellingprice">
 			</div>
 		</div>
 		<div class="row cl">
@@ -96,7 +96,8 @@ $(function(){
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
-	});
+	})
+});
 	
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

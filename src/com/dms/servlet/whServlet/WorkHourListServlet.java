@@ -36,7 +36,7 @@ public class WorkHourListServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		WorkHourDao workhour = new WorkHourService();
 		List<WorkHour> list = workhour.getWorkHour();
-		request.setAttribute("list", list);
+		request.setAttribute("work", list);
 		request.getRequestDispatcher("/workhour.jsp").forward(request, response);
 	}
 

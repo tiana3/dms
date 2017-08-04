@@ -41,8 +41,7 @@ public class PartListServlet extends HttpServlet  {
 		List<Part> list = imp.getPart(keyword1 , keyword2 , modelId);
 		request.setAttribute("partlist",list);
 		request.getRequestDispatcher("/partlist.jsp").forward(request, response);
-
-
+		
 			}	
 	
 }

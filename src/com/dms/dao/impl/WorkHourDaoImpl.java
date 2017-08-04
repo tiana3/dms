@@ -16,6 +16,11 @@ public class WorkHourDaoImpl implements WorkHourDao{
 	PreparedStatement pre = null;
 	ResultSet res = null;
 	
+	public static void main(String[] args) {
+		WorkHourDaoImpl s = new WorkHourDaoImpl();
+		System.out.println(s.getWorkHour());
+	}
+	
 	@Override
 	public List<WorkHour> getWorkHour() {
 		List<WorkHour> list = new ArrayList<WorkHour>();
@@ -49,7 +54,7 @@ public class WorkHourDaoImpl implements WorkHourDao{
 
 	@Override
 	public void addWorkHour(WorkHour workhour) {
-		String sql = "insert into workplace (workplaceName,workhour,workpay) value(?,?,?)";
+		String sql = "insert into workplace (workplaceName,workhour,workpay) value(?,?,?) where workplaceId=?";
 		
 		try {
 			con = JdbcUtil.getConnection();
@@ -84,7 +89,7 @@ public class WorkHourDaoImpl implements WorkHourDao{
 
 	@Override
 	public void updateWorkHour(WorkHour workhour) {
-		String sql = "update workplace set workplaceName=?, workhour=?, workpay=? where workplaceId=?";
+		String sql = "UPDATE dms.workplace SET workpay=? WHERE workplaceId=?";
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql);
