@@ -13,6 +13,7 @@ import com.dms.util.JdbcUtil;
 
 public class PartDaoImpl implements PartDao {
 	
+	 
 	
 
 	@Override
@@ -151,5 +152,6 @@ public class PartDaoImpl implements PartDao {
 		
 		return list;
 	}
+
 
 }

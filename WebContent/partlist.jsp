@@ -41,19 +41,7 @@
             <span class="logo navbar-slogan f-l mr-10 hidden-xs">汽车售后管理</span>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav class="nav navbar-nav">
-                <ul class="cl">
-                    <li class="dropDown dropDown_hover">
-                        <a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-                        <ul class="dropDown-menu menu radius box-shadow">
-                            <li>
-                                <a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i>仓库管理</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 仓库管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
@@ -105,22 +93,22 @@
 
     <div class="menu_dropdown bk_2">
         <dl id="menu-article">
-            <dt class="selected"><i class="Hui-iconfont">&#xe616;</i> 维修业务<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd style="display:block">
+            <dt><i class="Hui-iconfont">&#xe616;</i> 维修业务<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
                 <ul>
-                    <li class="current">
-                        <a href="article-list.html" title="预约">预约</a>
+                    <li >
+                        <a href="#" title="预约">预约</a>
                     </li>
-                    <li class="current">
+                    <li >
                         <a href="article-list.html" title="维修估价">维修估价</a>
                     </li>
-                    <li class="current">
+                    <li >
                         <a href="article-list.html" title="维修业务开单">维修业务开单</a>
                     </li>
-                    <li class="current">
+                    <li >
                         <a href="article-list.html" title="维修业务查询">维修业务查询</a>
                     </li>
-                    <li class="current">
+                    <li >
                         <a href="article-list.html" title="完工">完工</a>
                     </li>
                 </ul>
@@ -205,19 +193,19 @@
         </dl>
         <dl id="menu-system">
             <dt><i class="Hui-iconfont">&#xe62e;</i> 基础信息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
+            <dd style="display:block">
                 <ul>
                     <li>
                         <a href="system-log.html" title="工时工位管理">工时工位管理</a>
                     </li>
                 </ul>
                 <ul>
-                    <li>
+                    <li class="current">
                         <a href="partlist.jsp" title="材料目录管理">材料目录管理</a>
                     </li>
                 </ul>
                 <ul>
-                    <li>
+                    <li >
                         <a href="system-log.html" title="车型管理">车型管理</a>
                     </li>
                 </ul>
@@ -260,8 +248,9 @@
             <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-				<a class="btn btn-primary radius" data-title="添加信息" _href="article-add.jsp?act=update&ipone=${part.partId }" onclick="article_add('添加信息','article-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加信息</a>
+				<a class="btn btn-primary radius" data-title="添加信息" _href="article-add.jsp" onclick="article_add('添加信息','part-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加信息</a>
 				</span>
+				<input type="hidden" name="act">
                 <span class="r">共有数据：<strong>1</strong>条</span>
             </div>
             <div class="mt-20">     
@@ -283,13 +272,13 @@
                     <tr class="text-c">                  		
                         <td><input type="checkbox" value="" name=""></td>
                         <td>${varSta.count }</td>
-                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-add.jsp','10001')" title="查看">${part.partName}</u></td>
+                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','part-add.jsp','10001')" title="查看">${part.partName}</u></td>
                         <td>${part.partNo}</td>
                         <td>${part.model}</td>
                         <td>${part.buyingPrice}</td>
                         <td>${part.sellingPrice}</td>                                   
                         <td class="f-14 td-manage">
-                        <a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑资料','article-updat.jsp?','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                        <a style="text-decoration:none" class="ml-5" onClick="article_edit('编辑资料','part-update.jsp?partId=${part.partId}&partName=${part.partName}&partNo=${part.partNo}&modelId=${part.modelId}&buyingPrice=${part.buyingPrice}&sellingPrice=${part.sellingPrice}','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </tr>
                     </c:forEach>
