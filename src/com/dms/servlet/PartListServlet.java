@@ -40,7 +40,7 @@ public class PartListServlet extends HttpServlet  {
 		PartDaoImpl imp = new PartDaoImpl();	
 		List<Part> list = imp.getPart(keyword1 , keyword2 , modelId);
 		request.setAttribute("partlist",list);
-		request.getRequestDispatcher("/charts-8.jsp").forward(request, response);
+		request.getRequestDispatcher("/partlist.jsp").forward(request, response);
 
 
 			}	
