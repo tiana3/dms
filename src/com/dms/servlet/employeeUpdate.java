@@ -41,8 +41,8 @@ public class employeeUpdate extends HttpServlet {
 		String IdCard = request.getParameter("idcard");
 		String jobname = request.getParameter("jobname");
 		String department = request.getParameter("departmentname");
-		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department, employeeid, jobname);
-		System.out.println(employeeid+" "+name+" "+gender+""+phone+""+IdCard+""+jobname+""+department);
+		int jobid = Integer.parseInt(request.getParameter("jobid"));
+		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department,jobid, jobname);
 		EmployeeDaoImlp.updateEmployee(employee);
 		response.sendRedirect("employees.jsp");
 	}

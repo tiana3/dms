@@ -190,30 +190,21 @@ function myfunction(x){
 	<div class="Hui-article">
 		<article class="cl pd-20">
             <div class="span12" style="text-align: center;">
-            <form class="form-search form-inline" action="employeeUpdate" method="get">
+            <form class="form-search form-inline" action="employeeInsert" method="get">
             <h1>员工资料修改</h1>
             <div align="center">
 				<table class="table table-bordered" align="center" style="width: 20%">
-				<%int id = Integer.parseInt(request.getParameter("id"));
-				ArrayList<Employee> employees = EmployeeDaoImlp.getAllEmployee();
-				for(Employee e:employees){
-					if(e.getEmployeeId()==id){%>
 				<tr>
-				<td>编号</td><td><input type="text" value=<%=e.getEmployeeId() %> disabled="disabled" onfocus="myFunction(this)" onblur="myfunction(this)">
-				<%HttpSession ssion = request.getSession();
-				ssion.setAttribute("empid", e.getEmployeeId());%></td>
+				<td>员工名称:</td><td><input type="text" name="name" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
 				</tr>
 				<tr>
-				<td>员工名称:</td><td><input type="text" value=<%=e.getEmployeeName()%> name="name" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
+				<td>性别:</td><td><input type="text" name="gender" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
 				</tr>
 				<tr>
-				<td>性别:</td><td><input type="text" value=<%=e.getGender() %> name="gender" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
+				<td>联系电话:</td><td><input type="text" name="phone" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
 				</tr>
 				<tr>
-				<td>联系电话:</td><td><input type="text" value=<%=e.getPhone() %> name="phone" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
-				</tr>
-				<tr>
-				<td> 身份证:</td><td><input type="text" value=<%=e.getIdCard() %> name="idcard" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
+				<td> 身份证:</td><td><input type="text" name="idcard" onfocus="myFunction(this)" onblur="myfunction(this)"></td>
 				</tr>
 				<tr>
 				<td>工作岗位:</td>
@@ -225,10 +216,8 @@ function myfunction(x){
 				</select>
 				</td>
 				</tr>
-				<%}
-				}%>
 				</table>
-				<input type="submit" class="btn btn-sm btn-warning" value="确定修改" >
+				<input type="submit" class="btn btn-sm btn-warning" value="确定添加" >
 				</div>
 			</form>
             </div>
