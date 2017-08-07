@@ -92,10 +92,17 @@
 	<script type="text/javascript">
 	$("#form-cartype-add").validate({
 		submitHandler:function(form){
-			$(form).ajaxSubmit();
-			parent.location.reload();
-			var index = parent.layer.getFrameIndex(window.name);
-			parent.layer.close(index);
+			$(form).ajaxSubmit({
+				success: function() { 
+					
+					parent.location.reload();
+					var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
+				}
+				
+			})
+				
+			
 		}
 	});
 </script>
