@@ -38,7 +38,7 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="get" class="form form-horizontal" id="form-workhour-add">
+		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="post" class="form form-horizontal" id="form-workhour-add">
 			
 			<input type="hidden" name="workplaceId" value="${param.workplaceId }">
 			<div class="row cl">

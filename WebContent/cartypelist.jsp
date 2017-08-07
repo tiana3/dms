@@ -265,7 +265,6 @@
 								onclick="cartype_del(this,${carType.modelId })"
 								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
-							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
 				</tbody>
 			</table>

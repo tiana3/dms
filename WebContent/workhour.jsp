@@ -37,6 +37,7 @@
 <title>工时工位管理</title>
 </head>
 <body>
+	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
@@ -74,26 +75,20 @@
 				<li class="dropDown dropDown_hover"><a href="#"
 					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-						<li><a href="#">切换账户</a></li>
 						<li><a href="#">退出</a></li>
 					</ul></li>
-				<li id="Hui-msg"><a href="#" title="消息"> <span
-						class="badge badge-danger">1</span> <i class="Hui-iconfont"
+				<li id="Hui-msg"><a href="#" title="消息"><span
+						class="badge badge-danger">1</span><i class="Hui-iconfont"
 						style="font-size: 18px">&#xe68a;</i></a></li>
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
 						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a>
-						</li>
-						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a>
-						</li>
-						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a>
-						</li>
+						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
-						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a>
-						</li>
+						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
 					</ul></li>
 			</ul>
@@ -101,7 +96,9 @@
 		</div>
 	</div>
 	</header>
+	<!--/_header 作为公共模版分离出去-->
 
+	<!--_menu 作为公共模版分离出去-->
 	<aside class="Hui-aside">
 
 	<div class="menu_dropdown bk_2">
@@ -128,13 +125,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-product">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="product-brand.html" title="品牌管理">品牌管理</a></li>
+					<li class="current"><a href="product-brand.html" title="品牌管理">品牌管理</a></li>
 					<li><a href="product-category.html" title="分类管理">分类管理</a></li>
 					<li><a href="product-list.html" title="产品管理">产品管理</a></li>
 				</ul>
@@ -147,8 +144,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a>
-					</li>
+					<li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
 					<li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>
 				</ul>
 			</dd>
@@ -163,12 +159,9 @@
 					<li><a href="member-list.html" title="会员列表">会员列表</a></li>
 					<li><a href="member-del.html" title="删除的会员">删除的会员</a></li>
 					<li><a href="member-level.html" title="等级管理">等级管理</a></li>
-					<li><a href="member-scoreoperation.html" title="积分管理">积分管理</a>
-					</li>
-					<li><a href="member-record-browse.html" title="浏览记录">浏览记录</a>
-					</li>
-					<li><a href="member-record-download.html" title="下载记录">下载记录</a>
-					</li>
+					<li><a href="member-scoreoperation.html" title="积分管理">积分管理</a></li>
+					<li><a href="member-record-browse.html" title="浏览记录">浏览记录</a></li>
+					<li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
 					<li><a href="member-record-share.html" title="分享记录">分享记录</a></li>
 				</ul>
 			</dd>
@@ -204,18 +197,17 @@
 			</dd>
 		</dl>
 		<dl id="menu-system">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block">
+			<dd>
 				<ul>
 					<li><a href="system-base.html" title="系统设置">系统设置</a></li>
 					<li><a href="system-category.html" title="栏目管理">栏目管理</a></li>
 					<li><a href="system-data.html" title="数据字典">数据字典</a></li>
 					<li><a href="system-shielding.html" title="屏蔽词">屏蔽词</a></li>
-					<li class="current"><a href="system-log.html" title="系统日志">系统日志</a>
-					</li>
+					<li><a href="system-log.html" title="系统日志">系统日志</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -236,11 +228,15 @@
 	<div class="Hui-article">
 		<article class="cl pd-20">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l">工位名:<input type="text"> <a title="详情"
+			<span class="l">工位名:<input type="text"> <a title="搜索"
 				href="javascript:;" onclick="system_log_show(this,'10001')"
 				class="ml-5" style="text-decoration: none"> <i
 					class="Hui-iconfont">&#xe665;</i></a>
-			</span> <span class="r">共有数据：<strong></strong> 条
+			</span> <span>
+			<a class="btn btn-primary radius"
+				onclick="workhour_edit('添加工时工位','workhourAddUpdate.jsp','${workhour.workplaceId}')" href="javascript:;"><i
+				class="Hui-iconfont">&#xe600;</i> 添加工时工位</a></span>
+			<span class="r">共有数据：<strong></strong> 条
 			</span>
 		</div>
 		<div class="mt-10">
@@ -264,7 +260,7 @@
 							<td>${workhour.workhour }</td>
 							<td>${workhour.workpay }</td>
 							<td><a title="编辑" href="javascript:;" class="ml-5"
-								onclick="workhour_edit('工时工位','workhourAddUpdate.jsp?workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')" 
+								onclick="workhour_edit('工时工位','workhourAddUpdate.jsp?workplaceId=${workhour.workplaceId }&workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')" 
 								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6df;</i></a>
 								<a title="删除" href="javascript:;"
 								onclick="workhour_del(this,${workhour.workplaceId })" class="ml-5"
