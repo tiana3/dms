@@ -56,7 +56,7 @@ public class employeeSelect extends HttpServlet {
 		if(c = false)
 		{
 			System.out.println(" 6666666");
-				out.print("<h1>不存在此用户</h1>");
+				out.print("<h1>此用户不存在</h1>");
 		}
 		}
 
