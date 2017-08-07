@@ -218,7 +218,7 @@
 					<tbody>
 					
 						<tr class="text-c">
-							<td>${varStatus.count }</td>
+							<td>${varSta.count }</td>
 							<td>${workhour.workplaceName }</td>
 							<td>${workhour.workhour }</td>
 							<td>${workhour.workpay }</td>
