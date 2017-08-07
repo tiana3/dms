@@ -38,24 +38,30 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="${pageContext.request.contextPath}/CarTypeAddUpdateServlet" method="post" class="form form-horizontal" id="form-cartype-add">
+		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="post" class="form form-horizontal" id="form-workhour-add">
 			
-			<input type="hidden" name="modelId" value="${param.modelId }">
+			<input type="hidden" name="workplaceId" value="${param.workplaceId }">
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">车辆厂家：</label>
+				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.factory }" placeholder="" id=""
-						name="factory">
+					<input type="text" class="input-text" value="${param.workplaceName }" placeholder="" id=""
+						name="workplaceName">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">车辆型号：</label>
+				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.model }" placeholder="" id=""
-						name="model">
+					<input type="text" class="input-text" value="${param.workhour }" placeholder="" id=""
+						name="workhour">
 				</div>
 			</div>
-			
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="${param.workpay }" placeholder="" id=""
+						name="workpay">
+				</div>
+			</div>
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 					<button class="btn btn-primary radius" type="submit">
@@ -90,7 +96,7 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-	$("#form-cartype-add").validate({
+	$("#form-workhour-add").validate({
 		submitHandler:function(form){
 			$(form).ajaxSubmit({
 				success: function() { 
@@ -101,8 +107,7 @@
 				}
 				
 			})
-				
-			
+							
 		}
 	});
 </script>

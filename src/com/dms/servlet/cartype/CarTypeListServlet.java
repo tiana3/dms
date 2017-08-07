@@ -29,6 +29,7 @@ public class CarTypeListServlet extends HttpServlet {
 		
 		CarTypeService service = new CarTypeServiceImpl();
 		List<CarType> list = service.getAllCarType();
+	
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/cartypelist.jsp").forward(request, response);
 	}

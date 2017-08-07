@@ -1,12 +1,11 @@
-
-
-<%@ page language="java" import="java.util.List"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -14,10 +13,10 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="Bookmark" href="favicon.ico">
 <link rel="Shortcut Icon" href="favicon.ico" />
-
+<!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
-
+<![endif]-->
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -28,16 +27,15 @@
 	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script><![endif]-->
+<!--/meta 作为公共模版分离出去-->
 
-<script src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-	DD_belatedPNG.fix('*');
-</script>
-
-<title>工时工位管理</title>
+<title>客户车辆信息</title>
 </head>
 <body>
-<!--_header 作为公共模版分离出去-->
+	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
@@ -181,94 +179,104 @@
 	</div>
 	<!--/_menu 作为公共模版分离出去-->
 
-
 	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	工时工位管理 <a class="btn btn-success radius r"
+	档案信息管理 <span class="c-gray en">&gt;</span> 客户车辆信息 <a
+		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新"><i
-		class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		class="Hui-iconfont">&#xe68f;</i></a></nav>
+
 	<div class="Hui-article">
 		<article class="cl pd-20">
+		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
+		<div class="text-c"> 
+			客户姓名：
+			<input type="text" name="customerName" class="input-text" style="width:100px;">
+			手机号：
+			<input type="text" name="phone" class="input-text" style="width:120px;">
+			车牌号：
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">
+			车架号：
+			<input type="text" name="vin" id="" style="width:150px" class="input-text">			
+			
+			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		</div>
+		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l">工位名:<input type="text"> <a title="搜索"
-				href="javascript:;" onclick="system_log_show(this,'10001')"
-				class="ml-5" style="text-decoration: none"> <i
-					class="Hui-iconfont">&#xe665;</i></a>
-			</span> <span>
-			<a class="btn btn-primary radius"
-				onclick="workhour_edit('添加工时工位','workhourAddUpdate.jsp','${workhour.workplaceId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加工时工位</a></span>
-			<span class="r">共有数据：<strong></strong> 条
+			
+				<a class="btn btn-primary radius"
+				onclick="cartype_edit('添加车辆型号','cartypeAddUpdate.jsp','${carType.modelId}')" href="javascript:;"><i
+				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
+				条
 			</span>
 		</div>
 		<div class="mt-10">
-			<table
-				class="table table-border table-bordered table-bg table-hover table-sort">
+			<table class="table table-border table-bordered table-bg table-sort">
 				<thead>
 					<tr class="text-c">
-						<th width="80">序列号</th>
-						<th>工位名</th>
-						<th width="17%">工时(单位：小时)</th>
-						<th width="17%">工时费(单位：元)</th>
-						<th width="100">操作</th>
+						
+						<th>序号</th>
+						<th>客户名</th>
+						<th>车牌</th>
+						<th>手机号</th>
+						<th>车架号</th>
 					</tr>
 				</thead>
-				<c:forEach items="${work }" var="workhour" varStatus="varSta">
-					<tbody>
-					
+				<tbody>
+					<c:forEach items="${list }" var="customer" varStatus="varSta">
 						<tr class="text-c">
-							<td>${varStatus.count }</td>
-							<td>${workhour.workplaceName }</td>
-							<td>${workhour.workhour }</td>
-							<td>${workhour.workpay }</td>
-							<td><a title="编辑" href="javascript:;" class="ml-5"
-								onclick="workhour_edit('工时工位','workhourAddUpdate.jsp?workplaceId=${workhour.workplaceId }&workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')" 
-								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6df;</i></a>
-								<a title="删除" href="javascript:;"
-								onclick="workhour_del(this,${workhour.workplaceId })" class="ml-5"
-								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6e2;</i></a>
-							</td>
+							<td>${varSta.count }</td>
+							<td>${customer.customerName }</td>
+							<td>${customer.plateNumber }</td>
+							<td>${customer.phone }</td>
+							<td>${customer.vin }</td>
+							<td class="f-14 product-brand-manage"><a
+								style="text-decoration: none"
+								onClick="cartype_edit('车辆型号编辑','cartypeAddUpdate.jsp?modelId=${carType.modelId }&factory=${carType.factory }&model=${carType.model }','${carType.modelId}')"
+								href="javascript:;" title="详情"><i class="Hui-iconfont">&#xe6df;</i></a>
+								<a style="text-decoration: none" class="ml-5" href="javascript:;"
+								onclick="cartype_del(this,${carType.modelId })"
+								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
-					
-					</tbody>
-				</c:forEach>
+							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
-		<div id="pageNav" class="pageNav"></div>
 		</article>
 	</div>
 	</section>
 
+	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 	<script type="text/javascript"
 		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
+	<!--/_footer /作为公共模版分离出去-->
 
-
-
+	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
 		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
-	function workhour_edit(title,url,id,w,h){
+	function cartype_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);
 	}
 	
-	function workhour_del(obj,id){
+	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
-			$.ajax({url : "${pageContext.request.contextPath }/WorkHourRemoveServlet?workhourId="+ id});
-			
+			$.ajax({url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
 
-	</script>
-
+</script>
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

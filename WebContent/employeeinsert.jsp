@@ -48,142 +48,148 @@ function myfunction(x){
 }
 </script>
 <!--_header 作为公共模版分离出去-->
-<header class="navbar-wrapper">
+	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">汽车维修fuwuxi</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> <span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.0</span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+		<div class="container-fluid cl">
+			<a class="logo navbar-logo f-l mr-10 hidden-xs"
+				href="#">售后管理系统</a> <a
+				class="logo navbar-logo-m f-l mr-10 visible-xs"
+				href="/aboutHui.shtml">H</a> <span
+				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
 			<nav class="nav navbar-nav">
-				<ul class="cl">
-					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-				<ul class="cl">
-					<li>超级管理员</li>
-					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-							<li><a href="#">切换账户</a></li>
-							<li><a href="#">退出</a></li>
-						</ul>
-					</li>
-					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
-					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
-							<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
-							<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
-							<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
-							<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
-							<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-						</ul>
-					</li>
-				</ul>
+						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+			<ul class="cl">
+				<li>超级管理员</li>
+				<li class="dropDown dropDown_hover"><a href="#"
+					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="#">退出</a></li>
+					</ul></li>
+				
+				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
+					href="javascript:;" class="dropDown_A" title="换肤"><i
+						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+					</ul></li>
+			</ul>
 			</nav>
 		</div>
 	</div>
-</header>
-<!--/_header 作为公共模版分离出去-->
+	</header>
+	<!--/_header 作为公共模版分离出去-->
 
-<!--_menu 作为公共模版分离出去-->
-<aside class="Hui-aside">
-	
+	<!--_menu 作为公共模版分离出去-->
+	<aside class="Hui-aside">
+
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 维修业务<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt>
+				<i class="Hui-iconfont">&#xe616;</i> 维修业务<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
 			<dd>
 				<ul>
-					<li class="current"><a href="article-list.html" title="资讯管理">资讯管理</a></li>
+					<li><a href="#" title="预约">预约</a></li>
+					<li><a href="#" title="维修估价">维修估价</a></li>
+					<li><a href="#" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="#" title="完工">完工</a></li>
+					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 库房管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt>
+				<i class="Hui-iconfont">&#xe613;</i> 库房管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
 			<dd>
 				<ul>
-					<li><a href="picture-list.html" title="仓库管理">仓库管理</a></li>
+					<li><a href="#" title="领料出库">领料出库</a></li>
+					<li><a href="#" title="销货出库">销货出库出库</a></li>
+					<li><a href="#" title="退货出库">退货出库</a></li>
+					<li><a href="#" title="移库出库">移库出库</a></li>
+					<li><a href="#" title="采购入库">采购入库</a></li>
+					<li><a href="#" title="客户退货入库">客户退货入库</a></li>
+					<li><a href="#" title="移库入库">移库入库</a></li>
+					<li><a href="#" title="领料返还入库">领料返还入库</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 财务管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt>
+				<i class="Hui-iconfont">&#xe620;</i> 财务管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
 			<dd>
 				<ul>
-					<li><a href="product-brand.html" title="品牌管理">品牌管理</a></li>
-					<li><a href="product-category.html" title="分类管理">分类管理</a></li>
-					<li><a href="product-list.html" title="产品管理">产品管理</a></li>
+					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="#" title="取消结算">取消结算</a></li>
+					<li><a href="#" title="取消完工">取消完工</a></li>
+					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt>
+				<i class="Hui-iconfont">&#xe622;</i> 客户关怀回访<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
 			<dd>
 				<ul>
-					<li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
-					<li><a href="feedback-list.html" title="意见反馈">意见反馈</a></li>
+					<li><a href="#" title="客户回访">客户回访</a></li>
+					<li><a href="#" title="意见反馈">意见反馈</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i> 客户关怀回访<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
+			<dt class="selected">
+				<i class="Hui-iconfont">&#xe60d;</i> 员工管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="member-list.html" title="会员列表">会员列表</a></li>
-					<li><a href="member-del.html" title="删除的会员">删除的会员</a></li>
-					<li><a href="member-level.html" title="等级管理">等级管理</a></li>
-					<li><a href="member-scoreoperation.html" title="积分管理">积分管理</a></li>
-					<li><a href="member-record-browse.html" title="浏览记录">浏览记录</a></li>
-					<li><a href="member-record-download.html" title="下载记录">下载记录</a></li>
-					<li><a href="member-record-share.html" title="分享记录">分享记录</a></li>
+					<li class="current"><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-admin">
-			<dt class="selected"><i class="Hui-iconfont">&#xe62d;</i> 员工管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd style="display: block;">
+			<dt>
+				<i class="Hui-iconfont">&#xe62d;</i> 档案信息管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
+			<dd>
 				<ul>
-					<li class="current"><a href="admin-role.html" title="角色管理">角色管理</a></li>
-					<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
-					<li><a href="admin-list.html" title="管理员列表">管理员列表</a></li>
+					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt><i class="Hui-iconfont">&#xe61a;</i> 档案信息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt>
+				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
 			<dd>
 				<ul>
-					<li><a href="charts-1.html" title="折线图">折线图</a></li>
-					<li><a href="charts-2.html" title="时间轴折线图">时间轴折线图</a></li>
-					<li><a href="charts-3.html" title="区域图">区域图</a></li>
-					<li><a href="charts-4.html" title="柱状图">柱状图</a></li>
-					<li><a href="charts-5.html" title="饼状图">饼状图</a></li>
-					<li><a href="charts-6.html" title="3D柱状图">3D柱状图</a></li>
-					<li><a href="charts-7.html" title="3D饼状图">3D饼状图</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-system">
-			<dt><i class="Hui-iconfont">&#xe62e;</i> 基础信息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="system-base.html" title="系统设置">系统设置</a></li>
-					<li><a href="system-category.html" title="栏目管理">栏目管理</a></li>
-					<li><a href="system-data.html" title="数据字典">数据字典</a></li>
-					<li><a href="system-shielding.html" title="屏蔽词">屏蔽词</a></li>
-					<li><a href="system-log.html" title="系统日志">系统日志</a></li>
+					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="#" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
 	</div>
-</aside>
-<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
-<!--/_menu 作为公共模版分离出去-->
+	</aside>
+	<div class="dislpayArrow hidden-xs">
+		<a class="pngfix" href="javascript:void(0);"
+			onClick="displaynavbar(this)"></a>
+	</div>
+	<!--/_menu 作为公共模版分离出去-->
 
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
