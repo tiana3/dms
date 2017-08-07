@@ -42,6 +42,7 @@ public class employeeSelect extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		ArrayList<Employee>employee = EmployeeDaoImlp.getEmployee(name);
+		boolean c = false;
 		for(Employee e:employee){
 		if(name.equals(e.getEmployeeName()))
 		{
@@ -49,11 +50,14 @@ public class employeeSelect extends HttpServlet {
 			response.sendRedirect("employeeselect.jsp");
 			HttpSession ssion = request.getSession();
 			ssion.setAttribute("employeename", name);
-		}
-		else {
-			out.print("<h1>不存在此用户<h1>");
+			c = true;
 		}
 	}
+		if(c = false)
+		{
+			System.out.println(" 6666666");
+				out.print("<h1>此用户不存在</h1>");
+		}
 		}
 
 	/**
