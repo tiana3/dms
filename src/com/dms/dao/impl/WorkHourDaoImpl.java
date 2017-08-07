@@ -59,9 +59,10 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql);
-			pre.setString(1, workhour.getWorkplaceName());
-			pre.setDouble(2, workhour.getWorkhour());
-			pre.setDouble(3, workhour.getWorkpay());
+			pre.setInt(1, workhour.getWorkplaceId());
+			pre.setString(2, workhour.getWorkplaceName());
+			pre.setDouble(3, workhour.getWorkhour());
+			pre.setDouble(4, workhour.getWorkpay());
 			pre.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
