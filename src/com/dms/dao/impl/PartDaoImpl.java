@@ -116,8 +116,8 @@ public class PartDaoImpl implements PartDao {
 		Connection conn = JdbcUtil.getConnection() ;
 		ResultSet rs = null ;
 		PreparedStatement patm = null ;
-		String sql ="select part.partName,part.partNo,part.buyingPrice,part.sellingPrice,cartype.model "
-				+ "from part left join cartype on part.modelId=cartype.modelId where part.partName=? "
+		String sql ="select part.partName,part.partNo,part.buyingPrice,part.sellingPrice,cartype.model, "
+				+ "part.partId from part left join cartype on part.modelId=cartype.modelId where part.partName=? "
 				+ "or part.partNo=? or part.modelId =?";	
 		
 		try {
@@ -132,7 +132,8 @@ public class PartDaoImpl implements PartDao {
 			part.setPartNo(rs.getString(2));
 			part.setBuyingPrice(rs.getDouble(3));
 			part.setSellingPrice(rs.getDouble(4));
-			part.setModel(rs.getString(5));			
+			part.setModel(rs.getString(5));
+			part.setPartId(rs.getInt(6));
 			list.add(part);
 			}
 		} catch (SQLException e) {

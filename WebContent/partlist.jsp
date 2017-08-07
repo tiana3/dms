@@ -258,7 +258,7 @@
                     <thead>
                     <tr class="text-c">
                         <th width="25"><input type="checkbox" name="" value=""></th>
-                        <th width="80">序号</th>
+                        <th width="80">序号</th>                       
                         <th width="80">配件名</th>
                         <th width="80">配件号</th>
                         <th width="80">适用车型</th>
@@ -271,8 +271,8 @@
           <c:forEach items="${partlist}" var="part" varStatus="varSta">
                     <tr class="text-c">                  		
                         <td><input type="checkbox" value="" name=""></td>
-                        <td>${varSta.count }</td>
-                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','part-add.jsp','10001')" title="查看">${part.partName}</u></td>
+                        <td>${varSta.count }</td>                       
+                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','part-look.jsp?partId=${part.partId}&partName=${part.partName}&partNo=${part.partNo}&modelId=${part.modelId}&buyingPrice=${part.buyingPrice}&sellingPrice=${part.sellingPrice}','10001')" title="查看">${part.partName}</u></td>
                         <td>${part.partNo}</td>
                         <td>${part.model}</td>
                         <td>${part.buyingPrice}</td>

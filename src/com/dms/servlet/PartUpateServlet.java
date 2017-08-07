@@ -31,18 +31,22 @@ public class PartUpateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");			
 			PartDaoImpl imp = new PartDaoImpl();
 			Part part = new Part();
+			part.setPartId(Integer.parseInt(request.getParameter("partid")));
 			part.setPartName(request.getParameter("partname"));
 			part.setPartNo(request.getParameter("partno"));
 			part.setBuyingPrice(Double.parseDouble(request.getParameter("buyingprice")));
 			part.setSellingPrice(Double.parseDouble(request.getParameter("sellingprice")));	
-			part.setModelId(Integer.parseInt(request.getParameter("modelid")));
-			imp.updatePart(part);
-			System.out.println(part.getPartName()+" "+part.getPartNo()+" "+part.getModelId() );
-			request.getRequestDispatcher("partlist.jsp").forward(request, response);
-	
+			part.setModelId(Integer.parseInt(request.getParameter("modelid")));			
+			if(part != null){
+				request.setAttribute("part",part);
+				imp.updatePart(part);
+				request.getRequestDispatcher("partlist.jsp").forward(request, response);
+			}
+				System.out.println(part.getPartName()+" "+part.getPartNo()+" "+part.getModelId()
+				+" "+part.getPartId()+" "+part.getSellingPrice()+" "+part.getBuyingPrice());			
 	}
 
 	/**
