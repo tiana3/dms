@@ -32,7 +32,7 @@
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>车型管理</title>
+<title>客户车辆信息</title>
 </head>
 <body>
 	<!--_header 作为公共模版分离出去-->
@@ -181,7 +181,7 @@
 
 	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	基础信息管理 <span class="c-gray en">&gt;</span> 车型管理 <a
+	档案信息管理 <span class="c-gray en">&gt;</span> 客户车辆信息 <a
 		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新"><i
@@ -189,12 +189,25 @@
 
 	<div class="Hui-article">
 		<article class="cl pd-20">
-
+		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
+		<div class="text-c"> 
+			客户姓名：
+			<input type="text" name="customerName" class="input-text" style="width:100px;">
+			手机号：
+			<input type="text" name="phone" class="input-text" style="width:120px;">
+			车牌号：
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">
+			车架号：
+			<input type="text" name="vin" id="" style="width:150px" class="input-text">			
+			
+			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		</div>
+		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
 				<a class="btn btn-primary radius"
 				onclick="cartype_edit('添加车辆型号','cartypeAddUpdate.jsp','${carType.modelId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加车辆厂家型号</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
+				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
 				条
 			</span>
 		</div>
@@ -204,27 +217,29 @@
 					<tr class="text-c">
 						
 						<th>序号</th>
-						<th>车辆厂家</th>
-						<th>车辆型号</th>
-						<th>操作</th>
+						<th>客户名</th>
+						<th>车牌</th>
+						<th>手机号</th>
+						<th>车架号</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list }" var="carType" varStatus="varSta">
+					<c:forEach items="${list }" var="customer" varStatus="varSta">
 						<tr class="text-c">
-							
-							
 							<td>${varSta.count }</td>
-							<td>${carType.factory }</td>
-							<td>${carType.model }</td>
+							<td>${customer.customerName }</td>
+							<td>${customer.plateNumber }</td>
+							<td>${customer.phone }</td>
+							<td>${customer.vin }</td>
 							<td class="f-14 product-brand-manage"><a
 								style="text-decoration: none"
 								onClick="cartype_edit('车辆型号编辑','cartypeAddUpdate.jsp?modelId=${carType.modelId }&factory=${carType.factory }&model=${carType.model }','${carType.modelId}')"
-								href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+								href="javascript:;" title="详情"><i class="Hui-iconfont">&#xe6df;</i></a>
 								<a style="text-decoration: none" class="ml-5" href="javascript:;"
 								onclick="cartype_del(this,${carType.modelId })"
 								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
+							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
 				</tbody>
 			</table>
