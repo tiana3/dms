@@ -31,16 +31,10 @@
 <body>
 <article class="page-container">
 	<form class="form form-horizontal" id="form-article-add" action="PartUpateServlet" method="get">
-	<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件Id：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${param.partId}" placeholder="" id="" name="partid">
-			</div>
-		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${param.partName}" placeholder="" id="" name="partname">
+				<input type="text" class="input-text" value="${param.partName} " placeholder="" id="" name="partname">
 			</div>
 		</div>
 		<div class="row cl">
@@ -72,8 +66,7 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">	
 				<button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
