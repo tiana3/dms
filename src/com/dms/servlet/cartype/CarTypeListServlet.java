@@ -31,7 +31,7 @@ public class CarTypeListServlet extends HttpServlet {
 		List<CarType> list = service.getAllCarType();
 	
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/cartypelist.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/cartypelist.jsp").forward(request, response);
 	}
 
 	/**

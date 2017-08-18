@@ -142,7 +142,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -165,9 +165,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -193,7 +193,7 @@
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
 				<a class="btn btn-primary radius"
-				onclick="cartype_edit('添加车辆型号','cartypeAddUpdate.jsp','${carType.modelId}')" href="javascript:;"><i
+				onclick="cartype_edit('添加车辆型号','CarTypeShowServlet','${carType.modelId}')" href="javascript:;"><i
 				class="Hui-iconfont">&#xe600;</i> 添加车辆厂家型号</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
 				条
 			</span>
@@ -219,7 +219,7 @@
 							<td>${carType.model }</td>
 							<td class="f-14 product-brand-manage"><a
 								style="text-decoration: none"
-								onClick="cartype_edit('车辆型号编辑','cartypeAddUpdate.jsp?modelId=${carType.modelId }&factory=${carType.factory }&model=${carType.model }','${carType.modelId}')"
+								onClick="cartype_edit('车辆型号编辑','CarTypeShowServlet?act=update&modelId=${carType.modelId }','${carType.modelId}')"
 								href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
 								<a style="text-decoration: none" class="ml-5" href="javascript:;"
 								onclick="cartype_del(this,${carType.modelId })"
@@ -255,7 +255,8 @@
 	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
-			$.ajax({url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
+			$.ajax({
+				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
 		});

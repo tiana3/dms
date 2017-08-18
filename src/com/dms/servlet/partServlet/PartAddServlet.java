@@ -1,29 +1,26 @@
-package com.dms.servlet.whServlet;
+package com.dms.servlet.partServlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.WorkHourDao;
-import com.dms.entity.WorkHour;
-import com.dms.service.WorkHourService;
+import com.dms.dao.impl.PartDaoImpl;
+import com.dms.entity.Part;
 
 /**
- * Servlet implementation class WorkHourListServlet
+ * Servlet implementation class PartServlet
  */
-@WebServlet("/WorkHourListServlet")
-public class WorkHourListServlet extends HttpServlet {
+@WebServlet("/PartAddServlet")
+public class PartAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkHourListServlet() {
+    public PartAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +29,7 @@ public class WorkHourListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		WorkHourDao workhour = new WorkHourService();
-		List<WorkHour> work = workhour.getWorkHour();
-		request.setAttribute("work", work);
-		request.getRequestDispatcher("/workhour.jsp").forward(request, response);
+		this.doPost(request, response);
 	}
 
 	/**
@@ -45,7 +37,21 @@ public class WorkHourListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		Part part = new Part();
+		part.setPartName(request.getParameter("partname"));
+		part.setPartNo(request.getParameter("partno"));
+		part.setModelId(Integer.parseInt(request.getParameter("modelid")));
+		part.setBuyingPrice(Double.parseDouble(request.getParameter("buyingprice")));
+		part.setSellingPrice(Double.parseDouble(request.getParameter("sellingprice")));
+		PartDaoImpl  imp = new PartDaoImpl();
+		
+		Integer partId = imp.addPart(part);
+		
+		
+		
+		
 	}
 
 }

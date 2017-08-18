@@ -1,7 +1,5 @@
 package com.dms.dao;
 
-import java.util.List;
-
 import com.dms.entity.CustomerCarInfo;
 
 	

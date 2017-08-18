@@ -97,4 +97,30 @@ public class CarTypeDaoImpl implements CarTypeDao {
 		}
 	}
 
+	@Override
+	public CarType getCarTypeById(int modelId) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = JdbcUtil.getConnection();
+			prepareStatement = connection.prepareStatement("select * from cartype where modelId = ?");
+			prepareStatement.setInt(1,modelId);
+			resultSet = prepareStatement.executeQuery();
+					
+			while(resultSet.next()) {
+				int id = resultSet.getInt(1);
+				String factory = resultSet.getString(2);
+				String model = resultSet.getString(3);
+				CarType carType = new CarType(id, factory, model);			
+				return carType;
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(connection, prepareStatement, resultSet);
+		}	
+		return null;
+	}
+
 }

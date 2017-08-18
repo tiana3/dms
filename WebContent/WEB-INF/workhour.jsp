@@ -33,10 +33,10 @@
 <script>
 	DD_belatedPNG.fix('*');
 </script>
-
 <title>工时工位管理</title>
 </head>
 <body>
+
 <!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
@@ -167,9 +167,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -197,8 +197,8 @@
 					class="Hui-iconfont">&#xe665;</i></a>
 			</span> <span>
 			<a class="btn btn-primary radius"
-				onclick="workhour_edit('添加工时工位','workhourAddUpdate.jsp','${workhour.workplaceId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加工时工位</a></span>
+				onclick="workhour_edit('添加工时工位','workhourAddUpdate.jsp','${workhour.workplaceId}')" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加工时工位</a></span>
 			<span class="r">共有数据：<strong></strong> 条
 			</span>
 		</div>
@@ -218,7 +218,7 @@
 					<tbody>
 					
 						<tr class="text-c">
-							<td>${varStatus.count }</td>
+							<td>${varSta.count }</td>
 							<td>${workhour.workplaceName }</td>
 							<td>${workhour.workhour }</td>
 							<td>${workhour.workpay }</td>

@@ -1,8 +1,6 @@
-package com.dms.servlet;
+package com.dms.servlet.partServlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +13,14 @@ import com.dms.entity.Part;
 /**
  * Servlet implementation class PartUpateServlet
  */
-@WebServlet("/PartUpateServlet")
-public class PartUpateServlet extends HttpServlet {
+@WebServlet("/PartUpdateServlet")
+public class PartUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PartUpateServlet() {
+    public PartUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +31,26 @@ public class PartUpateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");			
 			PartDaoImpl imp = new PartDaoImpl();
 			Part part = new Part();
+			part.setPartId(Integer.parseInt(request.getParameter("partid")));
 			part.setPartName(request.getParameter("partname"));
 			part.setPartNo(request.getParameter("partno"));
 			part.setBuyingPrice(Double.parseDouble(request.getParameter("buyingprice")));
 			part.setSellingPrice(Double.parseDouble(request.getParameter("sellingprice")));	
-			part.setModelId(Integer.parseInt(request.getParameter("modelid")));
-			imp.updatePart(part);
-			System.out.println(part.getPartName()+" "+part.getPartNo()+" "+part.getModelId() );
-			request.getRequestDispatcher("partlist.jsp").forward(request, response);
-	
+			part.setModelId(Integer.parseInt(request.getParameter("modelid")));			
+			if(part != null){
+				request.setAttribute("part",part);
+				imp.updatePart(part);
+			}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		this.doGet(request, response);
 	}
 
 }

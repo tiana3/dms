@@ -26,7 +26,6 @@ public class CarTypeAddUpdateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String stringId = request.getParameter("modelId");
-		System.out.println(stringId);
 		if (stringId == null || stringId == "") {
 			String model = request.getParameter("model");
 			String factory = request.getParameter("factory");

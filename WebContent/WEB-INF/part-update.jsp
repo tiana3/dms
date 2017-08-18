@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--_meta 作为公共模版分离出去-->
 <html>
@@ -30,44 +31,50 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add" action="PartServlet" method="post">
+	<form class="form form-horizontal" id="form-update-add" action="PartUpdateServlet" method="get">
+	
+			
+			
+				<input type="hidden" name="partid" value="${part.partId}">
+			
+		
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partname">
+				<input type="text" class="input-text" value="${part.partName}" placeholder="" id="" name="partname">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">配件号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partno">
+				<input type="text" class="input-text" value="${part.partNo}" placeholder="" id="" name="partno">
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<select name="modelid" class="select">
-					<option value="1" >RVC</option>
-					<option value="2">RvE</option>
-					<option value="3">BWM</option>
+					<c:forEach items="${carTypes }" var="carType">
+						<option value="${carType.modelId }" ${carType.modelId == part.modelId ? "selected" : "" }>${carType.model }</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>进货成本：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="" id="" name="buyingprice">
+                    <input type="text" class="input-text" value="${part.buyingPrice}" placeholder="" id="" name="buyingprice">
 				</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">销售价：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="sellingprice">
+				<input type="text" class="input-text" value="${part.sellingPrice}" placeholder="" id="" name="sellingprice">
 			</div>
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+				<button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 				<button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
@@ -91,29 +98,48 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	// 文件上传过程中创建进度条实时显示。
-	uploader.on( 'uploadProgress', function( file, percentage ) {
-		var $li = $( '#'+file.id ),
-			$percent = $li.find('.progress-box .sr-only');
-	
-		// 避免重复创建
-		if ( !$percent.length ) {
-			$percent = $('<div class="progress-box"><span class="progress-bar radius"><span class="sr-only" style="width:0%"></span></span></div>').appendTo( $li ).find('.sr-only');
-		}
-		$li.find(".state").text("上传中");
-		$percent.css( 'width', percentage * 100 + '%' );
-	});
+$("#form-update-add").validate({
 
+	rules:{
+		partname:{
+			required:true,
+		},
+		partno:{
+			required:true,
+		},
+		modelid:{
+			required:true,
+
+		},
+		buyingprice:{
+			required:true,
+
+		},
+		sellingprice:{
+			required:true,
+		},
+		
+	},
+	//onkeyup:false,
+	focusCleanup:true,
+	success:"valid",
+submitHandler:function(form){
+	$(form).ajaxSubmit({
+		success: function() { 
+			
+			parent.layer.msg('修改成功!',{icon:6,time:1000});	
+			layer_close();
+			
+			//var index = parent.layer.getFrameIndex(window.name);
+			//parent.layer.close(index);
+		}
+		
+	})
+		
 	
-	
+}
 });
+	
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

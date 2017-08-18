@@ -1,7 +1,6 @@
-package com.dms.servlet.whServlet;
+package com.dms.servlet.cartype;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,24 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.WorkHourDao;
-import com.dms.entity.WorkHour;
-import com.dms.service.WorkHourService;
+import com.dms.entity.CarType;
+import com.dms.service.CarTypeService;
+import com.dms.service.impl.CarTypeServiceImpl;
 
 /**
- * Servlet implementation class WorkHourListServlet
+ * Servlet implementation class CarTypeShowServlet
  */
-@WebServlet("/WorkHourListServlet")
-public class WorkHourListServlet extends HttpServlet {
+@WebServlet("/CarTypeShowServlet")
+public class CarTypeShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WorkHourListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,10 +25,18 @@ public class WorkHourListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		WorkHourDao workhour = new WorkHourService();
-		List<WorkHour> work = workhour.getWorkHour();
-		request.setAttribute("work", work);
-		request.getRequestDispatcher("/workhour.jsp").forward(request, response);
+		
+		String act = request.getParameter("act");
+		if(act == null) {
+			
+		} else if("update".equals(act)) {
+			String modelId = request.getParameter("modelId");
+			CarTypeService service = new CarTypeServiceImpl();
+			CarType carType = service.getCarTypeById(Integer.parseInt(modelId));
+			request.setAttribute("carType", carType);
+		}
+		request.getRequestDispatcher("/WEB-INF/cartypeAddUpdate.jsp").forward(request, response);
+	
 	}
 
 	/**
