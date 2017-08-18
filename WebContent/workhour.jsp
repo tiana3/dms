@@ -230,7 +230,6 @@
 								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6e2;</i></a>
 							</td>
 						</tr>
-					
 					</tbody>
 				</c:forEach>
 			</table>

@@ -24,11 +24,11 @@ public class WorkHourDaoImpl implements WorkHourDao{
 	@Override
 	public List<WorkHour> getWorkHour() {
 		List<WorkHour> list = new ArrayList<WorkHour>();
+		String sql = "select * from workplace";
 		try {
 			con = JdbcUtil.getConnection();
-			pre = con.prepareStatement("select * from workplace");
+			pre = con.prepareStatement(sql);
 			res = pre.executeQuery();
-			
 			while(res.next()) {
 				int workplaceId = res.getInt(1);
 				String workplaceName = res.getString(2);
@@ -42,14 +42,31 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		}finally {
 			JdbcUtil.close(con, pre, res);
 		}
-		
 		return list;
 	}
 	
 	@Override
 	public List<WorkHour> getWorkHour(String workplaceName) {
-		// TODO Auto-generated method stub
-		return null;
+		List<WorkHour> list = new ArrayList<WorkHour>();
+		String sql = "SELECT * FROM workplace WHERE workplaceName LIKE '%?%' ";
+		try {
+			con = JdbcUtil.getConnection();
+			pre = con.prepareStatement(sql);
+			res = pre.executeQuery();
+			while(res.next()) {
+				int workplaceId = res.getInt(1);
+				workplaceName = res.getString(2);
+				double workhour = res.getDouble(3);
+				double workpay = res.getDouble(4);
+				list.add(new WorkHour(workplaceId, workplaceName, workhour, workpay));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(con, pre, res);
+		}
+		return list;
 	}
 
 	@Override
