@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.partServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,7 +13,7 @@ import com.dms.entity.Part;
 /**
  * Servlet implementation class PartServlet
  */
-@WebServlet("/PartServlet")
+@WebServlet("/PartAddServlet")
 public class PartAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +29,7 @@ public class PartAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		this.doPost(request, response);
 	}
 
 	/**
@@ -47,9 +46,12 @@ public class PartAddServlet extends HttpServlet {
 		part.setBuyingPrice(Double.parseDouble(request.getParameter("buyingprice")));
 		part.setSellingPrice(Double.parseDouble(request.getParameter("sellingprice")));
 		PartDaoImpl  imp = new PartDaoImpl();
-		imp.addPart(part);
-		request.getRequestDispatcher("partlist.jsp").forward(request, response);
-		System.out.println(part.toString());
+		
+		Integer partId = imp.addPart(part);
+		
+		
+		
+		
 	}
 
 }

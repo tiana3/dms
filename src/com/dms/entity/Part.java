@@ -10,6 +10,11 @@ public class Part {
 	private String model;
 
 	
+	@Override
+	public String toString() {
+		return "Part [partId=" + partId + ", partName=" + partName + ", partNo=" + partNo + ", buyingPrice="
+				+ buyingPrice + ", sellingPrice=" + sellingPrice + ", modelId=" + modelId + ", model=" + model + "]";
+	}
 	public Part() {
 		super();
 	}

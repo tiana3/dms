@@ -10,4 +10,5 @@ public interface CarTypeService {
 	void addCarType(CarType carType); 	// 添加厂家型号
 	void removeCarType(int CarTypeId);	// 根据车辆型号id删除车辆型号
 	void updateCarType(CarType carType); // 修改车辆型号数据
+	CarType getCarTypeById(int modelId);
 }

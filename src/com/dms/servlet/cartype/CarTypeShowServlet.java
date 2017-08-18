@@ -1,6 +1,7 @@
 package com.dms.servlet.cartype;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +13,10 @@ import com.dms.service.CarTypeService;
 import com.dms.service.impl.CarTypeServiceImpl;
 
 /**
- * Servlet implementation class CarTypeAddUpdateServlet
+ * Servlet implementation class CarTypeShowServlet
  */
-@WebServlet("/CarTypeAddUpdateServlet")
-public class CarTypeAddUpdateServlet extends HttpServlet {
+@WebServlet("/CarTypeShowServlet")
+public class CarTypeShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -25,34 +26,24 @@ public class CarTypeAddUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String stringId = request.getParameter("modelId");
-		if (stringId == null || stringId == "") {
-			String model = request.getParameter("model");
-			String factory = request.getParameter("factory");
-			CarType carType = new CarType();
-			carType.setFactory(factory);
-			carType.setModel(model);
-			CarTypeService service = new CarTypeServiceImpl();
-			service.addCarType(carType);
-			response.getWriter().write("添加成功");
+		String act = request.getParameter("act");
+		if(act == null) {
 			
-		} else {
-			int modelId = Integer.parseInt(stringId);
-			String model = request.getParameter("model");
-			String factory = request.getParameter("factory");
-			CarType carType = new CarType(modelId, factory, model);
-			
+		} else if("update".equals(act)) {
+			String modelId = request.getParameter("modelId");
 			CarTypeService service = new CarTypeServiceImpl();
-			service.updateCarType(carType);
-			response.getWriter().write("修改成功");
-			response.sendRedirect(request.getContextPath() + "/CarTypeListServlet");
+			CarType carType = service.getCarTypeById(Integer.parseInt(modelId));
+			request.setAttribute("carType", carType);
 		}
+		request.getRequestDispatcher("/WEB-INF/cartypeAddUpdate.jsp").forward(request, response);
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

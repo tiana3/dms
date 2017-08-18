@@ -30,4 +30,10 @@ public class CarTypeServiceImpl implements CarTypeService {
 		dao.updateCarType(carType);
 	}
 
+	@Override
+	public CarType getCarTypeById(int modelId) {
+		// TODO Auto-generated method stub
+		return dao.getCarTypeById(modelId);
+	}
+
 }

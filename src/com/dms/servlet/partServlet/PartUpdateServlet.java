@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.partServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,14 +13,14 @@ import com.dms.entity.Part;
 /**
  * Servlet implementation class PartUpateServlet
  */
-@WebServlet("/PartUpateServlet")
-public class PartUpateServlet extends HttpServlet {
+@WebServlet("/PartUpdateServlet")
+public class PartUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PartUpateServlet() {
+    public PartUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,17 +43,14 @@ public class PartUpateServlet extends HttpServlet {
 			if(part != null){
 				request.setAttribute("part",part);
 				imp.updatePart(part);
-				request.getRequestDispatcher("partlist.jsp").forward(request, response);
 			}
-				System.out.println(part.getPartName()+" "+part.getPartNo()+" "+part.getModelId()
-				+" "+part.getPartId()+" "+part.getSellingPrice()+" "+part.getBuyingPrice());			
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		this.doGet(request, response);
 	}
 
 }

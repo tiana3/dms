@@ -40,18 +40,18 @@
 	<div class="page-container">
 		<form action="${pageContext.request.contextPath}/CarTypeAddUpdateServlet" method="post" class="form form-horizontal" id="form-cartype-add">
 			
-			<input type="hidden" name="modelId" value="${param.modelId }">
+			<input type="hidden" name="modelId" value="${carType.modelId }">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">车辆厂家：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.factory }" placeholder="" id=""
+					<input type="text" class="input-text" value="${carType.factory }" placeholder="" id=""
 						name="factory">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">车辆型号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.model }" placeholder="" id=""
+					<input type="text" class="input-text" value="${carType.model }" placeholder="" id=""
 						name="model">
 				</div>
 			</div>
@@ -96,8 +96,8 @@
 				success: function() { 
 					
 					parent.location.reload();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
+					//var index = parent.layer.getFrameIndex(window.name);
+					//parent.layer.close(index);
 				}
 				
 			})
