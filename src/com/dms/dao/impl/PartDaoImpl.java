@@ -59,7 +59,6 @@ public class PartDaoImpl implements PartDao {
 			patm = conn.prepareStatement(sql) ;
 			patm.setInt(1, id);
 			patm.executeUpdate();
-			System.out.println(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
