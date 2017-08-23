@@ -32,14 +32,16 @@ public class employeeUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		int employeeid = (int) session.getAttribute("empid");
+		int employeeid = (int) session.getAttribute("id");
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
 		String IdCard = request.getParameter("idcard");
-		String jobname = request.getParameter("jobname");
-		String department = request.getParameter("departmentname");
-		int jobid = Integer.parseInt(request.getParameter("jobid"));
+		String jobname = null;
+		String department = null;
+		String id = request.getParameter("jobid");
+		int jobid = Integer.parseInt(id);
+		System.out.println(jobid);
 		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department,jobid, jobname);
 		EmployeeDaoImlp.updateEmployee(employee);
 		response.sendRedirect("employees.jsp");

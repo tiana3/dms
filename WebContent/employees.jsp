@@ -181,7 +181,7 @@ function myfunction(x){
 		</dl>
 	</div>
 	</aside>
-	<div class="dislpayArrow hidden-xs">
+	<div class="dislpayArrow h	idden-xs">
 		<a class="pngfix" href="javascript:void(0);"
 			onClick="displaynavbar(this)"></a>
 	</div>
