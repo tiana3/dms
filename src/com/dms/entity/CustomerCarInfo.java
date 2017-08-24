@@ -9,7 +9,9 @@ public class CustomerCarInfo {
 	private String phone; 								//手机号
 	private String idCard; 							//客户身份证号
 	private String plateNumber;						//车牌号
-	private String vin; 								//车架号	
+	private String VIN; 								//车架号	
+	private String engineNumber;     //发送机号
+	
 	private String color;								//车颜色
 	private String gearBox;							//变速箱
 	private String buyDate;							//购买日期
@@ -18,24 +20,35 @@ public class CustomerCarInfo {
 	
 	public CustomerCarInfo(){}
 
-	public CustomerCarInfo(int customerCraInfo, String customerName, String gender, String address, String phone,
-			String idCard, String plateNumber, String vin, String color, String gearBox, String buyDate,
-			String poilcyDate, int modelid) {
+	public String getEngineNumber() {
+		return engineNumber;
+	}
+
+	public void setEngineNumber(String engineNumber) {
+		this.engineNumber = engineNumber;
+	}
+
+	public CustomerCarInfo(int customerCraInfoId, String customerName, String gender, String address, String phone,
+			String idCard, String plateNumber, String vIN, String engineNumber, String color, String gearBox,
+			String buyDate, String poilcyDate, int modelid) {
 		super();
-		this.customerCraInfoId = customerCraInfo;
+		this.customerCraInfoId = customerCraInfoId;
 		this.customerName = customerName;
 		this.gender = gender;
 		this.address = address;
 		this.phone = phone;
 		this.idCard = idCard;
 		this.plateNumber = plateNumber;
-		this.vin = vin;
+		VIN = vIN;
+		this.engineNumber = engineNumber;
 		this.color = color;
 		this.gearBox = gearBox;
 		this.buyDate = buyDate;
 		this.poilcyDate = poilcyDate;
 		this.modelid = modelid;
 	}
+
+
 
 	public int getCustomerCraInfo() {
 		return customerCraInfoId;
@@ -93,12 +106,12 @@ public class CustomerCarInfo {
 		this.plateNumber = plateNumber;
 	}
 
-	public String getVin() {
-		return vin;
+	public String getVIN() {
+		return VIN;
 	}
 
-	public void setVin(String vin) {
-		this.vin = vin;
+	public void setVIN(String vin) {
+		this.VIN = vin;
 	}
 
 	public String getColor() {

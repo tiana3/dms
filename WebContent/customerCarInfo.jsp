@@ -29,7 +29,7 @@
     <script>DD_belatedPNG.fix('*');</script><![endif]-->
     <!--/meta 作为公共模版分离出去-->
 
-    <title>材料目录管理</title>
+    <title>车辆信息管理</title>
     <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -84,7 +84,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="#" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -148,24 +148,25 @@
 		</dl>
 		<dl id="menu-admin">
 			<dt>
-				<i class="Hui-iconfont">&#xe62d;</i> 档案信息管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				<i class="Hui-iconfont">&#xe62d;</i>
+				 档案信息管理
+				 <i	class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li class="current"><a href="customerCarInfo.jsp" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
 			<dt class="selected">
-				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理
+				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li class="current"><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
@@ -188,69 +189,65 @@
         材料目录管理
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
-    <div class="Hui-article">
-        <article class="cl pd-20">
-			<form action="PartListServlet" method="post" >
-            <div class="text-c">
-
-                配件名：
-                <input type="text"  name="partname" id="logmin" class="input-text " style="width:120px;">&nbsp;&nbsp;&nbsp;
-                配件号：
-                <input type="text"  name="partno" id="logmax" class="input-text" style="width:120px;">&nbsp;&nbsp;&nbsp;
-                车型：             
-				<select name="modelid" class="" style="width:120px ; height:30px;">
-					<option value="0" >全部</option>
-					<c:forEach items="${carTypes }" var="carType">
-					<option value="${carType.modelId }" >${carType.model }</option>
+           <div class="Hui-article">
+		<article class="cl pd-20">
+		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
+		<div class="text-c"> 
+			客户姓名：
+			<input type="text" name="customerName" class="input-text" style="width:100px;">
+			手机号：
+			<input type="text" name="phone" class="input-text" style="width:120px;">
+			车牌号：
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">
+			车架号：
+			<input type="text" name="vin" id="" style="width:150px" class="input-text">			
+			
+			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		</div>
+		</form>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			
+				<a class="btn btn-primary radius"
+				onclick="carinfo_add('添加车辆信息','carinfo_add.jsp','${carType.modelId}')" href="javascript:;"><i
+				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(list)}</strong>
+				条
+			</span>
+		</div>
+		<div class="mt-10">
+			<table class="table table-border table-bordered table-bg table-sort">
+				<thead>
+					<tr class="text-c">
+						
+						<th>序号</th>
+						<th>客户名</th>
+						<th>车牌</th>
+						<th>手机号</th>
+						<th>车架号</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list }" var="customer" varStatus="varSta">
+						<tr class="text-c">
+							<td>${varSta.count }</td>
+							<td>${customer.customerName }</td>
+							<td>${customer.plateNumber }</td>
+							<td>${customer.phone }</td>
+							<td>${customer.vin }</td>
+							<td class="f-14 product-brand-manage"><a
+								style="text-decoration: none"
+								onClick="cartype_edit('车辆型号编辑','cartypeAddUpdate.jsp?modelId=${carType.modelId }&factory=${carType.factory }&model=${carType.model }','${carType.modelId}')"
+								href="javascript:;" title="详情"><i class="Hui-iconfont">&#xe6df;</i></a>
+								<a style="text-decoration: none" class="ml-5" href="javascript:;"
+								onclick="cartype_del(this,${carType.modelId })"
+								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+						</tr>
+							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		
-               <button  class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 
-              
-            </div>
-            <div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l">
-				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-				<a class="btn btn-primary radius" data-title="添加信息"  onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加信息</a>
-				</span>
-				<input type="hidden" name="act">
-                <span class="r">共有数据：<strong>${fn:length(partlist)}</strong>条</span>
-            </div>
-            <div class="mt-20">     
-                <table class="table table-border table-bordered table-bg table-hover table-sort">
-                    <thead>
-                    <tr class="text-c">
-                        <th width="25"><input type="checkbox" name="" value=""></th>
-                        <th width="80">序号</th>                       
-                        <th width="80">配件名</th>
-                        <th width="80">配件号</th>
-                        <th width="80">适用车型</th>
-                        <th width="120">进货成本</th>
-                        <th width="75">销售价</th>
-                        <th width="120">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-          <c:forEach items="${partlist}" var="part" varStatus="varSta">
-                    <tr class="text-c">                  		
-                        <td><input type="checkbox" value="${part.partId}" name="selectPart"></td>
-                        <td>${varSta.count }</td>                       
-                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','part-look.jsp?partId=${part.partId}&partName=${part.partName}&partNo=${part.partNo}&modelId=${part.modelId}&buyingPrice=${part.buyingPrice}&sellingPrice=${part.sellingPrice}','10001')" title="查看">${part.partName}</u></td>
-                        <td>${part.partNo}</td>
-                        <td>${part.model}</td>
-                        <td>${part.buyingPrice}</td>
-                        <td>${part.sellingPrice}</td>                                   
-                        <td class="f-14 td-manage">
-                        <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/GetCarTypeServlet?partId=${part.partId}&act=update','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-                            <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${part.partId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
-                    </tr>
-           </c:forEach>
-                    </tbody>
-                </table>
-                </form>
-            </div>
-        </article>
-    </div>
+				</tbody>
+			</table>
+		</div>
+		</article>
+	</div>
 </section>
 
 <!--_footer 作为公共模版分离出去-->
@@ -267,7 +264,7 @@
 <script type="text/javascript">
 
     /*资讯-添加*/
-    function part_add(title,url,w,h){
+    function carinfo_add(title,url,w,h){
 /*      	var index = layer.open({
             type: 2,
            title: title,

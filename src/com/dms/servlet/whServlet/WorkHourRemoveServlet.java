@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dms.dao.WorkHourDao;
-import com.dms.service.WorkHourService;
+import com.dms.service.impl.WorkHourService;
 
 /**
  * Servlet implementation class WorkHourRemoveServlet
