@@ -35,6 +35,15 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring-mvc</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<!-- 这些静态资源交给默认的servlet处理，springmvc拦截不到 -->
+	<servlet-mapping>  
+    <servlet-name>default</servlet-name>  
+    <url-pattern>/js/*</url-pattern>  
+    <url-pattern>/lib/*</url-pattern>  
+    <url-pattern>/static/*</url-pattern>  
+    <url-pattern>/temp/*</url-pattern>  
+	</servlet-mapping> 
 </web-app>
