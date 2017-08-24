@@ -1,7 +1,10 @@
+<%@page import="com.dms.dao.impl.EmployeeDaoImlp"%>
+<%@page import="com.dms.entity.Employee"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,13 +42,12 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> <a
 				class="logo navbar-logo-m f-l mr-10 visible-xs"
 				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
-			<nav class="nav navbar-nav">
-						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+			<nav class="nav navbar-nav"> <nav id="Hui-userbar"
+				class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>
 				<li class="dropDown dropDown_hover"><a href="#"
@@ -53,7 +55,7 @@
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="#">退出</a></li>
 					</ul></li>
-				
+
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
 						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
@@ -142,7 +144,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
+					<li><a href="#" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -165,9 +167,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
+					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -181,54 +183,77 @@
 
 	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	基础信息管理 <span class="c-gray en">&gt;</span> 车型管理 <a
+	管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a
 		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
-
 	<div class="Hui-article">
 		<article class="cl pd-20">
+		<form action="employeelist" method="post">
+			<div class="text-c">
+				姓名：  <input type="text"
+					name="name" id="name" class="input-text" style="width: 120px;">&nbsp;&nbsp;&nbsp; 手机号： <input
+					type="text" name="phone" id="phone" class="input-text"
+					style="width: 120px;">&nbsp;&nbsp;&nbsp;  身份证号： <input type="text"
+					name="idcard" id="idcard" class="input-text" style="width: 120px;">&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-success" type="submit">
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
+				</button>
+			
+			</div>
 
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
-				<a class="btn btn-primary radius"
-				onclick="cartype_edit('添加车辆型号','CarTypeShowServlet','${carType.modelId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加车辆厂家型号</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
-				条
-			</span>
-		</div>
-		<div class="mt-10">
-			<table class="table table-border table-bordered table-bg table-sort">
-				<thead>
+
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<span class="l"> <a href="javascript:;" onclick="datadel()"
+			class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+				批量删除</a> <a class="btn btn-primary radius"
+				onclick="cartype_edit('添加员工','employeeshow','${employee.employeeId}')" href="javascript:;"><i
+				class="Hui-iconfont">&#xe600;</i> 添加员工</a>
+		</span> <input type="hidden" name="act"> <span class="r">共有数据：<strong>${fn:length(list)}</strong>条
+		</span>
+	</div>
+	<div class="mt-10">
+		<table class="table table-border table-bordered table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th>序号</th>
+					<th>员工名称</th>
+					<th>性别</th>
+					<th>联系电话</th>
+					<th>身份证</th>
+					<th>所属部门</th>
+					<th>工作岗位</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list }" var="employee" varStatus="varSta">
 					<tr class="text-c">
-						
-						<th>序号</th>
-						<th>车辆厂家</th>
-						<th>车辆型号</th>
-						<th>操作</th>
+						<td><input type="checkbox" value="${employee.employeeId}"
+							name="selectemployee"></td>
+						<td>${varSta.count }</td>
+						<td>${employee.employeeName }</td>
+						<td>${employee.gender }</td>
+						<td>${employee.phone }</td>
+						<td>${employee.idCard }</td>
+						<td>${employee.jobName }</td>
+						<td>${employee.departmentName }</td>
+						<td class="f-14 product-brand-manage"><a
+							style="text-decoration: none"
+							onClick="cartype_edit('员工编辑','employeeshow?act=update&id=${employee.employeeId}','root')"
+							href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a style="text-decoration: none" class="ml-5" href="javascript:;"
+							onclick="cartype_del(this,${employee.employeeId})" title="删除"><i
+								class="Hui-iconfont">&#xe6e2;</i></a></td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list }" var="carType" varStatus="varSta">
-						<tr class="text-c">
-							
-							
-							<td>${varSta.count }</td>
-							<td>${carType.factory }</td>
-							<td>${carType.model }</td>
-							<td class="f-14 product-brand-manage"><a
-								style="text-decoration: none"
-								onClick="cartype_edit('车辆型号编辑','CarTypeShowServlet?act=update&modelId=${carType.modelId }','${carType.modelId}')"
-								href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-								<a style="text-decoration: none" class="ml-5" href="javascript:;"
-								onclick="cartype_del(this,${carType.modelId })"
-								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		</article>
+				</c:forEach>
+			</tbody>
+		</table>
+		</form>
+	</div>
+	</article>
 	</div>
 	</section>
 
@@ -250,12 +275,37 @@
 	function cartype_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);
 	}
-	
+   	function datadel() {
+        layer.confirm('确认要批量删除吗？',function(index){
+        	var checkIds = '';
+        	$('input[name="selectemployee"]:checked').each(function(){
+        		checkIds += $(this).val()+","
+        	})
+        	checkIds = checkIds.substring(0,checkIds.length-1);
+           
+        	$.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath }/empCheckedDeleteServlet',
+                data: "employeeids=" + checkIds ,
+                //dataType: 'json',
+                success: function(data){
+                	$('input[name="selectemployee"]:checked').each(function(){
+                		$(this).parents("tr").remove();
+                	})
+                    layer.msg(data,{icon:1,time:1000});
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    	
+  	}
+
 	function cartype_del(obj,id){
-		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
+		layer.confirm('确认要删除此员工吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
-			$.ajax({
-				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
+			$.ajax({url : "employeeRemove?id="+ id});
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
 		});

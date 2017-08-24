@@ -1,29 +1,34 @@
 package com.dms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.dao.impl.PartDaoImpl;
+import com.dms.entity.CarType;
 import com.dms.entity.Employee;
+import com.dms.entity.Part;
+import com.dms.service.CarTypeService;
+import com.dms.service.impl.CarTypeServiceImpl;
 
 /**
- * Servlet implementation class employeeUpdate
+ * Servlet implementation class employeelist
  */
-@WebServlet("/employeeUpdate")
-public class employeeUpdate extends HttpServlet {
+@WebServlet("/employeelist")
+public class employeelist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public employeeUpdate() {
+    public employeelist() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +39,22 @@ public class employeeUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
-		String employeid = request.getParameter("employeeid");
-		int employeeid = Integer.parseInt(employeid);
-		String name = request.getParameter("name");
-		String gender = request.getParameter("gender");
+		response.setContentType("text/html;charset=utf-8");
+		String employeename = request.getParameter("name");
+		String idcard = request.getParameter("idcard");
 		String phone = request.getParameter("phone");
-		String IdCard = request.getParameter("idcard");
-		PrintWriter out = response.getWriter();
-		String jobname = null;
-		String department = null;
-		String id = request.getParameter("jobid");
-		int jobid = Integer.parseInt(id);
-		System.out.println(jobid);
-		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department,jobid, jobname);
-		EmployeeDaoImlp.updateEmployee(employee);
-		response.sendRedirect("employeelist");
+		Employee employee = new Employee();
+		employee.setEmployeeName(employeename);
+		employee.setIdCard(idcard);
+		employee.setPhone(phone);
+			
+		List<Employee>list = EmployeeDaoImlp.getEmployee(employee);
+		
+	
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
