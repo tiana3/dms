@@ -19,8 +19,8 @@ public class WorkHourService implements WorkHourDao{
 	}
 
 	@Override
-	public void addWorkHour(WorkHour workhour) {
-		work.addWorkHour(workhour);
+	public Integer addWorkHour(WorkHour workhour) {
+		return work.addWorkHour(workhour);
 	}
 
 	@Override
@@ -31,5 +31,11 @@ public class WorkHourService implements WorkHourDao{
 	@Override
 	public void updateWorkHour(WorkHour workhour) {
 		work.updateWorkHour(workhour);
+	}
+
+	@Override
+	public WorkHour getWorkHourById(int workplaceId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
