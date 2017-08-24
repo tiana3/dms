@@ -1,14 +1,14 @@
 package com.dms.entity;
 //  工时工位实体，  合并了数据库的两张表
 public class WorkHour {
-	private int standardHourId; //标准工时的id
-	private double standardHour; //标准工时
+	private Integer standardHourId; //标准工时的id
+	private Double standardHour; //标准工时
 	
-	private int workplaceId;//工位id
+	private Integer workplaceId;//工位id
 	private String workplaceName;//工位名
-	private double workhour;// 工位所需工时
-	private double workpay;// 该工位 工时费  实际是 standardHour*workhour
-	private int modelId;  //车辆型号的id
+	private Double workhour;// 工位所需工时
+	private Double workpay;// 该工位 工时费  实际是 standardHour*workhour
+	private Integer modelId;  //车辆型号的id
 	
 	
 	
@@ -16,14 +16,19 @@ public class WorkHour {
 		super();
 	}
 	
-	public WorkHour(String workplaceName,double workhour, double workpay) {
+	public WorkHour(String workplaceName) {
+		super();
+		this.workplaceName = workplaceName;
+	}
+	
+	public WorkHour(String workplaceName,Double workhour, Double workpay) {
 		super();
 		this.workplaceName = workplaceName;
 		this.workhour = workhour;
 		this.workpay = workpay;
 	}
 	
-	public WorkHour(int workplaceId, String workplaceName, double workhour, double workpay) {
+	public WorkHour(Integer workplaceId, String workplaceName, Double workhour, Double workpay) {
 		super();
 		this.workplaceId = workplaceId;
 		this.workplaceName = workplaceName;
@@ -31,8 +36,8 @@ public class WorkHour {
 		this.workpay = workpay;
 	}
 	
-	public WorkHour(int standardHourId, double standardHour, int workplaceId, String workplaceName, double workhour,
-			double workpay, int modelId) {
+	public WorkHour(Integer standardHourId, Double standardHour, Integer workplaceId, String workplaceName, Double workhour,
+			double workpay, Integer modelId) {
 		super();
 		this.standardHourId = standardHourId;
 		this.standardHour = standardHour;
@@ -42,22 +47,22 @@ public class WorkHour {
 		this.workpay = workpay;
 		this.modelId = modelId;
 	}
-	public int getStandardHourId() {
+	public Integer getStandardHourId() {
 		return standardHourId;
 	}
-	public void setStandardHourId(int standardHourId) {
+	public void setStandardHourId(Integer standardHourId) {
 		this.standardHourId = standardHourId;
 	}
-	public double getStandardHour() {
+	public Double getStandardHour() {
 		return standardHour;
 	}
-	public void setStandardHour(double standardHour) {
+	public void setStandardHour(Double standardHour) {
 		this.standardHour = standardHour;
 	}
-	public int getWorkplaceId() {
+	public Integer getWorkplaceId() {
 		return workplaceId;
 	}
-	public void setWorkplaceId(int workplaceId) {
+	public void setWorkplaceId(Integer workplaceId) {
 		this.workplaceId = workplaceId;
 	}
 	public String getWorkplaceName() {
@@ -66,23 +71,29 @@ public class WorkHour {
 	public void setWorkplaceName(String workplaceName) {
 		this.workplaceName = workplaceName;
 	}
-	public double getWorkhour() {
+	public Double getWorkhour() {
 		return workhour;
 	}
-	public void setWorkhour(double workhour) {
+	public void setWorkhour(Double workhour) {
 		this.workhour = workhour;
 	}
-	public double getWorkpay() {
+	public Double getWorkpay() {
 		return workpay;
 	}
-	public void setWorkpay(double workpay) {
+	public void setWorkpay(Double workpay) {
 		this.workpay = workpay;
 	}
-	public int getModelId() {
+	public Integer getModelId() {
 		return modelId;
 	}
-	public void setModelId(int modelId) {
+	public void setModelId(Integer modelId) {
 		this.modelId = modelId;
+	}
+
+	@Override
+	public String toString() {
+		return "WorkHour [workplaceId=" + workplaceId + ", workplaceName=" + workplaceName + ", workhour=" + workhour
+				+ ", workpay=" + workpay + "]";
 	}
 	
 	
