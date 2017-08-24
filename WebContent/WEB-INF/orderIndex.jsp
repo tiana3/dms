@@ -192,14 +192,14 @@
       	<article class="cl pd-20">    
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
-					<a href="javascript:;" onclick="#" class="btn btn-primary radius">在修业务</a>
+					<a href="javascript:;" onclick="" class="btn btn-primary radius">在修业务</a>
 					<a class="btn btn-primary radius" onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"> 质检</a>
-					<a href="javascript:;" onclick="#" class="btn btn-primary radius">完工</a>
+					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 				</span>
 	            <span class="r">
-	            	<a href="javascript:;" onclick="#" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe632;</i>保存</a>
-					<a href="javascript:;" onclick="#" class="btn btn-primary radius">打印维修委托书</a>
-					<a href="javascript:;" onclick="#" class="btn btn-primary radius">打印派工单</a>
+	            	<a href="javascript:;" onclick="" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe632;</i>保存</a>
+					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印维修委托书</a>
+					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印派工单</a>
 	            </span>
       	  	</div>
 	      
@@ -209,7 +209,7 @@
 			
 			<p><span class="l">维修单号：</span><span id="time1" class="r"></span></p>
         
-		<form id="form1" action="${pageContext.request.contextPath }/OrderServlet?act=search" method="post">
+		<form id="form1" action="${pageContext.request.contextPath }/getCustomer.do" method="post">
 						<input type="hidden"  name="customerCraInfoId"  value="">
 						
 			<table class="table table-border table-bordered table-bg">
@@ -227,7 +227,7 @@
 						</td>
 						
 						<td>车主姓名</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name=""  value="${carInfo.customerName }"></td>
 					</tr>
 					<tr>
 						<td>车架号</td>
@@ -240,25 +240,25 @@
 							</select>
 						</td>
 						<td>车主地址</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name=""  value="${carInfo.address }"></td>
 
 					</tr>
 					<tr>
 						<td>发动机号</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name=""  value="${carInfo.engineNumber }"></td>
 						<td>购车日期</td>
 						<td>
 							<input type="text" onfocus="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"  class="input-text Wdate">
 						</td>
 												<td>车主电话</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name=""  value="${carInfo.phone }"></td>
 						
 
 
 					</tr>
 					<tr>
 						<td>车辆颜色</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name=""  value="${carInfo.color }"></td>
 						<td>保险到期日期</td>
 						<td>
 							<input type="text"  onfocus="WdatePicker({skin:'whyGreen',maxDate:'{%y+1}-%M-%d'})"  class="input-text Wdate">

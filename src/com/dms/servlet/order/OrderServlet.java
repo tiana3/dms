@@ -41,7 +41,7 @@ public class OrderServlet extends HttpServlet {
 			String VIN = request.getParameter("VIN");
 			CustomerCarInfoService  service = (CustomerCarInfoService) ctx.getBean("customerCarInfoServiceImpl");
 			
-			CustomerCarInfo carInfo = service.getCustomerCarInfoByKey(plateNumber);
+			CustomerCarInfo carInfo = service.getCustomerCarInfoByKey(plateNumber, VIN);
 			request.setAttribute("carInfo", carInfo);
 			request.getRequestDispatcher("/WEB-INF/orderIndex.jsp").forward(request, response);
 		}
