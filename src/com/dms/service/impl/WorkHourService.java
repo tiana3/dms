@@ -18,8 +18,6 @@ public class WorkHourService implements WorkHourDao{
 		return work.getWorkHour(workplaceName);
 	}
 
-
-
 	@Override
 	public void removeWorkHour(int workplaceId) {
 		work.removeWorkHour(workplaceId);
