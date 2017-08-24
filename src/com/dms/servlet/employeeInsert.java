@@ -1,6 +1,8 @@
 package com.dms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,15 +32,20 @@ public class employeeInsert extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
 		String IdCard = request.getParameter("idcard");
+		PrintWriter out = response.getWriter();
+		System.out.println(request.getParameter("jobid"));
 		int id = Integer.parseInt(request.getParameter("jobid"));
 		Employee employee = new Employee(1, name, gender, phone, IdCard, 1,"c", id, "b");
 		System.out.println(name+" "+gender+" "+phone+" "+" "+IdCard+" "+id);
 		EmployeeDaoImlp.addEmployee(employee);
-		response.sendRedirect("employees.jsp");
+		out.print("Ìí¼Ó³É¹¦");
 	}
 
 	/**

@@ -191,7 +191,6 @@
 		<article class="cl pd-20">
 
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			
 				<a class="btn btn-primary radius"
 				onclick="cartype_edit('添加车辆型号','CarTypeShowServlet','${carType.modelId}')" href="javascript:;"><i
 				class="Hui-iconfont">&#xe600;</i> 添加车辆厂家型号</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
