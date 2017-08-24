@@ -167,15 +167,8 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-<<<<<<< HEAD
-					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
 
-					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 
-					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
-
-=======
 					<li class="current"><a
 						href="${pageContext.request.contextPath }/WorkHourListServlet"
 						title="工时工位管理">工时工位管理</a></li>
@@ -185,7 +178,7 @@
 					<li><a
 						href="${pageContext.request.contextPath }/CarTypeListServlet"
 						title="厂家车型管理">厂家车型管理</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
+
 				</ul>
 			</dd>
 		</dl>

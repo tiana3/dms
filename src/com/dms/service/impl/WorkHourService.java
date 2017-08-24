@@ -18,15 +18,6 @@ public class WorkHourService implements WorkHourDao{
 		return work.getWorkHour(workplaceName);
 	}
 
-<<<<<<< HEAD
-	@Override
-	public Integer addWorkHour(WorkHour workhour) {
-		return work.addWorkHour(workhour);
-	}
-=======
-
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
-
 	@Override
 	public void removeWorkHour(int workplaceId) {
 		work.removeWorkHour(workplaceId);
@@ -38,15 +29,12 @@ public class WorkHourService implements WorkHourDao{
 	}
 
 	@Override
-<<<<<<< HEAD
-=======
 	public Integer addWorkHour(WorkHour workhour) {
 		// TODO Auto-generated method stub
 		return work.addWorkHour(workhour);
 	}
 
 	@Override
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
 	public WorkHour getWorkHourById(int workplaceId) {
 		// TODO Auto-generated method stub
 		return null;
