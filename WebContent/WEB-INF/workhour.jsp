@@ -144,7 +144,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -167,9 +167,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li><a href="CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>

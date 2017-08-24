@@ -142,7 +142,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
