@@ -85,7 +85,8 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="#" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="${pageContext.request.contextPath }/OrderServlet"
+						title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -142,11 +143,8 @@
 			</dt>
 			<dd>
 				<ul>
-<<<<<<< HEAD
-					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
-=======
-					<li><a href="" title="员工管理">员工管理</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
+					<li><a href="${pageContext.request.contextPath }/employeelist"
+						title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -169,6 +167,7 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
+<<<<<<< HEAD
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
 
@@ -176,6 +175,17 @@
 
 					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 
+=======
+					<li class="current"><a
+						href="${pageContext.request.contextPath }/WorkHourListServlet"
+						title="工时工位管理">工时工位管理</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/GetCarTypeServlet"
+						title="材料目录管理">材料目录管理</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/CarTypeListServlet"
+						title="厂家车型管理">厂家车型管理</a></li>
+>>>>>>> branch 'master' of file:///\\172.13.17.209\git
 				</ul>
 			</dd>
 		</dl>
@@ -196,17 +206,22 @@
 		class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<div class="cl pd-5 bg-1 bk-gray mt-20" >
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<div style="width: 160px; float: left;">
-			<span> <a class="btn btn-primary radius"
-				onclick="workhour_edit('添加工时工位','WorkHourServlet?act=add')" href="javascript:;"> 
-				<i class="Hui-iconfont">&#xe600;</i> 添加工时工位</a>
-			</span>
+				<span> <a class="btn btn-primary radius"
+					onclick="workhour_edit('添加工时工位','WorkHourServlet?act=add')"
+					href="javascript:;"> <i class="Hui-iconfont">&#xe600;</i>
+						添加工时工位
+				</a>
+				</span>
 			</div>
 			<form action="WorkHourListServlet" method="get">
-				<span class="l">工位名：&nbsp;<input type="text" name="workplaceName" style="height:25px;">
-	                <button  class="btn btn-success" type="submit" value="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-				</span> 
+				<span class="l">工位名：&nbsp;<input type="text"
+					name="workplaceName" style="height: 25px;">
+					<button class="btn btn-success" type="submit" value="submit">
+						<i class="Hui-iconfont">&#xe665;</i> 搜索
+					</button>
+				</span>
 			</form>
 			<span class="r">共有数据：<strong></strong> 条
 			</span>
