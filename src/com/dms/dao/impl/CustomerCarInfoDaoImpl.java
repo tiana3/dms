@@ -17,9 +17,9 @@ public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
 	}
 
 	@Override
-	public CustomerCarInfo getCustomerCarInfoByKey(String key) {
+	public CustomerCarInfo getCustomerCarInfoByKey(String plateNumber, String VIN) {
 		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
-		CustomerCarInfo customerCarInfo = mapper.getCustomerCarInfoByKey(key);
+		CustomerCarInfo customerCarInfo = mapper.getCustomerCarInfoByKey(plateNumber, VIN);
 		return customerCarInfo;
 	}
 

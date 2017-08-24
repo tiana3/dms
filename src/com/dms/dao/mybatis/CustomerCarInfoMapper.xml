@@ -37,7 +37,7 @@
 
     
     <select id="getCustomerCarInfoByKey" parameterType="String" resultMap="customerCarInfo">
-     select * from customercarinfo where plateNumber=#{key} or VIN=#{key}
+     select * from customercarinfo where plateNumber=#{plateNumber} or VIN=#{VIN}
     </select>
     
 

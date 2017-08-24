@@ -16,8 +16,8 @@ public class CustomerCarInfoServiceImpl implements CustomerCarInfoService {
 	}
 
 	@Override
-	public CustomerCarInfo getCustomerCarInfoByKey(String key) {
-		CustomerCarInfo customerCarInfo = customerCarInfoDao.getCustomerCarInfoByKey(key);
+	public CustomerCarInfo getCustomerCarInfoByKey(String plateNumber, String VIN) {
+		CustomerCarInfo customerCarInfo = customerCarInfoDao.getCustomerCarInfoByKey(plateNumber, VIN);
 		return customerCarInfo;
 	}
 
