@@ -1,5 +1,5 @@
 
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%@ page language="java" import="java.util.List"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -216,7 +216,7 @@
 					</button>
 				</span>
 			</form>
-			<span class="r">共有数据：<strong></strong> 条
+			<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条
 			</span>
 		</div>
 		<div class="mt-10">
