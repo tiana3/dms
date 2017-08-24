@@ -24,11 +24,11 @@ public class WorkHourDaoImpl implements WorkHourDao{
 	@Override
 	public List<WorkHour> getWorkHour() {
 		List<WorkHour> list = new ArrayList<WorkHour>();
+		String sql = "select * from workplace";
 		try {
 			con = JdbcUtil.getConnection();
-			pre = con.prepareStatement("select * from workplace");
+			pre = con.prepareStatement(sql);
 			res = pre.executeQuery();
-			
 			while(res.next()) {
 				int workplaceId = res.getInt(1);
 				String workplaceName = res.getString(2);
@@ -42,18 +42,37 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		}finally {
 			JdbcUtil.close(con, pre, res);
 		}
-		
 		return list;
 	}
 	
 	@Override
 	public List<WorkHour> getWorkHour(String workplaceName) {
-		// TODO Auto-generated method stub
-		return null;
+		List<WorkHour> list = new ArrayList<WorkHour>();
+		String sql = "SELECT * FROM workplace WHERE workplaceName LIKE concat('%',?,'%')";
+		try {
+			con = JdbcUtil.getConnection();
+			pre = con.prepareStatement(sql);
+			pre.setString(1, workplaceName);
+			res = pre.executeQuery();
+			while(res.next()) {
+				int workplaceId = res.getInt(1);
+				String workplacename = res.getString(2);
+				double workhour = res.getDouble(3);
+				double workpay = res.getDouble(4);
+				list.add(new WorkHour(workplaceId, workplacename, workhour, workpay));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(con, pre, res);
+		}
+		return list;
+		
 	}
 
 	@Override
-	public void addWorkHour(WorkHour workhour) {
+	public Integer addWorkHour(WorkHour workhour) {
 		String sql = "insert into workplace (workplaceName,workhour,workpay) value(?,?,?)";
 		
 		try {
@@ -70,6 +89,7 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		}finally {
 			JdbcUtil.close(con,pre,null);
 		}
+		return null;
 	}
 
 	@Override
@@ -104,5 +124,31 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		} finally {
 			JdbcUtil.close(con, pre, null);
 		}
+	}
+
+	@Override
+	public WorkHour getWorkHourById(int workplaceId) {
+		
+		try {
+			con = JdbcUtil.getConnection();
+			pre = con.prepareStatement("select * from workplace where workplaceId = ?");
+			pre.setInt(1, workplaceId);
+			res = pre.executeQuery();
+			
+			while(res.next()) {
+				int id = res.getInt(1);
+				String name = res.getString(2);
+				double workhour = res.getDouble(3);
+				double workpay = res.getDouble(4);
+				WorkHour work = new WorkHour(id, name, workhour, workpay);
+				return work;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(con, pre, res);
+		}
+		return null;
 	}
 }

@@ -7,34 +7,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.dao.impl.PartDaoImpl;
+
 /**
- * Servlet implementation class WorkHourServlet
+ * Servlet implementation class CheckedPartDeleteServlet
  */
-@WebServlet("/WorkHourServlet")
-public class WorkHourServlet extends HttpServlet {
+@WebServlet("/empCheckedDeleteServlet")
+public class empCheckedeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WorkHourServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		String employeeIdString = request.getParameter("employeeids");
+		String[] employeeIds = employeeIdString.split(",");
+		
+		for (String employeeId: employeeIds) {
+			System.out.println(employeeId);
+			EmployeeDaoImlp.removeEmployee(Integer.parseInt(employeeId));
+		}
+		response.getWriter().print("批量删除成功");
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

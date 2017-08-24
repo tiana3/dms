@@ -15,7 +15,11 @@
 	<!-- 表明用注释 -->
 	<context:annotation-config />
 
-
+<!--
+	<mvc:resources mapping="/js/**" location="/js/"/>    
+	<mvc:resources mapping="/lib/**" location="/lib/"/>    
+	<mvc:resources mapping="/static/**" location="/staitc/"/>  
+	<mvc:resources mapping="/temp/**" location="/temp/"/>    --> 
 	<!-- html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的 -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

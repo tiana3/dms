@@ -41,60 +41,51 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="employeeUpdate" method="post"
-			class="form form-horizontal" id="form-cartype-add">
-			<%
-				int id = Integer.parseInt(request.getParameter("id"));
-				ArrayList<Employee>employees = EmployeeDaoImlp.getAllEmployee();
-				HttpSession session2 = request.getSession();
-				
-				for(Employee e:employees)
-				{
-					if(e.getEmployeeId()==id)
-					{
-					session2.setAttribute("id", e.getEmployeeId());%>
-						
-					
-			<input type="hidden" name="employeeid" value="<%=e.getEmployeeId()%>">
+		<form action="employeeUpdate" id="form-update-add" method="POST"
+			class="form form-horizontal">
+
+
+			<input type="hidden" name="employeeid"
+				value="${employee.employeeId}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="<%=e.getEmployeeName()%>" placeholder="" id=""
-						name="factory">
+					<input type="text" class="input-text"
+						value="${employee.employeeName}" placeholder="" id="" name="name">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">性别：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="<%=e.getGender() %>"
+					<input type="text" class="input-text" value="${employee.gender}"
 						placeholder="" id="gender" name="gender">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">电话号码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="<%=e.getPhone() %>"
+					<input type="text" class="input-text" value="${employee.phone}"
 						placeholder="" id="phone" name="phone">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">身份证号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="<%=e.getIdCard()%>"
+					<input type="text" class="input-text" value="${employee.idCard}"
 						placeholder="" id="idcard" name="idcard">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">职务：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<select id="jobid">
-					<option value="1">研发员</option>
-					<option value="2">销售员</option>
-					<option value="3">维修员</option>
+					<select name="jobid">
+						<option value="1">研发员</option>
+						<option value="2">销售员</option>
+						<option value="3">维修员</option>
 					</select>
 				</div>
 			</div>
-			
+
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 					<button class="btn btn-primary radius" type="submit">
@@ -102,9 +93,6 @@
 					</button>
 				</div>
 			</div>
-			<%}
-				}
-			%>
 		</form>
 	</div>
 
@@ -117,6 +105,8 @@
 	<!--/_footer /作为公共模版分离出去-->
 
 	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
@@ -134,14 +124,45 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-		$("#form-cartype-add").validate({
-			submitHandler : function(form) {
-				$(form).ajaxSubmit();
-				parent.location.reload();
-				var index = parent.layer.getFrameIndex(window.name);
-				parent.layer.close(index);
+		$("#form-update-add").validate({
+
+			rules : {
+				name : {
+					required : true,
+				},
+				gender : {
+					required : true,
+				},
+				phone : {
+					required : true,
+
+				},
+				idcard : {
+					required : true,
+				},
+				
+			},
+			//onkeyup:false,
+			focusCleanup : true,
+			success : "valid",
+			submitHandler:function(form) {
+				$(form).ajaxSubmit({
+					success : function() {
+
+						parent.layer.msg('修改成功!', {icon:6,time:1000});
+						layer_close();
+						parent.location.reload();
+						
+
+						//var index = parent.layer.getFrameIndex(window.name);
+						//parent.layer.close(index);
+					}
+
+				})
+
 			}
 		});
 	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

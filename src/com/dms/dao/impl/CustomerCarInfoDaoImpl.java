@@ -22,5 +22,22 @@ public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
 		CustomerCarInfo customerCarInfo = mapper.getCustomerCarInfoByKey(plateNumber, VIN);
 		return customerCarInfo;
 	}
+	@Override
+	public void addCustomerCarInfo(CustomerCarInfo info){
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		mapper.addCustomerCarInfo(info);
+	}
+
+	@Override
+	public void removeCustomerCarInfo(int customerCarInfoId) {
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		mapper.removeCustomerCarInfo(customerCarInfoId);
+	}
+
+	@Override
+	public void updateCustomerCarInfo(CustomerCarInfo info) {
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		mapper.updateCustomerCarInfo(info);		
+	}
 
 }

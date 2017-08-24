@@ -35,38 +35,42 @@
 
 <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet"
 	type="text/css" />
+
+<title>增加工时工位</title>
 </head>
 <body>
 	<div class="page-container">
-		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="post" class="form form-horizontal" id="form-workhour-add">
-			
-			<input type="hidden" name="workplaceId" value="${param.workplaceId }">
+		<form action="WorkHourAddServlet" method="get"
+			class="form form-horizontal" id="form-workhour-add">
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工位名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workplaceName }" placeholder="" id=""
+					<input type="text" class="input-text"
+						value="${workhour.workplaceName }" placeholder="" id=""
 						name="workplaceName">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时(单位：小时)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workhour }" placeholder="" id=""
-						name="workhour">
+					<input type="text" class="input-text" value="${workhour.workhour }"
+						placeholder="" id="" name="workhour">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时费(单位：元)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workpay }" placeholder="" id=""
-						name="workpay">
+					<input type="text" class="input-text" value="${workhour.workpay }"
+						placeholder="" id="" name="workpay">
 				</div>
 			</div>
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-					<button class="btn btn-primary radius" type="submit">
-						<i class="Hui-iconfont">&#xe632;</i> 确定保存
-					</button>
+					<button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit">
+						<i class="Hui-iconfont">&#xe632;</i> 添加</button>
+					
+					<button onClick="layer_close()" class="btn btn-default radius"
+						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 				</div>
 			</div>
 		</form>
@@ -92,24 +96,39 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/ueditor.config.js"></script>
 	<script type="text/javascript"
-		src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+		src="lib/ueditor/1.4.3/ueditor.all.min.js">
+		
+	</script>
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-	$("#form-workhour-add").validate({
-		submitHandler:function(form){
-			$(form).ajaxSubmit({
-				success: function() { 
-					
-					parent.location.reload();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
-				}
+		$("#form-workhour-add").validate({
+			rules:{
+				workhourName:{
+					required:true,
+				},
+				workhour:{
+					required:true,
+				},
+				workpay:{
+					required:true,
+				},
+			},
+			focusCleanup:true,
+			success:"valid",
+			submitHandler:function(form){
+				$(form).ajaxSubmit({
+					success: function() { 
+						parent.layer.msg('添加成功,可继续添加!点击取消关闭',{icon:6,time:2000});	
+						location.reload();
+						//parent.location.reload();
+						//var index = parent.layer.getFrameIndex(window.name);
+						//parent.layer.close(index);
+					}
 				
-			})
-							
-		}
-	});
-</script>
+				})
+			}
+		});
+	</script>
 </body>
 </html>

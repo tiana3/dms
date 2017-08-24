@@ -1,29 +1,31 @@
 package com.dms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.entity.CarType;
 import com.dms.entity.Employee;
+import com.dms.service.CarTypeService;
+import com.dms.service.impl.CarTypeServiceImpl;
 
 /**
- * Servlet implementation class employeeUpdate
+ * Servlet implementation class employeeshow
  */
-@WebServlet("/employeeUpdate")
-public class employeeUpdate extends HttpServlet {
+@WebServlet("/employeeshow")
+public class employeeshow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public employeeUpdate() {
+    public employeeshow() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +36,21 @@ public class employeeUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
-		String employeid = request.getParameter("employeeid");
-		int employeeid = Integer.parseInt(employeid);
-		String name = request.getParameter("name");
-		String gender = request.getParameter("gender");
-		String phone = request.getParameter("phone");
-		String IdCard = request.getParameter("idcard");
-		PrintWriter out = response.getWriter();
-		String jobname = null;
-		String department = null;
-		String id = request.getParameter("jobid");
-		int jobid = Integer.parseInt(id);
-		System.out.println(jobid);
-		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department,jobid, jobname);
-		EmployeeDaoImlp.updateEmployee(employee);
-		response.sendRedirect("employeelist");
+		response.setContentType("text/html;charset=utf-8");
+		
+		String act = request.getParameter("act");
+		if(act == null) {
+			request.getRequestDispatcher("/WEB-INF/employeeinsert.jsp").forward(request, response);
+		} else if("update".equals(act)) {
+			String id = request.getParameter("id");
+			System.out.println(id);
+			Employee employee = EmployeeDaoImlp.getEmployeeById(Integer.parseInt(id));
+			request.setAttribute("employee", employee);
+			request.getRequestDispatcher("/WEB-INF/employeeUpdate.jsp").forward(request, response);
+		}
+		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

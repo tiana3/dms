@@ -141,7 +141,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -244,7 +244,7 @@
                         <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/GetCarTypeServlet?partId=${part.partId}&act=update','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${part.partId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </tr>
-                    </c:forEach>
+           </c:forEach>
                     </tbody>
                 </table>
                 </form>
