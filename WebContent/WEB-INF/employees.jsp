@@ -211,7 +211,7 @@
 				onclick="cartype_edit('添加员工','employeeshow','${employee.employeeId}')" href="javascript:;"><i
 				class="Hui-iconfont">&#xe600;</i> 添加员工</a>
 		</span> <input type="hidden" name="act"> <span class="r">共有数据：<strong>${fn:length(list)}</strong>条
-		</span>
+		</span>                                                                
 	</div>
 	<div class="mt-10">
 		<table class="table table-border table-bordered table-bg table-sort">
