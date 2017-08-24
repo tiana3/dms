@@ -1,41 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="com.sun.xml.internal.bind.v2.schemagen.xmlschema.Import"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8" import="java.util.*,com.dms.entity.Part,com.dms.dao.impl.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--_meta 作为公共模版分离出去-->
 <html>
+<!-- <head> -->
 <head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="Bookmark" href="favicon.ico">
-<link rel="Shortcut Icon" href="favicon.ico" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<![endif]-->
-<link rel="stylesheet" type="text/css"
-	href="static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css"
-	href="lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css"
-	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css"
-	href="static/h-ui.admin/css/style.css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script><![endif]-->
-<!--/meta 作为公共模版分离出去-->
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="favicon.ico" >
+    <link rel="Shortcut Icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="lib/html5.js"></script>
+    <script type="text/javascript" src="lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script><![endif]-->
+    <!--/meta 作为公共模版分离出去-->
 
-<title>客户车辆信息</title>
+    <title>车辆信息管理</title>
+    <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+    <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-	<!--_header 作为公共模版分离出去-->
+<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
@@ -142,32 +141,33 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-admin">
 			<dt>
-				<i class="Hui-iconfont">&#xe62d;</i> 档案信息管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				<i class="Hui-iconfont">&#xe62d;</i>
+				 档案信息管理
+				 <i	class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li class="current"><a href="customerCarInfo.jsp" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
 			<dt class="selected">
-				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理
+				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
-					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -179,15 +179,17 @@
 	</div>
 	<!--/_menu 作为公共模版分离出去-->
 
-	<section class="Hui-article-box"> <nav class="breadcrumb">
-	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	档案信息管理 <span class="c-gray en">&gt;</span> 客户车辆信息 <a
-		class="btn btn-success radius r"
-		style="line-height: 1.6em; margin-top: 3px"
-		href="javascript:location.replace(location.href);" title="刷新"><i
-		class="Hui-iconfont">&#xe68f;</i></a></nav>
 
-	<div class="Hui-article">
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+       基础信息管理
+        <span class="c-gray en">&gt;</span>
+        材料目录管理
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+           <div class="Hui-article">
 		<article class="cl pd-20">
 		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
 		<div class="text-c"> 
@@ -206,8 +208,8 @@
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
 				<a class="btn btn-primary radius"
-				onclick="cartype_edit('添加车辆型号','cartypeAddUpdate.jsp','${carType.modelId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a></span> <span class="r">共有数据：<strong>${fn:length(list)}</strong>
+				onclick="carinfo_add('添加车辆信息','carinfo_add.jsp','${carType.modelId}')" href="javascript:;"><i
+				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(list)}</strong>
 				条
 			</span>
 		</div>
@@ -246,37 +248,90 @@
 		</div>
 		</article>
 	</div>
-	</section>
+</section>
 
-	<!--_footer 作为公共模版分离出去-->
-	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-	<script type="text/javascript"
-		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
-	<!--/_footer /作为公共模版分离出去-->
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<!--/_footer /作为公共模版分离出去-->
 
-	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript"
-		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
-	<script type="text/javascript"
-		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-	<script type="text/javascript">
-	function cartype_edit(title,url,id,w,h){
-		layer_show(title,url,w,h);
-	}
-	
-	function cartype_del(obj,id){
-		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
-			//此处请求后台程序，下方是成功后的前台处理……
-			$.ajax({url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
-		});
-	}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
 
+    /*资讯-添加*/
+    function carinfo_add(title,url,w,h){
+/*      	var index = layer.open({
+            type: 2,
+           title: title,
+            content: url,
+       });
+       layer.full(index); */
+        layer_show(title,url,w,h);
+    }
+    /*资讯-编辑*/
+    function part_edit(title,url,id,w,h){
+       /*  var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        }); */
+    	layer_show(title,url,w,h);
+    }
+    /*资讯-删除*/
+    
+   	function datadel() {
+        layer.confirm('确认要批量删除吗？',function(index){
+        	var checkIds = '';
+        	$('input[name="selectPart"]:checked').each(function(){
+        		checkIds += $(this).val()+","
+        	})
+        	checkIds = checkIds.substring(0,checkIds.length-1);
+           
+        	$.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath }/CheckedPartDeleteServlet',
+                data: "partIds=" + checkIds ,
+                //dataType: 'json',
+                success: function(data){
+                	$('input[name="selectPart"]:checked').each(function(){
+                		$(this).parents("tr").remove();
+                	})
+                    layer.msg(data,{icon:1,time:1000});
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    	
+  	}
+    
+    
+    function part_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            $.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath }/PartDeleteServlet',
+                data: "partid=" + id ,
+                //dataType: 'json',
+                success: function(data){
+                    $(obj).parents("tr").remove();
+                    layer.msg(data,{icon:1,time:1000});
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+   
 </script>
-	<!--/请在上方写此页面业务相关的脚本-->
+<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

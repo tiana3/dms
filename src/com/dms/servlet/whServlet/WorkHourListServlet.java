@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dms.dao.WorkHourDao;
 import com.dms.dao.impl.WorkHourDaoImpl;
 import com.dms.entity.WorkHour;
-import com.dms.service.WorkHourService;
+import com.dms.service.impl.WorkHourService;
 
 /**
  * Servlet implementation class WorkHourListServlet

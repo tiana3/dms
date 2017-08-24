@@ -1,3 +1,6 @@
+<%@page import="com.dms.dao.impl.EmployeeDaoImlp"%>
+<%@page import="com.dms.entity.Employee"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -38,30 +41,60 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="post" class="form form-horizontal" id="form-workhour-add">
+		<form action="employeeUpdate" method="post"
+			class="form form-horizontal" id="form-cartype-add">
+			<%
+				int id = Integer.parseInt(request.getParameter("id"));
+				ArrayList<Employee>employees = EmployeeDaoImlp.getAllEmployee();
+				HttpSession session2 = request.getSession();
+				
+				for(Employee e:employees)
+				{
+					if(e.getEmployeeId()==id)
+					{
+					session2.setAttribute("id", e.getEmployeeId());%>
+						
+					
+			<input type="hidden" name="employeeid" value="<%=e.getEmployeeId()%>">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">姓名：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<%=e.getEmployeeName()%>" placeholder="" id=""
+						name="factory">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">性别：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<%=e.getGender() %>"
+						placeholder="" id="gender" name="gender">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">电话号码：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<%=e.getPhone() %>"
+						placeholder="" id="phone" name="phone">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">身份证号：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="<%=e.getIdCard()%>"
+						placeholder="" id="idcard" name="idcard">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">职务：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<select id="jobid">
+					<option value="1">研发员</option>
+					<option value="2">销售员</option>
+					<option value="3">维修员</option>
+					</select>
+				</div>
+			</div>
 			
-			<input type="hidden" name="workplaceId" value="${param.workplaceId }">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workplaceName }" placeholder="" id=""
-						name="workplaceName">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workhour }" placeholder="" id=""
-						name="workhour">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workpay }" placeholder="" id=""
-						name="workpay">
-				</div>
-			</div>
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 					<button class="btn btn-primary radius" type="submit">
@@ -69,6 +102,9 @@
 					</button>
 				</div>
 			</div>
+			<%}
+				}
+			%>
 		</form>
 	</div>
 
@@ -92,24 +128,20 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/ueditor.config.js"></script>
 	<script type="text/javascript"
-		src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+		src="lib/ueditor/1.4.3/ueditor.all.min.js">
+		
+	</script>
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-	$("#form-workhour-add").validate({
-		submitHandler:function(form){
-			$(form).ajaxSubmit({
-				success: function() { 
-					
-					parent.location.reload();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
-				}
-				
-			})
-							
-		}
-	});
-</script>
+		$("#form-cartype-add").validate({
+			submitHandler : function(form) {
+				$(form).ajaxSubmit();
+				parent.location.reload();
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			}
+		});
+	</script>
 </body>
 </html>
