@@ -85,7 +85,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="#" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -142,7 +142,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -165,9 +165,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>

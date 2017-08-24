@@ -32,10 +32,10 @@ public class WorkHourListServlet extends HttpServlet {
 
 
 			String str = request.getParameter("workplaceName");
-			System.out.println(str);
+			
 			WorkHourDao dao1 = new WorkHourService();
 			List<WorkHour> list = dao1.getWorkHour(str);
-			System.out.println(list.toString());
+			
 			request.setAttribute("work", list);
 			request.getRequestDispatcher("/WEB-INF/workhour.jsp").forward(request, response);
 
