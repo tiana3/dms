@@ -16,6 +16,11 @@ public class WorkHour {
 		super();
 	}
 	
+	public WorkHour(String workplaceName) {
+		super();
+		this.workplaceName = workplaceName;
+	}
+	
 	public WorkHour(String workplaceName,Double workhour, Double workpay) {
 		super();
 		this.workplaceName = workplaceName;

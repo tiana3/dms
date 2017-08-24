@@ -15,7 +15,6 @@
 <link rel="Bookmark" href="favicon.ico">
 <link rel="Shortcut Icon" href="favicon.ico" />
 
-<script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 
 <link rel="stylesheet" type="text/css"
@@ -37,17 +36,16 @@
 </head>
 <body>
 
-<!--_header 作为公共模版分离出去-->
+	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> <a
 				class="logo navbar-logo-m f-l mr-10 visible-xs"
 				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
-			<nav class="nav navbar-nav">
-						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+			<nav class="nav navbar-nav"> <nav id="Hui-userbar"
+				class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>
 				<li class="dropDown dropDown_hover"><a href="#"
@@ -55,7 +53,7 @@
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="#">退出</a></li>
 					</ul></li>
-				
+
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
 						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
@@ -144,7 +142,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li><a href="" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -167,9 +165,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li><a href="WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li><a href="CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -190,15 +188,18 @@
 		class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<span class="l">工位名:<input type="text"> <a title="搜索"
-				href="javascript:;" onclick="system_log_show(this,'10001')"
-				class="ml-5" style="text-decoration: none"> <i
-					class="Hui-iconfont">&#xe665;</i></a>
-			</span> <span>
-			<a class="btn btn-primary radius"
-				onclick="workhour_edit('添加工时工位','workhourAddUpdate.jsp','${workhour.workplaceId}')" href="javascript:;">
-				<i class="Hui-iconfont">&#xe600;</i> 添加工时工位</a></span>
+		<div class="cl pd-5 bg-1 bk-gray mt-20" >
+			<div style="width: 160px; float: left;">
+			<span> <a class="btn btn-primary radius"
+				onclick="workhour_edit('添加工时工位','WorkHourServlet?act=add')" href="javascript:;"> 
+				<i class="Hui-iconfont">&#xe600;</i> 添加工时工位</a>
+			</span>
+			</div>
+			<form action="WorkHourListServlet" method="get">
+				<span class="l">工位名：&nbsp;<input type="text" name="workplaceName" style="height:25px;">
+	                <button  class="btn btn-success" type="submit" value="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</span> 
+			</form>
 			<span class="r">共有数据：<strong></strong> 条
 			</span>
 		</div>
@@ -216,21 +217,21 @@
 				</thead>
 				<c:forEach items="${work }" var="workhour" varStatus="varSta">
 					<tbody>
-					
+
 						<tr class="text-c">
 							<td>${varSta.count }</td>
 							<td>${workhour.workplaceName }</td>
 							<td>${workhour.workhour }</td>
 							<td>${workhour.workpay }</td>
 							<td><a title="编辑" href="javascript:;" class="ml-5"
-								onclick="workhour_edit('工时工位','workhourAddUpdate.jsp?workplaceId=${workhour.workplaceId }&workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')" 
+								onClick="workhour_edit('工时工位','WorkHourServlet?act=update&workplaceId=${workhour.workplaceId }&workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')"
 								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6df;</i></a>
 								<a title="删除" href="javascript:;"
-								onclick="workhour_del(this,${workhour.workplaceId })" class="ml-5"
-								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6e2;</i></a>
-							</td>
+								onclick="workhour_del(this,${workhour.workplaceId })"
+								class="ml-5" style="text-decoration: none"> <i
+									class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
-					
+
 					</tbody>
 				</c:forEach>
 			</table>
@@ -268,6 +269,9 @@
 		});
 	}
 
+	function system_log_show(title,url,id,w,h){
+		
+	}
 	</script>
 
 </body>

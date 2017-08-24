@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dms.dao.WorkHourDao;
+import com.dms.dao.impl.WorkHourDaoImpl;
 import com.dms.entity.WorkHour;
 import com.dms.service.WorkHourService;
 
@@ -19,31 +20,33 @@ import com.dms.service.WorkHourService;
 @WebServlet("/WorkHourListServlet")
 public class WorkHourListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WorkHourListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		WorkHourDao workhour = new WorkHourService();
-		List<WorkHour> work = workhour.getWorkHour();
-		request.setAttribute("work", work);
-		request.getRequestDispatcher("/workhour.jsp").forward(request, response);
+
+
+			String str = request.getParameter("workplaceName");
+			System.out.println(str);
+			WorkHourDao dao1 = new WorkHourService();
+			List<WorkHour> list = dao1.getWorkHour(str);
+			System.out.println(list.toString());
+			request.setAttribute("work", list);
+			request.getRequestDispatcher("/WEB-INF/workhour.jsp").forward(request, response);
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
