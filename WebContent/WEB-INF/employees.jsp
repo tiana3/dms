@@ -35,7 +35,7 @@
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>车型管理</title>
+<title>员工管理</title>
 </head>
 <body>
 	<!--_header 作为公共模版分离出去-->
@@ -87,7 +87,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="#" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -138,13 +138,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-member">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe60d;</i> 员工管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="员工管理">员工管理</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -161,15 +161,15 @@
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
-					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/PartListServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
