@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import com.dms.dao.OrdersDao;
+import com.dms.dao.OrderDao;
 import com.dms.entity.Order;
 
 
-public class TheMaintenanceDaoImpl implements OrdersDao{
+public class TheMaintenanceDaoImpl implements OrderDao{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public SqlSessionTemplate getSqlSessionTemplate() {
@@ -23,7 +23,7 @@ public class TheMaintenanceDaoImpl implements OrdersDao{
 	
 	@Override
 	public List<Order> getAllOrders() {
-		OrdersDao dao = sqlSessionTemplate.getMapper(OrdersDao.class);
+		OrderDao dao = (OrderDao) sqlSessionTemplate.getMapper(OrderDao.class);
 		List<Order> order = dao.getAllOrders();
 		return order;
 	}
@@ -44,5 +44,11 @@ public class TheMaintenanceDaoImpl implements OrdersDao{
 	public void updateOrder(Order order) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Order getLastOrder(String plateNumber, String VIN) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
