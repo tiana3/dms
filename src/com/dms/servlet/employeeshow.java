@@ -2,6 +2,7 @@ package com.dms.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,12 +41,16 @@ public class employeeshow extends HttpServlet {
 		
 		String act = request.getParameter("act");
 		if(act == null) {
+			ArrayList<Employee>list = EmployeeDaoImlp.getJob();
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/employeeinsert.jsp").forward(request, response);
 		} else if("update".equals(act)) {
 			String id = request.getParameter("id");
 			System.out.println(id);
+			ArrayList<Employee>list1 = EmployeeDaoImlp.getJob();
 			Employee employee = EmployeeDaoImlp.getEmployeeById(Integer.parseInt(id));
 			request.setAttribute("employee", employee);
+			request.setAttribute("list1", list1);
 			request.getRequestDispatcher("/WEB-INF/employeeUpdate.jsp").forward(request, response);
 		}
 		

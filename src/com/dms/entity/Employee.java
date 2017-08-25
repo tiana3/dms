@@ -29,6 +29,12 @@ public class Employee {
 		this.jobId = jobId;
 		this.jobName = jobName;
 	}
+	
+	public Employee(int jobId, String jobName) {
+		super();
+		this.jobId = jobId;
+		this.jobName = jobName;
+	}
 	public int getEmployeeId() {
 		return employeeId;
 	}

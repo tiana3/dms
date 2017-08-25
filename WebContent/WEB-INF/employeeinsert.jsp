@@ -78,13 +78,12 @@
 				<label class="form-label col-xs-4 col-sm-2">职务：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<select name="jobid">
-					<option value="1">研发员</option>
-					<option value="2">销售员</option>
-					<option value="3">维修员</option>
+					<c:forEach items="${list}" var="employee" varStatus="varSta">
+					<option value="${employee.jobId}">${employee.jobName}</option>
+					</c:forEach>
 					</select>
 				</div>
 			</div>
-			
 			<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 				<button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
