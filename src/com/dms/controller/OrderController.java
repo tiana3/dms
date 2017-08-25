@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dms.entity.CustomerCarInfo;
+import com.dms.entity.Employee;
 import com.dms.entity.RepairType;
-import com.dms.service.CustomerCarInfoService;
 import com.dms.service.OrderService;
 
 @Controller
@@ -29,9 +29,11 @@ public class OrderController {
 		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
 		CustomerCarInfo carInfo = service.getCustomerCarInfoByKey(plateNumber, VIN);
 		List<RepairType> repairType = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
 		
 		model.addAttribute("repairType", repairType);
 		model.addAttribute("carInfo", carInfo);
+		model.addAttribute("sa", sa);
 		return "orderIndex";
 	}
 }

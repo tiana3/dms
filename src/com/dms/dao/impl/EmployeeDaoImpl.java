@@ -7,16 +7,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
+import com.dms.dao.EmployeeDao;
 import com.dms.entity.Employee;
 import com.dms.entity.Part;
 import com.dms.util.JdbcUtil;
 
-public class EmployeeDaoImlp {
-	public static void main(String[] args) {
-		System.out.println(getAllEmployee());
+public class EmployeeDaoImpl implements EmployeeDao{
+	private SqlSessionTemplate sqlSessionTemplate;
+
+	public SqlSessionTemplate getSqlSessionTemplate() {
+		return sqlSessionTemplate;
 	}
 
-	public static void addEmployee(Employee employee) {
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
+
+	public  void addEmployee(Employee employee) {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "insert into employee set employee.`name`='" + employee.getEmployeeName() + "',gender='"
 				+ employee.getGender() + "',phone='" + employee.getPhone() + "',idCard='" + employee.getIdCard()
@@ -33,7 +42,7 @@ public class EmployeeDaoImlp {
 		}
 	}
 
-	public static List<Employee> getEmployee(Employee employee) {
+	public  List<Employee> getEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		List<Employee> list = new ArrayList<Employee>();
 		Connection conn = JdbcUtil.getConnection();
@@ -80,7 +89,7 @@ public class EmployeeDaoImlp {
 		return list;
 	}
 
-	public static void updateEmployee(Employee employee) {
+	public  void updateEmployee(Employee employee) {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "UPDATE employee SET employee.`name`='" + employee.getEmployeeName() + "',employee.`gender`='"
 				+ employee.getGender() + "',employee.`phone`='" + employee.getPhone() + "',employee.`idCard`='"
@@ -99,7 +108,7 @@ public class EmployeeDaoImlp {
 		}
 	}
 
-	public static void removeEmployee(int EmployeeId) {
+	public  void removeEmployee(int EmployeeId) {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "delete from employee where employeeId='" + EmployeeId + "'";
 		PreparedStatement statment;
@@ -114,7 +123,7 @@ public class EmployeeDaoImlp {
 		}
 	}
 
-	public static ArrayList<Employee> getAllEmployee() {
+	public  ArrayList<Employee> getAllEmployee() {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "SELECT employee.`employeeId`,employee.`name`,employee.`gender`,employee.`phone`,employee.`idCard`,department.`departmentId`,department.`name`,job.`jobId`,job.`NAME` FROM employee,job,department  WHERE employee.jobId = job.jobId AND job.departmentId = department.departmentId ";
 		PreparedStatement statment;
@@ -139,7 +148,10 @@ public class EmployeeDaoImlp {
 		return employees;
 	}
 
-	public static ArrayList<Employee> getEmployee(String name) {
+/*
+ * ‘› ±≤ª”√
+ * 
+ * 	public static ArrayList<Employee> getEmployee(String name) {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "SELECT employee.`employeeId`,employee.`name`,employee.`gender`,employee.`phone`,employee.`idCard`,department.`departmentId`,department.`name`,job.`jobId`,job.`NAME` FROM employee,job,department  WHERE employee.jobId = job.jobId AND job.departmentId = department.departmentId "
 				+ "AND employee.name = '" + name + "'";
@@ -163,8 +175,9 @@ public class EmployeeDaoImlp {
 			e.printStackTrace();
 		}
 		return employees;
-	}
-	public static Employee getEmployeeById(int id) {
+	}*/
+	
+	public  Employee getEmployeeById(int id) {
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "SELECT employee.`employeeId`,employee.`name`,employee.`gender`,employee.`phone`,employee.`idCard`,department.`departmentId`,department.`name`,job.`jobId`,job.`NAME` FROM employee,job,department  WHERE employee.jobId = job.jobId AND job.departmentId = department.departmentId "
 				+ "AND employee.employeeId = '" + id + "'";
@@ -189,7 +202,7 @@ public class EmployeeDaoImlp {
 		}
 		return employee;
 	}
-	public static ArrayList<Employee> getJob(){
+	public ArrayList<Employee> getJob(){
 		Connection conn = JdbcUtil.getConnection();
 		String sql = "SELECT * from job";
 		PreparedStatement statment;
@@ -211,5 +224,12 @@ public class EmployeeDaoImlp {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public List<Employee> getSA() {
+		EmployeeDao mapper = sqlSessionTemplate.getMapper(EmployeeDao.class);
+		List<Employee> sa = mapper.getSA();
+		return sa;
 	}
 }

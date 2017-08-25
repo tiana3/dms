@@ -1,7 +1,6 @@
-package com.dms.servlet;
+package com.dms.servlet.empServlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,13 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.impl.EmployeeDaoImlp;
-import com.dms.dao.impl.PartDaoImpl;
-import com.dms.entity.CarType;
+import com.dms.dao.impl.EmployeeDaoImpl;
 import com.dms.entity.Employee;
-import com.dms.entity.Part;
-import com.dms.service.CarTypeService;
-import com.dms.service.impl.CarTypeServiceImpl;
 
 /**
  * Servlet implementation class employeelist
@@ -48,7 +42,7 @@ public class employeelist extends HttpServlet {
 		employee.setIdCard(idcard);
 		employee.setPhone(phone);
 			
-		List<Employee>list = EmployeeDaoImlp.getEmployee(employee);
+		List<Employee>list = new EmployeeDaoImpl().getEmployee(employee);
 		
 	
 		request.setAttribute("list", list);

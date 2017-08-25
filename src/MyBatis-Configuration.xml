@@ -8,8 +8,14 @@
 	<mappers>
 		<mapper resource="com/dms/dao/mybatis/CustomerCarInfoMapper.xml"/>
 
+		<mapper resource="com/dms/dao/mybatis/RepairTypeMapper.xml"/>
+		<mapper resource="com/dms/dao/mybatis/EmployeeMapper.xml"/>
+		<mapper resource="com/dms/dao/mybatis/OrderMapper.xml"/>
+
+
 		<mapper resource="com/dms/dao/mybatis/TheMaintenanceMapper.xml"/>
 
-		<mapper resource="com/dms/dao/mybatis/RepairTypeMapper.xml"/>
+
+
 	</mappers>
 </configuration>

@@ -2,26 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace="com.mydomain.UserMapper" 对应接口,就把这xml配置文件和对应接口联系上了-->
-<mapper namespace="com.dms.dao.CustomerCarInfoDao">
+<mapper namespace="com.dms.dao.OrderDao">
 <!-- 自定义返回结果集 -->
 <!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
-   <resultMap id="customerCarInfo" type="CustomerCarInfo">
+   <resultMap id="orderSender" type="Order">
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
-        <id property="customerCraInfoId" column="customerCraInfoId" javaType="java.lang.Integer"></id>
-        <result property="customerName" column="customerName" javaType="java.lang.String"></result>
-        <result property="gender" column="gender" javaType="java.lang.String"></result>
-        <result property="address" column="address" javaType="java.lang.String"></result>
-        <result property="phone" column="phone" javaType="java.lang.String"></result>
-        <result property="idCard" column="idCard" javaType="java.lang.String"></result>
-        <result property="plateNumber" column="plateNumber" javaType="java.lang.String"></result>
-        <result property="VIN" column="VIN" javaType="java.lang.String"></result>
-        <result property="engineNumber" column="engineNumber" javaType="java.lang.String"></result>
-        <result property="color" column="color" javaType="java.lang.String"></result>
-        <result property="gearBox" column="gearBox" javaType="java.lang.String"></result>
-        <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
-        <result property="policyDate" column="policy" javaType="java.lang.String"></result>
-        <result property="modelid" column="modelid" javaType="java.lang.Integer"></result>
-    </resultMap>
+        <result property="sender" column="sender" javaType="java.lang.String"></result>
+  		<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
+   </resultMap>
     
 
     
@@ -36,8 +24,8 @@
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 
     
-    <select id="getCustomerCarInfoByKey" parameterType="String" resultMap="customerCarInfo">
-     select * from customercarinfo where plateNumber=#{plateNumber} or VIN=#{VIN}
+    <select id="getLastOrder" parameterType="String" resultMap="orderSender">
+     select * from orders where plateNumber=#{plateNumber} or VIN=#{VIN}
     </select>
     
 
