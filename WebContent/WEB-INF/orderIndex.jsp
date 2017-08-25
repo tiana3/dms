@@ -141,7 +141,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -207,7 +207,7 @@
 
 
 			
-			<p><span class="l">维修单号：</span><span id="time1" class="r"></span></p>
+			<p><span class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
         
 		<form id="form1" action="${pageContext.request.contextPath }/getCustomer.do" method="post">
 						<input type="hidden"  name="customerCraInfoId"  value="">
@@ -236,7 +236,9 @@
 						<td>维修类别</td>
 						<td>
 							<select class="select">
-							<option></option>
+							<c:forEach items="${repairType }" var="type">
+								<option value="${type.repairTypeId }">${type.repairType } </option>
+							</c:forEach>
 							</select>
 						</td>
 						<td>车主地址</td>

@@ -189,4 +189,27 @@ public class EmployeeDaoImlp {
 		}
 		return employee;
 	}
+	public static ArrayList<Employee> getJob(){
+		Connection conn = JdbcUtil.getConnection();
+		String sql = "SELECT * from job";
+		PreparedStatement statment;
+		ArrayList<Employee>list = new ArrayList<Employee>();
+		try {
+			statment = conn.prepareStatement(sql);
+			ResultSet rs = statment.executeQuery();
+			while (rs.next()) {
+				 Employee employee = new Employee(rs.getInt(1),rs.getString(2));
+				// System.out.println(rs.getInt(1) + "," + rs.getString(2) + ","
+				// + rs.getString(3) +"," +
+				// rs.getString(4));
+				list.add(employee);
+			}
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

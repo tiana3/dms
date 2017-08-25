@@ -7,6 +7,10 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/dms/dao/mybatis/CustomerCarInfoMapper.xml"/>
+<<<<<<< HEAD
 		<mapper resource="com/dms/dao/mybatis/TheMaintenanceMapper.xml"/>
+=======
+		<mapper resource="com/dms/dao/mybatis/RepairTypeMapper.xml"/>
+>>>>>>> branch 'master' of file:///\\172.13.17.209\git
 	</mappers>
 </configuration>
