@@ -15,7 +15,7 @@ public class CustomerCarInfo {
 	private String color;								//车颜色
 	private String gearBox;							//变速箱
 	private String buyDate;							//购买日期
-	private String poilcyDate;							//保险日期
+	private String policyDate;							//保险日期
 	private int modelid; 								//车型号id
 	
 	public CustomerCarInfo(){}
@@ -44,7 +44,7 @@ public class CustomerCarInfo {
 		this.color = color;
 		this.gearBox = gearBox;
 		this.buyDate = buyDate;
-		this.poilcyDate = poilcyDate;
+		this.policyDate = poilcyDate;
 		this.modelid = modelid;
 	}
 
@@ -138,12 +138,12 @@ public class CustomerCarInfo {
 		this.buyDate = buyDate;
 	}
 
-	public String getPoilcyDate() {
-		return poilcyDate;
+	public String getPolicyDate() {
+		return policyDate;
 	}
 
-	public void setPoilcyDate(String poilcyDate) {
-		this.poilcyDate = poilcyDate;
+	public void setPolicyDate(String poilcyDate) {
+		this.policyDate = poilcyDate;
 	}
 
 	public int getModelid() {

@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.empServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,22 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.dao.EmployeeDao;
+import com.dms.dao.impl.EmployeeDaoImpl;
 import com.dms.entity.Employee;
 
 /**
- * Servlet implementation class employeeUpdate
+ * Servlet implementation class employeeInsert
  */
-@WebServlet("/employeeUpdate")
-public class employeeUpdate extends HttpServlet {
+@WebServlet("/employeeInsert")
+public class employeeInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public employeeUpdate() {
+    public employeeInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,22 +36,20 @@ public class employeeUpdate extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		String employeid = request.getParameter("employeeid");
-		int employeeid = Integer.parseInt(employeid);
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
 		String IdCard = request.getParameter("idcard");
 		PrintWriter out = response.getWriter();
-		String jobname = null;
-		String department = null;
-		String id = request.getParameter("jobid");
-		int jobid = Integer.parseInt(id);
-		System.out.println(jobid);
-		Employee employee = new Employee(employeeid, name, gender, phone, IdCard, employeeid,department,jobid, jobname);
-		EmployeeDaoImlp.updateEmployee(employee);
-		response.sendRedirect("employeelist");
+		System.out.println(request.getParameter("jobid"));
+		int id = Integer.parseInt(request.getParameter("jobid"));
+		Employee employee = new Employee(1, name, gender, phone, IdCard, 1,"c", id, "b");
+		System.out.println(name+" "+gender+" "+phone+" "+" "+IdCard+" "+id);
+		EmployeeDao dao= new EmployeeDaoImpl();
+		dao.addEmployee(employee);
+		out.print("Ìí¼Ó³É¹¦");
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

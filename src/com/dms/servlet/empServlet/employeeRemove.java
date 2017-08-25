@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.empServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.dao.EmployeeDao;
+import com.dms.dao.impl.EmployeeDaoImpl;
 
 /**
  * Servlet implementation class employeeRemove
@@ -30,7 +31,7 @@ public class employeeRemove extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
-		EmployeeDaoImlp.removeEmployee(id);
+		new EmployeeDaoImpl().removeEmployee(id);
 		System.out.println(id);
 		response.sendRedirect("employees.jsp");
 	}

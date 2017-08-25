@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.empServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.impl.EmployeeDaoImlp;
-import com.dms.dao.impl.PartDaoImpl;
+import com.dms.dao.EmployeeDao;
+import com.dms.dao.impl.EmployeeDaoImpl;
 
 /**
  * Servlet implementation class CheckedPartDeleteServlet
@@ -28,8 +28,8 @@ public class empCheckedeDeleteServlet extends HttpServlet {
 		String[] employeeIds = employeeIdString.split(",");
 		
 		for (String employeeId: employeeIds) {
-			System.out.println(employeeId);
-			EmployeeDaoImlp.removeEmployee(Integer.parseInt(employeeId));
+			EmployeeDao dao= new EmployeeDaoImpl();
+			dao.removeEmployee(Integer.parseInt(employeeId));
 		}
 		response.getWriter().print("批量删除成功");
 	

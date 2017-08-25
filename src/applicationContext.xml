@@ -51,6 +51,14 @@
 	<bean id="repairTypeDaoimpl" class="com.dms.dao.impl.RepairTypeDaoimpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
+	
+	<bean id="employeeDaoImpl" class="com.dms.dao.impl.EmployeeDaoImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="orderDaoImpl" class="com.dms.dao.impl.OrderDaoImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 
 	
 	<!-- service配置 -->
@@ -61,6 +69,8 @@
 	<bean id="orderServiceImpl" class="com.dms.service.impl.OrderServiceImpl">
 		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>
 		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
+		<property name="employeeDao" ref="employeeDaoImpl"/>	
+		<property name="orderDao" ref="orderDaoImpl"/>	
 	</bean>
 
 	

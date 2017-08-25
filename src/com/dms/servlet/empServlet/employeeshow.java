@@ -1,4 +1,4 @@
-package com.dms.servlet;
+package com.dms.servlet.empServlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dms.dao.impl.EmployeeDaoImlp;
+import com.dms.dao.EmployeeDao;
+import com.dms.dao.impl.EmployeeDaoImpl;
 import com.dms.entity.CarType;
 import com.dms.entity.Employee;
 import com.dms.service.CarTypeService;
@@ -41,14 +42,14 @@ public class employeeshow extends HttpServlet {
 		
 		String act = request.getParameter("act");
 		if(act == null) {
-			ArrayList<Employee>list = EmployeeDaoImlp.getJob();
+			ArrayList<Employee>list = new EmployeeDaoImpl().getJob();
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/employeeinsert.jsp").forward(request, response);
 		} else if("update".equals(act)) {
 			String id = request.getParameter("id");
 			System.out.println(id);
-			ArrayList<Employee>list1 = EmployeeDaoImlp.getJob();
-			Employee employee = EmployeeDaoImlp.getEmployeeById(Integer.parseInt(id));
+			ArrayList<Employee>list1 = new EmployeeDaoImpl().getJob();
+			Employee employee = new EmployeeDaoImpl().getEmployeeById(Integer.parseInt(id));
 			request.setAttribute("employee", employee);
 			request.setAttribute("list1", list1);
 			request.getRequestDispatcher("/WEB-INF/employeeUpdate.jsp").forward(request, response);

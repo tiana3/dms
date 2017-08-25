@@ -227,7 +227,7 @@
 						</td>
 						
 						<td>车主姓名</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.customerName }"></td>
+						<td>${carInfo.customerName }</td>
 					</tr>
 					<tr>
 						<td>车架号</td>
@@ -242,28 +242,28 @@
 							</select>
 						</td>
 						<td>车主地址</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.address }"></td>
+						<td>${carInfo.address }</td>
 
 					</tr>
 					<tr>
 						<td>发动机号</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.engineNumber }"></td>
+						<td>${carInfo.engineNumber }</td>
 						<td>购车日期</td>
 						<td>
-							<input type="text" onfocus="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"  class="input-text Wdate">
+							${carInfo.buyDate }
 						</td>
-												<td>车主电话</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.phone }"></td>
+						<td>车主电话</td>
+						<td>${carInfo.phone }</td>
 						
 
 
 					</tr>
 					<tr>
 						<td>车辆颜色</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.color }"></td>
+						<td>${carInfo.color }</td>
 						<td>保险到期日期</td>
 						<td>
-							<input type="text"  onfocus="WdatePicker({skin:'whyGreen',maxDate:'{%y+1}-%M-%d'})"  class="input-text Wdate">
+							${carInfo.policyDate }
 						</td>
 						<td>送修人</td>
 						<td><input type="text" class="input-text"  name=""  value=""></td>
@@ -273,14 +273,7 @@
 					<tr>
 						<td>变速箱</td>
 						<td>								
-								<div class="radio-box">
-								<input name="变速箱" type="radio"  checked>
-								<label>手动</label>
-								</div>
-								<div class="radio-box">
-								<input type="radio"  name="变速箱">
-								<label>自动</label>
-								</div>
+							${carInfo.gearBox }
 						</td>
 						<td>当前里程</td>
 						<td><input type="text" class="input-text"  name=""  value=""></td>
@@ -294,7 +287,9 @@
 					<td>服务顾问</td>
 					<td>
 						<select class="select">
-							<option></option>
+							<c:forEach items="${sa }" var="s">
+								<option value="${s.employeeId }">${s.employeeName } </option>
+							</c:forEach>
 						</select>
 
 					</td>

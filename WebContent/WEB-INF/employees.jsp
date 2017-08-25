@@ -1,4 +1,4 @@
-<%@page import="com.dms.dao.impl.EmployeeDaoImlp"%>
+<%@page import="com.dms.dao.impl.EmployeeDaoImpl"%>
 <%@page import="com.dms.entity.Employee"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
