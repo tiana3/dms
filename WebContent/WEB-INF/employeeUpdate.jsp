@@ -41,36 +41,37 @@
 </head>
 <body>
 	<div class="page-container">
-	<article class="page-container">
-		<form action="employeeInsert" id="form-part-add" method="post"
-			class="form form-horizontal" id="form-cartype-add">
-			
-			<input type="hidden" name="employeeid">
+		<form action="employeeUpdate" id="form-update-add" method="POST"
+			class="form form-horizontal">
+
+
+			<input type="hidden" name="employeeid"
+				value="${employee.employeeId}">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder="" id=""
-						name="name">
+					<input type="text" class="input-text"
+						value="${employee.employeeName}" placeholder="" id="" name="name">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">性别：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" 
+					<input type="text" class="input-text" value="${employee.gender}"
 						placeholder="" id="gender" name="gender">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">电话号码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text"
+					<input type="text" class="input-text" value="${employee.phone}"
 						placeholder="" id="phone" name="phone">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">身份证号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text"
+					<input type="text" class="input-text" value="${employee.idCard}"
 						placeholder="" id="idcard" name="idcard">
 				</div>
 			</div>
@@ -78,20 +79,21 @@
 				<label class="form-label col-xs-4 col-sm-2">职务：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<select name="jobid">
-					<c:forEach items="${list}" var="employee" varStatus="varSta">
+					<c:forEach items="${list1}" var="employee" varStatus="vasta">
 					<option value="${employee.jobId}">${employee.jobName}</option>
-					</c:forEach>
+					</c:forEach>	
 					</select>
 				</div>
 			</div>
+
 			<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-				<button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+					<button class="btn btn-primary radius" type="submit">
+						<i class="Hui-iconfont">&#xe632;</i> 确定保存
+					</button>
+				</div>
 			</div>
-		</div>
 		</form>
-		</article>
 	</div>
 
 	<!--_footer 作为公共模版分离出去-->
@@ -102,61 +104,65 @@
 		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
 	<!--/_footer /作为公共模版分离出去-->
 
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>   
-<script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
-<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.config.js"></script> 
-<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
-<script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript">
-$("#form-part-add").validate({
-
-		rules:{
-			name:{
-				required:true,
-			},
-			gender:{
-				required:true,
-			},
-			idcard:{
-				required:true,
-
-			},
-			phone:{
-				required:true,
-
-			},
-			idcard:{
-				required:true,
-
-			},
-			
-		},
-		//onkeyup:false,
-		focusCleanup:true,
-		success:"valid",
-		submitHandler:function(form){
-			$(form).ajaxSubmit({
-				success: function() { 
-					parent.layer.msg('已添加,可以继续添加!',{icon:6,time:1500});	
-					location.reload();
-				
-				//var index = parent.layer.getFrameIndex(window.name);
-				//parent.layer.close(index);
-			}
-			
-		})
-			
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript"
+		src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript"
+		src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript"
+		src="lib/webuploader/0.1.5/webuploader.min.js"></script>
+	<script type="text/javascript"
+		src="lib/ueditor/1.4.3/ueditor.config.js"></script>
+	<script type="text/javascript"
+		src="lib/ueditor/1.4.3/ueditor.all.min.js">
 		
-	}
-});
+	</script>
+	<script type="text/javascript"
+		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+		$("#form-update-add").validate({
 
+			rules : {
+				name : {
+					required : true,
+				},
+				gender : {
+					required : true,
+				},
+				phone : {
+					required : true,
 
+				},
+				idcard : {
+					required : true,
+				},
+				
+			},
+			//onkeyup:false,
+			focusCleanup : true,
+			success : "valid",
+			submitHandler:function(form) {
+				$(form).ajaxSubmit({
+					success : function() {
 
-</script>
-<!--/请在上方写此页面业务相关的脚本-->
+						parent.layer.msg('修改成功!', {icon:6,time:1000});
+						layer_close();
+						parent.location.reload();
+						
+
+						//var index = parent.layer.getFrameIndex(window.name);
+						//parent.layer.close(index);
+					}
+
+				})
+
+			}
+		});
+	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
