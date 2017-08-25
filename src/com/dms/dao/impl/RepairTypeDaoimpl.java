@@ -20,8 +20,13 @@ public class RepairTypeDaoimpl implements RepairTypeDao {
 	@Override
 	public List<RepairType> getAllRepairType() {
 		RepairTypeDao mapper = sqlSessionTemplate.getMapper(RepairTypeDao.class);
-		mapper.getAllRepairType();
-		return mapper.getAllRepairType();
+		List<RepairType> repairType = mapper.getAllRepairType();
+		
+		return repairType;
 	}
 
+	public static void main (String[] args) {
+		RepairTypeDaoimpl imp = new RepairTypeDaoimpl();
+		imp.getAllRepairType();
+	}
 }

@@ -202,7 +202,7 @@
 		<article class="cl pd-20">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 
-			<form action="WorkHourListServlet" method="get">
+			<form action="${pageContext.request.contextPath }/theMaintenance" method="get">
 				<div>
 					<span class="l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车牌号：&nbsp;
 						<input type="text" name="" style="height: 25px;">
@@ -217,8 +217,8 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;维修类型：
 					<select name="modelid" class="" style="width:120px ; height:30px;">
 						<option value="0" >全部</option>
-						<c:forEach items="${carTypes }" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
+						<c:forEach items="${repairType }" var="repairType">
+						<option value="${repairtype.repairTypeId }" >${repairtype.repairType }</option>
 						</c:forEach>
 					</select>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
