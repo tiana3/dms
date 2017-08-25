@@ -7,6 +7,6 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/dms/dao/mybatis/CustomerCarInfoMapper.xml"/>
-
+		<mapper resource="com/dms/dao/mybatis/RepairTypeMapper.xml"/>
 	</mappers>
 </configuration>
