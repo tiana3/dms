@@ -247,9 +247,11 @@
            </c:forEach>
                     </tbody>
                 </table>
+                </div>
                 </form>
             </div>
         </article>
+        
     </div>
 </section>
 
