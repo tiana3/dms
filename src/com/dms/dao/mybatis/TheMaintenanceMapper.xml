@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="com.mydomain.UserMapper" 对应接口,就把这xml配置文件和对应接口联系上了-->
+<mapper namespace="com.dms.dao.OrdersDao">
+<!-- 自定义返回结果集 -->
+<!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
+   <resultMap id="order" type="Order">
+<!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
+        <id property="orderId" column="orderId" javaType="java.lang.Integer"></id>
+        <result property="plateNumber" column="plateNumber" javaType="java.lang.String"></result>
+        <result property="repairId" column="repairType" javaType="java.lang.Integer"></result>
+        <result property="employeeName" column="name" javaType="java.lang.String"></result>
+        <result property="Date" column="Date" javaType="java.lang.Integer"></result>
+    </resultMap>
+    
+
+    
+    
+<!-- 在各种标签中的id属性必须和接口中的方法名相同 ， id属性值必须是唯一的，不能够重复使用。parameterType属性指明查询时使用的参数类型，resultMap="userBean" 是表明返回时是返回的上面<resultMap>标签里定义的类型，会把从数据库里读取出来的列，一个一个封装到实体类的property里     
+  resultType属性指明查询返回的结果集类型，如果直接返回 resultType=“UserBean”，就不会通过resultMap，会直接把读取的数据，封装到UserBean实体类   数据对应条件是， 数据库里的字段名和实体类的属性名一样，或者和实体类的set方法名对应，不然数据就找不到对应的实体类属性 -->    
+<!-- useGeneratedKeys：（ 仅 对 insert 有 用 ） 这 会 告 诉 MyBatis 使 用 JDBC 的getGeneratedKeys 
+            方法来取出由数据（比如：像 MySQL 和 SQLServer 这样的数据库管理系统的自动递增字段）内部生成的主键。默认值： false。 -->    
+<!--keyProperty： （仅对 insert有用）标记一个属性， MyBatis 会通过 getGeneratedKeys或者通过 insert 语句的 selectKey 子元素设置它的值。默认：不设置。 -->
+<!--#{}中的内容，为占位符，当参数为某个JavaBean时，表示放置该Bean对象的属性值  -->
+
+	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
+
+    
+    <select id="getAllOrders" parameterType="Order" resultMap="order">
+     	select orders.orderId, customercarinfo.plateNumber, repairtype.repairType, orders.Date, employee.name from 
+		orders inner join customercarinfo on orders.customerCarInfoId=customercarinfo.customerCarInfoId 
+		inner join repairtype on orders.repairTypeId=repairtype.repairTypeId  
+		inner join employee on orders.SA=employee.employeeId
+    </select>
+    
+
+</mapper>

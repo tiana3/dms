@@ -192,7 +192,7 @@
       	<article class="cl pd-20">    
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
-					<a href="javascript:;" onclick="" class="btn btn-primary radius">在修业务</a>
+					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
 					<a class="btn btn-primary radius" onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"> 质检</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 				</span>
