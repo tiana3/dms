@@ -8,8 +8,14 @@ public class Part {
 	private double sellingPrice;
 	private int modelId;
 	private String model;
-
+	private Employee picker;          //维护一个领料人，用于存储订单中材料的领料人
 	
+	public Employee getPicker() {
+		return picker;
+	}
+	public void setPicker(Employee picker) {
+		this.picker = picker;
+	}
 	@Override
 	public String toString() {
 		return "Part [partId=" + partId + ", partName=" + partName + ", partNo=" + partNo + ", buyingPrice="

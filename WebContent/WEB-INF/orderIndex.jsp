@@ -32,6 +32,9 @@
     <title>维修业务开单</title>
     <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+	
+
+
 </head>
 <body>
 <!--_header 作为公共模版分离出去-->
@@ -84,7 +87,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li class="current"><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/order.do" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -186,32 +189,35 @@
        维修业务
         <span class="c-gray en">&gt;</span>
         维修业务开单
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="${pageContext.request.contextPath }/order.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 	 </nav> 
       <div class="Hui-article">
       	<article class="cl pd-20">    
+			<form id="form-order-save" action="${pageContext.request.contextPath }/orderInfo.do" method="post">
+	
+	
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
-					<a class="btn btn-primary radius" onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"> 质检</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
+					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
+							<option value="0">&nbsp; </option>
+							<c:forEach items="${inspectors }" var="inspector">
+								<option value="${inspector.employeeId }">${inspector.jobName }-${inspector.employeeName } </option>
+							</c:forEach>
+						</select>
 				</span>
-	            <span class="r">
-	            	<a href="javascript:;" onclick="" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe632;</i>保存</a>
+	            <span class="r">                                    
+					<button class="btn btn-primary radius" id="saveButton"  type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印维修委托书</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印派工单</a>
 	            </span>
       	  	</div>
 	      
- 
-
-
-			
 			<p><span class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
         
-		<form id="form1" action="${pageContext.request.contextPath }/getCustomer.do" method="post">
-						<input type="hidden"  name="customerCraInfoId"  value="">
-						
+			<input type="hidden"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
+			<input type="hidden"  name="orderId"  value="${order.orderId }">			
 			<table class="table table-border table-bordered table-bg">
 				<tbody>
 					<tr>
@@ -223,7 +229,7 @@
 						</td>
 						<td>预估完工时间</td>
 						<td>
-							<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',skin:'whyGreen',minDate:'%y-%M-%d %H:%m'})"  class="input-text Wdate">
+							<input type="text" value="${order.expectDate }" name="expectDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',skin:'whyGreen',minDate:'%y-%M-%d %H:%m'})"  class="input-text Wdate">
 						</td>
 						
 						<td>车主姓名</td>
@@ -235,9 +241,9 @@
 					
 						<td>维修类别</td>
 						<td>
-							<select class="select">
+							<select class="select" name="repairId">
 							<c:forEach items="${repairType }" var="type">
-								<option value="${type.repairTypeId }">${type.repairType } </option>
+								<option value="${type.repairTypeId }" selected="${type.repairTypeId==order.repairId? selected:false }">${type.repairType } </option>
 							</c:forEach>
 							</select>
 						</td>
@@ -246,8 +252,8 @@
 
 					</tr>
 					<tr>
-						<td>发动机号</td>
-						<td>${carInfo.engineNumber }</td>
+						<td>车型</td>
+						<td>${carInfo.carType.factory} ${carInfo.carType.model}</td>
 						<td>购车日期</td>
 						<td>
 							${carInfo.buyDate }
@@ -266,7 +272,7 @@
 							${carInfo.policyDate }
 						</td>
 						<td>送修人</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name="sender"  value="${lastOrder.sender }"></td>
 
 
 					</tr>
@@ -276,139 +282,124 @@
 							${carInfo.gearBox }
 						</td>
 						<td>当前里程</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name="mileage"  value="${order.mileage }"></td>
 						
 						<td>送修人电话</td>
-						<td><input type="text" class="input-text"  name=""  value=""></td>
+						<td><input type="text" class="input-text"  name="senderPhone"  value="${lastOrder.senderPhone }"></td>
 						
 						
 					</tr>
 				<tr>
 					<td>服务顾问</td>
 					<td>
-						<select class="select">
+						<select class="select" name="SA">
 							<c:forEach items="${sa }" var="s">
-								<option value="${s.employeeId }">${s.employeeName } </option>
+								<option value="${s.employeeId }" selected="${order.SA == s.employeeId ? selected:false }">${s.employeeName } </option>
 							</c:forEach>
 						</select>
 
 					</td>
 					<td>备注</td>
-					<td colspan="3"><input type="text" class="input-text"  name=""  value=""></td>
+					<td colspan="3"><input type="text" class="input-text"  name="remark"  value="${order.remark }"></td>
 					
 				</tr>
 				
 				<tr>
 					<td>外观内饰备注</td>
-					<td colspan="5"><input type="text" class="input-text"  name=""  value=""></td>
+					<td colspan="5"><input type="text" class="input-text"  name="carRemark"  value="${order.carRemark }"></td>
 				</tr>
 		</tbody>
 	</table>
-	</form>
+	
+	
+	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				<b>工时工位</b>
+				</span>
+	            <span class="r">
+					<a href="javascript:;" onclick="allWork_select('整单派工','${pageContext.request.contextPath }/allWorkSelect.do','300','200')" class="btn btn-secondary  radius">整单派工</a>
+					<a href="javascript:;" onclick="" class="btn btn-secondary  radius"><i class="Hui-iconfont">&#xe600;</i>添加预定义工位</a>
+					<a class="btn btn-secondary  radius" onclick="custom_add()" href="javascript:;"> <i class="Hui-iconfont">&#xe600;</i>添加自定义工位</a>
+					<a class="btn btn-danger  radius" onclick="workplace_delete()" href="javascript:;"> <i class="Hui-iconfont">&#xe6e2;</i>删除工位</a>
+	            </span>
+      	  	</div>
 	
 			<table class="table table-border table-bordered table-bg mt-20">
 				<thead>
 					<tr>
-						<th colspan="2" scope="col">服务器信息</th>
-			</tr>
-		</thead>
-				<tbody>
+						<th width="60%" scope="col">工位名</th>
+						<th width="20%" scope="col">工时费</th>
+						<th scope="col">技师</th>
+					</tr>
+				</thead>
+				<tbody id="workhour">
+					<c:forEach items="${order.customs }" var="custom" varStatus="num">
+						<tr>
+							<td><input value="${custom.customName }"  name="customs[${num.count - 1 }].customName" type="text" class="input-text"></td>
+							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="input-text"></td>
+							<td>
+								<select name="customs[${num.count - 1 }].employeeId" class="select">
+										<option value="0">&nbsp;&nbsp;</option>
+										<c:forEach items="${Ma_Tec }" var="ma">
+											<option value="${ma.employeeId }" selected="${custom.employeeId == ma.employeeId? selected:false }" >${ma.jobName }-${ma.employeeName }</option>
+										</c:forEach>
+								</select>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	
+     		 <div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				<b>配件材料</b>
+				</span>
+	            <span class="r">
+					<a href="javascript:;" onclick="add_part('添加配件材料','${pageContext.request.contextPath }/addPart.do','800','500')" class="btn btn-secondary  radius"><i class="Hui-iconfont">&#xe600;</i>添加配件材料</a>
+	            </span>
+      	  	</div>
+	
+			<table class="table table-border table-bordered table-bg mt-20">
+				<thead>
 					<tr>
-						<th width="30%">服务器计算机名</th>
-						<td><span id="lbServerName">http://127.0.0.1/</span></td>
-			</tr>
-					<tr>
-						<td>服务器IP地址</td>
-						<td>192.168.1.1</td>
-			</tr>
-					<tr>
-						<td>服务器域名</td>
-						<td>www.h-ui.net</td>
-			</tr>
-					<tr>
-						<td>服务器端口 </td>
-						<td>80</td>
-			</tr>
-					<tr>
-						<td>服务器IIS版本 </td>
-						<td>Microsoft-IIS/6.0</td>
-			</tr>
-					<tr>
-						<td>本文件所在文件夹 </td>
-						<td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
-			</tr>
-					<tr>
-						<td>服务器操作系统 </td>
-						<td>Microsoft Windows NT 5.2.3790 Service Pack 2</td>
-			</tr>
-					<tr>
-						<td>系统所在文件夹 </td>
-						<td>C:\WINDOWS\system32</td>
-			</tr>
-					<tr>
-						<td>服务器脚本超时时间 </td>
-						<td>30000秒</td>
-			</tr>
-					<tr>
-						<td>服务器的语言种类 </td>
-						<td>Chinese (People's Republic of China)</td>
-			</tr>
-					<tr>
-						<td>.NET Framework 版本 </td>
-						<td>2.050727.3655</td>
-			</tr>
-					<tr>
-						<td>服务器当前时间 </td>
-						<td>2014-6-14 12:06:23</td>
-			</tr>
-					<tr>
-						<td>服务器IE版本 </td>
-						<td>6.0000</td>
-			</tr>
-					<tr>
-						<td>服务器上次启动到现在已运行 </td>
-						<td>7210分钟</td>
-			</tr>
-					<tr>
-						<td>逻辑驱动器 </td>
-						<td>C:\D:\</td>
-			</tr>
-					<tr>
-						<td>CPU 总数 </td>
-						<td>4</td>
-			</tr>
-					<tr>
-						<td>CPU 类型 </td>
-						<td>x86 Family 6 Model 42 Stepping 1, GenuineIntel</td>
-			</tr>
-					<tr>
-						<td>虚拟内存 </td>
-						<td>52480M</td>
-			</tr>
-					<tr>
-						<td>当前程序占用内存 </td>
-						<td>3.29M</td>
-			</tr>
-					<tr>
-						<td>Asp.net所占内存 </td>
-						<td>51.46M</td>
-			</tr>
-					<tr>
-						<td>当前Session数量 </td>
-						<td>8</td>
-			</tr>
-					<tr>
-						<td>当前SessionID </td>
-						<td>gznhpwmp34004345jz2q3l45</td>
-			</tr>
-					<tr>
-						<td>当前系统用户名 </td>
-						<td>NETWORK SERVICE</td>
-			</tr>
-		</tbody>
-	</table>
+						<th width="20%" scope="col">配件名</th>
+						<th width="20%" scope="col">配件号</th>
+						<th width="15%" scope="col">金额</th>
+						<th width="15%" scope="col">适用车型</th>
+						<th width="15%" scope="col">领料人</th>
+						<th scope="col">操作</th>
+					</tr>
+				</thead>
+				<tbody id="part">
+					<c:forEach items="${order.parts }" var="part" varStatus="num">
+						<tr>
+							<td>
+								<input value="${part.partId }"  name="parts[${num.count - 1 }].partId" type="hidden" >
+								${part.partName }
+							</td>
+							<td>${part.partNo }</td>
+							<td>${part.sellingPrice }</td>
+							<td>${part.model }</td>
+							<td>${part.picker }</td>
+							<td>
+								<a style="text-decoration: none" class="ml-5" href="javascript:;"
+								onclick="part_del(this)"
+								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	
+	
+	
+	
+	
+	
+	</form>
 </article>
 </div>
+   
    
  </section>
 
@@ -423,9 +414,121 @@
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>   
+<script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 	setInterval("document.getElementById('time1').innerHTML='当前时间：' + new Date().toLocaleString()",1000); 
+	
+//创建了一个方法，用于下面调用
+function save() {
+	// 关键在此增加了一个return，返回的是一个validate对象，这个对象有一个form方法，返回的是是否通过验证 true false*/
+	return   $("#form-order-save").validate({
+			
+			rules:{
+				plateNumber:{
+					required:true,
+				},
+				VIN:{
+					required:true,
+				},
+				expectDate:{
+					required:true,
+	
+				},
+				mileage:{
+					required:true,
+					digits:true
+				},
+				sender:{
+					required:true,
+				},
+				senderPhone:{
+					required:true,
+				},
+			},
+			//onkeyup:false,
+/* 			focusCleanup:true,
+			success:"valid",
+		submitHandler:function(form){
+			
+			   var length = document.getElementById("part").children.length;
+			   for (i = 0; i < length; i++) {
+				   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
+			   }
+			   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
 
+
+		   $(form).ajaxSubmit({
+				success: function() { 
+				}
+				
+			})
+				
+			
+		} */
+	});
+}
+	//创建点击事件，当点击时会先调用sava()方法， 然后返回一个对象，调用form()方法
+	$("#saveButton").click(function(){
+		 if(save().form()) {
+			//通过表单验证，以下编写自己的代码
+			 var length = document.getElementById("part").children.length;
+			   for (i = 0; i < length; i++) {
+				   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
+			   }
+			   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
+			  
+			   $("#form-order-save").ajaxSubmit({
+					success: function(data) { 
+					
+	
+					}
+				})
+			 
+		 } else {
+		  //校验不通过，什么都不用做，校验信息已经正常显示在表单上
+		 }
+	});
+	
+	
+	
+	
+	
+	function custom_add() {
+		var workhour = document.getElementById("workhour");
+		var length = workhour.children.length;
+		/*var tr = document.createElement("tr");
+		 var td = document.createElement("td");
+		var select = document.createElement("select");
+		var forEach = document.createElement("c:forEach");
+		forEach.setAttribute("items", "${Ma_Tec }");
+		forEach.setAttribute("var", "ma");
+		var option = document.createElement("option");
+		option.setAttribute("value", "${ma.employeeId}"); */
+		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
+	}
+	
+	function workplace_delete() {
+			 $("#workhour tr:last").remove();
+			 layer.msg("删除成功",{icon:1,time:1000});
+	}
+
+   function allWork_select(title,url,w,h){
+       layer_show(title,url,w,h);
+   }
+   
+	function part_del(obj){
+			$(obj).parents("tr").remove();
+			layer.msg('已删除!',{icon:1,time:1000});
+	}
+
+   function add_part(title,url,w,h){
+       layer_show(title,url,w,h);
+   }
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

@@ -12,4 +12,9 @@ public interface OrderService {
 	CustomerCarInfo getCustomerCarInfoByKey(String plateNumber, String VIN);
 	List<Employee> getSA();
 	Order getLastOrder(String plateNumber, String VIN);
+	List<Employee> getMa_Tec();
+	public List<Employee> getInspectors();
+	
+	Order saveOrder(Order order);
+	
 }

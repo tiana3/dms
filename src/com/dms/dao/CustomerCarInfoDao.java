@@ -2,6 +2,7 @@ package com.dms.dao;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
 
 	
@@ -12,5 +13,6 @@ public interface CustomerCarInfoDao {
 	void addCustomerCarInfo(CustomerCarInfo info);  //添加客户车辆信息
 	void removeCustomerCarInfo(int customerCarInfoId);//根据id删除信息
 	void updateCustomerCarInfo(CustomerCarInfo info);//修改客户车辆信息				
-
+	
+	CarType getCarTypeByModelId(int modleId);
 }

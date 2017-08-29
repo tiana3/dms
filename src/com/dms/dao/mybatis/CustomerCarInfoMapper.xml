@@ -7,7 +7,7 @@
 <!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
    <resultMap id="customerCarInfo" type="CustomerCarInfo">
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
-        <id property="customerCraInfoId" column="customerCraInfoId" javaType="java.lang.Integer"></id>
+        <id property="customerCarInfoId" column="customerCarInfoId" javaType="java.lang.Integer"></id>
         <result property="customerName" column="customerName" javaType="java.lang.String"></result>
         <result property="gender" column="gender" javaType="java.lang.String"></result>
         <result property="address" column="address" javaType="java.lang.String"></result>
@@ -21,6 +21,9 @@
         <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
         <result property="policyDate" column="policy" javaType="java.lang.String"></result>
         <result property="modelid" column="modelid" javaType="java.lang.Integer"></result>
+  		
+  		<!-- column="modelid"对应的是上面查询数据库 查询出来的modelid  -->
+  		<association property="carType" column="modelid" javaType="CarType" select="getCarTypeByModelId"></association>
     </resultMap>
     
 
@@ -40,6 +43,8 @@
      select * from customercarinfo where plateNumber=#{plateNumber} or VIN=#{VIN}
     </select>
     
-
+    <select id="getCarTypeByModelId" parameterType="Integer" resultType="CarType">
+     select cartype.* from cartype where modelId=#{modelid}
+    </select>
     
 </mapper>

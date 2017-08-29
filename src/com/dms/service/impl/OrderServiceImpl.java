@@ -1,5 +1,6 @@
 package com.dms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dms.dao.CustomerCarInfoDao;
@@ -73,6 +74,27 @@ public class OrderServiceImpl implements OrderService {
 	public Order getLastOrder(String plateNumber, String VIN) {
 		// TODO Auto-generated method stub
 		return orderDao.getLastOrder(plateNumber, VIN);
+	}
+
+	@Override
+	public List<Employee> getMa_Tec() {
+		// TODO Auto-generated method stub
+		return employeeDao.getMA_Tec();
+	}
+
+	@Override
+	public List<Employee> getInspectors() {
+		// TODO Auto-generated method stub
+		return employeeDao.getInspectors();
+	}
+
+	@Override
+	public Order saveOrder(Order order) {
+		String date = new Date().toLocaleString();
+		order.setDate(date);
+		
+		
+		return null;
 	}
 
 }

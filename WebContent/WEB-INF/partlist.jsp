@@ -306,7 +306,7 @@
                 	$('input[name="selectPart"]:checked').each(function(){
                 		$(this).parents("tr").remove();
                 	})
-                    layer.msg(data,{icon:1,time:1000});
+                   layer.msg(data,{icon:1,time:1000});
                 },
                 error:function(data) {
                     console.log(data.msg);

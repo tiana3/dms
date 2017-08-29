@@ -16,10 +16,6 @@ import com.dms.service.TheMaintenanceService;
 @Controller
 public class TheMaintenanceController {
 	
-	@RequestMapping("order.do")
-	public String order(Model model) {
-		return "orderIndex";
-	}
 	
 	@RequestMapping("getAllOrders.do")
 	public String getAllOrders(Model mode) {

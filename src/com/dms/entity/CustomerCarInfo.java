@@ -2,7 +2,7 @@ package com.dms.entity;
 
 public class CustomerCarInfo {
 		
-	private int customerCraInfoId;						//客户车辆信息id
+	private int customerCarInfoId;						//客户车辆信息id
 	private String customerName;						//客户名
 	private String gender; 							//客户性别
 	private String address;							//客户地址
@@ -18,6 +18,38 @@ public class CustomerCarInfo {
 	private String policyDate;							//保险日期
 	private int modelid; 								//车型号id
 	
+	private CarType carType;     //车型
+	
+	
+	public CustomerCarInfo(int customerCarInfoId, String customerName, String gender, String address, String phone,
+			String idCard, String plateNumber, String vIN, String engineNumber, String color, String gearBox,
+			String buyDate, String policyDate, int modelid, CarType carType) {
+		super();
+		this.customerCarInfoId = customerCarInfoId;
+		this.customerName = customerName;
+		this.gender = gender;
+		this.address = address;
+		this.phone = phone;
+		this.idCard = idCard;
+		this.plateNumber = plateNumber;
+		VIN = vIN;
+		this.engineNumber = engineNumber;
+		this.color = color;
+		this.gearBox = gearBox;
+		this.buyDate = buyDate;
+		this.policyDate = policyDate;
+		this.modelid = modelid;
+		this.carType = carType;
+	}
+
+	public CarType getCarType() {
+		return carType;
+	}
+
+	public void setCarType(CarType carType) {
+		this.carType = carType;
+	}
+
 	public CustomerCarInfo(){}
 
 	public String getEngineNumber() {
@@ -28,11 +60,11 @@ public class CustomerCarInfo {
 		this.engineNumber = engineNumber;
 	}
 
-	public CustomerCarInfo(int customerCraInfoId, String customerName, String gender, String address, String phone,
+	public CustomerCarInfo(int customerCarInfoId, String customerName, String gender, String address, String phone,
 			String idCard, String plateNumber, String vIN, String engineNumber, String color, String gearBox,
 			String buyDate, String poilcyDate, int modelid) {
 		super();
-		this.customerCraInfoId = customerCraInfoId;
+		this.customerCarInfoId = customerCarInfoId;
 		this.customerName = customerName;
 		this.gender = gender;
 		this.address = address;
@@ -50,12 +82,12 @@ public class CustomerCarInfo {
 
 
 
-	public int getCustomerCraInfo() {
-		return customerCraInfoId;
+	public int getCustomerCarInfoId() {
+		return customerCarInfoId;
 	}
 
-	public void setCustomerCraInfo(int customerCraInfo) {
-		this.customerCraInfoId = customerCraInfo;
+	public void setCustomerCarInfoId(int customerCarInfoId) {
+		this.customerCarInfoId = customerCarInfoId;
 	}
 
 	public String getCustomerName() {
