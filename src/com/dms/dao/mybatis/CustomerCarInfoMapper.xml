@@ -20,7 +20,11 @@
         <result property="gearBox" column="gearBox" javaType="java.lang.String"></result>
         <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
         <result property="policyDate" column="policy" javaType="java.lang.String"></result>
+<<<<<<< HEAD
         <result property="modelid" column="modelId" javaType="java.lang.Integer"></result>
+=======
+        <result property="modelid" column="modelid" javaType="java.lang.Integer"></result>
+>>>>>>> branch 'master' of \\172.13.17.209\git
     </resultMap>
     
 

@@ -141,7 +141,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employees.jsp" title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -192,7 +192,7 @@
       	<article class="cl pd-20">    
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
-					<a href="javascript:;" onclick="" class="btn btn-primary radius">在修业务</a>
+					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
 					<a class="btn btn-primary radius" onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"> 质检</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 				</span>
@@ -207,7 +207,7 @@
 
 
 			
-			<p><span class="l">维修单号：</span><span id="time1" class="r"></span></p>
+			<p><span class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
         
 		<form id="form1" action="${pageContext.request.contextPath }/getCustomer.do" method="post">
 						<input type="hidden"  name="customerCraInfoId"  value="">
@@ -227,7 +227,7 @@
 						</td>
 						
 						<td>车主姓名</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.customerName }"></td>
+						<td>${carInfo.customerName }</td>
 					</tr>
 					<tr>
 						<td>车架号</td>
@@ -236,32 +236,34 @@
 						<td>维修类别</td>
 						<td>
 							<select class="select">
-							<option></option>
+							<c:forEach items="${repairType }" var="type">
+								<option value="${type.repairTypeId }">${type.repairType } </option>
+							</c:forEach>
 							</select>
 						</td>
 						<td>车主地址</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.address }"></td>
+						<td>${carInfo.address }</td>
 
 					</tr>
 					<tr>
 						<td>发动机号</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.engineNumber }"></td>
+						<td>${carInfo.engineNumber }</td>
 						<td>购车日期</td>
 						<td>
-							<input type="text" onfocus="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"  class="input-text Wdate">
+							${carInfo.buyDate }
 						</td>
-												<td>车主电话</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.phone }"></td>
+						<td>车主电话</td>
+						<td>${carInfo.phone }</td>
 						
 
 
 					</tr>
 					<tr>
 						<td>车辆颜色</td>
-						<td><input type="text" class="input-text"  name=""  value="${carInfo.color }"></td>
+						<td>${carInfo.color }</td>
 						<td>保险到期日期</td>
 						<td>
-							<input type="text"  onfocus="WdatePicker({skin:'whyGreen',maxDate:'{%y+1}-%M-%d'})"  class="input-text Wdate">
+							${carInfo.policyDate }
 						</td>
 						<td>送修人</td>
 						<td><input type="text" class="input-text"  name=""  value=""></td>
@@ -271,14 +273,7 @@
 					<tr>
 						<td>变速箱</td>
 						<td>								
-								<div class="radio-box">
-								<input name="变速箱" type="radio"  checked>
-								<label>手动</label>
-								</div>
-								<div class="radio-box">
-								<input type="radio"  name="变速箱">
-								<label>自动</label>
-								</div>
+							${carInfo.gearBox }
 						</td>
 						<td>当前里程</td>
 						<td><input type="text" class="input-text"  name=""  value=""></td>
@@ -292,7 +287,9 @@
 					<td>服务顾问</td>
 					<td>
 						<select class="select">
-							<option></option>
+							<c:forEach items="${sa }" var="s">
+								<option value="${s.employeeId }">${s.employeeName } </option>
+							</c:forEach>
 						</select>
 
 					</td>

@@ -38,30 +38,51 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="${pageContext.request.contextPath}/WorkHourAddUpdateServlet" method="post" class="form form-horizontal" id="form-workhour-add">
-			
-			<input type="hidden" name="workplaceId" value="${param.workplaceId }">
+		<form action="employeeUpdate" id="form-update-add" method="POST"
+			class="form form-horizontal">
+
+
+			<input type="hidden" name="employeeid"
+				value="${employee.employeeId}">
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
+				<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workplaceName }" placeholder="" id=""
-						name="workplaceName">
+					<input type="text" class="input-text"
+						value="${employee.employeeName}" placeholder="" id="" name="name">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
+				<label class="form-label col-xs-4 col-sm-2">性别：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workhour }" placeholder="" id=""
-						name="workhour">
+					<input type="text" class="input-text" value="${employee.gender}"
+						placeholder="" id="gender" name="gender">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
+				<label class="form-label col-xs-4 col-sm-2">电话号码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${param.workpay }" placeholder="" id=""
-						name="workpay">
+					<input type="text" class="input-text" value="${employee.phone}"
+						placeholder="" id="phone" name="phone">
 				</div>
 			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">身份证号：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="${employee.idCard}"
+						placeholder="" id="idcard" name="idcard">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">职务：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<select name="jobid">
+					<c:forEach items="${list1}" var="employee" varStatus="vasta">
+					<option value="${employee.jobId}">${employee.jobName}</option>
+					</c:forEach>	
+					</select>
+				</div>
+			</div>
+
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 					<button class="btn btn-primary radius" type="submit">
@@ -82,6 +103,8 @@
 
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
@@ -92,24 +115,51 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/ueditor.config.js"></script>
 	<script type="text/javascript"
-		src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+		src="lib/ueditor/1.4.3/ueditor.all.min.js">
+		
+	</script>
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-	$("#form-workhour-add").validate({
-		submitHandler:function(form){
-			$(form).ajaxSubmit({
-				success: function() { 
-					
-					parent.location.reload();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
-				}
+		$("#form-update-add").validate({
+
+			rules : {
+				name : {
+					required : true,
+				},
+				gender : {
+					required : true,
+				},
+				phone : {
+					required : true,
+
+				},
+				idcard : {
+					required : true,
+				},
 				
-			})
-							
-		}
-	});
-</script>
+			},
+			//onkeyup:false,
+			focusCleanup : true,
+			success : "valid",
+			submitHandler:function(form) {
+				$(form).ajaxSubmit({
+					success : function() {
+
+						parent.layer.msg('修改成功!', {icon:6,time:1000});
+						layer_close();
+						parent.location.reload();
+						
+
+						//var index = parent.layer.getFrameIndex(window.name);
+						//parent.layer.close(index);
+					}
+
+				})
+
+			}
+		});
+	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

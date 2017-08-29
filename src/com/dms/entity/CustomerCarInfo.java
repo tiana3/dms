@@ -142,8 +142,9 @@ public class CustomerCarInfo {
 		return policyDate;
 	}
 
-	public void setPolicyDate(String policyDate) {
-		this.policyDate = policyDate;
+	public void setPolicyDate(String poilcyDate) {
+		this.policyDate = poilcyDate;
+
 	}
 
 	public int getModelid() {
