@@ -9,7 +9,7 @@
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
         <id property="employeeId" column="employeeId" javaType="java.lang.Integer"></id>
         <result property="employeeName" column="name" javaType="java.lang.String"></result>
-
+		<result property="jobName" column="jobname" javaType="java.lang.String"></result>
     </resultMap>
     
 
@@ -25,10 +25,17 @@
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 
     
+    <select id="getMA_Tec"  resultMap="employee">
+		SELECT employee.name,employee.employeeId,job.NAME AS jobname FROM employee INNER JOIN job ON employee.jobId=job.jobId WHERE employee.jobId=4 OR employee.jobId=5 OR employee.jobId=6 OR employee.jobId=7 OR employee.jobId=9 OR employee.jobId=10    
+     </select>
+   
     <select id="getSA"  resultMap="employee">
      select * from employee where jobId=1 or jobId=2
     </select>
     
+    <select id="getInspectors"  resultMap="employee">
+	SELECT employee.name,employee.employeeId,job.NAME AS jobname FROM employee INNER JOIN job ON employee.jobId=job.jobId WHERE employee.jobId=9 OR employee.jobId=10    
 
+    </select>
     
 </mapper>

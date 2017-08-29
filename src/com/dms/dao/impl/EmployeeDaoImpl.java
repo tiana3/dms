@@ -232,4 +232,18 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		List<Employee> sa = mapper.getSA();
 		return sa;
 	}
+
+	@Override
+	public List<Employee> getMA_Tec() {
+		EmployeeDao mapper = sqlSessionTemplate.getMapper(EmployeeDao.class);
+		List<Employee> Ma_Tec = mapper.getMA_Tec();
+		return Ma_Tec;
+	}
+
+	@Override
+	public List<Employee> getInspectors() {
+		EmployeeDao mapper = sqlSessionTemplate.getMapper(EmployeeDao.class);
+		List<Employee> inspectors = mapper.getInspectors();
+		return inspectors;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dms.dao.CustomerCarInfoDao;
+import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
 
 public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
@@ -40,6 +41,12 @@ public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
 	public void updateCustomerCarInfo(CustomerCarInfo info) {
 		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
 		mapper.updateCustomerCarInfo(info);		
+	}
+	
+		@Override
+	public CarType getCarTypeByModelId(int modleId) {
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		return mapper.getCarTypeByModelId(modleId);
 	}
 
 	@Override

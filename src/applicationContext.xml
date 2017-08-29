@@ -68,6 +68,10 @@
 	<bean id="orderDaoImpl" class="com.dms.dao.impl.OrderDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
+	
+		<bean id="orderIdBuildDaoImpl" class="com.dms.dao.impl.OrderIdBuildDaoImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 
 
 

@@ -18,6 +18,7 @@ public class CustomerCarInfo {
 	private String policyDate;							//保险日期
 	private int modelid; 								//车型号id
 	
+	private CarType carType;     //车型
 	public CustomerCarInfo(){}
 
 	public String getEngineNumber() {
@@ -54,8 +55,8 @@ public class CustomerCarInfo {
 		return customerCarInfoId;
 	}
 
-	public void setCustomerCarInfoId(int customerCraInfoId) {
-		this.customerCarInfoId = customerCraInfoId;
+	public void setCustomerCarInfoId(int customerCarInfoId) {
+		this.customerCarInfoId = customerCarInfoId;
 	}
 
 	public String getCustomerName() {
@@ -142,8 +143,8 @@ public class CustomerCarInfo {
 		return policyDate;
 	}
 
-	public void setPolicyDate(String poilcyDate) {
-		this.policyDate = poilcyDate;
+	public void setPolicyDate(String policyDate) {
+		this.policyDate = policyDate;
 
 	}
 

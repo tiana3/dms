@@ -28,52 +28,28 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>新增材料管理</title>
+<title>整单派工</title>
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-part-add" action="PartAddServlet" method="post">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
+			<label class="form-label col-xs-4 col-sm-2">整单派工</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partname">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件号：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="partno">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>适用车型：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<select name="modelid" class="select">
-					<c:forEach items="${carTypes }" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
+				<select  class="select">
+					<option value="0">&nbsp;&nbsp;</option>
+					<c:forEach items="${Ma_Tec }" var="ma">
+						<option value="${ma.employeeId }">${ma.jobName }-${ma.employeeName }</option>
 					</c:forEach>
 				</select>
 			</div>
 		</div>
+		<br/><br/>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>进货成本：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="" id="" name="buyingprice">
-				</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>销售价：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="sellingprice">
-			</div>
-		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+			<div class="col-xs-8 col-sm-8 col-xs-offset-2 col-sm-offset-5">
+				<button onClick="allWork()" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 				<button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
-	</form>
 </article>
 
 <!--_footer 作为公共模版分离出去-->
@@ -93,48 +69,17 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
-$("#form-part-add").validate({
-
-		rules:{
-			partname:{
-				required:true,
-			},
-			partno:{
-				required:true,
-			},
-			modelid:{
-				required:true,
-
-			},
-			buyingprice:{
-				required:true,
-
-			},
-			sellingprice:{
-				required:true,
-			},
-			
-		},
-		//onkeyup:false,
-		focusCleanup:true,
-		success:"valid",
-	submitHandler:function(form){
-		$(form).ajaxSubmit({
-			success: function() { 
-				parent.layer.msg('已添加,可以继续添加!',{icon:6,time:1500});	
-				location.reload();
-				
-				//var index = parent.layer.getFrameIndex(window.name);
-				//parent.layer.close(index);
-			}
-			
-		})
-			
-		
-	}
-});
 
 
+
+
+function allWork() {
+	var value = $("select").val();
+	parent.$("#workhour .select").val(value);
+	//var index = parent.layer.getFrameIndex(window.name);
+	//parent.layer.close(index);
+	layer_close()
+}
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

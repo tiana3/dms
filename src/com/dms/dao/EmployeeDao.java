@@ -14,4 +14,6 @@ public interface EmployeeDao {
 	Employee getEmployeeById(int id);     //根据id找员工
 
 	List<Employee> getSA();      //查询所有的服务顾问和定损员
+	List<Employee> getMA_Tec();   //查询所有车间员工
+	List<Employee> getInspectors();  //查询所有质检 和 车间主管
 }

@@ -14,7 +14,7 @@
 
 
 		<mapper resource="com/dms/dao/mybatis/TheMaintenanceMapper.xml"/>
-
+		<mapper resource="com/dms/dao/mybatis/OrderIdBuildMapper.xml"/>
 
 
 	</mappers>
