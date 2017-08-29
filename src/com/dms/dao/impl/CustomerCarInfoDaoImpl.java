@@ -1,5 +1,7 @@
 package com.dms.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dms.dao.CustomerCarInfoDao;
@@ -38,6 +40,21 @@ public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
 	public void updateCustomerCarInfo(CustomerCarInfo info) {
 		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
 		mapper.updateCustomerCarInfo(info);		
+	}
+
+	@Override
+	public List<CustomerCarInfo> getCustomerCarInfoByWordKey(String plateNumber, String VIN, String customerName,
+			String phone) {
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		List<CustomerCarInfo> customerCarInfo = mapper.getCustomerCarInfoByWordKey(plateNumber, VIN,customerName,phone);
+		return customerCarInfo ;
+	}
+
+	@Override
+	public CustomerCarInfo getCustomerCarInfoById(int customerCarInfoIdid) {
+		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
+		CustomerCarInfo customerCarInfo = mapper.getCustomerCarInfoById(customerCarInfoIdid);
+		return customerCarInfo;
 	}
 
 }

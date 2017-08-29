@@ -7,7 +7,7 @@
 <!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
    <resultMap id="customerCarInfo" type="CustomerCarInfo">
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
-        <id property="customerCraInfoId" column="customerCraInfoId" javaType="java.lang.Integer"></id>
+        <id property="customerCarInfoId" column="customerCarInfoId" javaType="java.lang.Integer"></id>
         <result property="customerName" column="customerName" javaType="java.lang.String"></result>
         <result property="gender" column="gender" javaType="java.lang.String"></result>
         <result property="address" column="address" javaType="java.lang.String"></result>
@@ -19,8 +19,8 @@
         <result property="color" column="color" javaType="java.lang.String"></result>
         <result property="gearBox" column="gearBox" javaType="java.lang.String"></result>
         <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
-        <result property="poilcyDate" column="poilcyDate" javaType="java.lang.String"></result>
-        <result property="modelid" column="modelid" javaType="java.lang.Integer"></result>
+        <result property="policyDate" column="policy" javaType="java.lang.String"></result>
+        <result property="modelid" column="modelId" javaType="java.lang.Integer"></result>
     </resultMap>
     
 
@@ -36,10 +36,30 @@
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 
     
-    <select id="getCustomerCarInfoByKey" parameterType="String" resultMap="customerCarInfo">
+    <select id="getCustomerCarInfoByKey"  resultMap="customerCarInfo">
      select * from customercarinfo where plateNumber=#{plateNumber} or VIN=#{VIN}
+    </select>    
+     <select id="getCustomerCarInfoByWordKey"  resultMap="customerCarInfo">
+     select * from customercarinfo 
+     <where>
+				<if test="plateNumber != null">plateNumber like "%"#{plateNumber}"%"</if>				
+				<if test="VIN != null" >and VIN like "%"#{VIN}"%"</if>
+				<if test="phone != null">and phone like "%"#{phone}"%"</if>
+				<if test="customerName != null">and customerName like "%"#{customerName}"%"</if>
+ 		</where> 
     </select>
-    
-
-    
+    <select id="getCustomerCarInfoById" resultMap="customerCarInfo">
+    		select * from customercarinfo where customerCarInfoId = #{customerCarInfoId};
+    </select>
+	<insert id="addCustomerCarInfo" useGeneratedKeys="true" keyProperty="customerCarInfoId">
+		INSERT INTO customercarinfo (customerName,gender,address,phone,idCard,plateNumber,VIN,engineNumber,color,gearBox,buyDate,policy,modelId) 
+		VALUES (#{customerName},#{gender} , #{address}, #{phone}, #{idCard},#{plateNumber}, #{VIN}, #{engineNumber}, #{color}, #{gearBox}, #{buyDate}, #{policyDate},#{modelid});
+	</insert>
+    <delete id="removeCustomerCarInfo">
+    	delete from customercarinfo where customerCarInfoId = #{customerCarInfoId};
+    </delete>
+    <update id="updateCustomerCarInfo" >
+    	update customercarinfo set customerName=#{customerName},gender=#{gender}, address=#{address},phone=#{phone},idCard=#{idCard},plateNumber=#{plateNumber}, VIN=#{VIN} ,engineNumber=#{engineNumber}, color=#{color}, 
+    	gearbox=#{gearBox} ,  buyDate=#{buyDate} , policy=#{policyDate}, modelId=#{modelid} where customerCarInfoId = #{customerCarInfoId};
+    </update>
 </mapper>

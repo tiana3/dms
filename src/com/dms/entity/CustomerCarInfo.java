@@ -2,7 +2,7 @@ package com.dms.entity;
 
 public class CustomerCarInfo {
 		
-	private int customerCraInfoId;						//客户车辆信息id
+	private int customerCarInfoId;						//客户车辆信息id
 	private String customerName;						//客户名
 	private String gender; 							//客户性别
 	private String address;							//客户地址
@@ -15,7 +15,7 @@ public class CustomerCarInfo {
 	private String color;								//车颜色
 	private String gearBox;							//变速箱
 	private String buyDate;							//购买日期
-	private String poilcyDate;							//保险日期
+	private String policyDate;							//保险日期
 	private int modelid; 								//车型号id
 	
 	public CustomerCarInfo(){}
@@ -28,11 +28,11 @@ public class CustomerCarInfo {
 		this.engineNumber = engineNumber;
 	}
 
-	public CustomerCarInfo(int customerCraInfoId, String customerName, String gender, String address, String phone,
+	public CustomerCarInfo(int customerCarInfoId, String customerName, String gender, String address, String phone,
 			String idCard, String plateNumber, String vIN, String engineNumber, String color, String gearBox,
-			String buyDate, String poilcyDate, int modelid) {
+			String buyDate, String policyDate, int modelid) {
 		super();
-		this.customerCraInfoId = customerCraInfoId;
+		this.customerCarInfoId = customerCarInfoId;
 		this.customerName = customerName;
 		this.gender = gender;
 		this.address = address;
@@ -44,18 +44,18 @@ public class CustomerCarInfo {
 		this.color = color;
 		this.gearBox = gearBox;
 		this.buyDate = buyDate;
-		this.poilcyDate = poilcyDate;
+		this.policyDate = policyDate;
 		this.modelid = modelid;
 	}
 
 
 
-	public int getCustomerCraInfo() {
-		return customerCraInfoId;
+	public int getCustomerCarInfoId() {
+		return customerCarInfoId;
 	}
 
-	public void setCustomerCraInfo(int customerCraInfo) {
-		this.customerCraInfoId = customerCraInfo;
+	public void setCustomerCarInfoId(int customerCraInfoId) {
+		this.customerCarInfoId = customerCraInfoId;
 	}
 
 	public String getCustomerName() {
@@ -138,12 +138,12 @@ public class CustomerCarInfo {
 		this.buyDate = buyDate;
 	}
 
-	public String getPoilcyDate() {
-		return poilcyDate;
+	public String getPolicyDate() {
+		return policyDate;
 	}
 
-	public void setPoilcyDate(String poilcyDate) {
-		this.poilcyDate = poilcyDate;
+	public void setPolicyDate(String policyDate) {
+		this.policyDate = policyDate;
 	}
 
 	public int getModelid() {

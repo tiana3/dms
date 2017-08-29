@@ -154,7 +154,7 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li class="current"><a href="customerCarInfo.jsp" title="客户车辆信息">客户车辆信息</a></li>
+					<li class="current"><a href="carinfo.do" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -187,11 +187,11 @@
        基础信息管理
         <span class="c-gray en">&gt;</span>
         材料目录管理
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="carinfo.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
            <div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
+		<form action="${pageContext.request.contextPath }/customerCarInfo.do" method="post">
 		<div class="text-c"> 
 			客户姓名：
 			<input type="text" name="customerName" class="input-text" style="width:100px;">
@@ -200,52 +200,47 @@
 			车牌号：
 			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">
 			车架号：
-			<input type="text" name="vin" id="" style="width:150px" class="input-text">			
+			<input type="text" name="VIN" id="" style="width:150px" class="input-text">			
 			
 			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		</div>
 		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
-				<a class="btn btn-primary radius"
-				onclick="carinfo_add('添加车辆信息','carinfo_add.jsp','${carType.modelId}')" href="javascript:;"><i
-				class="Hui-iconfont">&#xe600;</i> 添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(list)}</strong>
+				<a class="btn btn-primary radius" onclick="carinfo_add('添加车辆信息','carinfo_add.do')" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i>添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(carInfo)}</strong>
 				条
 			</span>
 		</div>
 		<div class="mt-10">
 			<table class="table table-border table-bordered table-bg table-sort">
 				<thead>
-					<tr class="text-c">
-						
+					<tr class="text-c">				
 						<th>序号</th>
 						<th>客户名</th>
 						<th>车牌</th>
 						<th>手机号</th>
 						<th>车架号</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list }" var="customer" varStatus="varSta">
-						<tr class="text-c">
-							<td>${varSta.count }</td>
-							<td>${customer.customerName }</td>
-							<td>${customer.plateNumber }</td>
-							<td>${customer.phone }</td>
-							<td>${customer.vin }</td>
-							<td class="f-14 product-brand-manage"><a
-								style="text-decoration: none"
-								onClick="cartype_edit('车辆型号编辑','cartypeAddUpdate.jsp?modelId=${carType.modelId }&factory=${carType.factory }&model=${carType.model }','${carType.modelId}')"
-								href="javascript:;" title="详情"><i class="Hui-iconfont">&#xe6df;</i></a>
-								<a style="text-decoration: none" class="ml-5" href="javascript:;"
-								onclick="cartype_del(this,${carType.modelId })"
-								title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<c:forEach items="${carInfo }" var="car" varStatus="varSta">					
+						<tr class="text-c">									
+							<td><input type="hidden" value="${car.customerCarInfoId}" >${varSta.count }</td>
+							<td>${car.customerName }</td>
+							<td>${car.plateNumber }</td>
+							<td>${car.phone }</td>
+							<td>${car.VIN }</td>
+							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/getcarinfo.do?customerCarInfoId=${car.customerCarInfoId}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${car.customerCarInfoId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
 							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+		
 		</article>
 	</div>
 </section>
@@ -272,13 +267,14 @@
        });
        layer.full(index); */
         layer_show(title,url,w,h);
+    
     }
     /*资讯-编辑*/
     function part_edit(title,url,id,w,h){
-       /*  var index = layer.open({
+    	/*       var index = layer.open({
             type: 2,
             title: title,
-            content: url
+            content: '',
         }); */
     	layer_show(title,url,w,h);
     }
@@ -316,12 +312,13 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 type: 'POST',
-                url: '${pageContext.request.contextPath }/PartDeleteServlet',
-                data: "partid=" + id ,
+                url: 'carinfodel.do',
+                data: "customerCarInfoId=" + id ,
                 //dataType: 'json',
                 success: function(data){
                     $(obj).parents("tr").remove();
-                    layer.msg(data,{icon:1,time:1000});
+                    layer.msg("删除成功",{icon:1,time:1000});
+                    window.location.reload();
                 },
                 error:function(data) {
                     console.log(data.msg);
