@@ -1,7 +1,10 @@
 package com.dms.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -23,12 +26,13 @@ import com.dms.service.impl.CarTypeServiceImpl;
 
 @Controller
 public class OrderController {
-
+	//业务维修开单的空白页
 	@RequestMapping("order.do")
 	public String order(Model model) {
 		return "orderIndex";
 	}
 	
+	//订单中，搜索材料的显示详情
 	@RequestMapping("partList.do")
 	public String partList(Model model, @RequestParam(value = "partname") String partname, @RequestParam(value = "partno") String partno, @RequestParam(value = "modelid") String modelid) {
 		Integer modelId = 0;
@@ -49,7 +53,7 @@ public class OrderController {
 		
 		return "orderSelectPart";
 	}
-	
+	//订单中选择添加材料
 	@RequestMapping("addPart.do")
 	public String addpart(Model model) {
 		CarTypeService service = new CarTypeServiceImpl();
@@ -58,7 +62,7 @@ public class OrderController {
 		
 		return "orderSelectPart";
 	}
-	
+	//整单派工时查询所有工人
 	@RequestMapping("allWorkSelect.do")
 	public String allWorkSelect(Model model) {
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -69,6 +73,7 @@ public class OrderController {
 		return "orderWork";
 	}
 	
+	//根据车牌或者VIN 获取到车辆客户信息，返回给页面
 	@RequestMapping("orderInfo.do")
 	public String getCustomerCarInfoByPlateNumber(Model model, @RequestParam(value = "plateNumber") String plateNumber, @RequestParam(value = "VIN") String VIN) {
 		
@@ -92,17 +97,21 @@ public class OrderController {
 		return "orderIndex";
 	}
 	
-	
+	// 保存新增维修单
 	@RequestMapping("orderSave.do")
-	public String orderSave(Model model, Order order) {
-		String date = new Date().toLocaleString();
-		order.setDate(date);
-		
+	public void orderSave(HttpServletResponse response,Model model, Order order) {
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
+		Order saveOrder = service.saveOrder(order);
 		
+		String orderId = saveOrder.getOrderId();
+		String date = saveOrder.getDate();
 		
-		
-		return "orderIndex";
+		try {
+			response.getWriter().print("{\"date\":\""+ date +"\",\"orderId\":\""+ orderId +"\"}");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

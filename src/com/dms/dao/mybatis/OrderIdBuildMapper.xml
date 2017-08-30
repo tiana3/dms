@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace="com.mydomain.UserMapper" 对应接口,就把这xml配置文件和对应接口联系上了-->
-<mapper namespace="com.dms.dao.OrderIdBuildao">
-<!-- 自定义返回结果集 -->
+<mapper namespace="com.dms.dao.OrderIdBuildDao">
+<!-- 自定义返回结果集 --> 
 <!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
    <resultMap id="currentNum" type="Integer">
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
-        <result property="num" column="num" javaType="java.lang.Integer"></result>
+        <result property="num" column="num" javaType="java.lang.String"></result>
     </resultMap>
     
 
@@ -23,11 +23,11 @@
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 
     
-    <select id="getCurrentNum"  resultType="Integer">
+    <select id="getCurrentNum"  resultType="String">
      select * from orderidbuild 
     </select>
     
-    <update id="updateNum" parameterType="Integer">
+    <update id="updateNum" parameterType="String">
     	update orderidbuild set num = #{num}
     </update>
     

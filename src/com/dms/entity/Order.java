@@ -2,11 +2,16 @@ package com.dms.entity;
 
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Order {
 
 	private String orderId;									//订单Id
 	private CustomerCarInfo customerCarInfo;						//用户车辆信息
 	private Integer SA;										//服务顾问 记录的是员工的id
+	
 	private String  Date;									//开单时间
 	private Double mileage;								//里程
 	private String carRemark; 								//外观，饰品
@@ -18,10 +23,26 @@ public class Order {
 	private Integer repairId;	                               //维修类型ID
 	private String sender;							//送修人
 	private String senderPhone;                         //送修人电话
+	private Integer orderStateId;                      //订单类型id
 	
 	private Integer inspector;   //质检，  记录的是员工的id
 	
+	//@DateTimeFormat(pattern="yyyy-MM-dd")    暂时没用，因为完工时间不是前端生成，而是自己创建传入的     
+	private Date completedDate;     //将前端传过来的字符串转换成Date类型
 	
+	
+	public Date getCompletedDate() {
+		return completedDate;
+	}
+	public void setCompletedDate(Date completedDate) {
+		this.completedDate = completedDate;
+	}
+	public Integer getOrderStateId() {
+		return orderStateId;
+	}
+	public void setOrderStateId(Integer orderStateId) {
+		this.orderStateId = orderStateId;
+	}
 	public String getOrderId() {
 		return orderId;
 	}

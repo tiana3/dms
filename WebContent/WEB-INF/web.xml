@@ -38,6 +38,7 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
+	
 	<!-- 这些静态资源交给默认的servlet处理，springmvc拦截不到 -->
 	<servlet-mapping>  
     <servlet-name>default</servlet-name>  

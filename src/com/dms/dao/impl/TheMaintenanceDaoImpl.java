@@ -7,7 +7,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.dms.dao.OrderDao;
+import com.dms.entity.Custom;
 import com.dms.entity.Order;
+import com.dms.entity.Part;
 
 
 public class TheMaintenanceDaoImpl implements OrderDao{
@@ -50,5 +52,17 @@ public class TheMaintenanceDaoImpl implements OrderDao{
 	public Order getLastOrder(String plateNumber, String VIN) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addCustoms(String orderId, List<Custom> customs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addParts(String orderId, List<Part> parts) {
+		// TODO Auto-generated method stub
+		
 	}
 }

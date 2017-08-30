@@ -20,6 +20,7 @@
         <result property="gearBox" column="gearBox" javaType="java.lang.String"></result>
         <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
         <result property="policyDate" column="policy" javaType="java.lang.String"></result>
+       
         <result property="modelid" column="modelId" javaType="java.lang.Integer"></result>
  		<!-- column="modelid"对应的是上面查询数据库 查询出来的modelid  -->
   		<association property="carType" column="modelId" javaType="CarType" select="getCarTypeByModelId"></association>
