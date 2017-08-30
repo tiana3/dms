@@ -27,7 +27,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>965200</value>
+			<value>root</value>
 		</property>
 	</bean>
 	
@@ -90,6 +90,8 @@
 		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
 		<property name="employeeDao" ref="employeeDaoImpl"/>	
 		<property name="orderDao" ref="orderDaoImpl"/>	
+		<property name="orderIdBuildDao" ref="orderIdBuildDaoImpl"/>	
+		
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager"/>

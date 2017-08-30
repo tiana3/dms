@@ -1,6 +1,8 @@
 
 package com.dms.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;

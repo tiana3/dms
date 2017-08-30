@@ -22,7 +22,25 @@
 <!--#{}中的内容，为占位符，当参数为某个JavaBean时，表示放置该Bean对象的属性值  -->
 
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
-
+	<insert id="addOrder" >
+		insert into orders values(#{orderId},#{customerCarInfo.customerCarInfoId},#{SA},#{Date},#{mileage},#{carRemark},#{remark},#{expectDate},#{repairId},#{sender},#{senderPhone},1,0,0,0,0,#{inspector},null)
+	</insert>
+   	
+   	<insert id="addCustoms" >
+		insert into custom(orderId,customName,customPrice,employeeId) values
+		<foreach collection="customs" item="custom" separator=",">
+			(#{orderId}, #{custom.customName}, #{custom.customPrice}, #{custom.employeeId})
+		</foreach>
+	</insert>
+	
+	<insert id="addParts" >
+		insert into order_part(orderId,partId,picker)  values
+		<foreach collection="parts" item="part" separator=",">
+			(#{orderId}, #{part.partId},#{part.picker.employeeId})
+		</foreach>
+	
+	</insert>
+    
     
     <select id="getLastOrder" parameterType="String" resultMap="orderSender">
      SELECT sender,senderPhone FROM orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId where plateNumber=#{plateNumber} or VIN=#{VIN} ORDER BY orderId DESC LIMIT 0,1

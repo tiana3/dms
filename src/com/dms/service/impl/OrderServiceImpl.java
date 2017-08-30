@@ -1,11 +1,15 @@
 package com.dms.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.dao.CustomerCarInfoDao;
 import com.dms.dao.EmployeeDao;
 import com.dms.dao.OrderDao;
+import com.dms.dao.OrderIdBuildDao;
 import com.dms.dao.RepairTypeDao;
 import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
@@ -18,7 +22,16 @@ public class OrderServiceImpl implements OrderService {
 	private RepairTypeDao repairTypeDao;
 	private EmployeeDao employeeDao;
 	private OrderDao orderDao;
+	private OrderIdBuildDao orderIdBuildDao;
 	
+	public OrderIdBuildDao getOrderIdBuildDao() {
+		return orderIdBuildDao;
+	}
+
+	public void setOrderIdBuildDao(OrderIdBuildDao orderIdBuildDao) {
+		this.orderIdBuildDao = orderIdBuildDao;
+	}
+
 	public OrderDao getOrderDao() {
 		return orderDao;
 	}
@@ -87,14 +100,41 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return employeeDao.getInspectors();
 	}
-
+	@Transactional
 	@Override
 	public Order saveOrder(Order order) {
+		//设置当前时间保存到数据库     开单时间
 		String date = new Date().toLocaleString();
 		order.setDate(date);
+		//生成订单号
+		String currentNum = orderIdBuildDao.getCurrentNum();
+		String subCurrentNum = currentNum.substring(0, 8);
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String currentDay = format.format(new Date());
 		
+		if(subCurrentNum.equals(currentDay)) {
+			Long parseCurrentNum = Long.parseLong(currentNum);
+			String updateNum = Long.toString(parseCurrentNum+1);
+			orderIdBuildDao.updateNum(updateNum);
+			order.setOrderId(updateNum);
+		}else {
+			String newNum = currentDay + "001";
+			orderIdBuildDao.updateNum(newNum);
+			order.setOrderId(newNum);
+		}
+		orderDao.addOrder(order);
 		
-		return null;
+		return order;
+	}
+
+	@Override
+	public String getCurrentNum() {
+		return orderIdBuildDao.getCurrentNum();
+	}
+
+	@Override
+	public void updateNum(String num) {
+		orderIdBuildDao.updateNum(num);
 	}
 
 }

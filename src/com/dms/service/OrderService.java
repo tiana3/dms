@@ -17,4 +17,7 @@ public interface OrderService {
 	
 	Order saveOrder(Order order);
 	
+	String getCurrentNum();   //得到当前订单编号
+	void updateNum(String num); //更新当前订单编号
+	
 }
