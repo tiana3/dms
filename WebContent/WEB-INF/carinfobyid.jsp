@@ -63,19 +63,14 @@
 		
 		<tr class="text-c">		
 				
-				<td>车辆型号:<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
-					</c:forEach>
-				</select></td>
-						
-				<td>车辆厂家:
-				
+				<td>车辆型号:</td>
+				<td>
 				<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
+					<c:forEach items="${car}" var="car1">
+						<option value="${car1.modelId}" ${carType.modelid == car1.modelId ? "selected" : ""}>${car1.factory }-${car1.model }</option>
 					</c:forEach>
-				</select></td>
+				</select>
+				</td>
 				
 		</tr>
 		
@@ -92,7 +87,7 @@
 		
 	
 		<tr class="text-c">						
-				<td><button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button></td>
+				<td><button onClick="close()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button></td>
 				<td><button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></td>
 		</tr>
 	
@@ -117,8 +112,45 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
+$("#form-carinfo-add").validate({
 
+	rules:{
+		customerName:{
+			required:true,
+		},
+		plateNumber:{
+			required:true,
+		},
+		VIN:{
+			required:true,
 
+		},
+		phone:{
+			required:true,
+
+		},
+		
+	},
+	//onkeyup:false,
+	focusCleanup:true,
+	success:"valid",
+submitHandler:function(form){
+	$(form).ajaxSubmit({
+		success: function() { 
+			
+			parent.layer.msg('修改成功!',{icon:6,time:1000});	
+			layer_close();
+			
+			//var index = parent.layer.getFrameIndex(window.name);
+			//parent.layer.close(index);
+		}
+		
+	})
+		
+	
+}
+});
+	
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

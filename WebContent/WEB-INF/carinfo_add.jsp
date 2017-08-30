@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="mt-10">
-<form class="form form-horizontal" id="form-carinfo-add" action="carinfoadd.do" method="post">
+<form class="form form-horizontal" id="form-carinfo-add" action="${pageContext.request.contextPath }/carinfo_add.do" method="post">
 <table class="table table-border table-bordered table-bg table-sort">
 		
 		<tr class="text-c">						
@@ -55,38 +55,31 @@
 	
 		
 		<tr class="text-c">						
-				<td>地&nbsp;&nbsp;&nbsp;址&nbsp;:<input type="text" name="address" value="${carType.address}" class="input-text" style="width:200px;"></td>
-				<td>发动机号:<input type="text" name="engineNumber" value="${carType.engineNumber}" class="input-text" style="width:200px;"></td>
+				<td>地&nbsp;&nbsp;&nbsp;址&nbsp;:<input type="text" name="address" value="" class="input-text" style="width:200px;"></td>
+				<td>发动机号:<input type="text" name="engineNumber" value="" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 		
-		<tr class="text-c">		
-				
-				<td>车辆型号:<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
-					</c:forEach>
-				</select></td>
-						
-				<td>车辆厂家:
-				
+		<tr class="text-c">				
+				<td>车辆型号:</td>
+				<td>
 				<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
+					<c:forEach items="${car}" var="car1">
+						<option value="${car1.modelId}" ${carType.modelid == car1.modelId ? "selected" : ""}>${car1.factory }-${car1.model }</option>
 					</c:forEach>
-				</select></td>
-				
+				</select>
+				</td>
 		</tr>
 		
 		<tr class="text-c">						
-				<td>电&nbsp;&nbsp;&nbsp;&nbsp;话:<input type="text" name="phone" value="${carType.phone}" class="input-text" style="width:200px;"></td>
-				<td>颜&nbsp;&nbsp;&nbsp;&nbsp;色:<input type="text" name="color" value="${carType.color}" class="input-text" style="width:200px;"></td>
+				<td>电&nbsp;&nbsp;&nbsp;&nbsp;话:<input type="text" name="phone" value="" class="input-text" style="width:200px;"></td>
+				<td>颜&nbsp;&nbsp;&nbsp;&nbsp;色:<input type="text" name="color" value="" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 		
 		<tr class="text-c">						
-				<td>身&nbsp;份&nbsp;证&nbsp;:<input type="text" name="idCard" value="${carType.idCard}" class="input-text" style="width:200px;"></td>
-				<td>变&nbsp;速&nbsp;箱&nbsp;:<input type="text" name="gearBox" value="${carType.VIN}" class="input-text" style="width:200px;"></td>
+				<td>身&nbsp;份&nbsp;证&nbsp;:<input type="text" name="idCard" value="" class="input-text" style="width:200px;"></td>
+				<td>变&nbsp;速&nbsp;箱&nbsp;:<input type="text" name="gearBox" value="" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 	
@@ -120,6 +113,15 @@ $("#form-carinfo-add").validate({
 
 	rules:{
 		customerName:{
+			required:true,
+		},
+		phone:{
+			required:true,
+		},
+		VIN:{
+			required:true,
+		},
+		engineNumber:{
 			required:true,
 		},
 	},

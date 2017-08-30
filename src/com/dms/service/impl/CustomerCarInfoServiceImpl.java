@@ -2,13 +2,25 @@ package com.dms.service.impl;
 
 import java.util.List;
 
+import com.dms.dao.CarTypeDao;
 import com.dms.dao.CustomerCarInfoDao;
+import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
 import com.dms.service.CustomerCarInfoService;
 
 public class CustomerCarInfoServiceImpl implements CustomerCarInfoService {
 	private CustomerCarInfoDao customerCarInfoDao;
+	private CarTypeDao carTypeDao;
 	
+	
+	public CarTypeDao getCarTypeDao() {
+		return carTypeDao;
+	}
+
+	public void setCarTypeDao(CarTypeDao carTypeDao) {
+		this.carTypeDao = carTypeDao;
+	}
+
 	public CustomerCarInfoDao getCustomerCarInfoDao() {
 		return customerCarInfoDao;
 	}
@@ -53,6 +65,12 @@ public class CustomerCarInfoServiceImpl implements CustomerCarInfoService {
 		CustomerCarInfo customerCarInfo = customerCarInfoDao.getCustomerCarInfoById(customerCarInfoId);
 		return customerCarInfo;
 	}
-	
+
+	@Override
+	public List<CarType> getCarType() {
+		// TODO Auto-generated method stub
+		return carTypeDao.getAllCarType();
+	}
+
 
 }

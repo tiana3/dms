@@ -2,6 +2,7 @@ package com.dms.service;
 
 import java.util.List;
 
+import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
 
 public interface CustomerCarInfoService {
@@ -11,4 +12,5 @@ public interface CustomerCarInfoService {
 	void removeCustomerCarInfo(int customerCarInfoId);			//根据车辆id 删除信息
 	void updateCustomerCarInfo(CustomerCarInfo info);			//修改客户车辆信息
 	CustomerCarInfo getCustomerCarInfoById(int customerCarInfoId);				//根据id 查询客户车辆信息
+	List<CarType> getCarType();
 }

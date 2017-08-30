@@ -115,7 +115,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
@@ -207,7 +207,7 @@
 		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
-				<a class="btn btn-primary radius" onclick="carinfo_add('添加车辆信息','carinfo_add.do')" href="javascript:;">
+				<a class="btn btn-primary radius" onclick="carinfo_add('添加车辆信息','carinfoadd.do')" href="javascript:;">
 				<i class="Hui-iconfont">&#xe600;</i>添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(carInfo)}</strong>
 				条
 			</span>

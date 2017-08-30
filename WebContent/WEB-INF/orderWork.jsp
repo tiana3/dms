@@ -78,7 +78,7 @@ function allWork() {
 	parent.$("#workhour .select").val(value);
 	//var index = parent.layer.getFrameIndex(window.name);
 	//parent.layer.close(index);
-	layer_close()
+	layer_close();
 }
 
 </script>

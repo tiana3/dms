@@ -43,11 +43,6 @@ public class CustomerCarInfoDaoImpl implements CustomerCarInfoDao {
 		mapper.updateCustomerCarInfo(info);		
 	}
 	
-		@Override
-	public CarType getCarTypeByModelId(int modleId) {
-		CustomerCarInfoDao mapper = sqlSessionTemplate.getMapper(CustomerCarInfoDao.class);
-		return mapper.getCarTypeByModelId(modleId);
-	}
 
 	@Override
 	public List<CustomerCarInfo> getCustomerCarInfoByWordKey(String plateNumber, String VIN, String customerName,
