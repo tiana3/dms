@@ -137,4 +137,14 @@ public class OrderServiceImpl implements OrderService {
 		orderIdBuildDao.updateNum(num);
 	}
 
+	@Override
+	public void deleteOrder(String orderId) {
+		orderDao.deleteOrder(orderId);
+	}
+
+	@Override
+	public void updateOrder(Order order) {
+		orderDao.updateOrder(order);
+	}
+
 }

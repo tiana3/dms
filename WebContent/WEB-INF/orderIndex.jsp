@@ -198,6 +198,7 @@
 	
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
+				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/order.do">新开单</a>
 					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
@@ -216,17 +217,16 @@
       	  	</div>
 
 			<p><span id="showOrderId" class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
-        
-			<input type="hidden"   name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
+        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.Date }">
+			<input type="hidden" id="hiddenCustomerCarInfoId"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
 			<input type="hidden" id="hiddenOrderId" name="orderId"  value="${order.orderId }">			
 			<table class="table table-border table-bordered table-bg">
 				<tbody>
 					<tr>
 						<td>车牌</td>                                                     
 						<td>
-						<input  type="text" class="input-text" name="plateNumber"  value="${carInfo.plateNumber }" onkeydown='if(event.keyCode==13) {submit()}'>
+						<input id="plate" type="text" class="input-text" name="plateNumber"  value="${carInfo.plateNumber }" onkeydown='if(event.keyCode==13) {submit()}'>
 						 <!--   <button  class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查找</button>  -->
-
 						</td>
 						<td>预估完工时间</td>
 						<td>
@@ -238,7 +238,7 @@
 					</tr>
 					<tr>
 						<td>车架号</td>
-						<td><input type="text" class="input-text"  name="VIN"  value="${carInfo.VIN }" onkeydown='if(event.keyCode==13) {submit()}'></td>
+						<td><input id="vin" type="text" class="input-text"  name="VIN"  value="${carInfo.VIN }" onkeydown='if(event.keyCode==13) {submit()}'></td>
 					
 						<td>维修类别</td>
 						<td>
@@ -519,12 +519,29 @@ function save() {
 							var json = JSON.parse(data);
 							layer.msg("维修单新增成功",{icon:1,time:1000});
 							$("#hiddenOrderId").val(json.orderId);
+							$("#hiddenDate").val(json.date);
 							$("#showOrderId").text("维修单号:"+json.orderId);
 							$("#time1").text("开单时间:"+json.date);
 						}
 					})
 			 } else {
-				 layer.msg("已保存",{icon:1,time:1000});
+				 //动态设置配件材料的name属性
+				 var length = document.getElementById("part").children.length;
+				   for (i = 0; i < length; i++) {
+					   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
+				   }
+				   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
+
+				   $("#form-order-save").ajaxSubmit({
+					   url:"${pageContext.request.contextPath }/updateOrder.do",
+					   
+					   
+					  	success: function(data) { 
+					  		
+							var json = JSON.parse(data);
+							layer.msg("已保存",{icon:1,time:1000});
+						}
+				   })
 			 }
 			 
 		 } else {
@@ -551,8 +568,12 @@ function save() {
 	}
 	
 	function workplace_delete() {
+		if($("#workhour tr").length != 0) {
 			 $("#workhour tr:last").remove();
 			 layer.msg("删除成功",{icon:1,time:1000});
+		}else{
+			 layer.msg("没有工位",{icon:2,time:1000});
+		}
 	}
 
    function allWork_select(title,url,w,h){
@@ -572,28 +593,35 @@ function save() {
    
    function deleteOrder() {
        var Id = $("#hiddenOrderId").val();
-	   if(Id != "" && id != null) {
+	   if(Id != "" && Id != null) {
 	       layer.confirm('确认作废维修单吗？',function(index){
 	          var Id = $("#hiddenOrderId").val();
 	    	   
 	    	   $.ajax({
-	               type: 'POST',
+	               type: 'POST',                            
 	               url: '${pageContext.request.contextPath }/orderDelete.do',
 	               data: {orderId:Id},
 	               //dataType: 'json',
-	               success: function(data){
-	                   layer.msg("已作废",{icon:1,time:1000});
+	               success: function(){
 	                   location.replace("${pageContext.request.contextPath }/order.do");
 	               },
-	               error:function(data) {
-	                   console.log(data.msg);
+	               error:function() {
+	                   console.log();
 	               },
 	           });
 	       });
+
 	   }else{
 		   layer.msg("还没有维修单",{icon:2,time:1000});
 	   }
    }
+   
+   $(document).ready(function(){ 
+	   if($("#hiddenCustomerCarInfoId").val()!="") {
+		   $("#vin").attr("readonly",true);
+		   $("#plate").attr("readonly",true);
+	   }
+   })
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

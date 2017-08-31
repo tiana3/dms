@@ -58,11 +58,16 @@ public class OrderDaoImpl implements OrderDao {
 			addParts(order.getOrderId(), parts);
 		}
 	}
-
+	
+	/**
+	 * 修改订单，修改基本信息，更改所有工时和所有材料
+	 */
+	@Transactional
 	@Override
 	public void updateOrder(Order order) {
-		// TODO Auto-generated method stub
-		
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		deleteOrder(order.getOrderId());
+		addOrder(order);
 	}
 
 	@Override
@@ -75,6 +80,28 @@ public class OrderDaoImpl implements OrderDao {
 	public void addParts(String orderId, List<Part> parts) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.addParts(orderId, parts);
+	}
+	
+	
+	@Transactional
+	@Override
+	public void deleteOrder(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.deleteOrder(orderId);
+		deleteCustoms(orderId);
+		deleteParts(orderId);
+	}
+
+	@Override
+	public void deleteCustoms(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.deleteCustoms(orderId);
+	}
+
+	@Override
+	public void deleteParts(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.deleteParts(orderId);		
 	}
 
 }
