@@ -74,7 +74,8 @@
 	<bean id="carTypeDaoImpl" class="com.dms.dao.impl.CarTypeDaoImpl">
 	</bean>
 	
-
+	<bean id="settlementDaoImpl" class="com.dms.dao.impl.SettlementDaoImpl">
+	</bean>
 
 
 	<!-- service配置 -->
@@ -98,6 +99,9 @@
 		<property name="orderIdBuildDao" ref="orderIdBuildDaoImpl"/>	
 		
 	</bean>
-
+	<bean id="settlementServiceImpl" class="com.dms.service.impl.SettlementServiceImpl">
+		
+	</bean>	
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

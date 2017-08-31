@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SettlementController {
 	
 	@RequestMapping("settlement.do")
-	public String order(Model model) {
+	public String rider(Model model) {
 		return "settlement";
 	}
 	
