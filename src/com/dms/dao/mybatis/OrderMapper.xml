@@ -10,6 +10,34 @@
         <result property="sender" column="sender" javaType="java.lang.String"></result>
   		<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
    </resultMap>
+   
+   <resultMap id="order" type="Order">
+<!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
+       	<id property="orderId" column="orderId" javaType="java.lang.String"></id>
+        <result property="SA" column="SA" javaType="java.lang.Integer"></result>
+  		<result property="Date" column="Date" javaType="java.lang.String"></result>
+   		<result property="mileage" column="mileage" javaType="java.lang.Double"></result>
+   		<result property="carRemark" column="carRemark" javaType="java.lang.String"></result>
+   		<result property="remark" column="remark" javaType="java.lang.String"></result>
+   		<result property="expectDate" column="expectDate" javaType="java.lang.String"></result>
+		<result property="repairId" column="repairId" javaType="java.lang.Integer"></result>
+     	<result property="sender" column="sender" javaType="java.lang.String"></result>
+     	<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
+     	<result property="orderStateId" column="orderStateId" javaType="java.lang.Integer"></result>
+     	<result property="inspector" column="inspector" javaType="java.lang.Integer"></result>
+     	<result property="completedDate" column="completedDate" javaType="java.util.Date"></result>
+     	<result property="workPrice" column="workPrice" javaType="java.lang.Double"></result>
+     	<result property="partPrice" column="partPrice" javaType="java.lang.Double"></result>
+     	<result property="discountPrice" column="discountPrice" javaType="java.lang.Double"></result>
+  		
+  		<!-- 根据数据库 column="customerCarInfoId"的值  去com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById 查询详细的车辆信息            javaType="CustomerCarInfo"是指实体类的属性是什么类型的 -->
+  		<association property="customerCarInfo" column="customerCarInfoId"  javaType="CustomerCarInfo" select="com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById"></association>
+  		
+  		<collection property="customs" column="orderId" select="getOrderCustomsByOrderId"></collection>
+ 		<collection property="parts" column="orderId" select="getOrderPartsByOrderId"></collection>
+  
+  
+   </resultMap>
     
 
     
@@ -42,11 +70,18 @@
 	</insert>
     
     
-    <select id="getLastOrder" parameterType="String" resultMap="orderSender">
+    <select id="getLastOrder" parameterType="String"  resultMap="orderSender">
      SELECT sender,senderPhone FROM orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId where plateNumber=#{plateNumber} or VIN=#{VIN} ORDER BY orderId DESC LIMIT 0,1
     </select>
     
-
+    <select id="getOrderCustomsByOrderId" parameterType="String" resultType="Custom">
+     	select * from custom where orderId = #{orderId}
+    </select>
+    
+    <select id="getOrderPartsByOrderId" parameterType="String"  resultType="Part">
+		select * from order_part inner join part on order_part.partId = part.partId inner join cartype on part.modelId = cartype.modelId where orderId = #{orderId}
+    </select>
+    
     <delete id="deleteOrder" parameterType="String">
     	delete from orders where orderId = #{orderId}
     </delete>

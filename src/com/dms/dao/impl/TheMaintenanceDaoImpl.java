@@ -83,4 +83,16 @@ public class TheMaintenanceDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Custom> getOrderCustomsByOrderId(String orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Part> getOrderPartsByOrderId(String orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

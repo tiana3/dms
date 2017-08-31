@@ -104,4 +104,16 @@ public class OrderDaoImpl implements OrderDao {
 		mapper.deleteParts(orderId);		
 	}
 
+	@Override
+	public List<Custom> getOrderCustomsByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		return mapper.getOrderCustomsByOrderId(orderId);
+	}
+
+	@Override
+	public List<Part> getOrderPartsByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		return mapper.getOrderPartsByOrderId(orderId);
+	}
+
 }

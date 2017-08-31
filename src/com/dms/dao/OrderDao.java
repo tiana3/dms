@@ -25,4 +25,7 @@ public interface OrderDao {
 	void deleteOrder(String orderId);   //根据订单号删除维修单
 	void deleteCustoms(String orderId);  //根据订单号删除所有对应的自定义维修项目
 	void deleteParts(String orderId); //根据订单号删除所有对应的配件材料
+	
+	List<Custom> getOrderCustomsByOrderId(String orderId);       //根据订单号获取对应的所有自定义维修项目
+	List<Part> getOrderPartsByOrderId(String orderId);           //根据订单号获取对应的所有配件材料
 }

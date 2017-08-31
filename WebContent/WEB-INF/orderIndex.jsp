@@ -295,7 +295,7 @@
 					<td>
 						<select class="select" name="SA">
 							<c:forEach items="${sa }" var="s">
-								<option value="${s.employeeId }" selected="${order.SA == s.employeeId ? selected:false }">${s.employeeName } </option>
+								<option value="${s.employeeId }" selected=${order.SA == s.employeeId ? true : false }>${s.employeeName } </option>
 							</c:forEach>
 						</select>
 
