@@ -235,7 +235,6 @@
 				</thead>
 				<c:forEach items="${work }" var="workhour" varStatus="varSta">
 					<tbody>
-
 						<tr class="text-c">
 							<td>${varSta.count }</td>
 							<td>${workhour.workplaceName }</td>

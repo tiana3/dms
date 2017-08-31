@@ -36,20 +36,10 @@ public class TheMaintenanceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
-		String orderId = request.getParameter("orderId");
-		String plateNumber = request.getParameter("plateNumber");
-		String repairType = request.getParameter("repairType");
-		String name = request.getParameter("name");
-		String date = request.getParameter("date");
-		TheMaintenanceService service = (TheMaintenanceService) ctx.getBean("TheMaintenanceServiceImpl");
-		
-		
-	}
 
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

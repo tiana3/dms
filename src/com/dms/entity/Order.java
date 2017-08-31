@@ -75,12 +75,7 @@ public class Order {
 	public void setInspector(Integer inspector) {
 		this.inspector = inspector;
 	}
-	public CustomerCarInfo getCustomerCarInfo() {
-		return customerCarInfo;
-	}
-	public void setCustomerCarInfo(CustomerCarInfo customerCarInfo) {
-		this.customerCarInfo = customerCarInfo;
-	}
+
 	public Integer getSA() {
 		return SA;
 	}
@@ -156,9 +151,18 @@ public class Order {
 	public Order() {
 		super();
 	}
-	
-
-	
+	public CustomerCarInfo getCustomerCarInfo() {
+		return customerCarInfo;
+	}
+	public void setCustomerCarInfo(CustomerCarInfo customerCarInfo) {
+		this.customerCarInfo = customerCarInfo;
+	}
+	public Order(CustomerCarInfo customerCarInfo, Integer sA, Integer repairId) {
+		super();
+		this.customerCarInfo = customerCarInfo;
+		SA = sA;
+		this.repairId = repairId;
+	}
 	
 	
 }

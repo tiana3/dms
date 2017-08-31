@@ -4,12 +4,18 @@ package com.dms.dao.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.dms.dao.CustomerCarInfoDao;
+import com.dms.dao.EmployeeDao;
 import com.dms.dao.OrderDao;
 import com.dms.entity.Custom;
+import com.dms.entity.CustomerCarInfo;
+import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
+import com.dms.entity.RepairType;
 
 
 public class TheMaintenanceDaoImpl implements OrderDao{
@@ -29,11 +35,21 @@ public class TheMaintenanceDaoImpl implements OrderDao{
 		List<Order> order = dao.getAllOrders();
 		return order;
 	}
+	
+	@Override
+	public List<Employee> getSA() {
+		EmployeeDao dao = (EmployeeDao) sqlSessionTemplate.getMapper(EmployeeDao.class);
+		List<Employee> employee = dao.getSA();
+		return employee;
+		
+	}
 
 	@Override
-	public List<Order> getOrders(int customerCarInfoId, int employeeId, int repairId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getOrders(String plateNumber, int employeeId, int repairId) {
+		OrderDao dao = (OrderDao) sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> order = dao.getOrders(plateNumber, repairId, employeeId);
+		
+		return order;
 	}
 
 	@Override
@@ -65,4 +81,5 @@ public class TheMaintenanceDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -40,23 +40,22 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
-			<nav class="nav navbar-nav"> <nav id="Hui-userbar"
-				class="nav navbar-nav navbar-userbar hidden-xs">
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> 
+			<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H</a>
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+			<nav class="nav navbar-nav" id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover">
+					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="#">退出</a></li>
-					</ul></li>
+					</ul>
+				</li>
 
-				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
-					href="javascript:;" class="dropDown_A" title="换肤"><i
-						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
+				<li id="Hui-skin" class="dropDown right dropDown_hover">
+					<a href="javascript:;" class="dropDown_A" title="换肤">
+					<i class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
 						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
@@ -64,7 +63,8 @@
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
 						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 			</nav>
 		</div>
@@ -199,73 +199,73 @@
 		href="javascript:location.replace(location.href);" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
+		<div style="margin-top: 30px; margin-left: 100px;">
+			<form action="${pageContext.request.contextPath }/getOrders.do"
+				smethod="get">
+
+				<span class="l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车牌号：&nbsp;
+					<input type="text" name="plateNumber"
+					value="${acrInfo.plateNumber }" style="height: 25px;">
+				</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务顾问： <select class=""
+					name="repairId" style="width: 120px; height: 30px;">
+					<option value="0">全部</option>
+					<c:forEach items="${sa }" var="employee">
+						<option value="${employee.employeeId }">${employee.employeeName }</option>
+					</c:forEach>
+
+				</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;维修类型： <select class="select"
+					name="employeeId" style="width: 120px; height: 30px;">
+					<option value="0">全部</option>
+					<c:forEach items="${repairType }" var="type">
+						<option value="${type.repairTypeId }">${type.repairType }</option>
+					</c:forEach>
+				</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-success" type="submit" value="submit">
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
+				</button>
+			</form>
+		</div>
 		<article class="cl pd-20">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 
-			<form action="${pageContext.request.contextPath }/theMaintenance" method="get">
-				<div>
-					<span class="l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车牌号：&nbsp;
-						<input type="text" name="" style="height: 25px;">
-					</span> 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务顾问：
-					<select name="modelid" class="" style="width:120px ; height:30px;">
-						<option value="0" >全部</option>
-						<c:forEach items="${carTypes }" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
-						</c:forEach>
-					</select> 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;维修类型：
-					<select name="modelid" class="" style="width:120px ; height:30px;">
-						<option value="0" >全部</option>
-						<c:forEach items="${repairType }" var="repairType">
-						<option value="${repairtype.repairTypeId }" >${repairtype.repairType }</option>
-						</c:forEach>
-					</select>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button class="btn btn-success" type="submit" value="submit">
-						<i class="Hui-iconfont">&#xe665;</i> 搜索
-					</button>
-					<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条
-					</span>
-				</div>
-				<div class="mt-20">
-					<table
-						class="table table-border table-bordered table-bg table-hover table-sort">
-						<thead>
-							<tr class="text-c">
-								<th width="66">序号</th>
-								<th>维修单号</th>
-								<th>车牌号</th>
-								<th width="120">维修类型</th>
-								<th width="120">服务顾问</th>
-								<th width="140">开单时间</th>
-								<th width="80">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="" var="part" varStatus="varSta">
-								<tr class="text-c">
-
-									<td>${varSta.count }</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><button class="btn btn-success" type="submit" value="submit">
-										<i class="Hui-iconfont">&#xe665;</i> 查看</button>
-									</td>
-
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</form>
-
+			<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条
+			</span>
 		</div>
-		<div id="pageNav" class="pageNav"></div>
-		</article>
+		<div class="mt-20">
+			<table
+				class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th width="66">序号</th>
+						<th>维修单号</th>
+						<th>车牌号</th>
+						<th width="120">维修类型</th>
+						<th width="120">服务顾问</th>
+						<th width="140">开单时间</th>
+						<th width="80">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${order }" var="part" varStatus="varSta">
+						<tr class="text-c">
+							<td>${varSta.count }</td>
+							<td>${part.orderId }</td>
+							<td>${part.repairId}</td>
+							<td>${part.customerCarInfo }</td>
+							<td>${part.SA }</td>
+							<td></td>
+							<td><button class="btn btn-success" type="submit"
+									value="submit">
+									<i class="Hui-iconfont">&#xe665;</i> 查看
+								</button></td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</article>
 	</div>
 	</section>
 

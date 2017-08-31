@@ -27,7 +27,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>root</value>
+			<value>965200</value>
 		</property>
 	</bean>
 	
@@ -84,8 +84,10 @@
 	</bean>
  
 	<bean id="theMaintenanceServiceImpl" class="com.dms.service.impl.TheMaintenanceServiceImpl">
-		<property name="ordersDao" ref="theMiantenanceDao"></property>
-		<property name="repairTypeDao" ref="repairTypeDaoimpl"></property>
+		<property name="orderDao" ref="theMiantenanceDao"/>
+		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
+		<property name="employeeDao" ref="employeeDaoImpl"/>
+  		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>
 	</bean>
 
 	<bean id="orderServiceImpl" class="com.dms.service.impl.OrderServiceImpl">

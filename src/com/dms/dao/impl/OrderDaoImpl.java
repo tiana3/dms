@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.dao.OrderDao;
 import com.dms.entity.Custom;
+import com.dms.entity.CustomerCarInfo;
+import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 
@@ -30,12 +32,6 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<Order> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Order> getOrders(int customerCarInfoId, int employeeId, int repairId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -75,6 +71,18 @@ public class OrderDaoImpl implements OrderDao {
 	public void addParts(String orderId, List<Part> parts) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.addParts(orderId, parts);
+	}
+
+	@Override
+	public List<Employee> getSA() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Order> getOrders(String plateNumber, int employeeId, int repairId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
