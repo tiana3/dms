@@ -133,5 +133,48 @@ public class OrderController {
 		
 		return "{\"data\":\"³É¹¦\"}";
 	}
-
+	
+	
+	@RequestMapping("theMaintenance.do")
+	public String theMaintenance(Model model) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+		List<RepairType> repairTypes = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		List<Order> allOrders = service.getAllOrders();
+		
+		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("repairType", repairTypes);
+		model.addAttribute("sa", sa);
+		
+		return "theMaintenance";
+	}
+	
+	@RequestMapping("showOrder.do")
+	public String showOrder(Model model,@RequestParam(value = "orderId") String orderId ) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+	
+		Order order = service.getOrderByOrderId(orderId);
+		CustomerCarInfo carInfo = order.getCustomerCarInfo();
+		List<RepairType> repairType = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		Order lastOrder = order;
+		List<Employee> Ma_Tec = service.getMa_Tec();
+		List<Employee> inspectors = service.getInspectors();
+		
+		if(carInfo!=null) {
+			model.addAttribute("order", order);
+			model.addAttribute("repairType", repairType);
+			model.addAttribute("carInfo", carInfo);
+			model.addAttribute("sa", sa);
+			model.addAttribute("lastOrder", lastOrder);
+			model.addAttribute("Ma_Tec", Ma_Tec);
+			model.addAttribute("inspectors", inspectors);
+		}	
+		
+		
+		
+		return "orderIndex";
+	}
 }

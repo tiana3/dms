@@ -51,9 +51,6 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
  
- 	<bean id="theMiantenanceDao" class="com.dms.dao.impl.TheMaintenanceDaoImpl">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>
 
 	<bean id="repairTypeDaoimpl" class="com.dms.dao.impl.RepairTypeDaoimpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
@@ -84,12 +81,7 @@
 	    <property name="carTypeDao" ref="carTypeDaoImpl"/>
 	</bean>
  
-	<bean id="theMaintenanceServiceImpl" class="com.dms.service.impl.TheMaintenanceServiceImpl">
-		<property name="orderDao" ref="theMiantenanceDao"/>
-		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
-		<property name="employeeDao" ref="employeeDaoImpl"/>
-  		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>
-	</bean>
+
 
 	<bean id="orderServiceImpl" class="com.dms.service.impl.OrderServiceImpl">
 		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>

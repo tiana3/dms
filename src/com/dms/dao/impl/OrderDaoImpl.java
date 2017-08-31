@@ -32,8 +32,9 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<Order> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		OrderDao maper = (OrderDao) sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> orders = maper.getAllOrders();
+		return orders;
 	}
 	
 	/**
@@ -120,8 +121,16 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<Order> getOrders(String plateNumber, int employeeId, int repairId) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> orders = mapper.getOrders(plateNumber, repairId, employeeId);
+		
+		return orders;
+	}
+
+	@Override
+	public Order getOrderByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);		
+		return mapper.getOrderByOrderId(orderId);
 	}
 
 }

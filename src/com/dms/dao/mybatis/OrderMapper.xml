@@ -20,7 +20,7 @@
    		<result property="carRemark" column="carRemark" javaType="java.lang.String"></result>
    		<result property="remark" column="remark" javaType="java.lang.String"></result>
    		<result property="expectDate" column="expectDate" javaType="java.lang.String"></result>
-		<result property="repairId" column="repairId" javaType="java.lang.Integer"></result>
+		<result property="repairId" column="repairTypeId" javaType="java.lang.Integer"></result>
      	<result property="sender" column="sender" javaType="java.lang.String"></result>
      	<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
      	<result property="orderStateId" column="orderStateId" javaType="java.lang.Integer"></result>
@@ -68,6 +68,14 @@
 		</foreach>
 	
 	</insert>
+    
+    <select id="getAllOrders"   resultMap="order">
+  		  SELECT * FROM orders where orderStateId = 1 
+    </select>
+    
+	 <select id="getOrderByOrderId"   resultMap="order">
+  		  SELECT * FROM orders where orderStateId = 1 and orderId=#{orderId}
+    </select>
     
     
     <select id="getLastOrder" parameterType="String"  resultMap="orderSender">

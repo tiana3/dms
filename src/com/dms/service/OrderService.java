@@ -23,4 +23,8 @@ public interface OrderService {
 	
 	void updateOrder(Order order);
 	
+	public List<Order> getAllOrders();  //查询所有的在修订单
+	public List<Order> getOrders(String plateNumber, int employeeId, int repairId);      //根据条件查询在修订单
+	public Order getOrderByOrderId(String orderId);
+
 }

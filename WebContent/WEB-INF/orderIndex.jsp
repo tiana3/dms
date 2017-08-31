@@ -199,7 +199,7 @@
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/order.do">新开单</a>
-					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
+					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
 							<option value="0">&nbsp; </option>
@@ -217,7 +217,7 @@
       	  	</div>
 
 			<p><span id="showOrderId" class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
-        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.Date }">
+        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.date }">
 			<input type="hidden" id="hiddenCustomerCarInfoId"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
 			<input type="hidden" id="hiddenOrderId" name="orderId"  value="${order.orderId }">			
 			<table class="table table-border table-bordered table-bg">
@@ -295,7 +295,7 @@
 					<td>
 						<select class="select" name="SA">
 							<c:forEach items="${sa }" var="s">
-								<option value="${s.employeeId }" selected=${order.SA == s.employeeId ? true : false }>${s.employeeName } </option>
+								<option value="${s.employeeId }"  ${order.SA == s.employeeId ?'selected' : '' }>${s.employeeName } </option>
 							</c:forEach>
 						</select>
 
@@ -342,7 +342,7 @@
 								<select name="customs[${num.count - 1 }].employeeId" class="select">
 										<option value="0">&nbsp;&nbsp;</option>
 										<c:forEach items="${Ma_Tec }" var="ma">
-											<option value="${ma.employeeId }" selected="${custom.employeeId == ma.employeeId? selected:false }" >${ma.jobName }-${ma.employeeName }</option>
+											<option value="${ma.employeeId }" ${custom.employeeId == ma.employeeId? "selected":"" } >${ma.jobName }-${ma.employeeName }</option>
 										</c:forEach>
 								</select>
 							</td>

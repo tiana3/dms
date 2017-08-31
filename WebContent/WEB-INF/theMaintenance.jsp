@@ -191,44 +191,43 @@
 	<!--/_menu 作为公共模版分离出去-->
 
 
-	<section class="Hui-article-box"> <nav class="breadcrumb">
+<section class="Hui-article-box"> 
+	<nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	维修业务<span class="c-gray en">&gt;</span> 在修业务 <a
+		维修业务<span class="c-gray en">&gt;</span> 在修业务 <a
 		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
-		href="javascript:location.replace(location.href);" title="刷新"><i
-		class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		href="javascript:location.replace(location.href);" title="刷新">
+		<i class="Hui-iconfont">&#xe68f;</i></a>
+	 </nav>
 	<div class="Hui-article">
-		<div style="margin-top: 30px; margin-left: 100px;">
-			<form action="${pageContext.request.contextPath }/getOrders.do"
-				smethod="get">
-
-				<span class="l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车牌号：&nbsp;
-					<input type="text" name="plateNumber"
-					value="${acrInfo.plateNumber }" style="height: 25px;">
-				</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务顾问： <select class=""
-					name="repairId" style="width: 120px; height: 30px;">
+		<article class="cl pd-20">
+			<form action="${pageContext.request.contextPath }/getOrders.do" method="get">
+				<div class="text-c">
+				维修单号：
+				<input class="input-text" type="text" name="plateNumber" style="width:120px;">&nbsp;&nbsp;&nbsp;
+				车牌号：
+				<input class="input-text" type="text" name="plateNumber" style="width:120px;">&nbsp;&nbsp;&nbsp;
+				服务顾问： 
+				<select class="" name="repairId" style="width: 120px; height: 30px;">
 					<option value="0">全部</option>
 					<c:forEach items="${sa }" var="employee">
 						<option value="${employee.employeeId }">${employee.employeeName }</option>
 					</c:forEach>
-
-				</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;维修类型： <select class="select"
-					name="employeeId" style="width: 120px; height: 30px;">
+				</select>&nbsp;&nbsp;&nbsp;
+				维修类型：
+				<select class="select" name="employeeId" style="width: 120px; height: 30px;">
 					<option value="0">全部</option>
 					<c:forEach items="${repairType }" var="type">
 						<option value="${type.repairTypeId }">${type.repairType }</option>
 					</c:forEach>
-				</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-success" type="submit" value="submit">
-					<i class="Hui-iconfont">&#xe665;</i> 搜索
-				</button>
-			</form>
-		</div>
-		<article class="cl pd-20">
+				</select>&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
+				</div>
+		
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 
-			<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条
+			<span class="r">共有数据：<strong>${fn:length(allOrders)}</strong> 条
 			</span>
 		</div>
 		<div class="mt-20">
@@ -246,26 +245,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${order }" var="part" varStatus="varSta">
+					<c:forEach items="${allOrders }" var="order" varStatus="varSta">
 						<tr class="text-c">
 							<td>${varSta.count }</td>
-							<td>${part.orderId }</td>
-							<td>${part.repairId}</td>
-							<td>${part.customerCarInfo }</td>
-							<td>${part.SA }</td>
-							<td></td>
-							<td><button class="btn btn-success" type="submit"
-									value="submit">
-									<i class="Hui-iconfont">&#xe665;</i> 查看
-								</button></td>
+							<td>${order.orderId }</td>
+							<td>${order.customerCarInfo.plateNumber}</td>
+							
+							<c:forEach items="${repairType }" var="type">
+								<c:if test="${type.repairTypeId == order.repairId}">
+									<td>${type.repairType }</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach items="${sa }" var="employee">
+								<c:if test="${employee.employeeId == order.SA}">
+									<td>${employee.employeeName }</td>
+								</c:if>
+							</c:forEach>
+							
+							<td>${order.date }</td>
+							<td>
+							
+							<a href="${pageContext.request.contextPath }/showOrder.do?orderId=${order.orderId}" class="btn btn-secondary  radius">选择</a>
+
+							</td>
 
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-	</div>
-	</article>
+		</form>
+		</article>
+		
+	
 	</div>
 	</section>
 

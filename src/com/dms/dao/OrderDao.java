@@ -31,4 +31,7 @@ public interface OrderDao {
 	
 	List<Custom> getOrderCustomsByOrderId(String orderId);       //根据订单号获取对应的所有自定义维修项目
 	List<Part> getOrderPartsByOrderId(String orderId);           //根据订单号获取对应的所有配件材料
+
+	Order getOrderByOrderId(String orderId);             //根据维修单号查询 维修单
+
 }
