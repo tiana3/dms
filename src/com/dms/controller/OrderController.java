@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dms.dao.impl.PartDaoImpl;
 import com.dms.entity.CarType;
@@ -86,20 +87,22 @@ public class OrderController {
 		List<Employee> Ma_Tec = service.getMa_Tec();
 		List<Employee> inspectors = service.getInspectors();
 		
+		if(carInfo!=null) {
+			model.addAttribute("repairType", repairType);
+			model.addAttribute("carInfo", carInfo);
+			model.addAttribute("sa", sa);
+			model.addAttribute("lastOrder", lastOrder);
+			model.addAttribute("Ma_Tec", Ma_Tec);
+			model.addAttribute("inspectors", inspectors);
+		}				
 		
-		model.addAttribute("repairType", repairType);
-		model.addAttribute("carInfo", carInfo);
-		model.addAttribute("sa", sa);
-		model.addAttribute("lastOrder", lastOrder);
-		model.addAttribute("Ma_Tec", Ma_Tec);
-		model.addAttribute("inspectors", inspectors);
-							
 		return "orderIndex";
 	}
 	
 	// 保存新增维修单
+	@ResponseBody
 	@RequestMapping("orderSave.do")
-	public void orderSave(HttpServletResponse response,Model model, Order order) {
+	public String orderSave(Model model, Order order) {
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
 		Order saveOrder = service.saveOrder(order);
@@ -107,11 +110,28 @@ public class OrderController {
 		String orderId = saveOrder.getOrderId();
 		String date = saveOrder.getDate();
 		
-		try {
-			response.getWriter().print("{\"date\":\""+ date +"\",\"orderId\":\""+ orderId +"\"}");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return "{\"date\":\""+ date +"\",\"orderId\":\""+ orderId +"\"}";
 	}
+	
+	//作废维修单
+	@ResponseBody
+	@RequestMapping("orderDelete.do")
+	public String orderDelete(HttpServletResponse response,Model model, @RequestParam(value = "orderId") String orderId) throws IOException {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
+		service.deleteOrder(orderId);
+        return "{\"data\":\"成功\"}";
+	}
+	//修改维修单
+	@ResponseBody
+	@RequestMapping("updateOrder.do")
+	public String updateOrder(Model model, Order order) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
+		service.updateOrder(order);
+		
+		
+		return "{\"data\":\"成功\"}";
+	}
+
 }

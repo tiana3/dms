@@ -65,4 +65,22 @@ public class TheMaintenanceDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void deleteOrder(String orderId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCustoms(String orderId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteParts(String orderId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

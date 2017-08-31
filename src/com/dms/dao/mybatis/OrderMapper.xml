@@ -47,5 +47,15 @@
     </select>
     
 
+    <delete id="deleteOrder" parameterType="String">
+    	delete from orders where orderId = #{orderId}
+    </delete>
     
+    <delete id="deleteCustoms" parameterType="String">
+    	delete from custom where orderId = #{orderId}
+    </delete>
+    
+     <delete id="deleteParts" parameterType="String">
+    	delete from order_part where orderId = #{orderId}
+    </delete>  
 </mapper>
