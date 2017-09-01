@@ -39,7 +39,8 @@
 <title>修改工时工位</title>
 </head>
 <body>
-	<div class="page-container">
+<article class="page-container">
+
 		<form action="WorkHourUpdateServlet" method="get"
 			class="form form-horizontal" id="form-update-add">
 
@@ -53,6 +54,16 @@
 						name="workplaceName">
 				</div>
 			</div>
+			<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<select name="modelid" class="">
+					<c:forEach items="${carTypes}" var="carType">
+						<option value="${carType.modelId}" ${carType.modelId == workhour.modelId ? "selected" : ""}>${carType.model}</option>
+					</c:forEach>
+				</select>
+			</div>
+		</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
@@ -78,7 +89,7 @@
 			</div>
 		</form>
 	</div>
-
+</article>
 	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -106,7 +117,26 @@
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 		$("#form-update-add").validate({
+			rules:{
+				workplaceName:{
+					required:true,
+				},
+				modelid:{
+					required:true,
 
+				},
+				workhour:{
+					required:true,
+
+				},
+				workpay:{
+					required:true,
+				},
+				
+			},
+			//onkeyup:false,
+			focusCleanup:true,
+			success:"valid",
 			submitHandler : function(form) {
 				$(form).ajaxSubmit({
 					success : function() {
