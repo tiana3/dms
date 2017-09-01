@@ -27,7 +27,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>965200</value>
+			<value>root</value>
 		</property>
 	</bean>
 	
@@ -59,7 +59,9 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 
-
+	<bean id="partoutDaoImpl" class="com.dms.dao.impl.PartOutDaoImpl">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
 	<bean id="employeeDaoImpl" class="com.dms.dao.impl.EmployeeDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
@@ -83,6 +85,9 @@
 	<bean id="theMaintenanceServiceImpl" class="com.dms.service.impl.TheMaintenanceServiceImpl">
 		<property name="ordersDao" ref="theMiantenanceDao"></property>
 		<property name="repairTypeDao" ref="repairTypeDaoimpl"></property>
+	</bean>
+	<bean id="partoutServiceDao" class="com.dms.service.impl.partoutserviceDao">
+		<property name="partoutdao" ref="partoutDaoImpl"></property>
 	</bean>
 
 	<bean id="orderServiceImpl" class="com.dms.service.impl.OrderServiceImpl">
