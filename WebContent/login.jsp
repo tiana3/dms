@@ -18,37 +18,30 @@
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
-<title>后台登录 - H-ui.admin.page v3.0</title>
-<meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-<meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+<title>系统登录</title>
 </head>
 <body>
-<video autoplay loop id="bgvid" src="video/spsu.mp4">
+<video autoplay muted controls="controls" loop id="bgvid" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto;  z-index: -100;" src="video/carmvp.mp4">
  </video>
-<input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="header"></div>
 <div class="loginWraper" style="height: auto">
-	<div id="loginform" class="loginBox" style="height:500px;margin-top: 10%">
-		<form class="form form-horizontal" action="index.html" method="post" style="margin-left: 20%;margin-top: 15%;">
+	<div id="loginform" class="loginBox" >
+
+		<img alt="车标" src="image/das.jpg" style="width: 12%; margin-bottom:5%; margin-top:2%; margin-left:2%"><span><font size="20" >售后维修系统</font></span>
+		<form id="login" class="form form-horizontal" action="${pageContext.request.contextPath }/login.do" method="post" style="margin-left: 20%;">
 			<div class="row cl">
-				<label class="form-label col-xs-3" style="color: #0000ff"><i class="Hui-iconfont">&#xe60d;</i></label>
+				<label class="form-label col-xs-3" style="color: #0000ff"></label>
 				<div class="formControls col-xs-8">
-					<input id="" name="" type="text" placeholder="账户" class="input-text" style="width: 40%;border-radius: 3px">
+					<input id="" name="user" type="text" placeholder="账户" class="input-text" style="width: 40%;border-radius: 3px">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-3"><i class="Hui-iconfont" style="color: #ffff00">&#xe60e;</i></label>
+				<label class="form-label col-xs-3"></label>
 				<div class="formControls col-xs-8">
-					<input id="" name="" type="password" placeholder="密码" class="input-text" style="width: 40%;border-radius: 3px">
+					<input id="" name="password" type="password" placeholder="密码" class="input-text" style="width: 40%;border-radius: 3px">
 				</div>
 			</div>
-			<div class="row cl">
-				<div class="formControls col-xs-8 col-xs-offset-3">
-					<input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-					<img src="images/VerifyCode.aspx.png">
-					<a id="kanbuq" href="javascript:;">看不清，换一张</a>
-				</div>
-			</div>
+	
 
 			<div class="row cl">
 				<div class="formControls col-xs-8 col-xs-offset-3">
@@ -59,19 +52,76 @@
 			</div>
 		</form>
 	</div>
+<div class="footer" style="margin-top: 15%;">Copyright 你的公司名称 by dms</div>
 </div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin.page.v3.0</div>
 
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>   
+<script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script> 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+
+$("#login").validate({
+	rules:{
+		user:{
+			required:true,
+		},
+		password:{
+			required:true,
+		},
+	 },
+		
+     messages:{
+    	 user:{
+             required:"账户未填",
+         },
+         password:{
+             required:"密码未填 ",
+         },
+	},
+	//这是自定义错误信息的显示 ，  error是错误信息对象，element是当前验证的对象
+	errorPlacement : function(error, element) { 
+		//给element增加一个属性，是在文本里有提示信息
+		$(element).attr("placeholder",error.html());
+	}, 
+	
+	onkeyup:false,
+	focusCleanup:true,
+	
+	onfocusout:false,
+	success:"valid",
+	
+	submitHandler:function(form){
+
+		$(form).ajaxSubmit({
+			success: function(data) { 
+				var json = JSON.parse(data);
+				var msg = json.valid;
+				if("0"==msg) {
+					layer.msg("账户或密码错误",{icon:2,time:1500});
+				}else if("1"==msg){
+	                var url = json.url;
+					location.replace(url);
+				}
+			}
+		
+		})
+		
+	} 
+});
+
+
+
+
 </script>
 </body>
 </html>
