@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,49 +24,55 @@ public class WorkHourDaoImpl implements WorkHourDao{
 	
 	@Override
 	public List<WorkHour> getWorkHour() {
-		List<WorkHour> list = new ArrayList<WorkHour>();
-		String sql = "select * from workplace";
-		try {
-			con = JdbcUtil.getConnection();
-			pre = con.prepareStatement(sql);
-			res = pre.executeQuery();
-			while(res.next()) {
-				int workplaceId = res.getInt(1);
-				String workplaceName = res.getString(2);
-				double workhour = res.getDouble(3);
-				double workpay = res.getDouble(4);
-				list.add(new WorkHour(workplaceId, workplaceName, workhour, workpay));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			JdbcUtil.close(con, pre, res);
-		}
-		return list;
+		return null;
 	}
 	
 	@Override
-	public List<WorkHour> getWorkHour(String workplaceName) {
+	public List<WorkHour> getWorkHour(WorkHour workhour) {
 		List<WorkHour> list = new ArrayList<WorkHour>();
-		String sql = "SELECT * FROM workplace WHERE workplaceName LIKE concat('%',?,'%')";
+		String sql = null;
+		if(workhour.getModelId() == 0) {
+			sql="select workplace.workplaceId, workplace.workplaceName,workplace.workhour,"
+					+ "workplace.workpay,cartype.modelId from "
+					+ "workplace left join cartype on workplace.modelId=cartype.modelId "
+					+ "where 1=1 and workplace.workplaceName like concat('%',?,'%')";
+		}else {
+			sql="select workplace.workplaceId, workplace.workplaceName,workplace.workhour,"
+					+ "workplace.workpay,cartype.modelId from "
+					+ "workplace left join cartype on workplace.modelId=cartype.modelId where 1=1 "
+					+ "and workplace.workplaceName like concat('%',?,'%') and workplace.modelId=?";
+		}
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql);
-			pre.setString(1, workplaceName);
+			pre.setString(1, workhour.getWorkplaceName());
+			if(workhour.getModelId() !=0) {
+				pre.setInt(2, workhour.getModelId());
+			}
 			res = pre.executeQuery();
 			while(res.next()) {
-				int workplaceId = res.getInt(1);
-				String workplacename = res.getString(2);
-				double workhour = res.getDouble(3);
-				double workpay = res.getDouble(4);
-				list.add(new WorkHour(workplaceId, workplacename, workhour, workpay));
+				WorkHour workHour = new WorkHour();
+				workHour.setWorkplaceId(res.getInt(1));
+				workHour.setWorkplaceName(res.getString(2));
+				workHour.setWorkhour(res.getDouble(3));
+				workHour.setWorkpay(res.getDouble(4));
+				workHour.setModelId(res.getInt(5));
+
+				list.add(workHour);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			JdbcUtil.close(con, pre, res);
+			if(res != null) {
+			try {
+				res.close();
+				JdbcUtil.close(con, pre, res);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
 		}
 		return list;
 		
@@ -73,21 +80,31 @@ public class WorkHourDaoImpl implements WorkHourDao{
 
 	@Override
 	public Integer addWorkHour(WorkHour workhour) {
-		String sql = "insert into workplace (workplaceName,workhour,workpay) value(?,?,?)";
+		String sql = "insert into workplace (workplaceName,workhour,workpay,modelId) value(?,?,?,?)";
 		
 		try {
 			con = JdbcUtil.getConnection();
-			pre = con.prepareStatement(sql);
+			pre = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			
 			pre.setString(1, workhour.getWorkplaceName());
 			pre.setDouble(2, workhour.getWorkhour());
 			pre.setDouble(3, workhour.getWorkpay());
+			pre.setInt(4, workhour.getModelId());
 			pre.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			JdbcUtil.close(con,pre,null);
+			if(pre != null){
+				try {
+					pre.cancel();
+					JdbcUtil.close(con,pre,null);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		return null;
 	}
@@ -110,14 +127,16 @@ public class WorkHourDaoImpl implements WorkHourDao{
 
 	@Override
 	public void updateWorkHour(WorkHour workhour) {
-		String sql = "UPDATE workplace SET workplaceName=?, workhour=?, workpay=? WHERE workplaceId=?";
+		String sql = "UPDATE workplace inner join cartype on workplace.modelId = cartype.modelId SET "
+				+ "workplace.workplaceName=?, workplace.workhour=?, workplace.workpay=?,workplace.modelId=? WHERE workplaceId=?";
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql);
 			pre.setString(1, workhour.getWorkplaceName());
 			pre.setDouble(2, workhour.getWorkhour());
 			pre.setDouble(3, workhour.getWorkpay());
-			pre.setInt(4, workhour.getWorkplaceId());
+			pre.setInt(4, workhour.getModelId());
+			pre.setInt(5, workhour.getWorkplaceId());
 			pre.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -151,4 +170,5 @@ public class WorkHourDaoImpl implements WorkHourDao{
 		}
 		return null;
 	}
+	
 }

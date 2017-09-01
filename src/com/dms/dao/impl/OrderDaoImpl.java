@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.dao.OrderDao;
 import com.dms.entity.Custom;
+import com.dms.entity.CustomerCarInfo;
+import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 
@@ -30,14 +32,9 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<Order> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Order> getOrders(int customerCarInfoId, int employeeId, int repairId) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderDao maper = (OrderDao) sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> orders = maper.getAllOrders();
+		return orders;
 	}
 	
 	/**
@@ -102,6 +99,38 @@ public class OrderDaoImpl implements OrderDao {
 	public void deleteParts(String orderId) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.deleteParts(orderId);		
+	}
+
+	@Override
+	public List<Custom> getOrderCustomsByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		return mapper.getOrderCustomsByOrderId(orderId);
+	}
+
+	@Override
+	public List<Part> getOrderPartsByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		return mapper.getOrderPartsByOrderId(orderId);
+	}
+
+	@Override
+	public List<Employee> getSA() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Order> getOrders(String orderId, String plateNumber, int employeeId, int repairId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> orders = mapper.getOrders(orderId, plateNumber, repairId, employeeId);
+		
+		return orders;
+	}
+
+	@Override
+	public Order getOrderByOrderId(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);		
+		return mapper.getOrderByOrderId(orderId);
 	}
 
 }

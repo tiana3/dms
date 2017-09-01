@@ -147,4 +147,21 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.updateOrder(order);
 	}
 
+	@Override
+	public List<Order> getAllOrders() {
+		return orderDao.getAllOrders();
+	}
+
+	@Override
+	public List<Order> getOrders(String orderId, String plateNumber, int employeeId, int repairId) {
+		
+		return orderDao.getOrders(orderId, plateNumber, employeeId, repairId);
+	}
+
+	@Override
+	public Order getOrderByOrderId(String orderId) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrderByOrderId(orderId);
+	}
+
 }

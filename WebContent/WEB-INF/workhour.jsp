@@ -191,57 +191,74 @@
 	<!--/_menu 作为公共模版分离出去-->
 
 
-	<section class="Hui-article-box"> <nav class="breadcrumb">
+<section class="Hui-article-box">
+	<nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 
-	<span class="c-gray en">&gt;</span>基本信息管理
-	<span class="c-gray en">&gt;</span>工时工位管理 
+		<span class="c-gray en">&gt;</span>基本信息管理
+		<span class="c-gray en">&gt;</span>工时工位管理 
 	
-	<a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px"
-		href="javascript:location.replace(location.href);" title="刷新"><i
-		class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		<a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新">
+			<i class="Hui-iconfont">&#xe68f;</i>
+		</a> 
+	</nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
-			<div style="width: 160px; float: left;">
-				<span> <a class="btn btn-primary radius"
+		<form action="WorkHourListServlet" method="get">
+			<div class="text-c">
+			工位名：&nbsp;&nbsp;
+				<input class="input-text" type="text" name="workplaceName" style="width:120px;">&nbsp;&nbsp;&nbsp;
+			适用车型：             
+				<select name="modelid" class="input-text" style="width:120px ;">
+					<option value="0" >全部</option>
+					<c:forEach items="${carTypes }" var="carType">
+						<option value="${carType.modelId }" >${carType.model }</option>
+					</c:forEach>
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+					<button class="btn btn-success" type="submit" value="submit">
+						<i class="Hui-iconfont">&#xe665;</i> 搜索
+					</button>
+			</div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<a class="btn btn-primary radius"
 					onclick="workhour_edit('添加工时工位','WorkHourServlet?act=add')"
 					href="javascript:;"> <i class="Hui-iconfont">&#xe600;</i>
 						添加工时工位
 				</a>
-				</span>
+				<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条</span>
 			</div>
-			<form action="WorkHourListServlet" method="get">
-				<span class="l">工位名：&nbsp;<input type="text"
-					name="workplaceName" style="height: 25px;">
-					<button class="btn btn-success" type="submit" value="submit">
-						<i class="Hui-iconfont">&#xe665;</i> 搜索
-					</button>
-				</span>
-			</form>
-			<span class="r">共有数据：<strong>${fn:length(work)}</strong> 条
-			</span>
-		</div>
-		<div class="mt-10">
+				
+		<div class="mt-20">
 			<table
 				class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr class="text-c">
 						<th width="60">序列号</th>
 						<th>工位名</th>
+						<th>车型</th>
 						<th width="17%">工时(单位：小时)</th>
 						<th width="17%">工时费(单位：元)</th>
 						<th width="100">操作</th>
 					</tr>
 				</thead>
+				<tbody>
 				<c:forEach items="${work }" var="workhour" varStatus="varSta">
-					<tbody>
-
+					
 						<tr class="text-c">
 							<td>${varSta.count }</td>
 							<td>${workhour.workplaceName }</td>
+							<td>
+							<c:forEach items="${carTypes }" var="carType">
+								<c:if test="${carType.modelId == workhour.modelId}">
+									${carType.model }
+								</c:if>
+							</c:forEach>
+							</td>
 							<td>${workhour.workhour }</td>
 							<td>${workhour.workpay }</td>
-							<td><a title="编辑" href="javascript:;" class="ml-5"
+							<td  class="f-14 td-manage">
+							<a title="编辑" href="javascript:;" class="ml-5"
 								onClick="workhour_edit('工时工位','WorkHourServlet?act=update&workplaceId=${workhour.workplaceId }&workplaceName=${workhour.workplaceName }&workhour=${workhour.workhour }&workpay=${workhour.workpay }','${workhour.workplaceId }')"
 								style="text-decoration: none"> <i class="Hui-iconfont">&#xe6df;</i></a>
 								<a title="删除" href="javascript:;"
@@ -249,15 +266,16 @@
 								class="ml-5" style="text-decoration: none"> <i
 									class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>
-
+						</c:forEach>
 					</tbody>
-				</c:forEach>
+				
 			</table>
 		</div>
-		<div id="pageNav" class="pageNav"></div>
+
+					</form>
 		</article>
 	</div>
-	</section>
+</section>
 
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>

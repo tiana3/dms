@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.dms.dao.WorkHourDao;
 import com.dms.dao.impl.PartDaoImpl;
 import com.dms.dao.impl.WorkHourDaoImpl;
+import com.dms.entity.CarType;
 import com.dms.entity.Part;
 import com.dms.entity.WorkHour;
+import com.dms.service.CarTypeService;
 import com.dms.service.WorkHourService;
+import com.dms.service.impl.CarTypeServiceImpl;
 
 
 
@@ -31,6 +34,10 @@ public class WorkHourServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		
+		CarTypeService service = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service.getAllCarType();
+		request.setAttribute("carTypes", carTypeList);
 		
 		String act = request.getParameter("act");
 		if (act == null) {

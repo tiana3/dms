@@ -199,7 +199,7 @@
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
 				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/order.do">新开单</a>
-					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
+					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
 							<option value="0">&nbsp; </option>
@@ -216,8 +216,8 @@
 	            </span>
       	  	</div>
 
-			<p><span id="showOrderId" class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
-        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.Date }">
+			<p><span id="showOrderId" class="l">维修单号:${order.orderId }</span><span id="time1" class="r" style="margin-right: 120px">开单时间:${order.date }</span></p>
+        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.date }">
 			<input type="hidden" id="hiddenCustomerCarInfoId"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
 			<input type="hidden" id="hiddenOrderId" name="orderId"  value="${order.orderId }">			
 			<table class="table table-border table-bordered table-bg">
@@ -244,7 +244,7 @@
 						<td>
 							<select class="select" name="repairId">
 							<c:forEach items="${repairType }" var="type">
-								<option value="${type.repairTypeId }" selected="${type.repairTypeId==order.repairId? selected:false }">${type.repairType } </option>
+								<option value="${type.repairTypeId }" ${type.repairTypeId==order.repairId? 'selected':'' }>${type.repairType } </option>
 							</c:forEach>
 							</select>
 						</td>
@@ -295,7 +295,7 @@
 					<td>
 						<select class="select" name="SA">
 							<c:forEach items="${sa }" var="s">
-								<option value="${s.employeeId }" selected="${order.SA == s.employeeId ? selected:false }">${s.employeeName } </option>
+								<option value="${s.employeeId }"  ${order.SA == s.employeeId ?'selected' : '' }>${s.employeeName } </option>
 							</c:forEach>
 						</select>
 
@@ -337,12 +337,12 @@
 					<c:forEach items="${order.customs }" var="custom" varStatus="num">
 						<tr>
 							<td><input value="${custom.customName }"  name="customs[${num.count - 1 }].customName" type="text" class="input-text"></td>
-							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="digits input-text"></td>
+							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="number min input-text"></td>
 							<td>
 								<select name="customs[${num.count - 1 }].employeeId" class="select">
 										<option value="0">&nbsp;&nbsp;</option>
 										<c:forEach items="${Ma_Tec }" var="ma">
-											<option value="${ma.employeeId }" selected="${custom.employeeId == ma.employeeId? selected:false }" >${ma.jobName }-${ma.employeeName }</option>
+											<option value="${ma.employeeId }" ${custom.employeeId == ma.employeeId? "selected":"" } >${ma.jobName }-${ma.employeeName }</option>
 										</c:forEach>
 								</select>
 							</td>
@@ -444,7 +444,8 @@ function save() {
 				},
 				mileage:{
 					required:true,
-					digits:true
+					number:true,
+					min:0,
 				},
 				sender:{
 					required:true,
@@ -466,7 +467,8 @@ function save() {
                  },
                  mileage:{
  					required:"里程必填且为数字 ",
- 					digits:"里程必须为数字 ",
+ 					number:"里程必须为数字 ",
+ 					min:"里程不能小于0",
                  },
  				sender:{
  					required:"送修人必填 ",
@@ -564,7 +566,7 @@ function save() {
 		forEach.setAttribute("var", "ma");
 		var option = document.createElement("option");
 		option.setAttribute("value", "${ma.employeeId}"); */
-		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='digits input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
+		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='number min input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
 	}
 	
 	function workplace_delete() {

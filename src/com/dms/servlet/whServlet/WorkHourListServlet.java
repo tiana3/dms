@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dms.dao.WorkHourDao;
-import com.dms.dao.impl.WorkHourDaoImpl;
+import com.dms.entity.CarType;
 import com.dms.entity.WorkHour;
+import com.dms.service.CarTypeService;
+import com.dms.service.impl.CarTypeServiceImpl;
 import com.dms.service.impl.WorkHourService;
 
 /**
@@ -29,15 +31,26 @@ public class WorkHourListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		
+		
+		CarTypeService service = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service.getAllCarType();
+		request.setAttribute("carTypes", carTypeList);
+		
+		String workplaceName = request.getParameter("workplaceName");
+		String modelid = request.getParameter("modelid");
+		Integer modelId = 0;
+		if(modelid!=null) {
+			modelId= Integer.parseInt(modelid);
+		}
+		WorkHour work =  new WorkHour();
+		work.setWorkplaceName(workplaceName);
+		work.setModelId(modelId);
+		WorkHourDao dao1 = new WorkHourService();
+		List<WorkHour> list = dao1.getWorkHour(work);
+		request.setAttribute("work", list);
 
-
-			String str = request.getParameter("workplaceName");
-			
-			WorkHourDao dao1 = new WorkHourService();
-			List<WorkHour> list = dao1.getWorkHour(str);
-			
-			request.setAttribute("work", list);
-			request.getRequestDispatcher("/WEB-INF/workhour.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/workhour.jsp").forward(request, response);
 
 	}
 
