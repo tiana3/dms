@@ -14,8 +14,8 @@ public class WorkHourService implements WorkHourDao{
 	}
 
 	@Override
-	public List<WorkHour> getWorkHour(String workplaceName) {
-		return work.getWorkHour(workplaceName);
+	public List<WorkHour> getWorkHour(WorkHour workhour) {
+		return work.getWorkHour(workhour);
 	}
 
 	@Override
@@ -39,4 +39,5 @@ public class WorkHourService implements WorkHourDao{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
-<html>
+<html>	
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -39,29 +39,39 @@
 <title>增加工时工位</title>
 </head>
 <body>
-	<div class="page-container">
-		<form action="WorkHourAddServlet" method="get"
+<article class="page-container">
+	<form action="WorkHourAddServlet" method="post"
 			class="form form-horizontal" id="form-workhour-add">
-			<div class="row cl">
+		<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工位名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text"
-						value="${workhour.workplaceName }" placeholder="" id=""
+						value="${workhour.workplaceName }" id=""
 						name="workplaceName">
 				</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>适用车型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<select name="modelid" class="select">
+					<c:forEach items="${carTypes }" var="carType">
+						<option value="${carType.modelId }" >${carType.model }</option>
+					</c:forEach>
+				</select>
 			</div>
+		</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时(单位：小时)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="${workhour.workhour }"
-						placeholder="" id="" name="workhour">
+						id="" name="workhour">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时费(单位：元)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="${workhour.workpay }"
-						placeholder="" id="" name="workpay">
+						id="" name="workpay">
 				</div>
 			</div>
 			<div class="row cl">
@@ -74,7 +84,7 @@
 				</div>
 			</div>
 		</form>
-	</div>
+</article>
 
 	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
@@ -105,6 +115,9 @@
 		$("#form-workhour-add").validate({
 			rules:{
 				workhourName:{
+					required:true,
+				},
+				modelid:{
 					required:true,
 				},
 				workhour:{

@@ -10,8 +10,15 @@ public class WorkHour {
 	private Double workpay;// 该工位 工时费  实际是 standardHour*workhour
 	private Integer modelId;  //车辆型号的id
 	
-	
-	
+	public WorkHour(Integer workplaceId, String workplaceName, Double workhour, Double workpay, Integer modelId) {
+		super();
+		this.workplaceId = workplaceId;
+		this.workplaceName = workplaceName;
+		this.workhour = workhour;
+		this.workpay = workpay;
+		this.modelId = modelId;
+	}
+
 	public WorkHour() {
 		super();
 	}
