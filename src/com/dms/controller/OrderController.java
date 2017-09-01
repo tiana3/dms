@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -172,9 +173,21 @@ public class OrderController {
 			model.addAttribute("Ma_Tec", Ma_Tec);
 			model.addAttribute("inspectors", inspectors);
 		}	
-		
-		
-		
 		return "orderIndex";
+	}
+	
+	@RequestMapping("getOrders.do")
+	public String getOrders(Model model, @RequestParam(value = "orderId")String orderId, @RequestParam(value = "plateNumber")String plateNumber, @RequestParam(value = "employeeId")int employeeId, @RequestParam(value = "repairId")int repairId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+		List<RepairType> repairTypes = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		List<Order> allOrders = service.getOrders(orderId, plateNumber, employeeId, repairId);
+		
+		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("repairType", repairTypes);
+		model.addAttribute("sa", sa);
+		
+		return "theMaintenance";
 	}
 }

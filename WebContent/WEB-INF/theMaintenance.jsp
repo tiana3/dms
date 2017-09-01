@@ -77,11 +77,11 @@
 
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe616;</i> 维修业务<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
@@ -161,11 +161,11 @@
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 
 
@@ -194,8 +194,8 @@
 <section class="Hui-article-box"> 
 	<nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		维修业务<span class="c-gray en">&gt;</span> 在修业务 <a
-		class="btn btn-success radius r"
+		维修业务<span class="c-gray en">&gt;
+		</span> 在修业务 <a class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新">
 		<i class="Hui-iconfont">&#xe68f;</i></a>
@@ -205,7 +205,7 @@
 			<form action="${pageContext.request.contextPath }/getOrders.do" method="get">
 				<div class="text-c">
 				维修单号：
-				<input class="input-text" type="text" name="plateNumber" style="width:120px;">&nbsp;&nbsp;&nbsp;
+				<input class="input-text" type="text" name="orderId" style="width:120px;">&nbsp;&nbsp;&nbsp;
 				车牌号：
 				<input class="input-text" type="text" name="plateNumber" style="width:120px;">&nbsp;&nbsp;&nbsp;
 				服务顾问： 
@@ -250,18 +250,19 @@
 							<td>${varSta.count }</td>
 							<td>${order.orderId }</td>
 							<td>${order.customerCarInfo.plateNumber}</td>
-							
+							<td>
 							<c:forEach items="${repairType }" var="type">
 								<c:if test="${type.repairTypeId == order.repairId}">
-									<td>${type.repairType }</td>
+									${type.repairType }
 								</c:if>
 							</c:forEach>
-							<c:forEach items="${sa }" var="employee">
+							</td>
+							<td><c:forEach items="${sa }" var="employee">
 								<c:if test="${employee.employeeId == order.SA}">
-									<td>${employee.employeeName }</td>
+									${employee.employeeName }
 								</c:if>
 							</c:forEach>
-							
+							</td>
 							<td>${order.date }</td>
 							<td>
 							

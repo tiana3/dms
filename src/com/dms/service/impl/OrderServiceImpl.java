@@ -153,9 +153,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> getOrders(String plateNumber, int employeeId, int repairId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getOrders(String orderId, String plateNumber, int employeeId, int repairId) {
+		
+		return orderDao.getOrders(orderId, plateNumber, employeeId, repairId);
 	}
 
 	@Override

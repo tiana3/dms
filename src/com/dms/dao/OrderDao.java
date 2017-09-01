@@ -14,7 +14,7 @@ public interface OrderDao {
 	//订单 的 操作
 	List<Order> getAllOrders();   // 查看所有订单
 	//根据客户车辆信息id号，服务顾问id号，维修类型id号   查询获取所有订单
-	List<Order> getOrders(@Param("plateNumber")String plateNumber, @Param("employeeId")int employeeId, @Param("repairId")int repairId);
+	List<Order> getOrders(@Param("orderId")String orderId, @Param("plateNumber")String plateNumber, @Param("employeeId")int employeeId, @Param("repairId")int repairId);
 	
 	void updateOrder(Order order);	
 

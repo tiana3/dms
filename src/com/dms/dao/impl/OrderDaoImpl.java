@@ -120,9 +120,9 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<Order> getOrders(String plateNumber, int employeeId, int repairId) {
+	public List<Order> getOrders(String orderId, String plateNumber, int employeeId, int repairId) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
-		List<Order> orders = mapper.getOrders(plateNumber, repairId, employeeId);
+		List<Order> orders = mapper.getOrders(orderId, plateNumber, repairId, employeeId);
 		
 		return orders;
 	}

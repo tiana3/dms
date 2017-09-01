@@ -73,6 +73,18 @@
   		  SELECT * FROM orders where orderStateId = 1 
     </select>
     
+    <select id="getOrders" resultMap="order">
+    	SELECT * FROM orders inner join customercarinfo on orders.customerCarInfoId=customercarinfo.customerCarInfoId
+		<where>
+			<if test="orderId != null">orderId like "%"#{orderId}"%"</if>
+			<if test="plateNumber != null">and plateNumber like "%"#{plateNumber}"%"</if>
+			<if test="repairId != 0">and repairTypeId = #{repairId}</if>
+			<if test="employeeId != 0">and SA = #{employeeId}</if>
+			and orderStateId = 1
+		</where>
+		
+    </select>
+    
 	 <select id="getOrderByOrderId"   resultMap="order">
   		  SELECT * FROM orders where orderStateId = 1 and orderId=#{orderId}
     </select>
