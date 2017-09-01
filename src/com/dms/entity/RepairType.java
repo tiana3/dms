@@ -24,4 +24,9 @@ public class RepairType {
 		this.repairType = repairType;
 	}
 	
+	@Override
+	public String toString() {
+		return "RepairType [repairTypeId=" + repairTypeId + ", repairType=" + repairType + "]";
+	}
+	
 }

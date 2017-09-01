@@ -16,14 +16,14 @@ public class OrderIdBuildDaoImpl implements OrderIdBuildDao {
 	}
 	
 	@Override
-	public Integer getCurrentNum() {
+	public String getCurrentNum() {                          
 		OrderIdBuildDao mapper = sqlSessionTemplate.getMapper(OrderIdBuildDao.class);
-		Integer currentNum = mapper.getCurrentNum();
+		String currentNum = mapper.getCurrentNum();
 		return currentNum;
 	}
 
 	@Override
-	public void updateNum(Integer num) {
+	public void updateNum(String num) {
 		OrderIdBuildDao mapper = sqlSessionTemplate.getMapper(OrderIdBuildDao.class);
 		mapper.updateNum(num);
 	}

@@ -10,6 +10,34 @@
         <result property="sender" column="sender" javaType="java.lang.String"></result>
   		<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
    </resultMap>
+   
+   <resultMap id="order" type="Order">
+<!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
+       	<id property="orderId" column="orderId" javaType="java.lang.String"></id>
+        <result property="SA" column="SA" javaType="java.lang.Integer"></result>
+  		<result property="Date" column="Date" javaType="java.lang.String"></result>
+   		<result property="mileage" column="mileage" javaType="java.lang.Double"></result>
+   		<result property="carRemark" column="carRemark" javaType="java.lang.String"></result>
+   		<result property="remark" column="remark" javaType="java.lang.String"></result>
+   		<result property="expectDate" column="expectDate" javaType="java.lang.String"></result>
+		<result property="repairId" column="repairTypeId" javaType="java.lang.Integer"></result>
+     	<result property="sender" column="sender" javaType="java.lang.String"></result>
+     	<result property="senderPhone" column="senderPhone" javaType="java.lang.String"></result>
+     	<result property="orderStateId" column="orderStateId" javaType="java.lang.Integer"></result>
+     	<result property="inspector" column="inspector" javaType="java.lang.Integer"></result>
+     	<result property="completedDate" column="completedDate" javaType="java.util.Date"></result>
+     	<result property="workPrice" column="workPrice" javaType="java.lang.Double"></result>
+     	<result property="partPrice" column="partPrice" javaType="java.lang.Double"></result>
+     	<result property="discountPrice" column="discountPrice" javaType="java.lang.Double"></result>
+  		
+  		<!-- 根据数据库 column="customerCarInfoId"的值  去com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById 查询详细的车辆信息            javaType="CustomerCarInfo"是指实体类的属性是什么类型的 -->
+  		<association property="customerCarInfo" column="customerCarInfoId"  javaType="CustomerCarInfo" select="com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById"></association>
+  		
+  		<collection property="customs" column="orderId" select="getOrderCustomsByOrderId"></collection>
+ 		<collection property="parts" column="orderId" select="getOrderPartsByOrderId"></collection>
+  
+  
+   </resultMap>
     
 
     
@@ -22,12 +50,67 @@
 <!--#{}中的内容，为占位符，当参数为某个JavaBean时，表示放置该Bean对象的属性值  -->
 
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
-
+	<insert id="addOrder" >
+		insert into orders values(#{orderId},#{customerCarInfo.customerCarInfoId},#{SA},#{Date},#{mileage},#{carRemark},#{remark},#{expectDate},#{repairId},#{sender},#{senderPhone},1,0,0,0,0,#{inspector},null)
+	</insert>
+   	
+   	<insert id="addCustoms" >
+		insert into custom(orderId,customName,customPrice,employeeId) values
+		<foreach collection="customs" item="custom" separator=",">
+			(#{orderId}, #{custom.customName}, #{custom.customPrice}, #{custom.employeeId})
+		</foreach>
+	</insert>
+	
+	<insert id="addParts" >
+		insert into order_part(orderId,partId,picker)  values
+		<foreach collection="parts" item="part" separator=",">
+			(#{orderId}, #{part.partId},#{part.picker.employeeId})
+		</foreach>
+	
+	</insert>
     
-    <select id="getLastOrder" parameterType="String" resultMap="orderSender">
+    <select id="getAllOrders"   resultMap="order">
+  		  SELECT * FROM orders where orderStateId = 1 
+    </select>
+    
+    <select id="getOrders" resultMap="order">
+    	SELECT * FROM orders inner join customercarinfo on orders.customerCarInfoId=customercarinfo.customerCarInfoId
+		<where>
+			<if test="orderId != null">orderId like "%"#{orderId}"%"</if>
+			<if test="plateNumber != null">and plateNumber like "%"#{plateNumber}"%"</if>
+			<if test="repairId != 0">and repairTypeId = #{repairId}</if>
+			<if test="employeeId != 0">and SA = #{employeeId}</if>
+			and orderStateId = 1
+		</where>
+		
+    </select>
+    
+	 <select id="getOrderByOrderId"   resultMap="order">
+  		  SELECT * FROM orders where orderStateId = 1 and orderId=#{orderId}
+    </select>
+    
+    
+    <select id="getLastOrder" parameterType="String"  resultMap="orderSender">
      SELECT sender,senderPhone FROM orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId where plateNumber=#{plateNumber} or VIN=#{VIN} ORDER BY orderId DESC LIMIT 0,1
     </select>
     
-
+    <select id="getOrderCustomsByOrderId" parameterType="String" resultType="Custom">
+     	select * from custom where orderId = #{orderId}
+    </select>
     
+    <select id="getOrderPartsByOrderId" parameterType="String"  resultType="Part">
+		select * from order_part inner join part on order_part.partId = part.partId inner join cartype on part.modelId = cartype.modelId where orderId = #{orderId}
+    </select>
+    
+    <delete id="deleteOrder" parameterType="String">
+    	delete from orders where orderId = #{orderId}
+    </delete>
+    
+    <delete id="deleteCustoms" parameterType="String">
+    	delete from custom where orderId = #{orderId}
+    </delete>
+    
+     <delete id="deleteParts" parameterType="String">
+    	delete from order_part where orderId = #{orderId}
+    </delete>  
 </mapper>

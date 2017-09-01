@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace="com.mydomain.UserMapper" 对应接口,就把这xml配置文件和对应接口联系上了-->
-<mapper namespace="com.dms.dao.OrdersDao">
+<mapper namespace="com.dms.dao.OrderDao">
+
 <!-- 自定义返回结果集 -->
 <!-- id="userBean" 是id用于下面返回值用    type="UserBean" 是对应的实体类   -->
+
    <resultMap id="order" type="Order">
+
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
-        <id property="orderId" column="orderId" javaType="java.lang.Integer"></id>
-        <result property="plateNumber" column="plateNumber" javaType="java.lang.String"></result>
-        <result property="repairId" column="repairType" javaType="java.lang.Integer"></result>
-        <result property="employeeName" column="name" javaType="java.lang.String"></result>
-        <result property="Date" column="Date" javaType="java.lang.Integer"></result>
+        <id property="orderId" column="orderId" javaType="java.lang.String"/> 
+        <result property="repairId" column="repairTypeId" javaType="java.lang.String"/>
+        <result property="SA" column="SA" javaType="java.lang.String"/>
+      <!-- <result property="Date" column="Date" javaType="java.lang.String"/>  --> 
+        <association property="customerCarInfo" column="customerCarInfoId" javaType="CustomerCarInfo" 
+	    select="com.dms.dao.mybatis.CustomerCarInfoMapper.getCustomerCarInfoById"/>
     </resultMap>
-    
+
 
     
     
@@ -27,12 +31,16 @@
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 
     
-    <select id="getAllOrders" parameterType="Order" resultMap="order">
-     	select orders.orderId, customercarinfo.plateNumber, repairtype.repairType, orders.Date, employee.name from 
-		orders inner join customercarinfo on orders.customerCarInfoId=customercarinfo.customerCarInfoId 
-		inner join repairtype on orders.repairTypeId=repairtype.repairTypeId  
-		inner join employee on orders.SA=employee.employeeId
+    <select id="getOrders" resultMap="order">
+	    select orders.orderId, customercarinfo.plateNumber, repairtype.repairType, orders.Date, employee.name from 
+		orders inner join customercarinfo on orders.customerCarInfoId=customercarinfo.customerCarInfoId
+		inner join repairtype on orders.repairTypeId=repairtype.repairTypeId
+		inner join employee on orders.SA=employee.employeeId 
+		<where>
+			<if test="plateNumber != null">plateNumber like "%"#{plateNumber}"%"</if>
+			<if test="repairId != 0">and repairType = #{repairId}</if>
+			<if test="employeeId != 0">and name = #{employeeId}</if>
+		</where>
     </select>
-    
 
 </mapper>

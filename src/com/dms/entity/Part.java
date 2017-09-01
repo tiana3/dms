@@ -1,6 +1,7 @@
 package com.dms.entity;
 
 public class Part {
+	private Integer Id;         //这是在order_part中间表里的 主键Id
 	private int partId;
 	private String partName;
 	private String partNo;
@@ -8,12 +9,19 @@ public class Part {
 	private double sellingPrice;
 	private int modelId;
 	private String model;
-	private Employee picker;          //维护一个领料人，用于存储订单中材料的领料人
+	private Integer picker;          //维护一个领料人Id，用于存储订单中材料的领料人
 	
-	public Employee getPicker() {
+	
+	public Integer getId() {
+		return Id;
+	}
+	public void setId(Integer id) {
+		Id = id;
+	}
+	public Integer getPicker() {
 		return picker;
 	}
-	public void setPicker(Employee picker) {
+	public void setPicker(Integer picker) {
 		this.picker = picker;
 	}
 	@Override

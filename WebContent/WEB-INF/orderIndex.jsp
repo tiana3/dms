@@ -193,12 +193,13 @@
 	 </nav> 
       <div class="Hui-article">
       	<article class="cl pd-20">    
+			<span id="error" style="color: red;"></span>
 			<form id="form-order-save" action="${pageContext.request.contextPath }/orderInfo.do" method="post">
-	
 	
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
-					<a href="javascript:;" onclick="TheMaintenanceServlet" class="btn btn-primary radius">在修业务</a>
+				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/order.do">新开单</a>
+					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
 							<option value="0">&nbsp; </option>
@@ -207,25 +208,25 @@
 							</c:forEach>
 						</select>
 				</span>
-	            <span class="r">                                    
+	            <span class="r">  
+   					<a class="btn btn-danger  radius" onclick="deleteOrder()" href="javascript:;"> <i class="Hui-iconfont">&#xe6e2;</i>作废</a>                                  
 					<button class="btn btn-primary radius" id="saveButton"  type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印维修委托书</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印派工单</a>
 	            </span>
       	  	</div>
-	      
-			<p><span class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
-        
-			<input type="hidden"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
-			<input type="hidden"  name="orderId"  value="${order.orderId }">			
+
+			<p><span id="showOrderId" class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
+        	<input type="hidden" id="hiddenDate" name="Date"  value="${order.date }">
+			<input type="hidden" id="hiddenCustomerCarInfoId"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
+			<input type="hidden" id="hiddenOrderId" name="orderId"  value="${order.orderId }">			
 			<table class="table table-border table-bordered table-bg">
 				<tbody>
 					<tr>
 						<td>车牌</td>                                                     
 						<td>
-						<input type="text" class="input-text" name="plateNumber"  value="${carInfo.plateNumber }" onkeydown='if(event.keyCode==13) {submit()}'>
+						<input id="plate" type="text" class="input-text" name="plateNumber"  value="${carInfo.plateNumber }" onkeydown='if(event.keyCode==13) {submit()}'>
 						 <!--   <button  class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 查找</button>  -->
-
 						</td>
 						<td>预估完工时间</td>
 						<td>
@@ -237,7 +238,7 @@
 					</tr>
 					<tr>
 						<td>车架号</td>
-						<td><input type="text" class="input-text"  name="VIN"  value="${carInfo.VIN }" onkeydown='if(event.keyCode==13) {submit()}'></td>
+						<td><input id="vin" type="text" class="input-text"  name="VIN"  value="${carInfo.VIN }" onkeydown='if(event.keyCode==13) {submit()}'></td>
 					
 						<td>维修类别</td>
 						<td>
@@ -294,7 +295,7 @@
 					<td>
 						<select class="select" name="SA">
 							<c:forEach items="${sa }" var="s">
-								<option value="${s.employeeId }" selected="${order.SA == s.employeeId ? selected:false }">${s.employeeName } </option>
+								<option value="${s.employeeId }"  ${order.SA == s.employeeId ?'selected' : '' }>${s.employeeName } </option>
 							</c:forEach>
 						</select>
 
@@ -336,12 +337,12 @@
 					<c:forEach items="${order.customs }" var="custom" varStatus="num">
 						<tr>
 							<td><input value="${custom.customName }"  name="customs[${num.count - 1 }].customName" type="text" class="input-text"></td>
-							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="input-text"></td>
+							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="digits input-text"></td>
 							<td>
 								<select name="customs[${num.count - 1 }].employeeId" class="select">
 										<option value="0">&nbsp;&nbsp;</option>
 										<c:forEach items="${Ma_Tec }" var="ma">
-											<option value="${ma.employeeId }" selected="${custom.employeeId == ma.employeeId? selected:false }" >${ma.jobName }-${ma.employeeName }</option>
+											<option value="${ma.employeeId }" ${custom.employeeId == ma.employeeId? "selected":"" } >${ma.jobName }-${ma.employeeName }</option>
 										</c:forEach>
 								</select>
 							</td>
@@ -397,6 +398,7 @@
 	
 	
 	</form>
+
 </article>
 </div>
    
@@ -421,12 +423,13 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
-	setInterval("document.getElementById('time1').innerHTML='当前时间：' + new Date().toLocaleString()",1000); 
+	//setInterval("document.getElementById('time1').innerHTML='当前时间：' + new Date().toLocaleString()",1000); 
 	
 //创建了一个方法，用于下面调用
 function save() {
 	// 关键在此增加了一个return，返回的是一个validate对象，这个对象有一个form方法，返回的是是否通过验证 true false*/
 	return   $("#form-order-save").validate({
+ 
 			
 			rules:{
 				plateNumber:{
@@ -449,7 +452,34 @@ function save() {
 				senderPhone:{
 					required:true,
 				},
+			 },
+				
+             messages:{
+             	plateNumber:{
+                     required:"根据车牌查询车辆信息 ",
+                 },
+                 VIN:{
+                     required:"根据车架号查询车辆信息 ",
+                 },
+                 expectDate:{
+                     required: "预完工时间必须选择 ",
+                 },
+                 mileage:{
+ 					required:"里程必填且为数字 ",
+ 					digits:"里程必须为数字 ",
+                 },
+ 				sender:{
+ 					required:"送修人必填 ",
+ 				},
+ 				senderPhone:{
+ 					required:"送修人电话必填 ",
+ 				},
 			},
+			//这是自定义错误信息的显示 ，  error是错误信息对象，element是当前验证的对象
+			errorPlacement : function(error, element) { 
+				//给element增加一个属性，是在文本里有提示信息
+				$(element).attr("placeholder",error.html());
+			}, 
 			//onkeyup:false,
 /* 			focusCleanup:true,
 			success:"valid",
@@ -475,19 +505,44 @@ function save() {
 	//创建点击事件，当点击时会先调用sava()方法， 然后返回一个对象，调用form()方法
 	$("#saveButton").click(function(){
 		 if(save().form()) {
-			//通过表单验证，以下编写自己的代码
-			 var length = document.getElementById("part").children.length;
-			   for (i = 0; i < length; i++) {
-				   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
-			   }
-			   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
-			  
-			   $("#form-order-save").ajaxSubmit({
-					success: function(data) { 
-					
-	
-					}
-				})
+			
+			 if($("#hiddenOrderId").val()==""){
+				 //通过表单验证，以下编写自己的代码
+				 var length = document.getElementById("part").children.length;
+				   for (i = 0; i < length; i++) {
+					   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
+				   }
+				   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
+				  
+				   $("#form-order-save").ajaxSubmit({
+						success: function(data) { 
+							var json = JSON.parse(data);
+							layer.msg("维修单新增成功",{icon:1,time:1000});
+							$("#hiddenOrderId").val(json.orderId);
+							$("#hiddenDate").val(json.date);
+							$("#showOrderId").text("维修单号:"+json.orderId);
+							$("#time1").text("开单时间:"+json.date);
+						}
+					})
+			 } else {
+				 //动态设置配件材料的name属性
+				 var length = document.getElementById("part").children.length;
+				   for (i = 0; i < length; i++) {
+					   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
+				   }
+				   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
+
+				   $("#form-order-save").ajaxSubmit({
+					   url:"${pageContext.request.contextPath }/updateOrder.do",
+					   
+					   
+					  	success: function(data) { 
+					  		
+							var json = JSON.parse(data);
+							layer.msg("已保存",{icon:1,time:1000});
+						}
+				   })
+			 }
 			 
 		 } else {
 		  //校验不通过，什么都不用做，校验信息已经正常显示在表单上
@@ -509,12 +564,16 @@ function save() {
 		forEach.setAttribute("var", "ma");
 		var option = document.createElement("option");
 		option.setAttribute("value", "${ma.employeeId}"); */
-		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
+		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='digits input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
 	}
 	
 	function workplace_delete() {
+		if($("#workhour tr").length != 0) {
 			 $("#workhour tr:last").remove();
 			 layer.msg("删除成功",{icon:1,time:1000});
+		}else{
+			 layer.msg("没有工位",{icon:2,time:1000});
+		}
 	}
 
    function allWork_select(title,url,w,h){
@@ -529,6 +588,40 @@ function save() {
    function add_part(title,url,w,h){
        layer_show(title,url,w,h);
    }
+   
+   
+   
+   function deleteOrder() {
+       var Id = $("#hiddenOrderId").val();
+	   if(Id != "" && Id != null) {
+	       layer.confirm('确认作废维修单吗？',function(index){
+	          var Id = $("#hiddenOrderId").val();
+	    	   
+	    	   $.ajax({
+	               type: 'POST',                            
+	               url: '${pageContext.request.contextPath }/orderDelete.do',
+	               data: {orderId:Id},
+	               //dataType: 'json',
+	               success: function(){
+	                   location.replace("${pageContext.request.contextPath }/order.do");
+	               },
+	               error:function() {
+	                   console.log();
+	               },
+	           });
+	       });
+
+	   }else{
+		   layer.msg("还没有维修单",{icon:2,time:1000});
+	   }
+   }
+   
+   $(document).ready(function(){ 
+	   if($("#hiddenCustomerCarInfoId").val()!="") {
+		   $("#vin").attr("readonly",true);
+		   $("#plate").attr("readonly",true);
+	   }
+   })
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

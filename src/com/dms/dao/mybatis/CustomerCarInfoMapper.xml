@@ -20,10 +20,10 @@
         <result property="gearBox" column="gearBox" javaType="java.lang.String"></result>
         <result property="buyDate" column="buyDate" javaType="java.lang.String"></result>
         <result property="policyDate" column="policy" javaType="java.lang.String"></result>
-
-        <result property="modelid" column="modelid" javaType="java.lang.Integer"></result>
+       
+        <result property="modelid" column="modelId" javaType="java.lang.Integer"></result>
  		<!-- column="modelid"对应的是上面查询数据库 查询出来的modelid  -->
-  		<association property="carType" column="modelid" javaType="CarType" select="getCarTypeByModelId"></association>
+  		<association property="carType" column="modelId" javaType="CarType" select="getCarTypeByModelId"></association>
  
    
     </resultMap>
@@ -48,19 +48,22 @@
      <select id="getCarTypeByModelId" parameterType="Integer" resultType="CarType">
      select cartype.* from cartype where modelId=#{modelid}
     </select>
+     <select id="getCarTypeByModel"  resultType="CarType">
+     select cartype.* from cartype
+    </select>
      
      
      <select id="getCustomerCarInfoByWordKey"  resultMap="customerCarInfo">
-     select * from customercarinfo 
+     select customercarinfo.* from customercarinfo 
      <where>
-				<if test="plateNumber != null">plateNumber like "%"#{plateNumber}"%"</if>				
+				<if test="plateNumber != null"> plateNumber like "%"#{plateNumber}"%"</if>				
 				<if test="VIN != null" >and VIN like "%"#{VIN}"%"</if>
 				<if test="phone != null">and phone like "%"#{phone}"%"</if>
 				<if test="customerName != null">and customerName like "%"#{customerName}"%"</if>
  		</where> 
     </select>
     <select id="getCustomerCarInfoById" resultMap="customerCarInfo">
-    		select * from customercarinfo where customerCarInfoId = #{customerCarInfoId};
+    		select customercarinfo.* from customercarinfo where customerCarInfoId = #{customerCarInfoId};
     </select>
 	<insert id="addCustomerCarInfo" useGeneratedKeys="true" keyProperty="customerCarInfoId">
 		INSERT INTO customercarinfo (customerName,gender,address,phone,idCard,plateNumber,VIN,engineNumber,color,gearBox,buyDate,policy,modelId) 

@@ -115,7 +115,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
@@ -184,9 +184,9 @@
 <section class="Hui-article-box">
     <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
         <span class="c-gray en">&gt;</span>
-       基础信息管理
+       档案信息管理
         <span class="c-gray en">&gt;</span>
-        材料目录管理
+       客户车辆信息
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="carinfo.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
            <div class="Hui-article">
@@ -207,7 +207,7 @@
 		</form>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			
-				<a class="btn btn-primary radius" onclick="carinfo_add('添加车辆信息','carinfo_add.do')" href="javascript:;">
+				<a class="btn btn-primary radius" onclick="carinfo_add('添加车辆信息','carinfoadd.do')" href="javascript:;">
 				<i class="Hui-iconfont">&#xe600;</i>添加客户车辆信息</a><span class="r">共有数据：<strong>${fn:length(carInfo)}</strong>
 				条
 			</span>

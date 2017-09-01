@@ -21,6 +21,14 @@ public class CustomerCarInfo {
 	private CarType carType;     //³µÐÍ
 	public CustomerCarInfo(){}
 
+	public CarType getCarType() {
+		return carType;
+	}
+
+	public void setCarType(CarType carType) {
+		this.carType = carType;
+	}
+
 	public String getEngineNumber() {
 		return engineNumber;
 	}

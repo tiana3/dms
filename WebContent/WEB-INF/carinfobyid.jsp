@@ -37,63 +37,58 @@
 <table class="table table-border table-bordered table-bg table-sort">
 		
 		<tr class="text-c">						
-				<td>客&nbsp;户&nbsp;名:<input type="text" name="customerName" value="${carType.customerName}" class="input-text" style="width:200px;"></td>
-				<td>车&nbsp;牌&nbsp;号:<input type="text" name="plateNumber" value="${carType.plateNumber}" class="input-text" style="width:200px;"></td>
+				<td>客&nbsp;户&nbsp;名:</td><td><input type="text" name="customerName" value="${carType.customerName}" class="input-text" style="width:200px;"></td>
+				<td>车&nbsp;牌&nbsp;号:</td><td><input type="text" name="plateNumber" value="${carType.plateNumber}" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 		
 		<tr class="text-c">						
-				<td>购买日期:<input type="text" onfocus="WdatePicker({maxDate:'{%y}-%M-%d'})" name="buyDate"  value="${carType.buyDate}" class="input-text Wdate" id="datemin" style="width:200px;"></td>
-				<td>保险到期日期:<input type="text" onfocus="WdatePicker({maxDate:'{%y+1}-%M-%d'})" name="policyDate" value="${carType.policyDate}" class="input-text Wdate" id="datemin" style="width:200px;"></td>
+				<td>购买日期:</td><td><input type="text" onfocus="WdatePicker({maxDate:'{%y}-%M-%d'})" name="buyDate"  value="${carType.buyDate}" class="input-text Wdate" id="datemin" style="width:200px;"></td>
+				<td>保险到期日期:</td><td><input type="text" onfocus="WdatePicker({maxDate:'{%y+1}-%M-%d'})" name="policyDate" value="${carType.policyDate}" class="input-text Wdate" id="datemin" style="width:200px;"></td>
 			
 		</tr>
 		
 		
 		<tr class="text-c">						
-				<td>车&nbsp;架&nbsp;号:<input type="text" name="VIN" value="${carType.VIN}" class="input-text" style="width:200px;"></td>
-					<td>性&nbsp;&nbsp;&nbsp;&nbsp;别:<input type="text" name="gender" value="${carType.gender}" class="input-text" style="width:200px;"></td>
+				<td>车&nbsp;架&nbsp;号:</td><td><input type="text" name="VIN" value="${carType.VIN}" class="input-text" style="width:200px;"></td>
+					<td>性&nbsp;&nbsp;&nbsp;&nbsp;别:</td><td><input type="text" name="gender" value="${carType.gender}" class="input-text" style="width:200px;"></td>
 		</tr>
 	
 		
 		<tr class="text-c">						
-				<td>地&nbsp;&nbsp;&nbsp;址&nbsp;:<input type="text" name="address" value="${carType.address}" class="input-text" style="width:200px;"></td>
-				<td>发动机号:<input type="text" name="engineNumber" value="${carType.engineNumber}" class="input-text" style="width:200px;"></td>
+				<td>地&nbsp;&nbsp;&nbsp;址&nbsp;:</td><td><input type="text" name="address" value="${carType.address}" class="input-text" style="width:200px;"></td>
+				<td>发动机号:</td><td><input type="text" name="engineNumber" value="${carType.engineNumber}" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 		
 		<tr class="text-c">		
 				
-				<td>车辆型号:<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
-					</c:forEach>
-				</select></td>
-						
-				<td>车辆厂家:
-				
+				<td colspan="3">车辆型号:</td>
+				<td>
 				<select name="modelid" >
-					<c:forEach items="" var="carType">
-						<option value="${carType.modelId }" >${carType.model }</option>
+					<c:forEach items="${car}" var="car1">
+						<option value="${car1.modelId}" ${carType.modelid == car1.modelId ? "selected" : ""}>${car1.factory }-${car1.model }</option>
 					</c:forEach>
-				</select></td>
+				</select>
+				</td>
 				
 		</tr>
 		
 		<tr class="text-c">						
-				<td>电&nbsp;&nbsp;&nbsp;&nbsp;话:<input type="text" name="phone" value="${carType.phone}" class="input-text" style="width:200px;"></td>
-				<td>颜&nbsp;&nbsp;&nbsp;&nbsp;色:<input type="text" name="color" value="${carType.color}" class="input-text" style="width:200px;"></td>
+				<td>电&nbsp;&nbsp;&nbsp;&nbsp;话:</td><td><input type="text" name="phone" value="${carType.phone}" class="input-text" style="width:200px;"></td>
+				<td>颜&nbsp;&nbsp;&nbsp;&nbsp;色:</td><td><input type="text" name="color" value="${carType.color}" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 		
 		<tr class="text-c">						
-				<td>身&nbsp;份&nbsp;证&nbsp;:<input type="text" name="idCard" value="${carType.idCard}" class="input-text" style="width:200px;"></td>
-				<td>变&nbsp;速&nbsp;箱&nbsp;:<input type="text" name="gearBox" value="${carType.VIN}" class="input-text" style="width:200px;"></td>
+				<td>身&nbsp;份&nbsp;证&nbsp;:</td><td><input type="text" name="idCard" value="${carType.idCard}" class="input-text" style="width:200px;"></td>
+				<td>变&nbsp;速&nbsp;箱&nbsp;:</td><td><input type="text" name="gearBox" value="${carType.VIN}" class="input-text" style="width:200px;"></td>
 		</tr>
 		
 	
 		<tr class="text-c">						
-				<td><button  class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button></td>
-				<td><button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></td>
+				<td colspan="4"><button onClick="close()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+				<button onClick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></td>
 		</tr>
 	
 	</table>
@@ -117,8 +112,45 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
+$("#form-carinfo-add").validate({
 
+	rules:{
+		customerName:{
+			required:true,
+		},
+		plateNumber:{
+			required:true,
+		},
+		VIN:{
+			required:true,
 
+		},
+		phone:{
+			required:true,
+
+		},
+		
+	},
+	//onkeyup:false,
+	focusCleanup:true,
+	success:"valid",
+submitHandler:function(form){
+	$(form).ajaxSubmit({
+		success: function() { 
+			
+			parent.layer.msg('修改成功!',{icon:6,time:1000});	
+			layer_close();
+			
+			//var index = parent.layer.getFrameIndex(window.name);
+			//parent.layer.close(index);
+		}
+		
+	})
+		
+	
+}
+});
+	
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

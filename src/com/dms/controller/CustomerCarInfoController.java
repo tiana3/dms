@@ -3,7 +3,9 @@ package com.dms.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
 import com.dms.service.CustomerCarInfoService;
 
@@ -42,22 +45,35 @@ public class CustomerCarInfoController {
 		return "customerCarInfo";
 	}
 	
-	@RequestMapping("getcarinfo")
+	@RequestMapping("getcarinfo")				//根据id查询一条用户
 	public String getCustomerInfoById(int customerCarInfoId,HttpServletRequest request,Model model){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		CustomerCarInfoService  service = (CustomerCarInfoService)ctx.getBean("customerCarInfoServiceImpl");
+		List<CarType> car = service.getCarType();
+		model.addAttribute("car", car);
 		CustomerCarInfo carType = service.getCustomerCarInfoById(customerCarInfoId);
 		model.addAttribute("carType", carType);
 		return "carinfobyid";		
 	}
-	@RequestMapping("carinfobyid.do")
-	public String updateCustomerInfoById(CustomerCarInfo info ){
+	@RequestMapping("carinfobyid.do")			//修改用户
+	public void updateCustomerInfoById(CustomerCarInfo info ){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
-		CustomerCarInfoService  service = (CustomerCarInfoService)ctx.getBean("customerCarInfoServiceImpl");	
-		
+		CustomerCarInfoService  service = (CustomerCarInfoService)ctx.getBean("customerCarInfoServiceImpl");			
 		service.updateCustomerCarInfo(info);
-		System.out.println(1);
-		return "carinfobyid";		
+	}
+	@RequestMapping("carinfoadd.do")
+	public String add(Model model){	
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		CustomerCarInfoService  service = (CustomerCarInfoService)ctx.getBean("customerCarInfoServiceImpl");			
+		List<CarType> car = service.getCarType();
+		model.addAttribute("car", car);
+		return "carinfo_add";	
+	}
+	@RequestMapping("carinfo_add.do")												
+	public void addCustomerCarInfo(CustomerCarInfo info,Model model){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		CustomerCarInfoService service = (CustomerCarInfoService)ctx.getBean("customerCarInfoServiceImpl");			
+		service.addCustomerCarInfo(info);	
 	}
 	
 }
