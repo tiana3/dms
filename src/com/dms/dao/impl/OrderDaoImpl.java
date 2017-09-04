@@ -133,4 +133,18 @@ public class OrderDaoImpl implements OrderDao {
 		return mapper.getOrderByOrderId(orderId);
 	}
 
+	@Override
+	public void updatepicker(Integer Id, Integer picker) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	
+		mapper.updatepicker(Id, picker);
+	}
+
+	@Override
+	public void dedeletepart(Integer Id) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.dedeletepart(Id);
+	}
+
 }

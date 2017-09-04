@@ -196,9 +196,7 @@
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
 	
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l"> <a href="javascript:;" onclick="datadel()"
-					class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-						批量删除</a> <a class="btn btn-primary radius"
+				<span class="l"><a class="btn btn-primary radius"
 					onclick="cartype_edit('添加员工','employeeshow','${partout.orderid}')"
 					href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加员工</a>
 				</span> <input type="hidden" name="act"> <span class="r">共有数据：<strong>${fn:length(list2)}</strong>条
@@ -207,66 +205,73 @@
 			<div class="mt-10">
 				<table class="table table-border table-bordered table-bg table-sort">
 					<thead>
+					<tr class="text-c">
+						<th>维修单号</th>
+						<th>车牌号</th>
+						<th>维修类型</th>
+						<th>服务顾问</th>
+						<th>开单时间</th>
+					</tr>
+				</thead>
+						<c:forEach items="${allOrders }" var="order" varStatus="varSta">
 						<tr class="text-c">
-							<th width="25"><input type="checkbox" name="" value=""></th>
-							<th>订单号</th>
-							<th>车牌号</th>
-							<th>车驾号</th>
-							<th>维修类型</th>
-							<th>服务顾问</th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
+							<td>${order.orderId }</td>
+							<td>${order.customerCarInfo.plateNumber}</td>
+							<td>
+							<c:forEach items="${repairType }" var="type">
+								<c:if test="${type.repairTypeId == order.repairId}">
+									${type.repairType }
+								</c:if>
+							</c:forEach>
+							</td>
+							<td><c:forEach items="${sa}" var="employee" varStatus="va">
+								<c:if test="${employee.employeeId == order.SA}">
+									${employee.employeeName }
+								</c:if>
+							</c:forEach>
+							</td>
+							<td>${order.date }</td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list2}" var="partout" varStatus="varSta">
-							<tr class="text-c">
-								<td><input type="checkbox" value="${partout.orderid}"
-									name="selectemployee"></td>
-								<td>${partout.orderid}</td>
-								<td>${partout.platenumber}</td>
-								<td>${partout.vin}</td>
-								<td>${partout.repairtype}</td>
-								<td>${partout.name}</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
 						</c:forEach>
+					</table>
+					<br>
+					<br>
+					<table class="table table-border table-bordered table-bg table-sort">	
 						<tr class="text-c">
-							<th width="25"><input type="checkbox" name="" value=""></th>
 							<th>零件</th>
 							<th>配件编号</th>
 							<th>进价</th>
 							<th>售价</th>
-							<th>厂家</th>
 							<th>型号</th>
 							<th>领料人</th>
-							<th>零件更改</th>
-							<th>领料人更改</th>
+							<th>操作</th>
 						</tr>
+						
+						<c:forEach items="${parts}" var="part" varStatus="va">
+						<c:forEach items="${allOrders }" var="order" varStatus="varSta">
 						<tr class="text-c">
-							<c:forEach items="list" var="partout" varStatus="va">
-							<td width="25"><input type="checkbox" name="" value=""></th>
-							<td>${partout.partname}</td>
-							<td>${partout.platenumber}</td>
-							<td>${partout.buyingPrice}</td>
-							<td>${partout.sellingPrice}</td>
-							<td>${partout.vin}</td>
-							<td>${partout.repairtype}</td>
-							<td>${partout.name}</td>
-							<td></td>
-							<td></td>
+							<td>${part.partName}</td>
+							<td>${part.partNo}</td>
+							<td>${part.buyingPrice}</td>
+							<td>${part.sellingPrice}</td>
+							<td>${part.model}</td>
+							<td>
+							
+							<select onchange="selectOnchang(this,Id=${part.id},orderId=${order.orderId})" name="picker">
+								<option value="0">未选择</option>
+							<c:forEach items="${employees2}" var="employee" varStatus="va">
+								<option value="${employee.employeeId}"  ${part.picker==employee.employeeId? "selected":"" } >${employee.employeeName}</option>
 							</c:forEach>
-						</tr>
-					</tbody>
+							</select>
+							
+							</td>
+							<td><a style="text-decoration: none" class="ml-5" href="javascript:;"
+							onclick="cartype_del(this,${part.id},${order.orderId})" title="删除"><i
+								class="Hui-iconfont">&#xe6e2;</i></a></td>
+							</tr>
+							</c:forEach>
+						</c:forEach>
 				</table>
-		</form>
-	</div>
-	</article>
 	</div>
 	</section>
 
@@ -285,6 +290,17 @@
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
+	function selectOnchang(obj,Id,orderId){ 
+		var picker = obj.options[obj.selectedIndex].value;
+		var tmp = document.createElement("form"); 
+	     var action = "part-out-update.do?Id=" + Id + "&picker=" + picker + "&orderId=" + orderId; 
+	     tmp.action = action; 
+	     tmp.method = "post"; 
+	     document.body.appendChild(tmp); 
+	     tmp.submit(); 
+	     
+		parent.layer.msg('领料人已变更!',{icon:6,time:1500});	
+		}
 		function cartype_edit(title, url, id, w, h) {
 			layer_show(title, url, w, h);
 		}
@@ -330,11 +346,11 @@
 
 		}
 
-		function cartype_del(obj, id) {
-			layer.confirm('确认要删除此员工吗？', function(index) {
+		function cartype_del(obj, id,orderId) {
+			layer.confirm('确认要删除此零件吗？', function(index) {
 				//此处请求后台程序，下方是成功后的前台处理……
 				$.ajax({
-					url : "employeeRemove?id=" + id
+					url : "part-out-delet.do?Id=" + id + "&orderId=" + orderId
 				});
 				$(obj).parents("tr").remove();
 				layer.msg('已删除!', {

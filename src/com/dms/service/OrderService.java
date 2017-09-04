@@ -2,6 +2,8 @@ package com.dms.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
@@ -26,5 +28,4 @@ public interface OrderService {
 	public List<Order> getAllOrders();  //查询所有的在修订单
 	public List<Order> getOrders(String orderId, String plateNumber, int employeeId, int repairId);      //根据条件查询在修订单
 	public Order getOrderByOrderId(String orderId);
-
 }

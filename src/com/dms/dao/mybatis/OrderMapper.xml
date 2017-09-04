@@ -112,5 +112,11 @@
     
      <delete id="deleteParts" parameterType="String">
     	delete from order_part where orderId = #{orderId}
+    </delete>
+    <update id="updatepicker">
+    	update order_part set picker = ${picker} where Id = ${Id}
+    </update>
+    <delete id="dedeletepart">
+    	delete from order_part where Id = ${Id}
     </delete>  
 </mapper>

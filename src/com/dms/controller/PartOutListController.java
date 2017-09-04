@@ -1,6 +1,8 @@
 package com.dms.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -9,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dms.entity.PartOut;
+import com.dms.entity.Employee;
+import com.dms.entity.Order;
+import com.dms.entity.Part;
+import com.dms.entity.RepairType;
 import com.dms.service.partoutservice;
 
 @Controller
@@ -17,52 +22,76 @@ public class PartOutListController {
 
 	
 	@RequestMapping("partout.do")
-	public String partout(Model modeld){
+	public String order(Model model) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		List<RepairType> repairTypes = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		List<Order> allOrders = service.getAllOrders();
+		
+		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("repairType", repairTypes);
+		model.addAttribute("sa", sa);
+		
 		return "part-out";
 	}
 
 	
 	
 	@RequestMapping("partoutlist.do")
-	public String getPartOutByJSP(Model model,@RequestParam(value = "orderId",required=false) String orderId,@RequestParam(value = "plateNumber",required=false) String plateNumber,@RequestParam(value = "name",required=false) String name,@RequestParam(value = "repairTypeId",required=false) String repairtypeId)
-	{
-		Integer repairTypeId = 0;
-		if(repairtypeId != null)
-		{
-			repairTypeId = Integer.parseInt(repairtypeId);
-		}
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		partoutservice service = (partoutservice)ctx.getBean("partoutServiceDao");
-		ArrayList<PartOut>list2 = service.getpartoutByJSP(orderId, plateNumber, name, repairTypeId);
-		ArrayList<PartOut>list = service.getrepairtype();
-		ArrayList<PartOut>list3 = service.getemployees();
-		ArrayList<PartOut>list5 = service.getemployeefu();
-		System.out.println(list2.toString());
-		
-//		System.out.println(list4.toString());
-		for (PartOut e : list3) {
-			for (PartOut o : list2) {
-				if (e.getRepairtypeid() == o.getEmployeeid()) {
-					o.setPicker(e.getRepairtype());
-				}
-			}
-		}
-		model.addAttribute("list5",list5);
-		model.addAttribute("list",list);
-		model.addAttribute("list2",list2);
-		model.addAttribute("list3",list3);
+	public String getOrders(Model model, @RequestParam(value = "orderId")String orderId, @RequestParam(value = "plateNumber")String plateNumber, @RequestParam(value = "employeeId")int employeeId, @RequestParam(value = "repairId")int repairId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		List<RepairType> repairTypes = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		List<Order> allOrders = service.getOrders(orderId, plateNumber, employeeId, repairId);
+		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("repairType", repairTypes);
+		model.addAttribute("sa", sa);
 		return "part-out";
+	
 	}
-	@RequestMapping("partoutU.do")
-	public String partoutupdate(Model model,@RequestParam(value = "orderId",required=false) String orderId){
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		partoutservice service = (partoutservice)ctx.getBean("partoutServiceDao");
-		ArrayList<PartOut>list2 = service.getpartoutByJSP(orderId,null, null, 0);
-		ArrayList<PartOut>list = service.getpartwithorder(orderId);
-		model.addAttribute("list2", list2);
-		System.out.println(list);
-		model.addAttribute("list",list);
-		
+	@RequestMapping("showOrderandpart.do")
+	public String getOrderandpart(Model model, @RequestParam(value = "orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		System.out.println(orderId);
+		List<RepairType> repairTypes = service.getAllRepairType();
+		List<Employee> sa = service.getSA();
+		List<Order> allOrders = service.getOrders(orderId, null, 0, 0);
+		List<Part>parts = service.getOrderPartsByOrderId(orderId);
+		List<Employee>employees = service.getAllEmployee();
+		List<Employee>employees2 = service.getMa_Tec();
+		System.out.println(parts.toString());
+		model.addAttribute("employees",employees);
+		System.out.println(sa);
+		model.addAttribute("employees2",employees2);
+		model.addAttribute("parts", parts);
+		model.addAttribute("allOrders", allOrders);
+		model.addAttribute("repairType", repairTypes);
+		model.addAttribute("sa", sa);
 		return "part-out-update";
+	
+	}
+	@RequestMapping("part-out-update.do")
+	public String getpickerandid(HttpServletRequest request, Model model, @RequestParam(value = "Id")int Id,@RequestParam(value = "picker")int picker,@RequestParam(value = "orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		service.updatepicker(Id, picker);
+		return "redirect:/showOrderandpart.do?orderId=" + orderId;
+	}
+	@RequestMapping("part-out-delet.do")
+	public void deletpartByid(HttpServletRequest request, Model model, @RequestParam(value = "Id")int Id,@RequestParam(value = "orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		service.dedeletepart(Id);
+		//return "redirect:/showOrderandpart.do?orderId=" + orderId;
+	}
+	@RequestMapping("part-show-insert.do")
+	public String showinsert(@RequestParam(value = "orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		
+		return "redirect:/showOrderandpart.do?orderId=" + orderId;
 	}
 }
