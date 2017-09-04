@@ -50,16 +50,8 @@
 	<bean id="customerCarInfoDao" class="com.dms.dao.impl.CustomerCarInfoDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
- 
- 	<bean id="theMiantenanceDao" class="com.dms.dao.impl.TheMaintenanceDaoImpl">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>
 
 	<bean id="repairTypeDaoimpl" class="com.dms.dao.impl.RepairTypeDaoimpl">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>
-
-	<bean id="partoutDaoImpl" class="com.dms.dao.impl.PartOutDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	
@@ -90,12 +82,12 @@
 		
 	</bean>
  
-	<bean id="theMaintenanceServiceImpl" class="com.dms.service.impl.TheMaintenanceServiceImpl">
-		<property name="ordersDao" ref="theMiantenanceDao"></property>
-		<property name="repairTypeDao" ref="repairTypeDaoimpl"></property>
-	</bean>
-	<bean id="partoutServiceDao" class="com.dms.service.impl.partoutserviceDao">
-		<property name="partoutdao" ref="partoutDaoImpl"></property>
+	<bean id="partoutserviceDao" class="com.dms.service.impl.partoutserviceDao">
+		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>
+		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
+		<property name="employeeDao" ref="employeeDaoImpl"/>	
+		<property name="orderDao" ref="orderDaoImpl"/>	
+		<property name="orderIdBuildDao" ref="orderIdBuildDaoImpl"/>
 	</bean>
 
 	<bean id="orderServiceImpl" class="com.dms.service.impl.OrderServiceImpl">
