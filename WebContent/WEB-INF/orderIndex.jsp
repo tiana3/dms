@@ -30,8 +30,6 @@
     <!--/meta 作为公共模版分离出去-->
 
     <title>维修业务开单</title>
-    <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-    <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 	
 
 
@@ -88,7 +86,7 @@
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
 					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/order.do')" title="维修业务开单">维修业务开单</a></li>
-					<li><a href="#" title="完工">完工</a></li>
+					<li><a href="javascript:;" onclick="complete()" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
 			</dd>
@@ -384,7 +382,12 @@
 							<td>${part.partNo }</td>
 							<td>${part.sellingPrice }</td>
 							<td>${part.model }</td>
-							<td>${part.picker }</td>
+							<c:forEach items="${Ma_Tec }" var="ma">
+								<c:if test="${part.picker == ma.employeeId}">
+									<td>${ma.jobName }-${ma.employeeName }</td>
+								</c:if>
+							</c:forEach>
+
 							<td>
 								<a style="text-decoration: none" class="ml-5" href="javascript:;"
 								onclick="part_del(this)"
@@ -639,6 +642,11 @@ function save() {
    function changePassword(title,url,w,h){
     layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
 	}
+   
+   //完工
+   function complete(){
+	   
+   }
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

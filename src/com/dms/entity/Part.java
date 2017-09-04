@@ -10,8 +10,15 @@ public class Part {
 	private int modelId;
 	private String model;
 	private Integer picker;          //维护一个领料人Id，用于存储订单中材料的领料人
+	private String name;     //领料人姓名
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Integer getId() {
 		return Id;
 	}

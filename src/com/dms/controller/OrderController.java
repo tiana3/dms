@@ -355,7 +355,6 @@ public class OrderController {
 			Order lastOrder = order;
 			List<Employee> Ma_Tec = service.getMa_Tec();
 			List<Employee> inspectors = service.getInspectors();
-			
 			if(carInfo!=null) {
 				model.addAttribute("order", order);
 				model.addAttribute("repairType", repairType);
