@@ -29,7 +29,7 @@
     <script>DD_belatedPNG.fix('*');</script><![endif]-->
     <!--/meta 作为公共模版分离出去-->
 
-    <title>材料目录管理</title>
+    <title>登录欢迎页</title>
     <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -39,16 +39,14 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
 			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+				href="#">售后管理系统</a> 
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li class="dropDown dropDown_hover">
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
@@ -184,29 +182,24 @@
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a> 
 		<span class="c-999 en">&gt;</span>
-		<span class="c-666">我的桌面</span> 
+		<span class="c-666">欢迎页</span> 
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<p class="f-20 text-success">欢迎使用H-ui.admin
-				<span class="f-14">v2.3</span>
-				后台模版！</p>
-			<p>登录次数：18 </p>
-			<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+			<p class="f-20 text-success">欢迎回来，${userName }！</p>
 			<table class="table table-border table-bordered table-bg">
 				<thead>
 					<tr>
-						<th colspan="7" scope="col">信息统计</th>
-			</tr>
+						<th colspan="7" scope="col">本月信息统计</th>
+					</tr>
 					<tr class="text-c">
-						<th>统计</th>
-						<th>资讯库</th>
-						<th>图片库</th>
-						<th>产品库</th>
-						<th>用户</th>
-						<th>管理员</th>
-			</tr>
-		</thead>
+						<th>姓名</th>
+						<th>台次</th>
+						<th>工时费</th>
+						<th>材料费</th>
+						<th>总金额</th>
+					</tr>
+				</thead>
 				<tbody>
 					<tr class="text-c">
 						<td>总数</td>
@@ -374,7 +367,9 @@
 	}
 }) */
   
-
+function changePassword(title,url,w,h){
+    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+}
   
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

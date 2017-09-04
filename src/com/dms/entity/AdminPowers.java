@@ -5,8 +5,18 @@ import java.util.List;
 public class AdminPowers {
 
 	private Integer adminId ;	  //操作员id
+	private String adminName;           //账号
 	private String name;		//操作员真实姓名
 	private List<Integer> powerIds;   //操作员的权限ID
+	
+	
+	
+	public String getAdminName() {
+		return adminName;
+	}
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 	public Integer getAdminId() {
 		return adminId;
 	}

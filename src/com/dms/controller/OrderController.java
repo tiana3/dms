@@ -1,6 +1,7 @@
 package com.dms.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
@@ -57,11 +58,13 @@ public class OrderController {
 				//取出session权限，判断是否具有开单权限。以异步方式，返回数据给ajax的回调函数
 				List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
 				//1在数据库的权限表就代表维修开单
+				PrintWriter writer = response.getWriter();
 				if(powerIds.contains(1)){
-					response.getWriter().write("{\"valid\":1,\"url\":\""+request.getContextPath()+"/orderIndex.do\"}");
+					writer.write("{\"valid\":1,\"url\":\""+request.getContextPath()+"/orderIndex.do\"}");
 				} else {
-					response.getWriter().write("{\"valid\":0,\"message\":\"对不起，没有开单权限\"}");
+					writer.write("{\"valid\":0,\"message\":\"对不起，没有开单权限\"}");
 				}
+				writer.close();
 			}
 				
 		}
@@ -237,8 +240,9 @@ public class OrderController {
 		
 		String orderId = saveOrder.getOrderId();
 		String date = saveOrder.getDate();
-		
-		response.getWriter().print("{\"date\":\""+ date +"\",\"orderId\":\""+ orderId +"\"}");
+		PrintWriter writer = response.getWriter();
+		writer.print("{\"date\":\""+ date +"\",\"orderId\":\""+ orderId +"\"}");
+		writer.close();
 	}
 	
 	
@@ -274,20 +278,54 @@ public class OrderController {
 	
 	
 	//修改维修单
-	@ResponseBody
 	@RequestMapping("updateOrder.do")
-	public String updateOrder(Model model, Order order) {
-		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
-		service.updateOrder(order);
+	public String updateOrder(Model model, Order order,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			return "redirect:/login.jsp";
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				return "redirect:/login.jsp";
+			}
+		}
+		
+		//如果保存的数据无效，直接跳转到开单页面。  当然开单页面会验证是否有权限
+		if(order.getCustomerCarInfo()==null||order.getMileage()==null||order.getSenderPhone()==null){
+			return "redirect:/orderIndex.do";
+		}
+		
+		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(3)){
+			ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+			OrderService  service = (OrderService)ctx.getBean("orderServiceImpl");
+			service.updateOrder(order);
+			PrintWriter writer = response.getWriter();
+			writer.print(true);
+			writer.close();
+			return null;
+		}else{
+			return "redirect:/login.jsp";
+		}
 		
 		
-		return "{\"data\":\"成功\"}";
 	}
 	
-	
+	//在修单查询
 	@RequestMapping("theMaintenance.do")
-	public String theMaintenance(Model model) {
+	public String theMaintenance(Model model,HttpServletRequest request) {
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			return "redirect:/login.jsp";
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				return "redirect:/login.jsp";
+			}
+		}
+		
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
 		List<RepairType> repairTypes = service.getAllRepairType();
@@ -302,42 +340,71 @@ public class OrderController {
 	}
 	
 	@RequestMapping("showOrder.do")
-	public String showOrder(Model model,@RequestParam(value = "orderId") String orderId ) {
-		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
-	
-		Order order = service.getOrderByOrderId(orderId);
-		CustomerCarInfo carInfo = order.getCustomerCarInfo();
-		List<RepairType> repairType = service.getAllRepairType();
-		List<Employee> sa = service.getSA();
-		Order lastOrder = order;
-		List<Employee> Ma_Tec = service.getMa_Tec();
-		List<Employee> inspectors = service.getInspectors();
+	public String showOrder(Model model,HttpServletRequest request,@RequestParam(value = "orderId") String orderId ) {
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			return "redirect:/login.jsp";
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				return "redirect:/login.jsp";
+			}
+		}
 		
-		if(carInfo!=null) {
-			model.addAttribute("order", order);
-			model.addAttribute("repairType", repairType);
-			model.addAttribute("carInfo", carInfo);
-			model.addAttribute("sa", sa);
-			model.addAttribute("lastOrder", lastOrder);
-			model.addAttribute("Ma_Tec", Ma_Tec);
-			model.addAttribute("inspectors", inspectors);
-		}	
-		return "orderIndex";
+		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(1)){
+			ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+			OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+			Order order = service.getOrderByOrderId(orderId);
+			CustomerCarInfo carInfo = order.getCustomerCarInfo();
+			List<RepairType> repairType = service.getAllRepairType();
+			List<Employee> sa = service.getSA();
+			Order lastOrder = order;
+			List<Employee> Ma_Tec = service.getMa_Tec();
+			List<Employee> inspectors = service.getInspectors();
+			
+			if(carInfo!=null) {
+				model.addAttribute("order", order);
+				model.addAttribute("repairType", repairType);
+				model.addAttribute("carInfo", carInfo);
+				model.addAttribute("sa", sa);
+				model.addAttribute("lastOrder", lastOrder);
+				model.addAttribute("Ma_Tec", Ma_Tec);
+				model.addAttribute("inspectors", inspectors);
+			}	
+			return "orderIndex";
+		}else{
+			return "redirect:/login.jsp";
+		}
 	}
 	
 	@RequestMapping("getOrders.do")
-	public String getOrders(Model model, @RequestParam(value = "orderId")String orderId, @RequestParam(value = "plateNumber")String plateNumber, @RequestParam(value = "employeeId")int employeeId, @RequestParam(value = "repairId")int repairId) {
-		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
-		OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
-		List<RepairType> repairTypes = service.getAllRepairType();
-		List<Employee> sa = service.getSA();
-		List<Order> allOrders = service.getOrders(orderId, plateNumber, employeeId, repairId);
-		
-		model.addAttribute("allOrders", allOrders);
-		model.addAttribute("repairType", repairTypes);
-		model.addAttribute("sa", sa);
-		
-		return "theMaintenance";
+	public String getOrders(Model model,HttpServletRequest request, @RequestParam(value = "orderId")String orderId, @RequestParam(value = "plateNumber")String plateNumber, @RequestParam(value = "employeeId")int employeeId, @RequestParam(value = "repairId")int repairId) {
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			return "redirect:/login.jsp";
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				return "redirect:/login.jsp";
+			}
+		}
+		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(4)){
+			
+			ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+			OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+			List<RepairType> repairTypes = service.getAllRepairType();
+			List<Employee> sa = service.getSA();
+			List<Order> allOrders = service.getOrders(orderId, plateNumber, employeeId, repairId);
+			model.addAttribute("allOrders", allOrders);
+			model.addAttribute("repairType", repairTypes);
+			model.addAttribute("sa", sa);
+			return "theMaintenance";
+		}else{
+			return "redirect:/login.jsp";
+		}
 	}
 }

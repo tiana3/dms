@@ -49,6 +49,7 @@
 				<li class="dropDown dropDown_hover">
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
@@ -350,6 +351,11 @@
     			location.replace(url);
     		}
     	})
+    }
+  
+  
+    function changePassword(title,url,w,h){
+        layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
     }
    
 </script>

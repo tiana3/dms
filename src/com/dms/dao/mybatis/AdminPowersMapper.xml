@@ -9,6 +9,8 @@
 <!-- property="id" 是对应实体类的属性  column="id"  对应的是数据库的列  -->
         <result property="adminId" column="adminId" javaType="java.lang.Integer"></result>
   		<result property="name" column="name" javaType="java.lang.String"></result>
+  		<result property="adminName" column="adminName" javaType="java.lang.String"></result>
+  		
   		<collection property="powerIds" column="adminId" select="getPowersByAdminId" ></collection>
    </resultMap>
    
@@ -21,7 +23,7 @@
 <!--#{}中的内容，为占位符，当参数为某个JavaBean时，表示放置该Bean对象的属性值  -->
    
     <select id="getAdmin" resultMap="adminPowers">
-		SELECT admin.adminId,NAME FROM admin WHERE adminName= #{user} AND PASSWORD= #{password}
+		SELECT admin.adminId,NAME,adminName FROM admin WHERE adminName= #{user} AND PASSWORD= #{password}
     </select>
     
     <select id="getPowersByAdminId" resultType="Integer">
@@ -29,5 +31,7 @@
 		INNER JOIN role_power ON admin_role.roleId = role_power.roleId WHERE admin.adminId=#{adminId}
     </select>
     
-
+	<update id="changePassword">
+		UPDATE admin SET PASSWORD = #{newPassword} where adminId=#{adminId}
+	</update>
 </mapper>

@@ -24,4 +24,10 @@ public class AdminDaoImpl implements AdminDao {
 		return adminPowers;
 	}
 
+	@Override
+	public void changePassword(Integer adminId, String newPassword) {
+		AdminDao mapper = sqlSessionTemplate.getMapper(AdminDao.class);
+		mapper.changePassword(adminId, newPassword);
+	}
+
 }

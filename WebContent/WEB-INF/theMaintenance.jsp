@@ -29,9 +29,7 @@
 	href="static/h-ui.admin/css/style.css" />
 
 <script src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-	DD_belatedPNG.fix('*');
-</script>
+
 <title>在修业务</title>
 </head>
 <body>
@@ -48,6 +46,8 @@
 				<li class="dropDown dropDown_hover">
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
@@ -294,6 +294,12 @@
 	<script type="text/javascript"
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-
+<script>
+function changePassword(title,url,w,h){
+    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+}
+	
+	DD_belatedPNG.fix('*');
+</script>
 </body>
 </html>

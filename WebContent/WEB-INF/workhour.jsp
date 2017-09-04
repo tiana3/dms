@@ -40,16 +40,15 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a>  
 			<nav class="nav navbar-nav"> <nav id="Hui-userbar"
 				class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li class="dropDown dropDown_hover">
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
@@ -304,9 +303,9 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
-
-	function system_log_show(title,url,id,w,h){
-		
+	
+	function changePassword(title,url,w,h){
+	    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
 	}
 	</script>
 
