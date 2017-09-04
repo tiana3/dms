@@ -345,7 +345,7 @@
     		var power = json.valid;
     		if(0==power) {
     			var msg = json.message;
-    			layer.msg(msg,{icon:2,time:1500});
+    			layer.msg(msg,{icon:4,time:1500});
     		}else if(1==power){
                 var url = json.url;
     			location.replace(url);

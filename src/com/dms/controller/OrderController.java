@@ -103,13 +103,6 @@ public class OrderController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	//订单中，搜索材料的显示详情
 	@RequestMapping("partList.do")
 	public String partList(Model model, @RequestParam(value = "partname") String partname, @RequestParam(value = "partno") String partno, @RequestParam(value = "modelid") String modelid) {
