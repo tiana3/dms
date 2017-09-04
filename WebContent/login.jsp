@@ -21,7 +21,7 @@
 <title>系统登录</title>
 </head>
 <body>
-<video autoplay muted controls="controls" loop id="bgvid" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto;  z-index: -100;" src="video/carmvp.mp4">
+<video autoplay muted loop id="bgvid" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto;  z-index: -100;" src="video/carmvp.mp4">
  </video>
 <div class="header"></div>
 <div class="loginWraper" style="height: auto">

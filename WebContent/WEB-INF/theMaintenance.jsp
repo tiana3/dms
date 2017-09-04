@@ -45,11 +45,10 @@
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
 			<nav class="nav navbar-nav" id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
 				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="#">退出</a></li>
+						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
 

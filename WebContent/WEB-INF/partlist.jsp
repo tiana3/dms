@@ -46,12 +46,12 @@
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover">
+					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="#">退出</a></li>
-					</ul></li>
+						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
+					</ul>
+				</li>
 				
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
@@ -84,7 +84,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="${pageContext.request.contextPath }/order.do" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/order.do')" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -335,6 +335,22 @@
         });
     }
 
+    
+    
+  //点击功能后权限验证的方法  
+    function powerJump(url){
+    	$.post(url,function(data){
+    		var json = JSON.parse(data);
+    		var power = json.valid;
+    		if(0==power) {
+    			var msg = json.message;
+    			layer.msg(msg,{icon:2,time:1500});
+    		}else if(1==power){
+                var url = json.url;
+    			location.replace(url);
+    		}
+    	})
+    }
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
