@@ -51,12 +51,7 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
  
-<<<<<<< HEAD
 
-
-=======
- 	
->>>>>>> branch 'master' of file:///D:\git
 	<bean id="repairTypeDaoimpl" class="com.dms.dao.impl.RepairTypeDaoimpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
@@ -115,8 +110,6 @@
 
 	
 
-		
-	</bean>	
 
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
