@@ -43,6 +43,8 @@ public class WorkHourUpdateServlet extends HttpServlet {
 		work.setWorkplaceName(request.getParameter("workplaceName"));
 		work.setWorkhour(Double.parseDouble(request.getParameter("workhour")));
 		work.setWorkpay(Double.parseDouble(request.getParameter("workpay")));
+		String id = request.getParameter("modelid");
+		work.setModelId(Integer.parseInt(request.getParameter("modelid")));	
 		if(work != null) {
 			request.setAttribute("work", work);
 			imp.updateWorkHour(work);

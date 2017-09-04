@@ -29,7 +29,7 @@
     <script>DD_belatedPNG.fix('*');</script><![endif]-->
     <!--/meta 作为公共模版分离出去-->
 
-    <title>材料目录管理</title>
+    <title>登录欢迎页</title>
     <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -39,10 +39,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
 			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+				href="#">售后管理系统</a> 
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
@@ -64,7 +61,8 @@
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
 						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 			</nav>
 		</div>
@@ -159,14 +157,14 @@
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
-					<li class="current"><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
@@ -182,79 +180,171 @@
 
 
 <section class="Hui-article-box">
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
-        <span class="c-gray en">&gt;</span>
-       基础信息管理
-        <span class="c-gray en">&gt;</span>
-        材料目录管理
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
-    </nav>
-    <div class="Hui-article">
-        <article class="cl pd-20">
-			<form action="PartListServlet" method="post" >
-            <div class="text-c">
-
-                配件名：
-                <input type="text"  name="partname" id="logmin" class="input-text " style="width:120px;">&nbsp;&nbsp;&nbsp;
-                配件号：
-                <input type="text"  name="partno" id="logmax" class="input-text" style="width:120px;">&nbsp;&nbsp;&nbsp;
-                车型：             
-				<select name="modelid" class="" style="width:120px ; height:30px;">
-					<option value="0" >全部</option>
-					<c:forEach items="${carTypes }" var="carType">
-					<option value="${carType.modelId }" >${carType.model }</option>
-					</c:forEach>
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		
-               <button  class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button> 
-              
-            </div>
-            <div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l">
-				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-				<a class="btn btn-primary radius" data-title="添加信息"  onclick="part_add('添加材料信息','GetCarTypeServlet?act=add')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加信息</a>
-				</span>
-				<input type="hidden" name="act">
-                <span class="r">共有数据：<strong>${fn:length(partlist)}</strong>条</span>
-            </div>
-            <div class="mt-20">     
-                <table class="table table-border table-bordered table-bg table-hover table-sort">
-                    <thead>
-                    <tr class="text-c">
-                        <th width="25"><input type="checkbox" name="" value=""></th>
-                        <th width="80">序号</th>                       
-                        <th width="80">配件名</th>
-                        <th width="80">配件号</th>
-                        <th width="80">适用车型</th>
-                        <th width="120">进货成本</th>
-                        <th width="75">销售价</th>
-                        <th width="120">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-          <c:forEach items="${partlist}" var="part" varStatus="varSta">
-                    <tr class="text-c">                  		
-                        <td><input type="checkbox" value="${part.partId}" name="selectPart"></td>
-                        <td>${varSta.count }</td>                       
-                        <td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','part-look.jsp?partId=${part.partId}&partName=${part.partName}&partNo=${part.partNo}&modelId=${part.modelId}&buyingPrice=${part.buyingPrice}&sellingPrice=${part.sellingPrice}','10001')" title="查看">${part.partName}</u></td>
-                        <td>${part.partNo}</td>
-                        <td>${part.model}</td>
-                        <td>${part.buyingPrice}</td>
-                        <td>${part.sellingPrice}</td>                                   
-                        <td class="f-14 td-manage">
-                        <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/GetCarTypeServlet?partId=${part.partId}&act=update','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-                            <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${part.partId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
-                    </tr>
-           </c:forEach>
-                    </tbody>
-                </table>
-                </div>
-                </form>
-            </div>
-        </article>
-        
-    </div>
-</section>
+	<nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a> 
+		<span class="c-999 en">&gt;</span>
+		<span class="c-666">欢迎页</span> 
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<p class="f-20 text-success">欢迎回来，${userName }！</p>
+			<table class="table table-border table-bordered table-bg">
+				<thead>
+					<tr>
+						<th colspan="7" scope="col">本月信息统计</th>
+					</tr>
+					<tr class="text-c">
+						<th>姓名</th>
+						<th>台次</th>
+						<th>工时费</th>
+						<th>材料费</th>
+						<th>总金额</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-c">
+						<td>总数</td>
+						<td>92</td>
+						<td>9</td>
+						<td>0</td>
+						<td>8</td>
+						<td>20</td>
+			</tr>
+					<tr class="text-c">
+						<td>今日</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+			</tr>
+					<tr class="text-c">
+						<td>昨日</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+			</tr>
+					<tr class="text-c">
+						<td>本周</td>
+						<td>2</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+			</tr>
+					<tr class="text-c">
+						<td>本月</td>
+						<td>2</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+			</tr>
+		</tbody>
+	</table>
+			<table class="table table-border table-bordered table-bg mt-20">
+				<thead>
+					<tr>
+						<th colspan="2" scope="col">服务器信息</th>
+			</tr>
+		</thead>
+				<tbody>
+					<tr>
+						<th width="30%">服务器计算机名</th>
+						<td><span id="lbServerName">http://127.0.0.1/</span></td>
+			</tr>
+					<tr>
+						<td>服务器IP地址</td>
+						<td>192.168.1.1</td>
+			</tr>
+					<tr>
+						<td>服务器域名</td>
+						<td>www.h-ui.net</td>
+			</tr>
+					<tr>
+						<td>服务器端口 </td>
+						<td>80</td>
+			</tr>
+					<tr>
+						<td>服务器IIS版本 </td>
+						<td>Microsoft-IIS/6.0</td>
+			</tr>
+					<tr>
+						<td>本文件所在文件夹 </td>
+						<td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
+			</tr>
+					<tr>
+						<td>服务器操作系统 </td>
+						<td>Microsoft Windows NT 5.2.3790 Service Pack 2</td>
+			</tr>
+					<tr>
+						<td>系统所在文件夹 </td>
+						<td>C:\WINDOWS\system32</td>
+			</tr>
+					<tr>
+						<td>服务器脚本超时时间 </td>
+						<td>30000秒</td>
+			</tr>
+					<tr>
+						<td>服务器的语言种类 </td>
+						<td>Chinese (People's Republic of China)</td>
+			</tr>
+					<tr>
+						<td>.NET Framework 版本 </td>
+						<td>2.050727.3655</td>
+			</tr>
+					<tr>
+						<td>服务器当前时间 </td>
+						<td>2014-6-14 12:06:23</td>
+			</tr>
+					<tr>
+						<td>服务器IE版本 </td>
+						<td>6.0000</td>
+			</tr>
+					<tr>
+						<td>服务器上次启动到现在已运行 </td>
+						<td>7210分钟</td>
+			</tr>
+					<tr>
+						<td>逻辑驱动器 </td>
+						<td>C:\D:\</td>
+			</tr>
+					<tr>
+						<td>CPU 总数 </td>
+						<td>4</td>
+			</tr>
+					<tr>
+						<td>CPU 类型 </td>
+						<td>x86 Family 6 Model 42 Stepping 1, GenuineIntel</td>
+			</tr>
+					<tr>
+						<td>虚拟内存 </td>
+						<td>52480M</td>
+			</tr>
+					<tr>
+						<td>当前程序占用内存 </td>
+						<td>3.29M</td>
+			</tr>
+					<tr>
+						<td>Asp.net所占内存 </td>
+						<td>51.46M</td>
+			</tr>
+					<tr>
+						<td>当前Session数量 </td>
+						<td>8</td>
+			</tr>
+					<tr>
+						<td>当前SessionID </td>
+						<td>gznhpwmp34004345jz2q3l45</td>
+			</tr>
+					<tr>
+						<td>当前系统用户名 </td>
+						<td>NETWORK SERVICE</td>
+			</tr>
+		</tbody>
+	</table>
+</article>
 
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
@@ -267,97 +357,20 @@
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="js/myJs.js"></script>
+
 <script type="text/javascript">
-
-    /*资讯-添加*/
-    function part_add(title,url,w,h){
-/*      	var index = layer.open({
-            type: 2,
-           title: title,
-            content: url,
-       });
-       layer.full(index); */
-        layer_show(title,url,w,h);
-    }
-    /*资讯-编辑*/
-    function part_edit(title,url,id,w,h){
-       /*  var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        }); */
-    	layer_show(title,url,w,h);
-    }
-    /*资讯-删除*/
-    
-   	function datadel() {
-        layer.confirm('确认要批量删除吗？',function(index){
-        	var checkIds = '';
-        	$('input[name="selectPart"]:checked').each(function(){
-        		checkIds += $(this).val()+","
-        	})
-        	checkIds = checkIds.substring(0,checkIds.length-1);
-           
-        	$.ajax({
-                type: 'POST',
-                url: '${pageContext.request.contextPath }/CheckedPartDeleteServlet',
-                data: "partIds=" + checkIds ,
-                //dataType: 'json',
-                success: function(data){
-                	$('input[name="selectPart"]:checked').each(function(){
-                		$(this).parents("tr").remove();
-                	})
-                   layer.msg(data,{icon:1,time:1000});
-                },
-                error:function(data) {
-                    console.log(data.msg);
-                },
-            });
-        });
-    	
-  	}
-    
-    
-    function part_del(obj,id){
-        layer.confirm('确认要删除吗？',function(index){
-            $.ajax({
-                type: 'POST',
-                url: '${pageContext.request.contextPath }/PartDeleteServlet',
-                data: "partid=" + id ,
-                //dataType: 'json',
-                success: function(data){
-                    $(obj).parents("tr").remove();
-                    layer.msg(data,{icon:1,time:1000});
-                },
-                error:function(data) {
-                    console.log(data.msg);
-                },
-            });
-        });
-    }
-
-    
-    
-  //点击功能后权限验证的方法  
-    function powerJump(url){
-    	$.post(url,function(data){
-    		var json = JSON.parse(data);
-    		var power = json.valid;
-    		if(0==power) {
-    			var msg = json.message;
-    			layer.msg(msg,{icon:2,time:1500});
-    		}else if(1==power){
-                var url = json.url;
-    			location.replace(url);
-    		}
-    	})
-    }
+/* $(document).ready(function(){ 
+	var message="${message}";
+	if(message!="") {
+		   layer.msg(message,{icon:2,time:1500});
+	}
+}) */
   
+function changePassword(title,url,w,h){
+    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+}
   
-    function changePassword(title,url,w,h){
-        layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
-    }
-   
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

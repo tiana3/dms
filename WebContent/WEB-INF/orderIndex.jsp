@@ -41,20 +41,20 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
 			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+				href="#">售后管理系统</a>
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover">
+					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="#">退出</a></li>
-					</ul></li>
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
+					</ul>
+				</li>
 				
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
@@ -184,12 +184,14 @@
 
 
 <section class="Hui-article-box">
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+    <nav class="breadcrumb">
+    
+    <i class="Hui-iconfont">&#xe67f;</i> 首页
         <span class="c-gray en">&gt;</span>
        维修业务
         <span class="c-gray en">&gt;</span>
         维修业务开单
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="${pageContext.request.contextPath }/order.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="${pageContext.request.contextPath }/orderIndex.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 	 </nav> 
       <div class="Hui-article">
       	<article class="cl pd-20">    
@@ -198,7 +200,7 @@
 	
 	      	 <div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l">
-				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/order.do">新开单</a>
+				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/orderIndex.do">新开单</a>
 					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
@@ -216,7 +218,7 @@
 	            </span>
       	  	</div>
 
-			<p><span id="showOrderId" class="l">维修单号：${order.orderId }</span><span id="time1" class="r"></span></p>
+			<p><span id="showOrderId" class="l">维修单号:${order.orderId }</span><span id="time1" class="r" style="margin-right: 120px">开单时间:${order.date }</span></p>
         	<input type="hidden" id="hiddenDate" name="Date"  value="${order.date }">
 			<input type="hidden" id="hiddenCustomerCarInfoId"  name="customerCarInfo.customerCarInfoId"  value="${carInfo.customerCarInfoId }">
 			<input type="hidden" id="hiddenOrderId" name="orderId"  value="${order.orderId }">			
@@ -244,7 +246,7 @@
 						<td>
 							<select class="select" name="repairId">
 							<c:forEach items="${repairType }" var="type">
-								<option value="${type.repairTypeId }" selected="${type.repairTypeId==order.repairId? selected:false }">${type.repairType } </option>
+								<option value="${type.repairTypeId }" ${type.repairTypeId==order.repairId? 'selected':'' }>${type.repairType } </option>
 							</c:forEach>
 							</select>
 						</td>
@@ -337,7 +339,7 @@
 					<c:forEach items="${order.customs }" var="custom" varStatus="num">
 						<tr>
 							<td><input value="${custom.customName }"  name="customs[${num.count - 1 }].customName" type="text" class="input-text"></td>
-							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="digits input-text"></td>
+							<td><input value="${custom.customPrice }"  name="customs[${num.count - 1 }].customPrice" type="text" class="number input-text "></td>
 							<td>
 								<select name="customs[${num.count - 1 }].employeeId" class="select">
 										<option value="0">&nbsp;&nbsp;</option>
@@ -418,6 +420,8 @@
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>   
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/additional-methods.js"></script>   
+<script type="text/javascript" src="lib/jquery/jquery.metadata.js"></script>   
 <script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.config.js"></script> 
 <script type="text/javascript" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
@@ -444,7 +448,8 @@ function save() {
 				},
 				mileage:{
 					required:true,
-					digits:true
+					number:true,
+					min:0,
 				},
 				sender:{
 					required:true,
@@ -466,7 +471,8 @@ function save() {
                  },
                  mileage:{
  					required:"里程必填且为数字 ",
- 					digits:"里程必须为数字 ",
+ 					number:"里程必须为数字 ",
+ 					min:"里程不能小于0",
                  },
  				sender:{
  					required:"送修人必填 ",
@@ -536,9 +542,8 @@ function save() {
 					   url:"${pageContext.request.contextPath }/updateOrder.do",
 					   
 					   
-					  	success: function(data) { 
+					  	success: function() { 
 					  		
-							var json = JSON.parse(data);
 							layer.msg("已保存",{icon:1,time:1000});
 						}
 				   })
@@ -564,7 +569,7 @@ function save() {
 		forEach.setAttribute("var", "ma");
 		var option = document.createElement("option");
 		option.setAttribute("value", "${ma.employeeId}"); */
-		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='digits input-text'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
+		$("#workhour").append("<tr><td><input name='customs["+length+"].customName' type='text' class='input-text'></td><td><input name='customs["+length+"].customPrice'  type='text' class='input-text number'></td><td><select class='select' name='customs["+ length +"].employeeId'><option value='0'>&nbsp;&nbsp;</option><c:forEach items='${Ma_Tec }' var='ma'><option value='${ma.employeeId}'>${ma.jobName}-${ma.employeeName}</option></c:forEach></select></td></tr>");
 	}
 	
 	function workplace_delete() {
@@ -602,8 +607,13 @@ function save() {
 	               url: '${pageContext.request.contextPath }/orderDelete.do',
 	               data: {orderId:Id},
 	               //dataType: 'json',
-	               success: function(){
-	                   location.replace("${pageContext.request.contextPath }/order.do");
+	               success: function(data){
+	            	   var json = JSON.parse(data);
+	            	   if(json.valid==0) {
+	           				layer.msg('对不起,你作废权限',{icon:4,time:1500});
+	            	   }else if(json.valid==1){
+		                   location.replace("${pageContext.request.contextPath }/orderIndex.do");
+	            	   }
 	               },
 	               error:function() {
 	                   console.log();
@@ -622,6 +632,11 @@ function save() {
 		   $("#plate").attr("readonly",true);
 	   }
    })
+   
+   //修改密码
+   function changePassword(title,url,w,h){
+    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+	}
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
-<html>
+<html>	
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -36,60 +36,48 @@
 <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet"
 	type="text/css" />
 
-<title>修改工时工位</title>
+<title>更改密码</title>
 </head>
 <body>
 <article class="page-container">
-
-		<form action="WorkHourUpdateServlet" method="get"
-			class="form form-horizontal" id="form-update-add">
-
-			<input type="hidden" name="workplaceId"
-				value="${workhour.workplaceId }">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
+	<form action="${pageContext.request.contextPath }/changePassword.do" method="post"
+			class="form form-horizontal" id="form-password-change">
+		<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">账号：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text"
-						value="${workhour.workplaceName }" placeholder="" id=""
-						name="workplaceName">
+					${adminName }
 				</div>
-			</div>
-			<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>当前密码：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<select name="modelid" class="">
-					<c:forEach items="${carTypes}" var="carType">
-						<option value="${carType.modelId}" ${carType.modelId == workhour.modelId ? "selected" : ""}>${carType.model}</option>
-					</c:forEach>
-				</select>
+				<input class="input-text" type="password" name="oldPassword">
 			</div>
 		</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>新密码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${workhour.workhour }"
-						placeholder="" id="" name="workhour">
+					<input type="password" id="password" class="input-text" name="newPassword">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>重复密码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${workhour.workpay }"
-						placeholder="" id="" name="workpay">
+					<input type="password" class="input-text" name="repeatPassword">
 				</div>
 			</div>
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-					<button class="btn btn-secondary radius" type="submit">
-						<i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					<button  class="btn btn-secondary radius" type="submit">
+						<i class="Hui-iconfont">&#xe632;</i> 确定</button>
 					
 					<button onClick="layer_close()" class="btn btn-default radius"
-						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+						type="button">取消</button>
 				</div>
 			</div>
 		</form>
-	</div>
 </article>
+
 	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -102,7 +90,7 @@
 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
-		src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+		src="lib/jquery.validation/1.14.0/additional-methods.js"></script>
 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
 	<script type="text/javascript"
@@ -116,44 +104,53 @@
 	<script type="text/javascript"
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
-		$("#form-update-add").validate({
+		$("#form-password-change").validate({
 			rules:{
-				workplaceName:{
+				newPassword:{
+					required:true,
+					minlength:4,  
+				},
+				oldPassword:{
 					required:true,
 				},
-				modelid:{
+				repeatPassword:{
 					required:true,
-
-				},
-				workhour:{
-					required:true,
-
-				},
-				workpay:{
-					required:true,
-				},
-				
+					equalTo:"#password"
+				},				
+	
 			},
-			//onkeyup:false,
+			
+            messages:{
+				newPassword:{
+					required:"没有输入新密码",
+					minlength:"密码长度要大于等于4位",  
+				},
+				oldPassword:{
+					required:"当前密码没有输入",
+				},
+				repeatPassword:{
+					required:"需要再次输入密码",
+					equalTo:"两次密码输入不一致"
+				},		
+            },
+			
 			focusCleanup:true,
 			success:"valid",
-			submitHandler : function(form) {
+			submitHandler:function(form){
 				$(form).ajaxSubmit({
-					success : function() {
-
-						parent.layer.msg('修改成功!', {
-							icon : 6,
-							time : 2000
-						});
-						parent.location.reload();
-						//layer_close();
-
+					success: function(data) { 
+						if(data=="true"){
+							parent.layer.msg('密码修改成功',{icon:6,time:1500});	
+							layer_close();
+						}else if(data=="false"){
+							parent.layer.msg('密码输入错误',{icon:2,time:1500});	
+						}
+						//parent.location.reload();
 						//var index = parent.layer.getFrameIndex(window.name);
 						//parent.layer.close(index);
 					}
-
+				
 				})
-
 			}
 		});
 	</script>

@@ -47,12 +47,14 @@
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover">
+					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="#">退出</a></li>
-					</ul></li>
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+
+						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
+					</ul>
+				</li>
 				
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
@@ -85,7 +87,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/order.do')" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -189,23 +191,23 @@
 
 	    <div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath }/settlement.do" method="post">
+		<form action="${pageContext.request.contextPath }/settlementlist.do" method="post">
 		<div class="text-c"> 
 			服务顾问：
-			<select>
-					<option>1</option>
+			<select name="SA">
+					<option value="">0</option>
 				</select>
 			业务状态：
-			<select>
-				<option>1</option>
+			<select name="orderStateId">
+				<option value="">0</option>
 			</select>
 			完工时间：
-			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name=""  value="" class="input-text Wdate" id="datemin" style="width:100px;">
-			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="" value="" class="input-text Wdate" id="datemax" style="width:100px;">
+			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
+			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="Date" value="" class="input-text Wdate" id="datemax" style="width:100px;">
 			车牌号：
-			<input type="text" name="" id="" style="width:100px" class="input-text">			
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">			
 			维修单号：
-			<input type="text" name="" id="" style="width:100px" class="input-text">			
+			<input type="text" name="orderId" id="" style="width:100px" class="input-text">			
 			
 			
 			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
@@ -227,14 +229,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${carInfo }" var="car" varStatus="varSta">					
+					<c:forEach items="${order }" var="order" varStatus="varSta">					
 						<tr class="text-c">									
-							<td><input type="hidden" value="${car.customerCarInfoId}" >${varSta.count }</td>
-							<td>${car.customerName }</td>
-							<td>${car.plateNumber }</td>
-							<td>${car.phone }</td>
-							<td>${car.phone }</td>
-							<td>${car.VIN }</td>
+							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
+							<td>${order.orderId}</td>
+							<td>${order.plateNumber }</td>
+							<td>${order.SA }</td>
+							<td>${order.Date }</td>
+							<td>${order.discountPrice }</td>
+							<td>${order.orderStateId }</td>
 							<td></td>
 							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/getcarinfo.do?customerCarInfoId=${car.customerCarInfoId}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${car.customerCarInfoId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
@@ -253,6 +256,8 @@
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="js/myJs.js"></script>
+
 	<script type="text/javascript"
 		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
 	<!--/_footer /作为公共模版分离出去-->
@@ -277,7 +282,10 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
-
+	function changePassword(title,url,w,h){
+	    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+	}
+	  
 </script>
 	<!--/请在上方写此页面业务相关的脚本-->
 </body>
