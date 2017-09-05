@@ -40,9 +40,9 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> 
-			<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H</a>
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span> 
 			<nav class="nav navbar-nav" id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>

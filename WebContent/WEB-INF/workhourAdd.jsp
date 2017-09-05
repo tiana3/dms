@@ -42,16 +42,16 @@
 <article class="page-container">
 	<form action="WorkHourAddServlet" method="post"
 			class="form form-horizontal" id="form-workhour-add">
-		<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工位名：</label>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">工位名：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text"
-						value="${workhour.workplaceName }" id=""
+						value="${workhour.workplaceName }" placeholder="" id=""
 						name="workplaceName">
 				</div>
-		</div>
+			</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>适用车型：</label>
+			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<select name="modelid" class="select">
 					<c:forEach items="${carTypes }" var="carType">
@@ -60,15 +60,9 @@
 				</select>
 			</div>
 		</div>
+			
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时(单位：小时)：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${workhour.workhour }"
-						id="" name="workhour">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>工时费(单位：元)：</label>
+				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="${workhour.workpay }"
 						id="" name="workpay">
@@ -114,19 +108,28 @@
 	<script type="text/javascript">
 		$("#form-workhour-add").validate({
 			rules:{
-				workhourName:{
+				workplaceName:{
 					required:true,
 				},
 				modelid:{
-					required:true,
-				},
-				workhour:{
 					required:true,
 				},
 				workpay:{
 					required:true,
 				},
 			},
+            messages:{
+             	workplaceName:{
+                     required:"请填写工位名 ",
+                 },
+                 modelid:{
+                     required:"请选择车型 ",
+                 },
+                 workpay:{
+                     required: "请填写工时费 ",
+                 },
+			},
+			
 			focusCleanup:true,
 			success:"valid",
 			submitHandler:function(form){

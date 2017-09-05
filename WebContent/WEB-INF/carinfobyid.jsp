@@ -28,7 +28,7 @@
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>新增材料管理</title>
+<title>新修改客户车辆信息</title>
 </head>
 <body>
 <div class="mt-10">
@@ -118,19 +118,40 @@ $("#form-carinfo-add").validate({
 		customerName:{
 			required:true,
 		},
-		plateNumber:{
+		phone:{
 			required:true,
 		},
 		VIN:{
 			required:true,
-
 		},
-		phone:{
+		engineNumber:{
 			required:true,
-
 		},
-		
+		plateNumber:{
+			required:true,
+		},
 	},
+    messages:{
+    	customerName:{
+             required:"请输入客户姓名 ",
+         },
+         phone:{
+             required:"请输入客户联系电话",
+         },
+         VIN:{
+             required: "请填写车架号",
+         },
+         engineNumber:{
+             required:"请填写发动机号 ",
+         },
+         plateNumber:{
+        	 required:"请填写车牌号 ",
+         }
+	},
+	errorPlacement : function(error, element) { 
+		//给element增加一个属性，是在文本里有提示信息
+		$(element).attr("placeholder",error.html());
+	}, 
 	//onkeyup:false,
 	focusCleanup:true,
 	success:"valid",

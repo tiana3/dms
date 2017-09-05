@@ -54,7 +54,6 @@ public class WorkHourAddServlet extends HttpServlet{
 		WorkHour work = new WorkHour();
 		work.setWorkplaceName(request.getParameter("workplaceName"));
 		work.setModelId(Integer.parseInt(request.getParameter("modelid")));
-		work.setWorkhour(Double.parseDouble(request.getParameter("workhour")));
 		work.setWorkpay(Double.parseDouble(request.getParameter("workpay")));
 		WorkHourDao dao = new WorkHourService();
 		dao.addWorkHour(work);

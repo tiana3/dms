@@ -126,11 +126,28 @@ $("#form-part-add").validate({
 				required:true,
 
 			},
-			idcard:{
+			jobid:{
 				required:true,
 
 			},
 			
+		},
+        messages:{
+        	name:{
+                 required:"请输入员工姓名 ",
+             },
+             gender:{
+                 required:"员工性别不能为空",
+             },
+             idcard:{
+                 required: "请填写员工身份证号 ",
+             },
+             phone:{
+                 required:"请填写员工联系电话 ",
+             },
+             jobid:{
+                 required: "请选择员工部门 ",
+             },
 		},
 		//onkeyup:false,
 		focusCleanup:true,

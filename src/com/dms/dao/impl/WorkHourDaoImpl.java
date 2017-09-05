@@ -80,16 +80,15 @@ public class WorkHourDaoImpl implements WorkHourDao{
 
 	@Override
 	public Integer addWorkHour(WorkHour workhour) {
-		String sql = "insert into workplace (workplaceName,workhour,workpay,modelId) value(?,?,?,?)";
+		String sql = "insert into workplace (workplaceName,workpay,modelId) value(?,?,?)";
 		
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			
 			pre.setString(1, workhour.getWorkplaceName());
-			pre.setDouble(2, workhour.getWorkhour());
-			pre.setDouble(3, workhour.getWorkpay());
-			pre.setInt(4, workhour.getModelId());
+			pre.setDouble(2, workhour.getWorkpay());
+			pre.setInt(3, workhour.getModelId());
 			pre.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,15 +127,14 @@ public class WorkHourDaoImpl implements WorkHourDao{
 	@Override
 	public void updateWorkHour(WorkHour workhour) {
 		String sql = "UPDATE workplace inner join cartype on workplace.modelId = cartype.modelId SET "
-				+ "workplace.workplaceName=?, workplace.workhour=?, workplace.workpay=?,workplace.modelId=? WHERE workplaceId=?";
+				+ "workplace.workplaceName=?, workplace.workpay=?,workplace.modelId=? WHERE workplaceId=?";
 		try {
 			con = JdbcUtil.getConnection();
 			pre = con.prepareStatement(sql);
 			pre.setString(1, workhour.getWorkplaceName());
-			pre.setDouble(2, workhour.getWorkhour());
-			pre.setDouble(3, workhour.getWorkpay());
-			pre.setInt(4, workhour.getModelId());
-			pre.setInt(5, workhour.getWorkplaceId());
+			pre.setDouble(2, workhour.getWorkpay());
+			pre.setInt(3, workhour.getModelId());
+			pre.setInt(4, workhour.getWorkplaceId());
 			pre.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
