@@ -119,7 +119,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
@@ -157,7 +157,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li><a href="${pageContext.request.contextPath }/carinfo.do" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
