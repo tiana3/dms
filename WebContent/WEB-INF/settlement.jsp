@@ -195,11 +195,11 @@
 		<div class="text-c"> 
 			服务顾问：
 			<select name="SA">
-					<option value="">0</option>
+					<option value=""></option>
 				</select>
 			业务状态：
 			<select name="orderStateId">
-				<option value="">0</option>
+				<option value=""></option>
 			</select>
 			完工时间：
 			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
@@ -233,12 +233,12 @@
 						<tr class="text-c">									
 							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
 							<td>${order.orderId}</td>
-							<td>${order.plateNumber }</td>
+							<td>${order.customerCarInfo.plateNumber }</td>
 							<td>${order.SA }</td>
-							<td>${order.Date }</td>
+							<td>${order.date }</td>
 							<td>${order.discountPrice }</td>
 							<td>${order.orderStateId }</td>
-							<td></td>
+							
 							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/getcarinfo.do?customerCarInfoId=${car.customerCarInfoId}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${car.customerCarInfoId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>

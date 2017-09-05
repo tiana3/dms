@@ -133,6 +133,12 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
+	public List<Order> getSettlementByWordKey(String completedDate, Integer SA, Integer orderStateId,
+			String plateNumber, String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> order =mapper.getSettlementByWordKey(completedDate, SA, orderStateId, plateNumber, orderId);
+		return order ;
+		
 	public void updatepicker(Integer Id, Integer picker) {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	

@@ -102,13 +102,6 @@ public class OrderController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	//订单中，搜索材料的显示详情
 	@RequestMapping("partList.do")
 	public String partList(Model model, @RequestParam(value = "partname") String partname, @RequestParam(value = "partno") String partno, @RequestParam(value = "modelid") String modelid) {
@@ -362,7 +355,6 @@ public class OrderController {
 			Order lastOrder = order;
 			List<Employee> Ma_Tec = service.getMa_Tec();
 			List<Employee> inspectors = service.getInspectors();
-			
 			if(carInfo!=null) {
 				model.addAttribute("order", order);
 				model.addAttribute("repairType", repairType);
