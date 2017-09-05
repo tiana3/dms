@@ -40,6 +40,7 @@ public class CarTypeListServlet extends HttpServlet {
 		}
 		
 		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		PrintWriter writer = response.getWriter();
 		if(powerIds.contains(16)){
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");
@@ -49,11 +50,11 @@ public class CarTypeListServlet extends HttpServlet {
 		
 			request.setAttribute("list", list);
 			
-			request.getRequestDispatcher("/WEB-INF/cartypelist.jsp").forward(request, response);
+			writer.write("{\"valid\":1,\"url\":\""+request.getContextPath()+"/CarTypeList\"}");
 		} else {
-			PrintWriter writer = response.getWriter();
 			writer.write("{\"valid\":0,\"message\":\"对不起，没有查询车辆型号权限\"}");
 		}
+		writer.close();
 		
 	}
 

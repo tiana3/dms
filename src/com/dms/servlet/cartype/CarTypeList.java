@@ -1,6 +1,7 @@
 package com.dms.servlet.cartype;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,13 +15,12 @@ import com.dms.entity.CarType;
 import com.dms.service.CarTypeService;
 import com.dms.service.impl.CarTypeServiceImpl;
 
-/**
- * Servlet implementation class CarTypeShowServlet
+/**当权限验证通过后，会重定向到这，这里还是要先判断权限，然后跳转页面
+ * Servlet implementation class CarTypeList
  */
-@WebServlet("/CarTypeShowServlet")
-public class CarTypeShowServlet extends HttpServlet {
+@WebServlet("/CarTypeList")
+public class CarTypeList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -36,28 +36,21 @@ public class CarTypeShowServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath()+"/login.jsp");
 				return;
 			}
-		}	
-	
+		}
+		
+		
 		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(16)){
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			
+			CarTypeService service = new CarTypeServiceImpl();
+			List<CarType> list = service.getAllCarType();
 		
-		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		
-		if(powerIds.contains(15)&&powerIds.contains(13)){
-			String act = request.getParameter("act");
-			if(act == null) {
-				
-			} else if("update".equals(act)) {
-				String modelId = request.getParameter("modelId");
-				CarTypeService service = new CarTypeServiceImpl();
-				CarType carType = service.getCarTypeById(Integer.parseInt(modelId));
-				request.setAttribute("carType", carType);
-			}
-			request.getRequestDispatcher("/WEB-INF/cartypeAddUpdate.jsp").forward(request, response);
-		}else {
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/cartypelist.jsp").forward(request, response);
+		} else {
 			response.sendRedirect(request.getContextPath()+"/login.jsp");
-			return;
 		}
 	}
 

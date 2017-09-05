@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
           <c:forEach items="${partlist}" var="part" varStatus="varSta">
-                    <tr class="text-c">                  		
+                    <tr>                  		
                         <td><input type="hidden" value="${part.partId }">${part.partName}</td>
                         <td>${part.partNo}</td>
                         <td>${part.sellingPrice}</td>                                   

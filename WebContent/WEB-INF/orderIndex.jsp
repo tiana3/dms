@@ -319,7 +319,7 @@
 				</span>
 	            <span class="r">
 					<a href="javascript:;" onclick="allWork_select('整单派工','${pageContext.request.contextPath }/allWorkSelect.do','300','200')" class="btn btn-secondary  radius">整单派工</a>
-					<a href="javascript:;" onclick="" class="btn btn-secondary  radius"><i class="Hui-iconfont">&#xe600;</i>添加预定义工位</a>
+					<a href="javascript:;" onclick="add_work('选择预定义工位','${pageContext.request.contextPath }/addWork.do','800','600')" class="btn btn-secondary  radius"><i class="Hui-iconfont">&#xe600;</i>添加预定义工位</a>
 					<a class="btn btn-secondary  radius" onclick="custom_add()" href="javascript:;"> <i class="Hui-iconfont">&#xe600;</i>添加自定义工位</a>
 					<a class="btn btn-danger  radius" onclick="workplace_delete()" href="javascript:;"> <i class="Hui-iconfont">&#xe6e2;</i>删除工位</a>
 	            </span>
@@ -381,11 +381,13 @@
 							<td>${part.partNo }</td>
 							<td>${part.sellingPrice }</td>
 							<td>${part.model }</td>
+								<td>
 							<c:forEach items="${Ma_Tec }" var="ma">
 								<c:if test="${part.picker == ma.employeeId}">
-									<td>${ma.jobName }-${ma.employeeName }</td>
+									${ma.jobName }-${ma.employeeName }
 								</c:if>
 							</c:forEach>
+								</td>
 
 							<td>
 								<a style="text-decoration: none" class="ml-5" href="javascript:;"
@@ -597,7 +599,9 @@ function save() {
    function add_part(title,url,w,h){
        layer_show(title,url,w,h);
    }
-   
+   function add_work(title,url,w,h){
+       layer_show(title,url,w,h);
+   } 
    
    
    function deleteOrder() {

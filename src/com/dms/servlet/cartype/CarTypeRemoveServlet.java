@@ -1,12 +1,14 @@
 package com.dms.servlet.cartype;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dms.service.CarTypeService;
 import com.dms.service.impl.CarTypeServiceImpl;
@@ -25,11 +27,33 @@ public class CarTypeRemoveServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String stringId = request.getParameter("modelId");
-		int modelId = Integer.parseInt(stringId);
-		CarTypeService service = new CarTypeServiceImpl();
-		service.removeCarType(modelId);
-		response.sendRedirect(request.getContextPath() + "/CarTypeListServlet");
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			response.sendRedirect(request.getContextPath()+"/login.jsp");
+			return;
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				response.sendRedirect(request.getContextPath()+"/login.jsp");
+				return;
+			}
+		}
+		
+		
+		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(14)){
+			String stringId = request.getParameter("modelId");
+			int modelId = Integer.parseInt(stringId);
+			CarTypeService service = new CarTypeServiceImpl();
+			service.removeCarType(modelId);
+			response.getWriter().print("1");
+		}else {
+			response.getWriter().print("你没有删除权限");
+		}
+
+		
+		
 	}
 
 	/**

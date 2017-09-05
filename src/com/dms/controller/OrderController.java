@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dms.dao.WorkHourDao;
 import com.dms.dao.impl.PartDaoImpl;
 import com.dms.entity.CarType;
 import com.dms.entity.CustomerCarInfo;
@@ -26,9 +27,11 @@ import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 import com.dms.entity.RepairType;
+import com.dms.entity.WorkHour;
 import com.dms.service.CarTypeService;
 import com.dms.service.OrderService;
 import com.dms.service.impl.CarTypeServiceImpl;
+import com.dms.service.impl.WorkHourService;
 
 @Controller
 public class OrderController {
@@ -101,6 +104,44 @@ public class OrderController {
 		}
 		
 	}
+	
+	//跳到选择预定义工时界面
+	@RequestMapping("addWork.do")
+	public String partList(Model model) {
+		CarTypeService service = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service.getAllCarType();
+		model.addAttribute("carTypes", carTypeList);
+		return "orderSelectWork";
+	}
+	
+	//订单中，选择条件后查询工位，显示
+	@RequestMapping("workList.do")
+	public String workList(Model model, @RequestParam(value = "workplaceName") String workplaceName, @RequestParam(value = "modelid") String modelid) {
+		CarTypeService service = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service.getAllCarType();
+		model.addAttribute("carTypes", carTypeList);
+		
+		Integer modelId = 0;
+		if(modelid!=null) {
+			modelId= Integer.parseInt(modelid);
+		}
+		WorkHour work =  new WorkHour();
+		work.setWorkplaceName(workplaceName);
+		work.setModelId(modelId);
+		WorkHourDao dao1 = new WorkHourService();
+		List<WorkHour> list = dao1.getWorkHour(work);
+		model.addAttribute("work", list);
+		
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		OrderService  orderService = (OrderService)ctx.getBean("orderServiceImpl");
+		List<Employee> Ma_Tec = orderService.getMa_Tec();
+		model.addAttribute("Ma_Tec", Ma_Tec);
+		
+		return "orderSelectWork";
+	}
+	
+	
+	
 	
 	//订单中，搜索材料的显示详情
 	@RequestMapping("partList.do")
@@ -331,6 +372,7 @@ public class OrderController {
 		return "theMaintenance";
 	}
 	
+	//在修单查询后，选择订单后到这来处理
 	@RequestMapping("showOrder.do")
 	public String showOrder(Model model,HttpServletRequest request,@RequestParam(value = "orderId") String orderId ) {
 		//下面验证是否登录，登录正常跳转，否则跳转登录页

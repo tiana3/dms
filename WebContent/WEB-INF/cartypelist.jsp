@@ -249,16 +249,36 @@
 
 	<script type="text/javascript">
 	function cartype_edit(title,url,id,w,h){
-		layer_show(title,url,w,h);
+		$.ajax({
+			type : 'post',
+			url : "${pageContext.request.contextPath }/CarTypeShow",
+			success : function(data){
+				if(data=="1"){
+					layer_show(title,url,500,300);
+				}else{
+					layer.msg(data,{icon:4,time:1500});
+				}
+			}
+		});
 	}
 	
 	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
 			$.ajax({
-				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+				type : 'post',
+				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet",
+				data:{modelId:id},		
+				success : function(data){
+					if(data=="1"){
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!',{icon:1,time:1000});
+					}else{
+						layer.msg(data,{icon:4,time:1500});
+					}
+				}
+			});
+
 		});
 	}
 
