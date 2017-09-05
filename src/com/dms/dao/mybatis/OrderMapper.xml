@@ -31,11 +31,10 @@
      	<result property="discountPrice" column="discountPrice" javaType="java.lang.Double"></result>
   		
   		<!-- 根据数据库 column="customerCarInfoId"的值  去com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById 查询详细的车辆信息            javaType="CustomerCarInfo"是指实体类的属性是什么类型的 -->
-  		<association property="customerCarInfo" column="customerCarInfoId"  javaType="CustomerCarInfo" select="com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById"></association>
-  		
+  		<association property="customerCarInfo" column="customerCarInfoId"  javaType="CustomerCarInfo" select="com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById"></association>  		
   		<collection property="customs" column="orderId" select="getOrderCustomsByOrderId"></collection>
  		<collection property="parts" column="orderId" select="getOrderPartsByOrderId"></collection>
-  
+  		
   
    </resultMap>
     
@@ -68,7 +67,7 @@
 		</foreach>
 	
 	</insert>
-    
+  
     <select id="getAllOrders"   resultMap="order">
   		  SELECT * FROM orders where orderStateId = 1 
     </select>
@@ -101,6 +100,16 @@
     <select id="getOrderPartsByOrderId" parameterType="String"  resultType="Part">
 		select * from order_part inner join part on order_part.partId = part.partId inner join cartype on part.modelId = cartype.modelId where orderId = #{orderId}
     </select>
+    <select id="getSettlementByWordKey" resultMap="order">
+    	select * from orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId
+    	<where>
+    		<if test="orderId != null">orderId like "%"#{orderId}"%"</if>
+			<if test="orderStateId != null">and orderStateId = #{orderStateId}</if>
+			<if test="completedDate != null">and completedDate like "%"#{completedDate}"%"</if>
+			<if test="SA != null">and SA  like "%"#{SA}"%"</if>
+			<if test="plateNumber != null">and plateNumber like "%"#{plateNumber}"%"</if>
+    	</where>
+    </select>
     
     <delete id="deleteOrder" parameterType="String">
     	delete from orders where orderId = #{orderId}
@@ -118,5 +127,8 @@
     </update>
     <delete id="dedeletepart">
     	delete from order_part where Id = ${Id}
-    </delete>  
+    </delete>
+    <insert id="addpartonOrder">
+    	insert into order_part(orderId,partId,picker)  values(#{orderId},#{partId},#{picker})
+    </insert>  
 </mapper>

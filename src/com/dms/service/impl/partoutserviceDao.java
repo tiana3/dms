@@ -10,6 +10,7 @@ import com.dms.dao.CustomerCarInfoDao;
 import com.dms.dao.EmployeeDao;
 import com.dms.dao.OrderDao;
 import com.dms.dao.OrderIdBuildDao;
+import com.dms.dao.PartDao;
 import com.dms.dao.RepairTypeDao;
 import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
@@ -24,7 +25,17 @@ public class partoutserviceDao implements partoutservice {
 	private EmployeeDao employeeDao;
 	private OrderDao orderDao;
 	private OrderIdBuildDao orderIdBuildDao;
+	private PartDao partDao;
 	
+	
+	public PartDao getPartDao() {
+		return partDao;
+	}
+
+	public void setPartDao(PartDao partDao) {
+		this.partDao = partDao;
+	}
+
 	public OrderIdBuildDao getOrderIdBuildDao() {
 		return orderIdBuildDao;
 	}
@@ -187,6 +198,18 @@ public class partoutserviceDao implements partoutservice {
 	public void dedeletepart(Integer Id) {
 		// TODO Auto-generated method stub
 		orderDao.dedeletepart(Id);
+	}
+
+	@Override
+	public List<Part> getPart(Part part) {
+		// TODO Auto-generated method stub
+		return partDao.getPart(part);
+	}
+
+	@Override
+	public void addpartonOrder(String orderId, String partId, int picker) {
+		// TODO Auto-generated method stub
+		orderDao.addpartonOrder(orderId, partId, picker);
 	}
 
 }
