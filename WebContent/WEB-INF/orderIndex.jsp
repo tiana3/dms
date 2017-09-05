@@ -97,7 +97,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="领料出库">领料出库</a></li>
+					<li><a href="${pageContext.request.contextPath }/partout.do" title="领料出库">领料出库</a></li>
 					<li><a href="#" title="销货出库">销货出库出库</a></li>
 					<li><a href="#" title="退货出库">退货出库</a></li>
 					<li><a href="#" title="移库出库">移库出库</a></li>
