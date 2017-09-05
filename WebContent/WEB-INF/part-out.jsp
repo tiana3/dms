@@ -77,11 +77,11 @@
 
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe616;</i> 维修业务<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
@@ -93,13 +93,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-picture">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe613;</i> 库房管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/partout.do" title="领料出库">领料出库</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/partout.do" title="领料出库">领料出库</a></li>
 					<li><a href="#" title="销货出库">销货出库出库</a></li>
 					<li><a href="#" title="退货出库">退货出库</a></li>
 					<li><a href="#" title="移库出库">移库出库</a></li>
