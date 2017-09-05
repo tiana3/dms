@@ -12,11 +12,7 @@
 		<mapper resource="com/dms/dao/mybatis/EmployeeMapper.xml"/>
 		<mapper resource="com/dms/dao/mybatis/OrderMapper.xml"/>
 		<mapper resource="com/dms/dao/mybatis/OrderIdBuildMapper.xml"/>
-<<<<<<< HEAD
-    
-=======
-        
->>>>>>> branch 'master' of \\172.13.17.209\git
+
         <mapper resource="com/dms/dao/mybatis/AdminPowersMapper.xml"/>  
 	</mappers>
 </configuration>
