@@ -1,6 +1,7 @@
 package com.dms.servlet.cartype;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,17 +15,19 @@ import com.dms.entity.CarType;
 import com.dms.service.CarTypeService;
 import com.dms.service.impl.CarTypeServiceImpl;
 
-/**
- * Servlet implementation class CarTypeShowServlet
+/**配合ajax实现 权限
+ * Servlet implementation class CarTypeShow
  */
-@WebServlet("/CarTypeShowServlet")
-public class CarTypeShowServlet extends HttpServlet {
+@WebServlet("/CarTypeShow")
+public class CarTypeShow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		//下面验证是否登录，登录正常跳转，否则跳转登录页
 		HttpSession session = request.getSession(false);
 		if(session==null){
@@ -39,26 +42,15 @@ public class CarTypeShowServlet extends HttpServlet {
 		}	
 	
 		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
-		
-		
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		
+		PrintWriter writer = response.getWriter();
 		if(powerIds.contains(15)&&powerIds.contains(13)){
-			String act = request.getParameter("act");
-			if(act == null) {
-				
-			} else if("update".equals(act)) {
-				String modelId = request.getParameter("modelId");
-				CarTypeService service = new CarTypeServiceImpl();
-				CarType carType = service.getCarTypeById(Integer.parseInt(modelId));
-				request.setAttribute("carType", carType);
-			}
-			request.getRequestDispatcher("/WEB-INF/cartypeAddUpdate.jsp").forward(request, response);
-		}else {
-			response.sendRedirect(request.getContextPath()+"/login.jsp");
-			return;
+			
+			writer.print("1");
+		} else {
+			writer.print("你没有权限");
 		}
+		writer.close();
+	
 	}
 
 	/**
