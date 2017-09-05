@@ -133,4 +133,12 @@ public class OrderDaoImpl implements OrderDao {
 		return mapper.getOrderByOrderId(orderId);
 	}
 
+	@Override
+	public List<Order> getSettlementByWordKey(String completedDate, Integer SA, Integer orderStateId,
+			String plateNumber, String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> order =mapper.getSettlementByWordKey(completedDate, SA, orderStateId, plateNumber, orderId);
+		return order;
+	}
+
 }

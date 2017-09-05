@@ -23,10 +23,10 @@ public class SettlementController {
 		return "settlement";
 	}
 	@RequestMapping("settlementlist.do")
-	public String getSettlementAll(Model model){
+	public String getSettlementAll(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("orderStateId")Integer orderStateId,@Param("customerCarInfo") String customerCarInfo,@Param("orderId")String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService  service = (SettlementService)ctx.getBean("settlementServiceImpl");
-		List<Order> order = service.getSettlementAll();
+		List<Order> order = service.getSettlementByWordKey(completedDate, SA, orderStateId, customerCarInfo, orderId);
 		model.addAttribute("order", order);
 		return "settlement" ;
 	}
