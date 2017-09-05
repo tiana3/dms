@@ -136,16 +136,10 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> getSettlementByWordKey(String completedDate, Integer SA,
 			String plateNumber, String orderId) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
-<<<<<<< HEAD
 		List<Order> order =mapper.getSettlementByWordKey(completedDate, SA, plateNumber, orderId);
-		return order ;
-	}
-=======
-		List<Order> order =mapper.getSettlementByWordKey(completedDate, SA, orderStateId, plateNumber, orderId);
 		return order;
 	}
 		
->>>>>>> branch 'master' of \\172.13.17.209\git
 	public void updatepicker(Integer Id, Integer picker) {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	
@@ -159,14 +153,11 @@ public class OrderDaoImpl implements OrderDao {
 		mapper.dedeletepart(Id);
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public void addpartonOrder(String orderId, String partId, int picker) {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.addpartonOrder(orderId, partId, picker);
 	}
->>>>>>> branch 'master' of \\172.13.17.209\git
 
 }
