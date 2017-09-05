@@ -124,7 +124,31 @@ $("#form-carinfo-add").validate({
 		engineNumber:{
 			required:true,
 		},
+		plateNumber:{
+			required:true,
+		},
 	},
+    messages:{
+    	customerName:{
+             required:"请输入客户姓名 ",
+         },
+         phone:{
+             required:"请输入客户联系电话",
+         },
+         VIN:{
+             required: "请填写车架号",
+         },
+         engineNumber:{
+             required:"请填写发动机号 ",
+         },
+         plateNumber:{
+        	 required:"请填写车牌号 ",
+         }
+	},
+	errorPlacement : function(error, element) { 
+		//给element增加一个属性，是在文本里有提示信息
+		$(element).attr("placeholder",error.html());
+	}, 
 	//onkeyup:false,
 	focusCleanup:true,
 	success:"valid",

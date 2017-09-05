@@ -39,11 +39,9 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a>  <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span> 
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
@@ -155,7 +153,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li><a href="${pageContext.request.contextPath }/carinfo.do" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -165,10 +163,10 @@
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd style="display: block;">
-				<ul>
-					<li><a href="#" title="工时工位管理">工时工位管理</a></li>
-					<li><a href="#" title="材料目录管理">材料目录管理</a></li>
-					<li class="current"><a href="#" title="厂家车型管理">厂家车型管理</a></li>
+			<ul>
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -190,7 +188,7 @@
 
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath }/CustomerCarInfoServlet" method="post">
+		<form action="${pageContext.request.contextPath }/carinfo.do" method="post">
 		<div class="text-c"> 
 			客户姓名：
 			<input type="text" name="customerName" class="input-text" style="width:100px;">

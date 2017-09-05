@@ -39,7 +39,7 @@
 			
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
+			<label class="form-label col-xs-4 col-sm-2">配件名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="${part.partName}" placeholder="" id="" name="partname">
 			</div>
@@ -61,7 +61,7 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>进货成本：</label>
+			<label class="form-label col-xs-4 col-sm-2">进货成本：</label>
 				<div class="formControls col-xs-8 col-sm-9">
                     <input type="text" class="input-text" value="${part.buyingPrice}" placeholder="" id="" name="buyingprice">
 				</div>
@@ -119,6 +119,23 @@ $("#form-update-add").validate({
 			required:true,
 		},
 		
+	},
+    messages:{
+      	partname:{
+            required:"请填写配件名 ",
+        },
+        partno:{
+            required:"请填写配件号",
+        },
+        modelid:{
+            required: "请选择车型 ",
+        },
+        buyingprice:{
+            required:"请输入进货成本 ",
+        },
+        sellingprice:{
+            required: "请填写销售价",
+        },
 	},
 	//onkeyup:false,
 	focusCleanup:true,

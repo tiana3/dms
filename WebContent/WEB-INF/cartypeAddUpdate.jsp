@@ -91,6 +91,25 @@
 		src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 	$("#form-cartype-add").validate({
+		rules:{
+			factory:{
+				required:true,
+			},
+			model:{
+				required:true,
+			},
+		},
+        messages:{
+        	factory:{
+                 required:"请填写厂家 ",
+             },
+             model:{
+                 required:"请填写车型",
+             },
+		},
+			focusCleanup:true,
+			success:"valid",
+		
 		submitHandler:function(form){
 			$(form).ajaxSubmit({
 				success: function() { 

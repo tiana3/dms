@@ -124,20 +124,39 @@
 		$("#form-update-add").validate({
 
 			rules : {
-				name : {
-					required : true,
+				name:{
+					required:true,
 				},
-				gender : {
-					required : true,
+				gender:{
+					required:true,
 				},
-				phone : {
-					required : true,
+				idcard:{
+					required:true,
 
 				},
-				idcard : {
-					required : true,
+				phone:{
+					required:true,
+
+				},
+				jobid:{
+					required:true,
+
 				},
 				
+			},
+            messages:{
+                	name:{
+                         required:"请输入员工姓名 ",
+                     },
+                     gender:{
+                         required:"员工性别不能为空",
+                     },
+                     idcard:{
+                         required: "请填写员工身份证号 ",
+                     },
+                     phone:{
+                         required:"请填写员工联系电话 ",
+                     },
 			},
 			//onkeyup:false,
 			focusCleanup : true,

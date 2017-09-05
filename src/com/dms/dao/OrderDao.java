@@ -3,6 +3,8 @@ package com.dms.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dms.entity.Custom;
 import com.dms.entity.CustomerCarInfo;
@@ -35,4 +37,5 @@ public interface OrderDao {
 	Order getOrderByOrderId(String orderId);             //根据维修单号查询 维修单
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
+	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
 }

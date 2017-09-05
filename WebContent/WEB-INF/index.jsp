@@ -38,8 +38,9 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> 
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span>
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
@@ -114,7 +115,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
@@ -152,7 +153,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li><a href="${pageContext.request.contextPath }/carinfo.do" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>

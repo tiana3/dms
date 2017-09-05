@@ -39,11 +39,9 @@
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span> 
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
@@ -117,7 +115,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="结算">结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
@@ -155,7 +153,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="#" title="客户车辆信息">客户车辆信息</a></li>
+					<li><a href="${pageContext.request.contextPath }/carinfo.do" title="客户车辆信息">客户车辆信息</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -251,16 +249,36 @@
 
 	<script type="text/javascript">
 	function cartype_edit(title,url,id,w,h){
-		layer_show(title,url,w,h);
+		$.ajax({
+			type : 'post',
+			url : "${pageContext.request.contextPath }/CarTypeShow",
+			success : function(data){
+				if(data=="1"){
+					layer_show(title,url,500,300);
+				}else{
+					layer.msg(data,{icon:4,time:1500});
+				}
+			}
+		});
 	}
 	
 	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
 			$.ajax({
-				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+				type : 'post',
+				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet",
+				data:{modelId:id},		
+				success : function(data){
+					if(data=="1"){
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!',{icon:1,time:1000});
+					}else{
+						layer.msg(data,{icon:4,time:1500});
+					}
+				}
+			});
+
 		});
 	}
 

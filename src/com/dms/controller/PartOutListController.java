@@ -11,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dms.dao.impl.PartDaoImpl;
+import com.dms.entity.CarType;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 import com.dms.entity.RepairType;
+import com.dms.service.CarTypeService;
 import com.dms.service.partoutservice;
+import com.dms.service.impl.CarTypeServiceImpl;
 
 @Controller
 public class PartOutListController {
@@ -87,11 +91,55 @@ public class PartOutListController {
 		service.dedeletepart(Id);
 		//return "redirect:/showOrderandpart.do?orderId=" + orderId;
 	}
+	
 	@RequestMapping("part-show-insert.do")
-	public String showinsert(@RequestParam(value = "orderId")String orderId) {
+	public String showinsert(@RequestParam(value = "orderId")String orderId,Model model) {
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		List<Employee>employees2 = service.getMa_Tec();
+		model.addAttribute("employees2",employees2);
+		model.addAttribute("orderId",orderId);
+		Part part = new Part();
+		part.setPartNo(null);
+		part.setModelId(0);
+		part.setPartName(null);
 		
-		return "redirect:/showOrderandpart.do?orderId=" + orderId;
+		PartDaoImpl imp = new PartDaoImpl();	
+		List<Part> list = imp.getPart(part);
+		CarTypeService service1 = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service1.getAllCarType();
+		model.addAttribute("partlist",list);
+		model.addAttribute("carTypes", carTypeList);
+		return "partinsert";
+	}
+	@RequestMapping("part-out-insert.do")
+	public String insertpartout(@RequestParam(value = "orderId")String orderId,Model model, @RequestParam(value = "partname") String partname, @RequestParam(value = "partno") String partno, @RequestParam(value = "modelid") String modelid) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		List<Employee>employees2 = service.getMa_Tec();
+		model.addAttribute("employees2",employees2);
+		Integer modelId = 0;
+		if(modelid!=null) {
+			modelId= Integer.parseInt(modelid);
+		}
+		Part part = new Part();
+		part.setPartNo(partno);
+		part.setModelId(modelId);
+		part.setPartName(partname);
+		
+		PartDaoImpl imp = new PartDaoImpl();	
+		List<Part> list = imp.getPart(part);
+		model.addAttribute("partlist",list);
+		model.addAttribute("orderId",orderId);
+		CarTypeService service1 = new CarTypeServiceImpl();
+		List<CarType> carTypeList = service1.getAllCarType();
+		model.addAttribute("carTypes", carTypeList);
+		return "partinsert";
+	}
+	@RequestMapping("part-out-add.do")
+	public void add(@RequestParam(value = "orderId")String orderId,Model model,@RequestParam(value = "partId")String partId,@RequestParam(value = "picker")int picker) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		partoutservice  service = (partoutservice) ctx.getBean("partoutserviceDao");
+		service.addpartonOrder(orderId, partId, picker);
 	}
 }

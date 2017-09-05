@@ -27,7 +27,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>root</value>
+			<value>965200</value>
 		</property>
 	</bean>
 	
@@ -70,7 +70,11 @@
 	
 	<bean id="carTypeDaoImpl" class="com.dms.dao.impl.CarTypeDaoImpl">
 	</bean>
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'master' of \\172.13.17.209\git
 	<bean id="adminDaoImpl" class="com.dms.dao.impl.AdminDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
@@ -93,13 +97,27 @@
 
 	</bean>
 	<bean id="settlementServiceImpl" class="com.dms.service.impl.SettlementServiceImpl">
+<<<<<<< HEAD
 	<property name="employeeDao" ref="employeeDaoImpl"/>	
+=======
+>>>>>>> branch 'master' of \\172.13.17.209\git
 		<property name="orderDao" ref="orderDaoImpl"/>	
 	</bean>
-
-		
+	
+	<bean id="partoutserviceDao" class="com.dms.service.impl.partoutserviceDao">
+		<property name="customerCarInfoDao" ref="customerCarInfoDao"/>
+		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
+		<property name="employeeDao" ref="employeeDaoImpl"/>	
+		<property name="orderDao" ref="orderDaoImpl"/>	
+		<property name="orderIdBuildDao" ref="orderIdBuildDaoImpl"/>
+	</bean>	
+	
 	<bean id="adminServiceImpl" class="com.dms.service.impl.AdminServiceImpl">
 		<property name="adminDao" ref="adminDaoImpl"/>	
+<<<<<<< HEAD
 	</bean>
+=======
+</bean>
+>>>>>>> branch 'master' of \\172.13.17.209\git
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
