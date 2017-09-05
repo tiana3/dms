@@ -12,7 +12,7 @@
 		<mapper resource="com/dms/dao/mybatis/EmployeeMapper.xml"/>
 		<mapper resource="com/dms/dao/mybatis/OrderMapper.xml"/>
 		<mapper resource="com/dms/dao/mybatis/OrderIdBuildMapper.xml"/>
-        <mapper resource="com/dms/dao/mybatis/SettlementMapper.xml"/>  
+    
         <mapper resource="com/dms/dao/mybatis/AdminPowersMapper.xml"/>  
 	</mappers>
 </configuration>

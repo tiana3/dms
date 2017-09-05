@@ -15,7 +15,7 @@ public interface OrderDao {
 	List<Order> getAllOrders();   // 查看所有订单
 	//根据客户车辆信息id号，服务顾问id号，维修类型id号   查询获取所有订单
 	List<Order> getOrders(@Param("orderId")String orderId, @Param("plateNumber")String plateNumber, @Param("employeeId")int employeeId, @Param("repairId")int repairId);
-	List<Order> getSettlementByWordKey(@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("orderStateId")Integer orderStateId,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
+	List<Order> getSettlementByWordKey(@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
 	void updateOrder(Order order);	
 
 	Order getLastOrder(@Param("plateNumber")String plateNumber, @Param("VIN")String VIN);//查询出最后一次订单的送修人和电话

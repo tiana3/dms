@@ -186,7 +186,7 @@
 	财务管理 <span class="c-gray en">&gt;</span> 结算 <a
 		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
-		href="javascript:location.replace(location.href);" title="刷新"><i
+		href="${pageContext.request.contextPath }/settlement.do" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 	    <div class="Hui-article">
@@ -195,12 +195,12 @@
 		<div class="text-c"> 
 			服务顾问：
 			<select name="SA">
-					<option value=""></option>
+				<option value="0">全部</option>
+				<c:forEach items="${employee }" var="employee" >
+					<option value="${employee.employeeId }">${employee.employeeName }</option>
+				</c:forEach>
 				</select>
-			业务状态：
-			<select name="orderStateId">
-				<option value=""></option>
-			</select>
+	
 			完工时间：
 			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
 			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="Date" value="" class="input-text Wdate" id="datemax" style="width:100px;">
@@ -234,13 +234,23 @@
 							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
 							<td>${order.orderId}</td>
 							<td>${order.customerCarInfo.plateNumber }</td>
-							<td>${order.SA }</td>
-							<td>${order.date }</td>
+							<td>
+								<c:forEach items="${employee}" var="employee">
+									<c:if test="${order.SA == employee.employeeId}">
+										${employee.employeeName}
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>${order.completedDate }</td>
 							<td>${order.discountPrice }</td>
-							<td>${order.orderStateId }</td>
+							<td>
+							<c:if test="${order.orderStateId == 1}">在修</c:if>
+							<c:if test="${order.orderStateId == 2}">完工</c:if>
+							<c:if test="${order.orderStateId == 3}">结算</c:if>	
+							</td>
 							
-							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/getcarinfo.do?customerCarInfoId=${car.customerCarInfoId}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-                            <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${car.customerCarInfoId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius" onClick="part_edit('完工','${pageContext.request.contextPath }/getorderbyid.do?orderId=${order.orderId}')" href="javascript:;" >选择</a>
+                            
 						</tr>
 							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
@@ -272,7 +282,14 @@
 	function cartype_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);
 	}
-	
+	 function part_edit(title,url,id,w,h){
+	    	/*       var index = layer.open({
+	            type: 2,
+	            title: title,
+	            content: '',
+	        }); */
+	    	layer_show(title,url,w,h);
+	    }
 	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
 			//此处请求后台程序，下方是成功后的前台处理……
