@@ -49,19 +49,19 @@
 				</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>当前密码：</label>
+			<label class="form-label col-xs-4 col-sm-2">当前密码：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input class="input-text" type="password" name="oldPassword">
 			</div>
 		</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>新密码：</label>
+				<label class="form-label col-xs-4 col-sm-2">新密码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="password" id="password" class="input-text" name="newPassword">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>重复密码：</label>
+				<label class="form-label col-xs-4 col-sm-2">重复密码：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="password" class="input-text" name="repeatPassword">
 				</div>

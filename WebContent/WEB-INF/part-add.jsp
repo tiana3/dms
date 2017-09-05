@@ -34,19 +34,19 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-part-add" action="PartAddServlet" method="post">
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件名：</label>
+			<label class="form-label col-xs-4 col-sm-2">配件名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="partname">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配件号：</label>
+			<label class="form-label col-xs-4 col-sm-2">配件号：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="partno">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>适用车型：</label>
+			<label class="form-label col-xs-4 col-sm-2">适用车型：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<select name="modelid" class="select">
 					<c:forEach items="${carTypes }" var="carType">
@@ -56,13 +56,13 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>进货成本：</label>
+			<label class="form-label col-xs-4 col-sm-2">进货成本：</label>
 				<div class="formControls col-xs-8 col-sm-9">
                     <input type="text" class="input-text" value="" placeholder="" id="" name="buyingprice">
 				</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>销售价：</label>
+			<label class="form-label col-xs-4 col-sm-2">销售价：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="" name="sellingprice">
 			</div>
@@ -114,6 +114,23 @@ $("#form-part-add").validate({
 				required:true,
 			},
 			
+		},
+        messages:{
+        	partname:{
+                 required:"请填写配件名 ",
+             },
+             partno:{
+                 required:"请填写配件号",
+             },
+             modelid:{
+                 required: "请选择车型 ",
+             },
+             buyingprice:{
+                 required:"请输入进货成本 ",
+             },
+             sellingprice:{
+                 required: "请填写销售价",
+             },
 		},
 		//onkeyup:false,
 		focusCleanup:true,

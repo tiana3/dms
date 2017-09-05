@@ -32,18 +32,16 @@
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>车型管理</title>
+<title>结算</title>
 </head>
 <body>
 	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="#">售后管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
+		
+			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span>
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
@@ -195,11 +193,11 @@
 		<div class="text-c"> 
 			服务顾问：
 			<select name="SA">
-					<option value="">0</option>
+					<option value=""></option>
 				</select>
 			业务状态：
 			<select name="orderStateId">
-				<option value="">0</option>
+				<option value=""></option>
 			</select>
 			完工时间：
 			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
@@ -233,12 +231,12 @@
 						<tr class="text-c">									
 							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
 							<td>${order.orderId}</td>
-							<td>${order.plateNumber }</td>
+							<td>${order.customerCarInfo.plateNumber }</td>
 							<td>${order.SA }</td>
-							<td>${order.Date }</td>
+							<td>${order.date }</td>
 							<td>${order.discountPrice }</td>
 							<td>${order.orderStateId }</td>
-							<td></td>
+							
 							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="ml-5" onClick="part_edit('编辑资料','${pageContext.request.contextPath }/getcarinfo.do?customerCarInfoId=${car.customerCarInfoId}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a style="text-decoration:none" class="ml-5" onClick="part_del(this,${car.customerCarInfoId})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 						</tr>

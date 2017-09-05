@@ -20,16 +20,11 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 	@Override
-	public List<Order> getSettlementByWordKey(String completedDate, String SA, Integer orderStateId,
-			CustomerCarInfo customerCarInfo, Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getSettlementByWordKey(String completedDate, Integer SA, Integer orderStateId,
+			String customerCarInfo, String orderId) {
+			List<Order> order = orderDao.getSettlementByWordKey(completedDate, SA, orderStateId, customerCarInfo, orderId);
+			return order; 
 	}
 
-	@Override
-	public List<Order> getSettlementAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -65,13 +65,6 @@
 			</div>
 		</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2">工时(单位：小时)：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="${workhour.workhour }"
-						placeholder="" id="" name="workhour">
-				</div>
-			</div>
-			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-2">工时费(单位：元)：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="${workhour.workpay }"
@@ -125,14 +118,21 @@
 					required:true,
 
 				},
-				workhour:{
-					required:true,
-
-				},
 				workpay:{
 					required:true,
 				},
 				
+			},
+            messages:{
+             	workplaceName:{
+                     required:"请填写工位名 ",
+                 },
+                 modelid:{
+                     required:"请选择车型 ",
+                 },
+                 workpay:{
+                     required: "请填写工时费 ",
+                 },
 			},
 			//onkeyup:false,
 			focusCleanup:true,

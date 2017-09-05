@@ -32,4 +32,6 @@ public interface partoutservice {
 	public List<Employee> getAllEmployee();          //获取所有员工
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
+	public List<Part> getPart(Part part);	//根据配件号和配件名、车型查询材料
+	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);//添加零件
 }
