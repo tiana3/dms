@@ -10,8 +10,15 @@ public class Part {
 	private int modelId;
 	private String model;
 	private Integer picker;          //维护一个领料人Id，用于存储订单中材料的领料人
+	private String name;     //领料人姓名
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Integer getId() {
 		return Id;
 	}
@@ -24,24 +31,30 @@ public class Part {
 	public void setPicker(Integer picker) {
 		this.picker = picker;
 	}
+	
 	@Override
 	public String toString() {
-		return "Part [partId=" + partId + ", partName=" + partName + ", partNo=" + partNo + ", buyingPrice="
-				+ buyingPrice + ", sellingPrice=" + sellingPrice + ", modelId=" + modelId + ", model=" + model + "]";
+		return "Part [Id=" + Id + ", partId=" + partId + ", partName=" + partName + ", partNo=" + partNo
+				+ ", buyingPrice=" + buyingPrice + ", sellingPrice=" + sellingPrice + ", modelId=" + modelId
+				+ ", model=" + model + ", picker=" + picker + "]";
 	}
-	public Part() {
+	public Part(Integer id, int partId, String partName, String partNo, double buyingPrice, double sellingPrice,
+			int modelId, String model, Integer picker) {
 		super();
-	}
-	public Part(int partId, String partName, String partNo, double buyingPrice, double sellingPrice, int modelId ,String model) {
-		super();
+		Id = id;
 		this.partId = partId;
 		this.partName = partName;
 		this.partNo = partNo;
 		this.buyingPrice = buyingPrice;
 		this.sellingPrice = sellingPrice;
 		this.modelId = modelId;
-		this.model = model ;
+		this.model = model;
+		this.picker = picker;
 	}
+	public Part() {
+		super();
+	}
+	
 	public int getPartId() {
 		return partId;
 	}

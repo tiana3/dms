@@ -47,12 +47,14 @@
 			<nav class="nav navbar-nav">
 						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover">
+					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="#">退出</a></li>
-					</ul></li>
+						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+
+						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
+					</ul>
+				</li>
 				
 				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
 					href="javascript:;" class="dropDown_A" title="换肤"><i
@@ -85,7 +87,7 @@
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
-					<li><a href="${pageContext.request.contextPath }/OrderServlet" title="维修业务开单">维修业务开单</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/order.do')" title="维修业务开单">维修业务开单</a></li>
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -254,6 +256,8 @@
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="js/myJs.js"></script>
+
 	<script type="text/javascript"
 		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
 	<!--/_footer /作为公共模版分离出去-->
@@ -278,7 +282,10 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
-
+	function changePassword(title,url,w,h){
+	    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+	}
+	  
 </script>
 	<!--/请在上方写此页面业务相关的脚本-->
 </body>

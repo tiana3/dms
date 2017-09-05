@@ -7,7 +7,7 @@
 	<display-name>dms</display-name>
 	<!--  当访问应用根目录时，从下面依次找文件，反馈给浏览器	 -->
 	<welcome-file-list>
-		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 		<welcome-file>index.html</welcome-file>
 
 	</welcome-file-list>
@@ -46,5 +46,7 @@
     <url-pattern>/lib/*</url-pattern>  
     <url-pattern>/static/*</url-pattern>  
     <url-pattern>/temp/*</url-pattern>  
+    <url-pattern>/video/*</url-pattern>
+    <url-pattern>/image/*</url-pattern>  
 	</servlet-mapping> 
 </web-app>

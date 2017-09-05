@@ -128,6 +128,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		String sql = "SELECT employee.`employeeId`,employee.`name`,employee.`gender`,employee.`phone`,employee.`idCard`,department.`departmentId`,department.`name`,job.`jobId`,job.`NAME` FROM employee,job,department  WHERE employee.jobId = job.jobId AND job.departmentId = department.departmentId ";
 		PreparedStatement statment;
 		ArrayList<Employee> employees = new ArrayList<Employee>();
+		System.out.println("jinru");
 		try {
 			statment = conn.prepareStatement(sql);
 			ResultSet rs = statment.executeQuery();

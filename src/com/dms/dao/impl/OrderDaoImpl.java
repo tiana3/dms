@@ -138,7 +138,19 @@ public class OrderDaoImpl implements OrderDao {
 			String plateNumber, String orderId) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		List<Order> order =mapper.getSettlementByWordKey(completedDate, SA, orderStateId, plateNumber, orderId);
-		return order;
+		return order ;
+		
+	public void updatepicker(Integer Id, Integer picker) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	
+		mapper.updatepicker(Id, picker);
+	}
+
+	@Override
+	public void dedeletepart(Integer Id) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.dedeletepart(Id);
 	}
 
 }
