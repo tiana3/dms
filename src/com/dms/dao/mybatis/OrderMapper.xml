@@ -118,5 +118,8 @@
     </update>
     <delete id="dedeletepart">
     	delete from order_part where Id = ${Id}
-    </delete>  
+    </delete>
+    <insert id="addpartonOrder">
+    	insert into order_part(orderId,partId,picker)  values(#{orderId},#{partId},#{picker})
+    </insert>  
 </mapper>

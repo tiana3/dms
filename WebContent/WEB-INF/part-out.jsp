@@ -1,12 +1,11 @@
-
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" import="java.util.List"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -14,9 +13,10 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="Bookmark" href="favicon.ico">
 <link rel="Shortcut Icon" href="favicon.ico" />
-
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
-
+<![endif]-->
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -27,35 +27,35 @@
 	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script><![endif]-->
+<!--/meta 作为公共模版分离出去-->
 
-<script src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-	DD_belatedPNG.fix('*');
-</script>
-<title>在修业务</title>
+<title>领料出库</title>
 </head>
 <body>
-
 	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> 
-			<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H</a>
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
-			<nav class="nav navbar-nav" id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">售后管理系统</a> <a
+				class="logo navbar-logo-m f-l mr-10 visible-xs"
+				href="/aboutHui.shtml">H</a> <span
+				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+			<nav class="nav navbar-nav"> <nav id="Hui-userbar"
+				class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<li class="dropDown dropDown_hover"><a href="#"
+					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="#">退出</a></li>
-					</ul>
-				</li>
+					</ul></li>
 
-				<li id="Hui-skin" class="dropDown right dropDown_hover">
-					<a href="javascript:;" class="dropDown_A" title="换肤">
-					<i class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
+				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
+					href="javascript:;" class="dropDown_A" title="换肤"><i
+						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
 						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
@@ -63,8 +63,7 @@
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
 						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 			</nav>
 		</div>
@@ -77,11 +76,11 @@
 
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe616;</i> 维修业务<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
@@ -93,13 +92,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-picture">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe613;</i> 库房管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="领料出库">领料出库</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/partout.do" title="领料出库">领料出库</a></li>
 					<li><a href="#" title="销货出库">销货出库出库</a></li>
 					<li><a href="#" title="退货出库">退货出库</a></li>
 					<li><a href="#" title="移库出库">移库出库</a></li>
@@ -143,7 +142,8 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employeelist"
+					<li><a
+						href="${pageContext.request.contextPath }/employeelist"
 						title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
@@ -167,18 +167,15 @@
 			</dt>
 			<dd>
 				<ul>
-
-
 					<li><a
 						href="${pageContext.request.contextPath }/WorkHourListServlet"
 						title="工时工位管理">工时工位管理</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/GetCarTypeServlet"
+						href="${pageContext.request.contextPath }/PartListServlet"
 						title="材料目录管理">材料目录管理</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/CarTypeListServlet"
 						title="厂家车型管理">厂家车型管理</a></li>
-
 				</ul>
 			</dd>
 		</dl>
@@ -194,8 +191,8 @@
 <section class="Hui-article-box"> 
 	<nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		维修业务<span class="c-gray en">&gt;
-		</span> 在修业务 <a class="btn btn-success radius r"
+		库房管理<span class="c-gray en">&gt;
+		</span> 领料出库 <a class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新">
 		<i class="Hui-iconfont">&#xe68f;</i></a>

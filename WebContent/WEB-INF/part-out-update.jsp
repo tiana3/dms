@@ -32,7 +32,7 @@
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>员工管理</title>
+<title>领料出库</title>
 </head>
 <body>
 	<!--_header 作为公共模版分离出去-->
@@ -92,13 +92,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-picture">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe613;</i> 库房管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
-					<li><a href="#" title="领料出库">领料出库</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/partout.do" title="领料出库">领料出库</a></li>
 					<li><a href="#" title="销货出库">销货出库出库</a></li>
 					<li><a href="#" title="退货出库">退货出库</a></li>
 					<li><a href="#" title="移库出库">移库出库</a></li>
@@ -136,13 +136,13 @@
 			</dd>
 		</dl>
 		<dl id="menu-member">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe60d;</i> 员工管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
-					<li class="current"><a
+					<li><a
 						href="${pageContext.request.contextPath }/employeelist"
 						title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
@@ -194,11 +194,11 @@
 		style="line-height: 1.6em; margin-top: 3px"
 		href="javascript:location.replace(location.href);" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
-	
+	<c:forEach items="${allOrders }" var="order" varStatus="varSta">
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l"><a class="btn btn-primary radius"
-					onclick="cartype_edit('添加员工','employeeshow','${partout.orderid}')"
-					href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加员工</a>
+					onclick="cartype_edit('添加零件','part-show-insert.do?orderId=${order.orderId}')"
+					href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加零件</a>
 				</span> <input type="hidden" name="act"> <span class="r">共有数据：<strong>${fn:length(list2)}</strong>条
 				</span>
 			</div>
@@ -213,7 +213,7 @@
 						<th>开单时间</th>
 					</tr>
 				</thead>
-						<c:forEach items="${allOrders }" var="order" varStatus="varSta">
+						
 						<tr class="text-c">
 							<td>${order.orderId }</td>
 							<td>${order.customerCarInfo.plateNumber}</td>
@@ -232,7 +232,7 @@
 							</td>
 							<td>${order.date }</td>
 						</tr>
-						</c:forEach>
+						
 					</table>
 					<br>
 					<br>
@@ -273,6 +273,7 @@
 						</c:forEach>
 				</table>
 	</div>
+	</c:forEach>
 	</section>
 
 	<!--_footer 作为公共模版分离出去-->
@@ -290,6 +291,7 @@
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
+	
 	function selectOnchang(obj,Id,orderId){ 
 		var picker = obj.options[obj.selectedIndex].value;
 		var tmp = document.createElement("form"); 

@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.dao.OrderDao;
 import com.dms.entity.Custom;
-import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
@@ -145,6 +144,13 @@ public class OrderDaoImpl implements OrderDao {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.dedeletepart(Id);
+	}
+
+	@Override
+	public void addpartonOrder(String orderId, String partId, int picker) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.addpartonOrder(orderId, partId, picker);
 	}
 
 }
