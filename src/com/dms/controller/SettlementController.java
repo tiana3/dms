@@ -28,13 +28,13 @@ public class SettlementController {
 		return "settlement";
 	}
 	@RequestMapping("settlementlist.do")
-	public String getSettlementAll(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String customerCarInfo,@Param("orderId")String orderId){
+	public String getSettlementAll(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
 		List<Employee> employee = service.getSA();
 		model.addAttribute("employee", employee);
 		
-		List<Order> order = service.getSettlementByWordKey(completedDate, SA, customerCarInfo, orderId);
+		List<Order> order = service.getSettlementByWordKey(completedDate, SA, plateNumber, orderId);
 		model.addAttribute("order", order);
 		return "settlement" ;
 	}
@@ -48,28 +48,38 @@ public class SettlementController {
 		model.addAttribute("order", order);
 		return "settlement-update";
 	}
-<<<<<<< HEAD
 	@RequestMapping("workout-list.do")
-	public String getSettlementall(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String customerCarInfo,@Param("orderId")String orderId){
+	public String getentall(Model model){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
 		List<Employee> employee = service.getSA();
 		model.addAttribute("employee", employee);
 		
-		List<Order> order = service.getSettlementByWordKey(completedDate, SA, customerCarInfo, orderId);
+		List<Order> order = service.getSettlementByWordKey(null, 0, null, null);
+		model.addAttribute("order", order);
+		return "workout-delete" ;
+	}
+	@RequestMapping("workout-li.do")
+	public String getSettlementall(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId){
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		List<Employee> employee = service.getSA();
+		model.addAttribute("employee", employee);
+		
+		List<Order> order = service.getSettlementByWordKey(completedDate, SA, plateNumber, orderId);
 		model.addAttribute("order", order);
 		return "workout-delete" ;
 	}
 	@RequestMapping("workout-delete.do")
-	public void deleteworkout(Model model,@RequestParam("orderId")String orderId){
+	public String deleteworkout(Model model,@RequestParam("orderId")String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
 		service.deleteWorkout(orderId);
-=======
+		return "redirect:/workout-list.do";
+	}
 	@RequestMapping("updateorderbyid.do")
 	public String getUpdateOrder(Model model){
 		
 		return null;
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
 	}
 }
