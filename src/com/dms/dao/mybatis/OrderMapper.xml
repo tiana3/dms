@@ -114,6 +114,9 @@
     	</where>
     		  
     </select>
+    <update id="deleteWorkout">
+    	update orders set orderStateId = 1,completedDate=null where orderId = #{orderId}
+    </update>
     
     <delete id="deleteOrder" parameterType="String">
     	delete from orders where orderId = #{orderId}

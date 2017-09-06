@@ -118,7 +118,7 @@
 				<ul>
 					<li class="current"><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
-					<li><a href="#" title="取消完工">取消完工</a></li>
+					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>

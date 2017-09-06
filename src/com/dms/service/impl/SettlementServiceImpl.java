@@ -49,6 +49,12 @@ public class SettlementServiceImpl implements SettlementService {
 		return order;
 	}
 
+	@Override
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
+		orderDao.deleteWorkout(orderId);
+	}
+
 
 
 

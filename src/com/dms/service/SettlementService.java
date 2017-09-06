@@ -13,4 +13,5 @@ public interface SettlementService {
 			 String orderId);
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
+	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
 }

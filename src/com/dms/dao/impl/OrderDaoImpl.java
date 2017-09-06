@@ -167,4 +167,11 @@ public class OrderDaoImpl implements OrderDao {
 		return order;
 	}
 
+	@Override
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.deleteWorkout(orderId);
+	}
+
 }
