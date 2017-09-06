@@ -178,7 +178,6 @@
 			onClick="displaynavbar(this)"></a>
 	</div>
 	<!--/_menu 作为公共模版分离出去-->
-
 	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
 	财务管理 <span class="c-gray en">&gt;</span> 结算 <a
@@ -186,80 +185,62 @@
 		style="line-height: 1.6em; margin-top: 3px"
 		href="${pageContext.request.contextPath }/settlement.do" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
-
-	    <div class="Hui-article">
-		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath }/settlementlist.do" method="post">
-		<div class="text-c"> 
-			服务顾问：
-			<select name="SA">
-				<option value="0">全部</option>
-				<c:forEach items="${employee }" var="employee" >
-					<option value="${employee.employeeId }">${employee.employeeName }</option>
-				</c:forEach>
-				</select>
-	
-			完工时间：
-			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
-			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="Date" value="" class="input-text Wdate" id="datemax" style="width:100px;">
-			车牌号：
-			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">			
-			维修单号：
-			<input type="text" name="orderId" id="" style="width:100px" class="input-text">			
-			
-			
-			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-		</div>
-		</form>
-		
-		<div class="mt-10">
-			<table class="table table-border table-bordered table-bg table-sort">
-				<thead>
-					<tr class="text-c">				
-						<th>序号</th>
-						<th>维修单号</th>
-						<th>车牌号</th>
-						<th>服务顾问</th>
-						<th>完工时间</th>
-						<th>金额</th>
-						<th>状态</th>
-						<th>操作</th>
+   <div class="Hui-article">
+<article class="cl pd-20">
+<form class="form form-horizontal" id="form-carinfo-add" action="" method="post">
+<div class="mt-10">
+				<table class="table table-border table-bordered table-bg table-sort">
+					<thead>
+					<tr class="text-c">
+						<th width="200px;">维修单号</th>
+						<th width="200px;">车牌号</th>
+						<th width="200px;">服务顾问</th>
+						
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${order }" var="order" varStatus="varSta">					
-						<tr class="text-c">									
-							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
-							<td>${order.orderId}</td>
-							<td>${order.customerCarInfo.plateNumber }</td>
-							<td>
-								<c:forEach items="${employee}" var="employee">
-									<c:if test="${order.SA == employee.employeeId}">
-										${employee.employeeName}
-									</c:if>
-								</c:forEach>
-							</td>
-							<td>${order.completedDate }</td>
-							<td>${order.discountPrice }</td>
-							<td>
-							<c:if test="${order.orderStateId == 1}">在修</c:if>
-							<c:if test="${order.orderStateId == 2}">完工</c:if>
-							<c:if test="${order.orderStateId == 3}">结算</c:if>	
-							</td>
-							
-							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/getorderbyid.do?orderId=${order.orderId}" >选择</a>
-                            
+				</thead>						
+						<tr class="text-c">
+							<td >${order.orderId}</td>
+							<td >${order.customerCarInfo.plateNumber}</td>
+							<td >${order.SA}</td>						
 						</tr>
-							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		
-		</article>
-	</div>
-	</section>
+					</table>
+					<br>
+					<br>
+					<table class="table table-border table-bordered table-bg table-sort">	
+						<thead>
+					<tr class="text-c">
+						<th width="100px">材料费</th>
+						<th width="100px">折扣金额</th>
+						<th width="100px">工时费</th>
+						<th width="100px">应付</th>
+						<th width="100px">实付</th>					
+						<th width="100px">折扣</th>
+					</tr>
+				</thead>						
+						<tr class="text-c">
+							<td>
+							<input onblur="hss()" value="${order.partPrice}" name="partPrice" id="partPrice"></td>
+							<td>
+							<input value="${order.discountPrice}" name="discountPrice" id="discountPrice"></td>
+							<td><input value="${order.workPrice}" name="workPrice" id="workPrice"></td>
+							<td>
+							<input  name="yf" id="yf"></td>
+							<td>
+							<input name="sf" id="sf" ></td>	
+							<td><input onblur="hss()" name="zk" id="zk" value="1"></td>
+						</tr>
+						<tr class="text-c">
+					<td colspan="7"><button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 结算</button>
+					<buttin class="btn btn-default radius" type="submit">取消结算</buttin>
+					<buttin class="btn btn-default radius" type="submit">打印结算单</buttin>	
+					</td>	
+					</tr>		
+				</table>
 
+	</div>	
+		</form>
+</article>
+</div>
 	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -277,7 +258,9 @@
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
-
+	function cartype_edit(title,url,id,w,h){
+		layer_show(title,url,w,h);
+	}
 	 function part_edit(title,url,id,w,h){
 	    	/*       var index = layer.open({
 	            type: 2,
@@ -298,6 +281,23 @@
 	function changePassword(title,url,w,h){
 	    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
 	}
+	function hss(){	
+			
+				var add1 = document.getElementById("partPrice").value;
+				var add2 = document.getElementById("workPrice").value;				
+				var add3 = document.getElementById("yf").value;
+				var add4 = document.getElementById("sf").value;
+				var add5 = document.getElementById("zk").value;
+				document.getElementById("yf").value=add1*1+add2*1;				
+				document.getElementById("sf").value=add3*1*add5*1;
+			if(add4 == 0){
+				document.getElementById("discountPrice").value=0;					
+			}else{
+				document.getElementById("discountPrice").value=document.getElementById("yf").value-document.getElementById("sf").value;	;						
+			}		
+								
+	}
+
 	  
 </script>
 	<!--/请在上方写此页面业务相关的脚本-->

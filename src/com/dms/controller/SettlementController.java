@@ -38,8 +38,11 @@ public class SettlementController {
 		return "settlement" ;
 	}
 	@RequestMapping("getorderbyid.do")
-	public String getOrderById(Model model){
-		
-		return "settlementorder";
+	public String getOrderById(Model model,String orderId){
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		Order order = service.getOrderById(orderId);
+		model.addAttribute("order", order);
+		return "settlement-update";
 	}
 }

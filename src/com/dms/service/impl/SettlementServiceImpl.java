@@ -43,6 +43,12 @@ public class SettlementServiceImpl implements SettlementService {
 		return employee;
 	}
 
+	@Override
+	public Order getOrderById(String orderId) {
+		Order order = orderDao.getOrderById(orderId);
+		return order;
+	}
+
 
 
 

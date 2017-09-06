@@ -35,6 +35,7 @@ public interface OrderDao {
 	List<Part> getOrderPartsByOrderId(String orderId);           //根据订单号获取对应的所有配件材料
 
 	Order getOrderByOrderId(String orderId);             //根据维修单号查询 维修单
+	Order getOrderById(String orderId);						//根据orderId查询完修单
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);

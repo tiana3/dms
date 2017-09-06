@@ -12,5 +12,5 @@ public interface SettlementService {
 	public List<Order> getSettlementByWordKey( String completedDate,Integer SA, String customerCarInfo,
 			 String orderId);
 	public List<Employee> getSA();
-
+	public Order getOrderById(String orderId);
 }

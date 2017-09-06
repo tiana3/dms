@@ -33,7 +33,7 @@ public class Order {
 	private Double workPrice;         //总工时费
 	private Double partPrice;         //总材料费
 	private Double discountPrice;        //折扣金额，结算时用
-	
+
 	
 	
 	public Double getWorkPrice() {

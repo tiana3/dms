@@ -100,7 +100,9 @@
     <select id="getOrderPartsByOrderId" parameterType="String"  resultType="Part">
 		select * from order_part inner join part on order_part.partId = part.partId inner join cartype on part.modelId = cartype.modelId where orderId = #{orderId}
     </select>
-    
+    <select id="getOrderById" resultMap="order">
+    	select * from orders where orderId=#{orderId} 
+    </select>
     <select id="getSettlementByWordKey" resultMap="order">
     	select * from orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId
     	<where>
