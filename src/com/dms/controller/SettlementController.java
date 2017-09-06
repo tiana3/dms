@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
@@ -44,5 +45,37 @@ public class SettlementController {
 		Order order = service.getOrderById(orderId);
 		model.addAttribute("order", order);
 		return "settlement-update";
+	}
+	
+	
+	@RequestMapping("cancelSettlements.do")
+	public String cancelSettlements(Model model,@Param("settlementDate")String settlementDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		List<Employee> employee = service.getSA();
+		model.addAttribute("employee", employee);
+		List<Order> order = service.getSettlementByOrderStateId(settlementDate, SA, plateNumber, orderId);
+		model.addAttribute("order", order);
+		return "orderSettled";
+	}
+	
+	@RequestMapping("cancelSettlement.do")
+	public String cancelSettlement(Model model,@Param("settlementDate")String settlementDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		List<Employee> employee = service.getSA();
+		model.addAttribute("employee", employee);
+		List<Order> order = service.getSettlementByOrderStateId(null, 0, null, null);
+		model.addAttribute("order", order);
+		return "orderSettled";
+	}
+	
+	@RequestMapping("updateOSId.do")
+	public String updateOSId(Model model,@Param("orderId")String orderId) {
+		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		service.updateOrderStateId(orderId);
+		
+		return "redirect:/cancelSettlement.do";
 	}
 }

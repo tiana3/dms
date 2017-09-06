@@ -9,8 +9,13 @@ import com.dms.entity.Order;
 
 public interface SettlementService {
 	
-	public List<Order> getSettlementByWordKey( String completedDate,Integer SA, String customerCarInfo,
+	public List<Order> getSettlementByWordKey( String completedDate,Integer SA, String plateNumber,
 			 String orderId);
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
+	
+	public List<Order> getSettlementByOrderStateId(String settlementDate,Integer SA, String plateNumber,
+			 String orderId);
+
+	public void updateOrderStateId(String orderId);
 }

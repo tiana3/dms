@@ -49,7 +49,17 @@ public class SettlementServiceImpl implements SettlementService {
 		return order;
 	}
 
+	@Override
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,
+			String orderId) {
+		List<Order> order = orderDao.getSettlementByOrderStateId(settlementDate, SA, plateNumber, orderId);
+		return order; 
+	}
 
-
+	@Override
+	public void updateOrderStateId(String orderId) {
+		orderDao.updateOrderStateId(orderId);
+		
+	}
 
 }

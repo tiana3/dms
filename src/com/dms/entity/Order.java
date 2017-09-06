@@ -30,6 +30,7 @@ public class Order {
 	private Integer inspector;   //质检，  记录的是员工的id
 	//@DateTimeFormat(pattern="yyyy-MM-dd") 该注解将前端传过来的字符串转换成Date类型  暂时没用，因为完工时间不是前端生成，而是自己创建传入的     
 	private Date completedDate;                //完工时间
+	private Date settlementDate;				//结算时间
 	private Double workPrice;         //总工时费
 	private Double partPrice;         //总材料费
 	private Double discountPrice;        //折扣金额，结算时用
@@ -71,6 +72,12 @@ public class Order {
 	}
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+	public Date getSettlementDate() {
+		return settlementDate;
+	}
+	public void setSettlementDate(Date settlementDate) {
+		this.settlementDate = settlementDate;
 	}
 	public Order(String orderId, CustomerCarInfo customerCarInfo, Integer sA, String date, Double mileage,
 			String carRemark, String remark, String expectDate, List<Integer> workplaceIds, List<Part> parts,
