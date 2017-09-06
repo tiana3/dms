@@ -17,7 +17,7 @@ public class SettlementServiceImpl implements SettlementService {
 	public EmployeeDao getEmployeeDao() {
 		return employeeDao;
 	}
-
+ 
 	public void setEmployeeDao(EmployeeDao employeeDao) {
 		this.employeeDao = employeeDao;
 	}

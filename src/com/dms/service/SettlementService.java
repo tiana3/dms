@@ -14,7 +14,7 @@ public interface SettlementService {
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
 
-	
+
 	public List<Order> getSettlementByOrderStateId(String settlementDate,Integer SA, String plateNumber,
 			 String orderId);
 
