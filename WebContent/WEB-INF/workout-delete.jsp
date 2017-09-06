@@ -32,7 +32,7 @@
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 
-<title>结算</title>
+<title>取消完工</title>
 </head>
 <body>
 	<!--_header 作为公共模版分离出去-->
@@ -116,14 +116,9 @@
 			</dt>
 			<dd style="display: block;">
 				<ul>
-					<li class="current"><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-<<<<<<< HEAD
-					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
-					<li><a href="#" title="取消完工">取消完工</a></li>
-=======
+					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
 					<li><a href="#" title="取消结算">取消结算</a></li>
-					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
+					<li class="current"><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -172,7 +167,7 @@
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
-					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/CarTypeListServlet')" title="厂家车型管理">厂家车型管理</a></li>
+					<li ><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -186,15 +181,15 @@
 
 	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-	财务管理 <span class="c-gray en">&gt;</span> 结算 <a
+	财务管理 <span class="c-gray en">&gt;</span> 取消完工 <a
 		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
-		href="${pageContext.request.contextPath }/settlement.do" title="刷新"><i
+		href="${pageContext.request.contextPath }/workout-list.do" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 	    <div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath }/settlementlist.do" method="post">
+		<form action="${pageContext.request.contextPath }/workout-li.do" method="post">
 		<div class="text-c"> 
 			服务顾问：
 			<select name="SA">
@@ -252,7 +247,7 @@
 							<c:if test="${order.orderStateId == 3}">结算</c:if>	
 							</td>
 							
-							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/getorderbyid.do?orderId=${order.orderId}" >选择</a>
+							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/workout-delete.do?orderId=${order.orderId}" onclick="update(this)">取消完工</a>
                             
 						</tr>
 							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
@@ -283,13 +278,10 @@
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
 
-	 function part_edit(title,url,id,w,h){
-	    	/*       var index = layer.open({
-	            type: 2,
-	            title: title,
-	            content: '',
-	        }); */
-	    	layer_show(title,url,w,h);
+	 function update(obj){
+		
+		 $(obj).parents("tr").remove();
+		 layer.msg('已取消完工!', {icon:6,time:2000});
 	    }
 	function cartype_del(obj,id){
 		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
@@ -298,6 +290,7 @@
 				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
+			
 		});
 	}
 	function changePassword(title,url,w,h){

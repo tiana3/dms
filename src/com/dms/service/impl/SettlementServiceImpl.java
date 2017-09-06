@@ -32,8 +32,8 @@ public class SettlementServiceImpl implements SettlementService {
 
 	@Override
 	public List<Order> getSettlementByWordKey(String completedDate, Integer SA, 
-			String customerCarInfo, String orderId) {
-			List<Order> order = orderDao.getSettlementByWordKey(completedDate, SA,  customerCarInfo, orderId);
+			String plateNumber, String orderId) {
+			List<Order> order = orderDao.getSettlementByWordKey(completedDate, SA,  plateNumber, orderId);
 			return order; 
 	}
 
@@ -55,6 +55,10 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 
-
+	@Override
+	public void updateOrderStateId(String orderId) {
+		orderDao.updateOrderStateId(orderId);
+		
+	}
 
 }

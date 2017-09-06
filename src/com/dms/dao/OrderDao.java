@@ -18,6 +18,9 @@ public interface OrderDao {
 	//根据客户车辆信息id号，服务顾问id号，维修类型id号   查询获取所有订单
 	List<Order> getOrders(@Param("orderId")String orderId, @Param("plateNumber")String plateNumber, @Param("employeeId")int employeeId, @Param("repairId")int repairId);
 	List<Order> getSettlementByWordKey(@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
+	List<Order> getSettlementByOrderStateId(@Param("settlementDate")String settlementDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
+
+	void updateOrderStateId(@Param("orderId")String orderId);
 	void updateOrder(Order order);	
 	void updateOrderById(Order order);
 	Order getLastOrder(@Param("plateNumber")String plateNumber, @Param("VIN")String VIN);//查询出最后一次订单的送修人和电话
@@ -39,4 +42,5 @@ public interface OrderDao {
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
+	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
 }

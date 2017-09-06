@@ -62,7 +62,6 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void updateOrder(Order order) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
-		mapper.updateOrder(order);
 		deleteOrder(order.getOrderId());
 		addOrder(order);
 	}
