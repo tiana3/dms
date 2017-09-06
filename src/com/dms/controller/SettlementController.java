@@ -42,10 +42,13 @@ public class SettlementController {
 	public String getOrderById(Model model,String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		List<Employee> employee = service.getSA();
+		model.addAttribute("employee", employee);
 		Order order = service.getOrderById(orderId);
 		model.addAttribute("order", order);
 		return "settlement-update";
 	}
+<<<<<<< HEAD
 	@RequestMapping("workout-list.do")
 	public String getSettlementall(Model model,@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String customerCarInfo,@Param("orderId")String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -62,5 +65,11 @@ public class SettlementController {
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
 		service.deleteWorkout(orderId);
+=======
+	@RequestMapping("updateorderbyid.do")
+	public String getUpdateOrder(Model model){
+		
+		return null;
+>>>>>>> branch 'master' of file:///\\172.13.17.209\git
 	}
 }
