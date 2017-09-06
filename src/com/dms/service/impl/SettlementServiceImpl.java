@@ -49,6 +49,11 @@ public class SettlementServiceImpl implements SettlementService {
 		return order;
 	}
 
+	@Override
+	public void updateOrderById(Order order) {
+		orderDao.updateOrderById(order);
+	}
+
 
 
 

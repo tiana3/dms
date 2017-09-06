@@ -13,4 +13,5 @@ public interface SettlementService {
 			 String orderId);
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
+	public void updateOrderById(Order order);
 }

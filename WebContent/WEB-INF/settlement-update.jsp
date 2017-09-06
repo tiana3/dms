@@ -187,8 +187,9 @@
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
    <div class="Hui-article">
 <article class="cl pd-20">
-<form class="form form-horizontal" id="form-carinfo-add" action="" method="post">
+<form class="form form-horizontal" id="form-carinfo-add" action="${pageContext.request.contextPath }/updateorder.do" method="post">
 <div class="mt-10">
+				<input type="hidden" value="${order.orderId}" name="orderId">
 				<table class="table table-border table-bordered table-bg table-sort">
 					<thead>
 					<tr class="text-c">
@@ -226,18 +227,19 @@
 							<td>
 							<input onblur="hss()" value="${order.partPrice}" name="partPrice" id="partPrice"></td>
 							<td>
-							<input value="${order.discountPrice}" name="discountPrice" id="discountPrice"></td>
+							<input onblur="hss()" value="" name="discountPrice" id="discountPrice"></td>
 							<td><input value="${order.workPrice}" name="workPrice" id="workPrice"></td>
 							<td>
-							<input  name="yf" id="yf"></td>
+							<input onblur="hss()" name="yf" id="yf"></td>
 							<td>
-							<input name="sf" id="sf" ></td>	
+							<input onblur="hss()" name="sf" id="sf" ></td>	
 							<td><input onblur="hss()" name="zk" id="zk" value="1"></td>
 						</tr>
 						<tr class="text-c">
-					<td colspan="7"><button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit">
+					<td colspan="7"><button  class="btn btn-secondary radius" type="submit">
 					<i class="Hui-iconfont">&#xe632;</i> 结算</button>
-					<buttin class="btn btn-default radius" type="submit">打印结算单</buttin>	
+					<buttin class="btn btn-default radius" type="submit">打印结算单</buttin>
+					<buttin class="btn btn-default radius" type="submit">取消</buttin>	
 					</td>	
 					</tr>		
 				</table>

@@ -62,6 +62,7 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void updateOrder(Order order) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.updateOrder(order);
 		deleteOrder(order.getOrderId());
 		addOrder(order);
 	}
@@ -165,6 +166,12 @@ public class OrderDaoImpl implements OrderDao {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		Order order = mapper.getOrderById(orderId);
 		return order;
+	}
+
+	@Override
+	public void updateOrderById(Order order) {
+		OrderDao mapper =sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.updateOrderById(order);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.dms.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -47,9 +48,12 @@ public class SettlementController {
 		model.addAttribute("order", order);
 		return "settlement-update";
 	}
-	@RequestMapping("updateorderbyid.do")
-	public String getUpdateOrder(Model model){
-		
-		return null;
+	@RequestMapping("updateorder.do")
+	public String getUpdateOrder(Model model,Order order){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+		SettlementService service =(SettlementService)ctx.getBean("settlementServiceImpl");
+		order.setSettlementDate(new Date());
+		service.updateOrderById(order);
+		return "settlement";
 	}
 }

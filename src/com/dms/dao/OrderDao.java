@@ -19,7 +19,7 @@ public interface OrderDao {
 	List<Order> getOrders(@Param("orderId")String orderId, @Param("plateNumber")String plateNumber, @Param("employeeId")int employeeId, @Param("repairId")int repairId);
 	List<Order> getSettlementByWordKey(@Param("completedDate")String completedDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
 	void updateOrder(Order order);	
-
+	void updateOrderById(Order order);
 	Order getLastOrder(@Param("plateNumber")String plateNumber, @Param("VIN")String VIN);//查询出最后一次订单的送修人和电话
 	
 	void addOrder(Order order);     //添加订单基本信息	
