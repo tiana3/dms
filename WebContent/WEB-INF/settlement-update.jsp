@@ -117,8 +117,13 @@
 			<dd style="display: block;">
 				<ul>
 					<li class="current"><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
+<<<<<<< HEAD
 					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
+=======
+					<li><a href="#" title="取消结算">取消结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
+>>>>>>> branch 'master' of file:///\\172.13.17.209\git
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -201,7 +206,12 @@
 						<tr class="text-c">
 							<td >${order.orderId}</td>
 							<td >${order.customerCarInfo.plateNumber}</td>
-							<td >${order.SA}</td>						
+							<td >
+							<c:forEach items="${employee}" var="employee">
+									<c:if test="${order.SA == employee.employeeId}">
+										${employee.employeeName}
+									</c:if>
+								</c:forEach></td>						
 						</tr>
 					</table>
 					<br>
@@ -230,8 +240,8 @@
 							<td><input onblur="hss()" name="zk" id="zk" value="1"></td>
 						</tr>
 						<tr class="text-c">
-					<td colspan="7"><button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 结算</button>
-					<buttin class="btn btn-default radius" type="submit">取消结算</buttin>
+					<td colspan="7"><button onClick="article_save_submit()" class="btn btn-secondary radius" type="submit">
+					<i class="Hui-iconfont">&#xe632;</i> 结算</button>
 					<buttin class="btn btn-default radius" type="submit">打印结算单</buttin>	
 					</td>	
 					</tr>		

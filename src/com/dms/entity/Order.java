@@ -73,15 +73,10 @@ public class Order {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public Date getSettlementDate() {
-		return settlementDate;
-	}
-	public void setSettlementDate(Date settlementDate) {
-		this.settlementDate = settlementDate;
-	}
+
 	public Order(String orderId, CustomerCarInfo customerCarInfo, Integer sA, String date, Double mileage,
 			String carRemark, String remark, String expectDate, List<Integer> workplaceIds, List<Part> parts,
-			List<Custom> customs, Integer repairId, String sender, String senderPhone, Integer inspector) {
+			List<Custom> customs, Integer repairId, String sender, String senderPhone, Integer inspector,Date settlementdate) {
 		super();
 		this.orderId = orderId;
 		this.customerCarInfo = customerCarInfo;
@@ -98,6 +93,7 @@ public class Order {
 		this.sender = sender;
 		this.senderPhone = senderPhone;
 		this.inspector = inspector;
+		this.settlementDate = settlementdate;
 	}
 	public Integer getInspector() {
 		return inspector;
@@ -193,6 +189,14 @@ public class Order {
 		SA = sA;
 		this.repairId = repairId;
 	}
+	
+	public Date getSettlementDate() {
+		return settlementDate;
+	}
+	public void setSettlementDate(Date settlementDate) {
+		this.settlementDate = settlementDate;
+	}
+	
 	
 	
 }

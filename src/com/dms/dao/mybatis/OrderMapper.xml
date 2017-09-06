@@ -114,6 +114,9 @@
     	</where>
     		  
     </select>
+    <update id="deleteWorkout">
+    	update orders set orderStateId = 1,completedDate=null where orderId = #{orderId}
+    </update>
     
     <select id="getSettlementByOrderStateId" resultMap="order">
     	select * from orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId
