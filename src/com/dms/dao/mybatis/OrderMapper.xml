@@ -100,15 +100,19 @@
     <select id="getOrderPartsByOrderId" parameterType="String"  resultType="Part">
 		select * from order_part inner join part on order_part.partId = part.partId inner join cartype on part.modelId = cartype.modelId where orderId = #{orderId}
     </select>
+    <select id="getOrderById" resultMap="order">
+    	select * from orders where orderId=#{orderId} 
+    </select>
     <select id="getSettlementByWordKey" resultMap="order">
     	select * from orders inner join customercarinfo on orders.customerCarInfoId = customercarinfo.customerCarInfoId
     	<where>
-    		<if test="orderId != null">orderId like "%"#{orderId}"%"</if>
-			<if test="orderStateId != null">and orderStateId = #{orderStateId}</if>
-			<if test="completedDate != null">and completedDate like "%"#{completedDate}"%"</if>
-			<if test="SA != null">and SA  like "%"#{SA}"%"</if>
-			<if test="plateNumber != null">and plateNumber like "%"#{plateNumber}"%"</if>
+    		<if test="orderId != null &amp;&amp; orderId != ''">orderId like "%"#{orderId}"%"</if>
+			<if test="completedDate != null &amp;&amp; completedDate != ''">and completedDate like "%"#{completedDate}"%"</if>
+			<if test="SA != 0 &amp;&amp; SA != ''">and SA = #{SA}</if>
+			<if test="plateNumber != null &amp;&amp; plateNumber != ''">and plateNumber like "%"#{plateNumber}"%"</if>
+			and orderStateId = 2;
     	</where>
+    		  
     </select>
     
     <delete id="deleteOrder" parameterType="String">

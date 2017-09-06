@@ -70,7 +70,7 @@
 	
 	<bean id="carTypeDaoImpl" class="com.dms.dao.impl.CarTypeDaoImpl">
 	</bean>
-	
+
 	<bean id="adminDaoImpl" class="com.dms.dao.impl.AdminDaoImpl">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
@@ -89,11 +89,12 @@
 		<property name="repairTypeDao" ref="repairTypeDaoimpl"/>
 		<property name="employeeDao" ref="employeeDaoImpl"/>	
 		<property name="orderDao" ref="orderDaoImpl"/>	
-
 		<property name="orderIdBuildDao" ref="orderIdBuildDaoImpl"/>			
 
 	</bean>
 	<bean id="settlementServiceImpl" class="com.dms.service.impl.SettlementServiceImpl">
+	<property name="employeeDao" ref="employeeDaoImpl"/>	
+
 		<property name="orderDao" ref="orderDaoImpl"/>	
 	</bean>
 	
@@ -107,6 +108,7 @@
 	
 	<bean id="adminServiceImpl" class="com.dms.service.impl.AdminServiceImpl">
 		<property name="adminDao" ref="adminDaoImpl"/>	
-</bean>
+	</bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
