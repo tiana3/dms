@@ -41,8 +41,15 @@ public class SettlementController {
 	public String getOrderById(Model model,String orderId){
 		ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
 		SettlementService service = (SettlementService)ctx.getBean("settlementServiceImpl");
+		List<Employee> employee = service.getSA();
+		model.addAttribute("employee", employee);
 		Order order = service.getOrderById(orderId);
 		model.addAttribute("order", order);
 		return "settlement-update";
+	}
+	@RequestMapping("updateorderbyid.do")
+	public String getUpdateOrder(Model model){
+		
+		return null;
 	}
 }

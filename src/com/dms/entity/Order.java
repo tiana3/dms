@@ -33,7 +33,7 @@ public class Order {
 	private Double workPrice;         //总工时费
 	private Double partPrice;         //总材料费
 	private Double discountPrice;        //折扣金额，结算时用
-
+	private Date  settlementDate;		 //结算时间
 	
 	
 	public Double getWorkPrice() {
@@ -74,7 +74,7 @@ public class Order {
 	}
 	public Order(String orderId, CustomerCarInfo customerCarInfo, Integer sA, String date, Double mileage,
 			String carRemark, String remark, String expectDate, List<Integer> workplaceIds, List<Part> parts,
-			List<Custom> customs, Integer repairId, String sender, String senderPhone, Integer inspector) {
+			List<Custom> customs, Integer repairId, String sender, String senderPhone, Integer inspector,Date settlementdate) {
 		super();
 		this.orderId = orderId;
 		this.customerCarInfo = customerCarInfo;
@@ -91,6 +91,7 @@ public class Order {
 		this.sender = sender;
 		this.senderPhone = senderPhone;
 		this.inspector = inspector;
+		this.settlementDate = settlementdate;
 	}
 	public Integer getInspector() {
 		return inspector;
@@ -186,6 +187,14 @@ public class Order {
 		SA = sA;
 		this.repairId = repairId;
 	}
+	
+	public Date getSettlementDate() {
+		return settlementDate;
+	}
+	public void setSettlementDate(Date settlementDate) {
+		this.settlementDate = settlementDate;
+	}
+	
 	
 	
 }
