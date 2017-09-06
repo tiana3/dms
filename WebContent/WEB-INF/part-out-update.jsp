@@ -171,9 +171,8 @@
 					<li><a
 						href="${pageContext.request.contextPath }/PartListServlet"
 						title="材料目录管理">材料目录管理</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/CarTypeListServlet"
-						title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/CarTypeListServlet')" title="厂家车型管理">厂家车型管理</a></li>
+
 				</ul>
 			</dd>
 		</dl>
