@@ -45,4 +45,5 @@ public interface OrderDao {
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
 	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
 	void updateOrderById(Order order);
+	void complete(@Param("orderId")String orderId, @Param("date")Date date);
 }
