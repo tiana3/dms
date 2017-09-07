@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Order {
@@ -34,8 +35,31 @@ public class Order {
 	private Double workPrice;         //总工时费
 	private Double partPrice;         //总材料费
 	private Double discountPrice;        //折扣金额，结算时用
-
+	private String completedDateString;     //用于对浏览器显示正常格式的时间
+	private String 	settlementDateString;	//用于对浏览器显示正常格式的时间
 	
+	
+
+	public String getSettlementDateString() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(settlementDate!=null) {
+			settlementDateString = format.format(settlementDate);
+		}
+		return settlementDateString;
+	}
+	
+
+	public String getCompletedDateString() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(completedDate!=null) {
+			completedDateString = format.format(completedDate);
+		}
+		return completedDateString;
+	}
+	
+	public void setCompletedDateString(String completedDateString) {
+		this.completedDateString = completedDateString;
+	}
 	
 	public Double getWorkPrice() {
 		return workPrice;
@@ -58,6 +82,10 @@ public class Order {
 	public Date getCompletedDate() {
 		return completedDate;
 	}
+	
+
+	
+	
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
 	}
@@ -197,6 +225,6 @@ public class Order {
 		this.settlementDate = settlementDate;
 	}
 	
-	
+
 	
 }

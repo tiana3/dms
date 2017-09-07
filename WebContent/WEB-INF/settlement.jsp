@@ -239,7 +239,7 @@
 									</c:if>
 								</c:forEach>
 							</td>
-							<td>${order.completedDate }</td>
+							<td>${order.completedDateString }</td>
 							<td>${order.discountPrice }</td>
 							<td>
 							<c:if test="${order.orderStateId == 1}">在修</c:if>
