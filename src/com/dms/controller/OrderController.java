@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dms.dao.WorkHourDao;
 import com.dms.dao.impl.PartDaoImpl;
 import com.dms.entity.CarType;
+import com.dms.entity.Custom;
 import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
@@ -440,4 +441,54 @@ public class OrderController {
 			return "redirect:/login.jsp";
 		}
 	}
+	
+	
+	@RequestMapping("complete.do")
+	public String complete(Model model,@RequestParam(value = "orderId")String orderId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//下面验证是否登录，登录正常跳转，否则跳转登录页
+		HttpSession session = request.getSession(false);
+		if(session==null){
+			return "redirect:/login.jsp";
+		} else {
+			String name = (String) session.getAttribute("userName");
+			if(name==null) {
+				return "redirect:/login.jsp";
+			}
+		}
+		//下面判断权限，  并判断是否派工，是否领料，是否质检
+		List<Integer> powerIds = (List<Integer>) session.getAttribute("powerIds");
+		if(powerIds.contains(25)){
+			ApplicationContext ctx =new ClassPathXmlApplicationContext("applicationContext.xml");
+			OrderService  service = (OrderService) ctx.getBean("orderServiceImpl");
+			Order order = service.getOrderByOrderId(orderId);
+			
+			List<Part> parts = order.getParts();
+			int pd1 = 1;
+				for(Part part : parts){
+					if(part.getPicker()==null||part.getPicker()==0){
+					pd1 = 0;
+				}
+			}
+			int pd2 = 1;
+			List<Custom> customs = order.getCustoms();
+			for(Custom custom : customs){
+				if(custom.getEmployeeId()==0){
+					pd2=0;
+				}
+			}
+			
+			if(order.getInspector()==0||pd1==0||pd2==0){
+				response.getWriter().print("0");
+				return null;
+			}else{
+				service.complete(orderId,new Date());
+				response.getWriter().print("1");
+				return null;
+			}
+			
+		}else{
+			return "redirect:/login.jsp";
+		}
+	}
+	
 }

@@ -63,7 +63,7 @@
 	<insert id="addParts" >
 		insert into order_part(orderId,partId,picker)  values
 		<foreach collection="parts" item="part" separator=",">
-			(#{orderId}, #{part.partId},#{part.picker.employeeId})
+			(#{orderId}, #{part.partId},#{part.picker})
 		</foreach>
 	
 	</insert>
@@ -145,6 +145,10 @@
     </delete>
     <update id="updatepicker">
     	update order_part set picker = ${picker} where Id = ${Id}
+    </update>
+    
+    <update id="complete">
+    	update orders set orderStateId = 2,completedDate=#{date} where orderId=#{orderId}
     </update>
     <delete id="dedeletepart">
     	delete from order_part where Id = ${Id}

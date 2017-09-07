@@ -1,5 +1,6 @@
 package com.dms.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -159,6 +160,12 @@ public class OrderDaoImpl implements OrderDao {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.addpartonOrder(orderId, partId, picker);
+	}
+
+	@Override
+	public void complete(String orderId, Date date) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.complete(orderId,date);
 	}
 
 	@Override
