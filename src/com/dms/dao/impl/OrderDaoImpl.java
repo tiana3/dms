@@ -160,4 +160,10 @@ public class OrderDaoImpl implements OrderDao {
 		mapper.addpartonOrder(orderId, partId, picker);
 	}
 
+	@Override
+	public void complete(String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.complete(orderId);
+	}
+
 }

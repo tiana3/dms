@@ -164,4 +164,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.getOrderByOrderId(orderId);
 	}
 
+	@Override
+	public void complete(String orderId) {
+		orderDao.complete(orderId);
+	}
+
 }
