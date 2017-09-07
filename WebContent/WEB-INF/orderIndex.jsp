@@ -200,7 +200,7 @@
 				<span class="l">
 				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/orderIndex.do">新开单</a>
 					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
-					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
+					<a id="complete" href="javascript:;" onclick="noComplete()" class="btn btn-primary radius">完工</a>
 					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
 							<option value="0">&nbsp; </option>
 							<c:forEach items="${inspectors }" var="inspector">
@@ -582,17 +582,20 @@ function save() {
 		if($("#workhour tr").length != 0) {
 			 $("#workhour tr:last").remove();
 			 layer.msg("删除成功",{icon:1,time:1000});
+			 $("#complete").attr('onclick', 'noComplete()');
 		}else{
 			 layer.msg("没有工位",{icon:2,time:1000});
 		}
 	}
 
    function allWork_select(title,url,w,h){
+		 $("#complete").attr('onclick', 'noComplete()');
        layer_show(title,url,w,h);
    }
    
 	function part_del(obj){
 			$(obj).parents("tr").remove();
+			 $("#complete").attr('onclick', 'noComplete()');
 			layer.msg('已删除!',{icon:1,time:1000});
 	}
 
@@ -645,11 +648,59 @@ function save() {
    function changePassword(title,url,w,h){
     layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
 	}
+  
    
-   //完工
-   function complete(){
+//下面是关于完工   
+function noComplete() {
+		  layer.msg("请先保存",{icon:5,time:1500});
+}
+
+$("#div *").not("#saveButton").change(function(){
+		 $("#complete").attr('onclick', 'noComplete()');
+		 return;
+});
+
+
+function complete(){
+	  var pd1 = 0;
+	   $("#workhour").find("select").each(function(){
+		  if($(this).val()==0){
+			  pd1=1;
+		  }
+	  });
 	   
-   }
+	  var pd2 = 0;  
+	  $("#part tr").each(function() {
+		var str =  $(this).find("td:eq(4)").text()
+	 	 if(str.replace(/(^\s*)|(\s*$)/g, "").length ==0){
+	 		pd2=1;
+	 	 }
+	  });
+	  
+	  if($("#inspector").val()==0 ){
+		   layer.msg("没有质检",{icon:5,time:1500});
+	  }else if(pd1==1){
+		   layer.msg("没有派工",{icon:5,time:1500});
+	  }else if(pd2==1){
+				layer.msg("有材料未领料",{icon:5,time:1500});
+	  }else{
+		 var id =  $("#hiddenOrderId").val();
+		  $.ajax({
+			   url:"${pageContext.request.contextPath }/complete.do",
+			   data:{orderId:id},
+			  	success: function(data) { 
+			  		if(data=="1"){
+						layer.msg("已完工",{icon:1,time:1500});
+	               	 	location.replace("${pageContext.request.contextPath }/orderIndex.do");
+			  		}else if(data=="0"){
+						layer.msg("结算数据有误,请确保数据有效",{icon:5,time:1500});
+			  		}
+				}
+		   })
+	  }
+
+	}	  
+
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

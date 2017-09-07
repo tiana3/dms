@@ -50,7 +50,7 @@
 
 	<!--  useGeneratedKeys="true" keyProperty="id"  这就表明要在添加的同时，从数据库获取自动生成的id字段的数据，获取到后会直接设置到调用时传入的对象里 -->
 	<insert id="addOrder" >
-		insert into orders values(#{orderId},#{customerCarInfo.customerCarInfoId},#{SA},#{Date},#{mileage},#{carRemark},#{remark},#{expectDate},#{repairId},#{sender},#{senderPhone},1,0,0,0,0,#{inspector},null)
+		insert into orders values(#{orderId},#{customerCarInfo.customerCarInfoId},#{SA},#{Date},#{mileage},#{carRemark},#{remark},#{expectDate},#{repairId},#{sender},#{senderPhone},1,0,0,0,0,#{inspector},null,null)
 	</insert>
    	
    	<insert id="addCustoms" >
