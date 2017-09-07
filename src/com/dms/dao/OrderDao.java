@@ -44,4 +44,5 @@ public interface OrderDao {
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
 	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
+	void updateOrderById(Order order);
 }

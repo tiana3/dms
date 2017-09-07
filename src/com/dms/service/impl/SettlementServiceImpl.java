@@ -68,16 +68,10 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 	@Override
-	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer sA, String plateNumber,
-			String orderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateOrderById(Order order) {
+		orderDao.updateOrderById(order);		
 	}
 
-	@Override
-	public void deleteWorkout(String orderId) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

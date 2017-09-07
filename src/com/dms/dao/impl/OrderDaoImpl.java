@@ -188,24 +188,10 @@ public class OrderDaoImpl implements OrderDao {
 		mapper.deleteWorkout(orderId);
 	}
 
-
 	@Override
-	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,
-			String orderId) {
-		
-		return null;
-	}
-
-	@Override
-	public void updateOrderStateId(String orderId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteWorkout(String orderId) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateOrderById(Order order) {
+		OrderDao mapper =sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.updateOrderById(order);
+		}
 
 }
