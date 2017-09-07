@@ -40,7 +40,7 @@
     
 
     
-    
+      
 <!-- 在各种标签中的id属性必须和接口中的方法名相同 ， id属性值必须是唯一的，不能够重复使用。parameterType属性指明查询时使用的参数类型，resultMap="userBean" 是表明返回时是返回的上面<resultMap>标签里定义的类型，会把从数据库里读取出来的列，一个一个封装到实体类的property里     
   resultType属性指明查询返回的结果集类型，如果直接返回 resultType=“UserBean”，就不会通过resultMap，会直接把读取的数据，封装到UserBean实体类   数据对应条件是， 数据库里的字段名和实体类的属性名一样，或者和实体类的set方法名对应，不然数据就找不到对应的实体类属性 -->    
 <!-- useGeneratedKeys：（ 仅 对 insert 有 用 ） 这 会 告 诉 MyBatis 使 用 JDBC 的getGeneratedKeys 
@@ -151,8 +151,5 @@
     </delete>
     <insert id="addpartonOrder">
     	insert into order_part(orderId,partId,picker)  values(#{orderId},#{partId},#{picker})
-    </insert> 
-    <update id="updateOrderById">
-    	update orders  set discountPrice=#{discountPrice} ,settlementDate=#{settlementDate} where orderId=${orderId}
-    </update> 
+    </insert>  
 </mapper>
