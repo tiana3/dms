@@ -236,10 +236,11 @@
 							<td><input onblur="hss()" name="zk" id="zk" value="1"></td>
 						</tr>
 						<tr class="text-c">
-					<td colspan="7"><button  class="btn btn-secondary radius" type="submit">
+					<td colspan="7">
+					<button  class="btn btn-secondary radius" type="submit">
 					<i class="Hui-iconfont">&#xe632;</i> 结算</button>
 					<buttin class="btn btn-default radius" type="submit">打印结算单</buttin>
-					<buttin class="btn btn-default radius" type="submit">取消</buttin>	
+					<a style="text-decoration:none" class="btn btn-secondary  radius" href="${pageContext.request.contextPath }/settlement.do">&nbsp;&nbsp;取消&nbsp;&nbsp;</a>
 					</td>	
 					</tr>		
 				</table>

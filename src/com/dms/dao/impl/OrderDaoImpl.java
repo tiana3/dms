@@ -12,6 +12,7 @@ import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 
+
 public class OrderDaoImpl implements OrderDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
@@ -193,6 +194,11 @@ public class OrderDaoImpl implements OrderDao {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.deleteWorkout(orderId);
 	}
+
+	@Override
+	public void updateOrderById(Order order) {
+		OrderDao mapper =sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.updateOrderById(order);
+		}
+
 }
-
-

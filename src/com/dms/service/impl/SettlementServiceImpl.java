@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.dms.dao.EmployeeDao;
 import com.dms.dao.OrderDao;
-import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.service.SettlementService;
@@ -67,5 +66,12 @@ public class SettlementServiceImpl implements SettlementService {
 		orderDao.updateOrderStateId(orderId);
 		
 	}
+
+	@Override
+	public void updateOrderById(Order order) {
+		orderDao.updateOrderById(order);		
+	}
+
+
 
 }

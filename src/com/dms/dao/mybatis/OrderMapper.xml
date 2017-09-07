@@ -155,5 +155,8 @@
     </delete>
     <insert id="addpartonOrder">
     	insert into order_part(orderId,partId,picker)  values(#{orderId},#{partId},#{picker})
-    </insert>  
+    </insert> 
+    <update id="updateOrderById">
+    	update orders  set discountPrice=#{discountPrice} ,settlementDate=#{settlementDate},orderStateId=3 where orderId=${orderId}
+    </update> 
 </mapper>

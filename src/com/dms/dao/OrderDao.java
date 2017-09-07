@@ -22,7 +22,6 @@ public interface OrderDao {
 	List<Order> getSettlementByOrderStateId(@Param("settlementDate")String settlementDate,@Param("SA")Integer SA,@Param("plateNumber") String plateNumber,@Param("orderId")String orderId);
 
 	void updateOrderStateId(@Param("orderId")String orderId);
-
 	void updateOrder(Order order);	
 
 	Order getLastOrder(@Param("plateNumber")String plateNumber, @Param("VIN")String VIN);//查询出最后一次订单的送修人和电话
@@ -41,12 +40,9 @@ public interface OrderDao {
 
 	Order getOrderByOrderId(String orderId);             //根据维修单号查询 维修单
 	Order getOrderById(String orderId);						//根据orderId查询完修单
-	
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
-	void complete(@Param("orderId")String orderId,@Param("date")Date date);    //完工
 	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
-
-
+	void updateOrderById(Order order);
 }

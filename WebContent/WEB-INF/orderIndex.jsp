@@ -191,7 +191,7 @@
         维修业务开单
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="${pageContext.request.contextPath }/orderIndex.do" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 	 </nav> 
-      <div id="div" class="Hui-article">
+      <div class="Hui-article">
       	<article class="cl pd-20">    
 			<span id="error" style="color: red;"></span>
 			<form id="form-order-save" action="${pageContext.request.contextPath }/orderInfo.do" method="post">
@@ -200,8 +200,8 @@
 				<span class="l">
 				    <a class="btn btn-primary radius"  href="${pageContext.request.contextPath }/orderIndex.do">新开单</a>
 					<a href="theMaintenance.do" onclick="" class="btn btn-primary radius">在修业务</a>
-					<a id="complete" href="javascript:;" onclick="noComplete()" class="btn btn-primary radius">完工</a>
-					质检<select id="inspector" class="select" name="inspector" style="display: inline; width: 140px;">
+					<a href="javascript:;" onclick="" class="btn btn-primary radius">完工</a>
+					质检<select class="select" name="inspector" style="display: inline; width: 140px;">
 							<option value="0">&nbsp; </option>
 							<c:forEach items="${inspectors }" var="inspector">
 								<option value="${inspector.employeeId }">${inspector.jobName }-${inspector.employeeName } </option>
@@ -210,7 +210,7 @@
 				</span>
 	            <span class="r">  
    					<a class="btn btn-danger  radius" onclick="deleteOrder()" href="javascript:;"> <i class="Hui-iconfont">&#xe6e2;</i>作废</a>                                  
-					<button class="btn btn-primary radius" onclick="save_Button()" id="saveButton"  type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+					<button class="btn btn-primary radius" id="saveButton"  type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印维修委托书</a>
 					<a href="javascript:;" onclick="" class="btn btn-primary radius">打印派工单</a>
 	            </span>
@@ -381,14 +381,13 @@
 							<td>${part.partNo }</td>
 							<td>${part.sellingPrice }</td>
 							<td>${part.model }</td>
-							<td>
-								<input value="${part.picker }"  name="parts[${num.count - 1 }].picker" type="hidden" >
-								<c:forEach items="${Ma_Tec }" var="ma">
-									<c:if test="${part.picker == ma.employeeId}">
-										${ma.jobName }-${ma.employeeName }
-									</c:if>
-								</c:forEach>
-							</td>
+								<td>
+							<c:forEach items="${Ma_Tec }" var="ma">
+								<c:if test="${part.picker == ma.employeeId}">
+									${ma.jobName }-${ma.employeeName }
+								</c:if>
+							</c:forEach>
+								</td>
 
 							<td>
 								<a style="text-decoration: none" class="ml-5" href="javascript:;"
@@ -516,17 +515,14 @@ function save() {
 	});
 }
 	//创建点击事件，当点击时会先调用sava()方法， 然后返回一个对象，调用form()方法
-	//$("#saveButton").click(function(){
-			
-	function save_Button() {
-		if(save().form()) {
+	$("#saveButton").click(function(){
+		 if(save().form()) {
 			
 			 if($("#hiddenOrderId").val()==""){
 				 //通过表单验证，以下编写自己的代码
 				 var length = document.getElementById("part").children.length;
 				   for (i = 0; i < length; i++) {
 					   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
-					    //document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[1].name="parts["+ i +"].picker";
 				   }
 				   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
 				  
@@ -545,25 +541,24 @@ function save() {
 				 var length = document.getElementById("part").children.length;
 				   for (i = 0; i < length; i++) {
 					   document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[0].name="parts["+ i +"].partId";
-					   if(document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[1]!=null){
-					  		 document.getElementById("part").getElementsByTagName("tr")[i].getElementsByTagName("input")[1].name="parts["+ i +"].picker";
-					   }
 				   }
-				  // $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
+				   $("#form-order-save").attr("action","${pageContext.request.contextPath }/orderSave.do");
 
 				   $("#form-order-save").ajaxSubmit({
 					   url:"${pageContext.request.contextPath }/updateOrder.do",
+					   
+					   
 					  	success: function() { 
+					  		
 							layer.msg("已保存",{icon:1,time:1000});
 						}
 				   })
 			 }
 			 
-			 $("#complete").attr('onclick', 'complete()');
 		 } else {
 		  //校验不通过，什么都不用做，校验信息已经正常显示在表单上
 		 }
-	};
+	});
 	
 	
 	
@@ -652,57 +647,9 @@ function save() {
 	}
    
    //完工
-                         
-  	function noComplete() {
-		   layer.msg("请先保存",{icon:5,time:1500});
-   }
-   
-   $("#div *").not("#saveButton").change(function(){
-		 $("#complete").attr('onclick', 'noComplete()');
-		 return;
-  	});
-   
-   
    function complete(){
-	  var pd1 = 0;
-	   $("#workhour").find("select").each(function(){
-		  if($(this).val()==0){
-			  pd1=1;
-		  }
-	  });
 	   
-	  var pd2 = 0;  
-	  $("#part tr").each(function() {
-		var str =  $(this).find("td:eq(4)").text()
-	 	 if(str.replace(/(^\s*)|(\s*$)/g, "").length ==0){
-	 		pd2=1;
-	 	 }
-	  });
-	  
-	  if($("#inspector").val()==0 ){
-		   layer.msg("没有质检",{icon:5,time:1500});
-	  }else if(pd1==1){
-		   layer.msg("没有派工",{icon:5,time:1500});
-	  }else if(pd2==1){
-				layer.msg("有材料未领料",{icon:5,time:1500});
-	  }else{
-		 var id =  $("#hiddenOrderId").val();
-		  $.ajax({
-			   url:"${pageContext.request.contextPath }/complete.do",
-			   data:{orderId:id},
-			  	success: function(data) { 
-			  		if(data=="1"){
-						layer.msg("已完工",{icon:1,time:1500});
-	               	 	location.replace("${pageContext.request.contextPath }/orderIndex.do");
-			  		}else if(data=="0"){
-						layer.msg("结算数据有误,请确保数据有效",{icon:5,time:1500});
-			  		}
-				}
-		   })
-	  }
-
-	}	  
-   
+   }
    
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

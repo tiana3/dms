@@ -14,12 +14,12 @@ public interface SettlementService {
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
 
-
-	public List<Order> getSettlementByOrderStateId(String settlementDate,Integer SA, String plateNumber,
-			 String orderId);
-
 	public void updateOrderStateId(String orderId);
 
 	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
+
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer sA, String plateNumber,
+			String orderId);
+	public void updateOrderById(Order order);
 
 }

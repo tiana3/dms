@@ -240,7 +240,7 @@
 								</c:forEach>
 							</td>
 							<td>${order.completedDateString }</td>
-							<td>${order.discountPrice }</td>
+							<td>${order.workPrice+order.partPrice}</td>
 							<td>
 							<c:if test="${order.orderStateId == 1}">在修</c:if>
 							<c:if test="${order.orderStateId == 2}">完工</c:if>
