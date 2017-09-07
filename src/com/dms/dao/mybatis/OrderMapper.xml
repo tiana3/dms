@@ -29,6 +29,7 @@
      	<result property="workPrice" column="workPrice" javaType="java.lang.Double"></result>
      	<result property="partPrice" column="partPrice" javaType="java.lang.Double"></result>
      	<result property="discountPrice" column="discountPrice" javaType="java.lang.Double"></result>
+  		<result property="settlementDate" column="settlementDate" javaType="java.util.Date"></result>
   		
   		<!-- 根据数据库 column="customerCarInfoId"的值  去com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById 查询详细的车辆信息            javaType="CustomerCarInfo"是指实体类的属性是什么类型的 -->
   		<association property="customerCarInfo" column="customerCarInfoId"  javaType="CustomerCarInfo" select="com.dms.dao.CustomerCarInfoDao.getCustomerCarInfoById"></association>  		
