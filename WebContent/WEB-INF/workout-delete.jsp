@@ -1,12 +1,11 @@
-
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" import="java.util.List"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -14,9 +13,10 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="Bookmark" href="favicon.ico">
 <link rel="Shortcut Icon" href="favicon.ico" />
-
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
-
+<![endif]-->
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -27,13 +27,14 @@
 	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script><![endif]-->
+<!--/meta 作为公共模版分离出去-->
 
-<script src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
-
-<title>在修业务</title>
+<title>取消完工</title>
 </head>
 <body>
-
 	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
@@ -41,7 +42,8 @@
 		<span class="logo navbar-slogan f-l mr-10 hidden-xs"><img alt="车标" src="image/das.jpg" style="width: 50px"></span>
 		
 			<span class="logo navbar-logo f-l mr-10 hidden-xs">售后管理系统</span>
-			<nav class="nav navbar-nav" id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+			<nav class="nav navbar-nav">
+						<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
 				<li class="dropDown dropDown_hover">
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
@@ -51,10 +53,10 @@
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
-
-				<li id="Hui-skin" class="dropDown right dropDown_hover">
-					<a href="javascript:;" class="dropDown_A" title="换肤">
-					<i class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
+				
+				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
+					href="javascript:;" class="dropDown_A" title="换肤"><i
+						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
 						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
@@ -62,8 +64,7 @@
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
 						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 			</nav>
 		</div>
@@ -76,16 +77,15 @@
 
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt class="selected">
+			<dt>
 				<i class="Hui-iconfont">&#xe616;</i> 维修业务<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd style="display: block;">
+			<dd>
 				<ul>
 					<li><a href="#" title="预约">预约</a></li>
 					<li><a href="#" title="维修估价">维修估价</a></li>
 					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/order.do')" title="维修业务开单">维修业务开单</a></li>
-
 					<li><a href="#" title="完工">完工</a></li>
 					<li><a href="#" title="维修业务查询">维修业务查询</a></li>
 				</ul>
@@ -114,16 +114,11 @@
 				<i class="Hui-iconfont">&#xe620;</i> 财务管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-<<<<<<< HEAD
 					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
-					<li><a href="#" title="取消完工">取消完工</a></li>
-=======
-					<li><a href="#" title="取消结算">取消结算</a></li>
-					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
+					<li class="current"><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -147,8 +142,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath }/employeelist"
-						title="员工管理">员工管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/employeelist" title="员工管理">员工管理</a></li>
 					<li><a href="#" title="操作员管理">操作员管理</a></li>
 				</ul>
 			</dd>
@@ -165,22 +159,15 @@
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd >
 				<ul>
-
-
-					<li><a
-						href="${pageContext.request.contextPath }/WorkHourListServlet"
-						title="工时工位管理">工时工位管理</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/GetCarTypeServlet"
-						title="材料目录管理">材料目录管理</a></li>
-					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/CarTypeListServlet')" title="厂家车型管理">厂家车型管理</a></li>
-
+					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li ><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -192,117 +179,125 @@
 	</div>
 	<!--/_menu 作为公共模版分离出去-->
 
-
-<section class="Hui-article-box"> 
-	<nav class="breadcrumb">
+	<section class="Hui-article-box"> <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		维修业务<span class="c-gray en">&gt;
-		</span> 在修业务 <a class="btn btn-success radius r"
+	财务管理 <span class="c-gray en">&gt;</span> 取消完工 <a
+		class="btn btn-success radius r"
 		style="line-height: 1.6em; margin-top: 3px"
-		href="javascript:location.replace(location.href);" title="刷新">
-		<i class="Hui-iconfont">&#xe68f;</i></a>
-	 </nav>
-	<div class="Hui-article">
-		<article class="cl pd-20">
-			<form action="${pageContext.request.contextPath }/getOrders.do" method="get">
-				<div class="text-c">
-				维修单号：
-				<input class="input-text" type="text" name="orderId" style="width:120px;">&nbsp;&nbsp;&nbsp;
-				车牌号：
-				<input class="input-text" type="text" name="plateNumber" style="width:120px;">&nbsp;&nbsp;&nbsp;
-				服务顾问： 
-				<select class="" name="repairId" style="width: 120px; height: 30px;">
-					<option value="0">全部</option>
-					<c:forEach items="${sa }" var="employee">
-						<option value="${employee.employeeId }">${employee.employeeName }</option>
-					</c:forEach>
-				</select>&nbsp;&nbsp;&nbsp;
-				维修类型：
-				<select class="select" name="employeeId" style="width: 120px; height: 30px;">
-					<option value="0">全部</option>
-					<c:forEach items="${repairType }" var="type">
-						<option value="${type.repairTypeId }">${type.repairType }</option>
-					</c:forEach>
-				</select>&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
-				</div>
-		
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
+		href="${pageContext.request.contextPath }/workout-list.do" title="刷新"><i
+		class="Hui-iconfont">&#xe68f;</i></a></nav>
 
-			<span class="r">共有数据：<strong>${fn:length(allOrders)}</strong> 条
-			</span>
+	    <div class="Hui-article">
+		<article class="cl pd-20">
+		<form action="${pageContext.request.contextPath }/workout-li.do" method="post">
+		<div class="text-c"> 
+			服务顾问：
+			<select name="SA">
+				<option value="0">全部</option>
+				<c:forEach items="${employee }" var="employee" >
+					<option value="${employee.employeeId }">${employee.employeeName }</option>
+				</c:forEach>
+				</select>
+	
+			完工时间：
+			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
+			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="Date" value="" class="input-text Wdate" id="datemax" style="width:100px;">
+			车牌号：
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">			
+			维修单号：
+			<input type="text" name="orderId" id="" style="width:100px" class="input-text">			
+			
+			
+			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		</div>
-		<div class="mt-20">
-			<table
-				class="table table-border table-bordered table-bg table-hover table-sort">
+		</form>
+		
+		<div class="mt-10">
+			<table class="table table-border table-bordered table-bg table-sort">
 				<thead>
-					<tr class="text-c">
-						<th width="66">序号</th>
+					<tr class="text-c">				
+						<th>序号</th>
 						<th>维修单号</th>
 						<th>车牌号</th>
-						<th width="120">维修类型</th>
-						<th width="120">服务顾问</th>
-						<th width="140">开单时间</th>
-						<th width="80">操作</th>
+						<th>服务顾问</th>
+						<th>完工时间</th>
+						<th>金额</th>
+						<th>状态</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${allOrders }" var="order" varStatus="varSta">
-						<tr class="text-c">
-							<td>${varSta.count }</td>
-							<td>${order.orderId }</td>
-							<td>${order.customerCarInfo.plateNumber}</td>
+					<c:forEach items="${order }" var="order" varStatus="varSta">					
+						<tr class="text-c">									
+							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
+							<td>${order.orderId}</td>
+							<td>${order.customerCarInfo.plateNumber }</td>
 							<td>
-							<c:forEach items="${repairType }" var="type">
-								<c:if test="${type.repairTypeId == order.repairId}">
-									${type.repairType }
-								</c:if>
-							</c:forEach>
+								<c:forEach items="${employee}" var="employee">
+									<c:if test="${order.SA == employee.employeeId}">
+										${employee.employeeName}
+									</c:if>
+								</c:forEach>
 							</td>
-							<td><c:forEach items="${sa }" var="employee">
-								<c:if test="${employee.employeeId == order.SA}">
-									${employee.employeeName }
-								</c:if>
-							</c:forEach>
-							</td>
-							<td>${order.date }</td>
+							<td>${order.completedDate }</td>
+							<td>${order.discountPrice }</td>
 							<td>
+							<c:if test="${order.orderStateId == 1}">在修</c:if>
+							<c:if test="${order.orderStateId == 2}">完工</c:if>
+							<c:if test="${order.orderStateId == 3}">结算</c:if>	
+							</td>
 							
-							<a href="${pageContext.request.contextPath }/showOrder.do?orderId=${order.orderId}" class="btn btn-secondary  radius">选择</a>
-
-							</td>
-
+							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/workout-delete.do?orderId=${order.orderId}" onclick="update(this)">取消完工</a>
+                            
 						</tr>
+							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		</form>
-		</article>
 		
-	
+		</article>
 	</div>
 	</section>
 
+	<!--_footer 作为公共模版分离出去-->
 	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="js/myJs.js"></script>
+
 	<script type="text/javascript"
 		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
+	<!--/_footer /作为公共模版分离出去-->
 
-
-
+	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript"
 		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript"
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script>
-function changePassword(title,url,w,h){
-    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
-}
-	
-	DD_belatedPNG.fix('*');
+	<script type="text/javascript">
+
+	 function update(obj){
+		
+		 $(obj).parents("tr").remove();
+		 layer.msg('已取消完工!', {icon:6,time:2000});
+	    }
+	function cartype_del(obj,id){
+		layer.confirm('车型删除须谨慎，确认要删除吗？',function(index){
+			//此处请求后台程序，下方是成功后的前台处理……
+			$.ajax({
+				url : "${pageContext.request.contextPath }/CarTypeRemoveServlet?modelId="+ id});
+			$(obj).parents("tr").remove();
+			layer.msg('已删除!',{icon:1,time:1000});
+			
+		});
+	}
+	function changePassword(title,url,w,h){
+	    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
+	}
+	  
 </script>
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

@@ -117,8 +117,13 @@
 			<dd>
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-					<li><a href="#" title="取消结算">取消结算</a></li>
+<<<<<<< HEAD
+					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
+=======
+					<li><a href="#" title="取消结算">取消结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
+>>>>>>> branch 'master' of file:///\\172.13.17.209\git
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -171,12 +176,8 @@
 					<li class="current"><a
 						href="${pageContext.request.contextPath }/WorkHourListServlet"
 						title="工时工位管理">工时工位管理</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/GetCarTypeServlet"
-						title="材料目录管理">材料目录管理</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/CarTypeListServlet"
-						title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/CarTypeListServlet')" title="厂家车型管理">厂家车型管理</a></li>
 
 				</ul>
 			</dd>

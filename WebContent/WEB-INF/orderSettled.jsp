@@ -1,40 +1,41 @@
-<%@page import="com.sun.xml.internal.bind.v2.schemagen.xmlschema.Import"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8" import="java.util.*,com.dms.entity.Part,com.dms.dao.impl.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!--_meta 作为公共模版分离出去-->
 <html>
-<!-- <head> -->
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="Bookmark" href="favicon.ico" >
-    <link rel="Shortcut Icon" href="favicon.ico" />
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="lib/html5.js"></script>
-    <script type="text/javascript" src="lib/respond.min.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
-    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
-    <!--[if IE 6]>
-    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
-    <script>DD_belatedPNG.fix('*');</script><![endif]-->
-    <!--/meta 作为公共模版分离出去-->
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="favicon.ico">
+<link rel="Shortcut Icon" href="favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script><![endif]-->
+<!--/meta 作为公共模版分离出去-->
 
-    <title>登录欢迎页</title>
-    <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-    <meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+<title>取消结算</title>
 </head>
 <body>
-<!--_header 作为公共模版分离出去-->
+	<!--_header 作为公共模版分离出去-->
 	<header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
@@ -48,6 +49,7 @@
 					${userName }<i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onclick="changePassword()">修改密码</a></li>	
+
 						<li><a href="${pageContext.request.contextPath }/logout.do">退出</a></li>
 					</ul>
 				</li>
@@ -62,8 +64,7 @@
 						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
 						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
 						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 			</nav>
 		</div>
@@ -113,16 +114,11 @@
 				<i class="Hui-iconfont">&#xe620;</i> 财务管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd style="display: block;">
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-<<<<<<< HEAD
-					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
+					<li class="current"><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
-=======
-					<li><a href="#" title="取消结算">取消结算</a></li>
-					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -163,11 +159,11 @@
 			</dd>
 		</dl>
 		<dl id="menu-tongji">
-			<dt>
+			<dt class="selected">
 				<i class="Hui-iconfont">&#xe61a;</i> 基础信息管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd >
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
@@ -183,68 +179,111 @@
 	</div>
 	<!--/_menu 作为公共模版分离出去-->
 
+	<section class="Hui-article-box"> <nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+	财务管理 <span class="c-gray en">&gt;</span> 取消结算 <a
+		class="btn btn-success radius r"
+		style="line-height: 1.6em; margin-top: 3px"
+		href="${pageContext.request.contextPath }/cancelSettlement.do" title="刷新"><i
+		class="Hui-iconfont">&#xe68f;</i></a></nav>
 
-
-<section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont"></i> 首页 
-		<span class="c-999 en">&gt;</span>
-		<span class="c-666">欢迎页</span> 
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-	<div class="Hui-article">
+	    <div class="Hui-article">
 		<article class="cl pd-20">
-			<p class="f-20 text-success">欢迎回来，${userName }！</p>
-
-	</table>
-			<table class="table table-border table-bordered table-bg mt-20">
-				<thead>
-					<tr>
-						<th colspan="2" scope="col">信息</th>
-			</tr>
-		</thead>
-				<tbody>
-					<tr>
-						<td width="30%">在修单数</td>
-						<td><span id="lbServerName"></span>10</td>
-			</tr>
-					<tr>
-						<td>今日预约</td>
-						<td>3</td>
-			</tr>
-					<tr>
-						<td>本月已结算台次</td>
-						<td>101</td>
-			</tr>
+		<form action="${pageContext.request.contextPath }/cancelSettlements.do" method="post">
+		<div class="text-c"> 
+			服务顾问：
+			<select name="SA">
+				<option value="0">全部</option>
+				<c:forEach items="${employee }" var="employee" >
+					<option value="${employee.employeeId }">${employee.employeeName }</option>
+				</c:forEach>
+				</select>
 	
-		</tbody>
-	</table>
-</article>
+			结算时间：
+			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" name="Date"  value="" class="input-text Wdate" id="datemin" style="width:100px;">
+			-<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" name="Date" value="" class="input-text Wdate" id="datemax" style="width:100px;">
+			车牌号：
+			<input type="text" name="plateNumber" id="" style="width:100px" class="input-text">			
+			维修单号：
+			<input type="text" name="orderId" id="" style="width:100px" class="input-text">			
+			
+			
+			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+		</div>
+		</form>
+		
+		<div class="mt-10">
+			<table class="table table-border table-bordered table-bg table-sort">
+				<thead>
+					<tr class="text-c">				
+						<th>序号</th>
+						<th>维修单号</th>
+						<th>车牌号</th>
+						<th>服务顾问</th>
+						<th>结算时间</th>
+						<th>金额</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${order }" var="order" varStatus="varSta">					
+						<tr class="text-c">									
+							<td><input type="hidden" value="${order.orderId}" >${varSta.count }</td>
+							<td>${order.orderId}</td>
+							<td>${order.customerCarInfo.plateNumber }</td>
+							<td>
+								<c:forEach items="${employee}" var="employee">
+									<c:if test="${order.SA == employee.employeeId}">
+										${employee.employeeName}
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>${order.settlementDate }</td>
+							<td>${order.discountPrice }</td>
+							<td>
+							<c:if test="${order.orderStateId == 1}">在修</c:if>
+							<c:if test="${order.orderStateId == 2}">完工</c:if>
+							<c:if test="${order.orderStateId == 3}">结算</c:if>	
+							</td>
+							
+							<td class="f-14 product-brand-manage"> <a onclick="update(this)" style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/updateOSId.do?orderId=${order.orderId}" >取消结算</a>
+                            
+						</tr>
+							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		</article>
+	</div>
+	</section>
 
-<!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
-<!--/_footer /作为公共模版分离出去-->
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	<script type="text/javascript" src="js/myJs.js"></script>
 
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript" src="js/myJs.js"></script>
+	<script type="text/javascript"
+		src="static/h-ui.admin/js/H-ui.admin.page.js"></script>
+	<!--/_footer /作为公共模版分离出去-->
 
-<script type="text/javascript">
-/* $(document).ready(function(){ 
-	var message="${message}";
-	if(message!="") {
-		   layer.msg(message,{icon:2,time:1500});
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+
+	function update(obj){
+	    $(obj).parents("tr").remove();
+	    layer.msg('已取消结算',{icon:6,time:2300})
 	}
-}) */
-  
-function changePassword(title,url,w,h){
-    layer_show("修改密码","${pageContext.request.contextPath }/password.do",500,300);
-}
-  
+	  
 </script>
-<!--/请在上方写此页面业务相关的脚本-->
+	<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

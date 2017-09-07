@@ -117,8 +117,8 @@
 			<dd style="display: block;">
 				<ul>
 					<li class="current"><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-					<li><a href="#" title="取消结算">取消结算</a></li>
-					<li><a href="#" title="取消完工">取消完工</a></li>
+					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
+					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -167,7 +167,7 @@
 				<ul>
 					<li><a href="${pageContext.request.contextPath }/WorkHourListServlet" title="工时工位管理">工时工位管理</a></li>
 					<li><a href="${pageContext.request.contextPath }/GetCarTypeServlet" title="材料目录管理">材料目录管理</a></li>
-					<li ><a href="${pageContext.request.contextPath }/CarTypeListServlet" title="厂家车型管理">厂家车型管理</a></li>
+					<li><a href="javascript:;"  onclick="powerJump('${pageContext.request.contextPath }/CarTypeListServlet')" title="厂家车型管理">厂家车型管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -247,7 +247,7 @@
 							<c:if test="${order.orderStateId == 3}">结算</c:if>	
 							</td>
 							
-							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius" onClick="part_edit('完工','${pageContext.request.contextPath }/getorderbyid.do?orderId=${order.orderId}')" href="javascript:;" >选择</a>
+							<td class="f-14 product-brand-manage"> <a style="text-decoration:none" class="btn btn-secondary  radius"  href="${pageContext.request.contextPath }/getorderbyid.do?orderId=${order.orderId}" >选择</a>
                             
 						</tr>
 							<!-- 	href="${pageContext.request.contextPath}/CarTypeRemoveServlet?modelId=${carType.modelId }" -->
@@ -277,9 +277,7 @@
 		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
-	function cartype_edit(title,url,id,w,h){
-		layer_show(title,url,w,h);
-	}
+
 	 function part_edit(title,url,id,w,h){
 	    	/*       var index = layer.open({
 	            type: 2,

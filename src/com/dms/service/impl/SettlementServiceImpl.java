@@ -17,7 +17,7 @@ public class SettlementServiceImpl implements SettlementService {
 	public EmployeeDao getEmployeeDao() {
 		return employeeDao;
 	}
-
+ 
 	public void setEmployeeDao(EmployeeDao employeeDao) {
 		this.employeeDao = employeeDao;
 	}
@@ -32,8 +32,8 @@ public class SettlementServiceImpl implements SettlementService {
 
 	@Override
 	public List<Order> getSettlementByWordKey(String completedDate, Integer SA, 
-			String customerCarInfo, String orderId) {
-			List<Order> order = orderDao.getSettlementByWordKey(completedDate, SA,  customerCarInfo, orderId);
+			String plateNumber, String orderId) {
+			List<Order> order = orderDao.getSettlementByWordKey(completedDate, SA,  plateNumber, orderId);
 			return order; 
 	}
 
@@ -43,7 +43,29 @@ public class SettlementServiceImpl implements SettlementService {
 		return employee;
 	}
 
+	@Override
+	public Order getOrderById(String orderId) {
+		Order order = orderDao.getOrderById(orderId);
+		return order;
+	}
 
+	@Override
 
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,
+			String orderId) {
+		List<Order> order = orderDao.getSettlementByOrderStateId(settlementDate, SA, plateNumber, orderId);
+		return order; 
+	}
+
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
+		orderDao.deleteWorkout(orderId);
+	}
+
+	@Override
+	public void updateOrderStateId(String orderId) {
+		orderDao.updateOrderStateId(orderId);
+		
+	}
 
 }
