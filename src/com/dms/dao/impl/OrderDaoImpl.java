@@ -175,19 +175,17 @@ public class OrderDaoImpl implements OrderDao {
 		List<Order> order =mapper.getSettlementByOrderStateId(settlementDate, SA, plateNumber, orderId);
 		return order;
 	}
-
-	
+	@Override
+	public void updateOrderStateId(String orderId) {
+		
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	
+		mapper.updateOrderStateId(orderId);
+	}
+	@Override
 	public void deleteWorkout(String orderId) {
 		// TODO Auto-generated method stub
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.deleteWorkout(orderId);
-	}
-
-	@Override
-	public void updateOrderStateId(String orderId) {
-		// TODO Auto-generated method stub
-		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
-		mapper.updateOrderStateId(orderId);
 	}
 
 
