@@ -12,6 +12,7 @@ import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 
+
 public interface OrderDao {
 	//订单 的 操作
 	List<Order> getAllOrders();   // 查看所有订单
@@ -22,7 +23,7 @@ public interface OrderDao {
 
 	void updateOrderStateId(@Param("orderId")String orderId);
 	void updateOrder(Order order);	
-	void updateOrderById(Order order);
+
 	Order getLastOrder(@Param("plateNumber")String plateNumber, @Param("VIN")String VIN);//查询出最后一次订单的送修人和电话
 	
 	void addOrder(Order order);     //添加订单基本信息	

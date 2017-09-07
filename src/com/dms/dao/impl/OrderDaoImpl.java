@@ -11,6 +11,7 @@ import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.entity.Part;
 
+
 public class OrderDaoImpl implements OrderDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
@@ -168,10 +169,25 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public void updateOrderById(Order order) {
-		OrderDao mapper =sqlSessionTemplate.getMapper(OrderDao.class);
-		mapper.updateOrderById(order);
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,
+			String orderId) {
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		List<Order> order =mapper.getSettlementByOrderStateId(settlementDate, SA, plateNumber, orderId);
+		return order;
 	}
+	@Override
+	public void updateOrderStateId(String orderId) {
+		
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);	
+		mapper.updateOrderStateId(orderId);
+	}
+	@Override
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
+		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
+		mapper.deleteWorkout(orderId);
+	}
+
 
 	@Override
 	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,

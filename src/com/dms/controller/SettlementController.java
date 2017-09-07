@@ -1,7 +1,5 @@
 package com.dms.controller;
 
-
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -117,5 +115,11 @@ public class SettlementController {
 		order.setSettlementDate(new Date());
 		service.updateOrderById(order);
 		return "redirect:/settlement.do";
+	}
+	@RequestMapping("updateorderbyid.do")
+	public String getUpdateOrder(Model model){
+		
+		return null;
+
 	}
 }
