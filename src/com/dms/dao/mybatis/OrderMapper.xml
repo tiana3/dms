@@ -153,6 +153,6 @@
     	insert into order_part(orderId,partId,picker)  values(#{orderId},#{partId},#{picker})
     </insert> 
     <update id="updateOrderById">
-    	update orders  set discountPrice=#{discountPrice} ,settlementDate=#{settlementDate} where orderId=${orderId}
+    	update orders  set discountPrice=#{discountPrice} ,settlementDate=#{settlementDate},orderStateId=3 where orderId=${orderId}
     </update> 
 </mapper>

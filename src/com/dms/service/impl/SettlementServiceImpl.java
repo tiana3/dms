@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.dms.dao.EmployeeDao;
 import com.dms.dao.OrderDao;
-import com.dms.entity.CustomerCarInfo;
 import com.dms.entity.Employee;
 import com.dms.entity.Order;
 import com.dms.service.SettlementService;
@@ -58,6 +57,19 @@ public class SettlementServiceImpl implements SettlementService {
 	@Override
 	public void updateOrderStateId(String orderId) {
 		orderDao.updateOrderStateId(orderId);
+		
+	}
+
+	@Override
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer sA, String plateNumber,
+			String orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
 		
 	}
 

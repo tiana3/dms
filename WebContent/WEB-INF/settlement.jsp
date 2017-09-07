@@ -117,13 +117,10 @@
 			<dd style="display: block;">
 				<ul>
 					<li class="current"><a href="${pageContext.request.contextPath }/settlement.do" title="结算">结算</a></li>
-<<<<<<< HEAD
 					<li><a href="${pageContext.request.contextPath }/cancelSettlement.do" title="取消结算">取消结算</a></li>
 					<li><a href="#" title="取消完工">取消完工</a></li>
-=======
 					<li><a href="#" title="取消结算">取消结算</a></li>
 					<li><a href="${pageContext.request.contextPath }/workout-list.do" title="取消完工">取消完工</a></li>
->>>>>>> branch 'master' of file:///\\172.13.17.209\git
 					<li><a href="#" title="材料进货管理">材料进货管理</a></li>
 				</ul>
 			</dd>
@@ -245,7 +242,7 @@
 								</c:forEach>
 							</td>
 							<td>${order.completedDate }</td>
-							<td>${order.discountPrice }</td>
+							<td>${order.workPrice+order.partPrice}</td>
 							<td>
 							<c:if test="${order.orderStateId == 1}">在修</c:if>
 							<c:if test="${order.orderStateId == 2}">完工</c:if>

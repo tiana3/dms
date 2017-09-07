@@ -173,4 +173,23 @@ public class OrderDaoImpl implements OrderDao {
 		mapper.updateOrderById(order);
 	}
 
+	@Override
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer SA, String plateNumber,
+			String orderId) {
+		
+		return null;
+	}
+
+	@Override
+	public void updateOrderStateId(String orderId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteWorkout(String orderId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

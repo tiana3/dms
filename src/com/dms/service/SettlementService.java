@@ -14,4 +14,8 @@ public interface SettlementService {
 	public List<Employee> getSA();
 	public Order getOrderById(String orderId);
 	public void updateOrderById(Order order);
+	public List<Order> getSettlementByOrderStateId(String settlementDate, Integer sA, String plateNumber,
+			String orderId);
+	void updateOrderStateId(String orderId);
+	public void deleteWorkout(String orderId);
 }

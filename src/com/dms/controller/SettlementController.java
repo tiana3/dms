@@ -116,6 +116,6 @@ public class SettlementController {
 		SettlementService service =(SettlementService)ctx.getBean("settlementServiceImpl");
 		order.setSettlementDate(new Date());
 		service.updateOrderById(order);
-		return "settlement";
+		return "redirect:/settlement.do";
 	}
 }
