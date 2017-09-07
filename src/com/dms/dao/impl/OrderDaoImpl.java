@@ -1,5 +1,6 @@
 package com.dms.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -161,9 +162,9 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public void complete(String orderId) {
+	public void complete(String orderId, Date date) {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
-		mapper.complete(orderId);
+		mapper.complete(orderId,date);
 	}
 
 	@Override
@@ -192,8 +193,6 @@ public class OrderDaoImpl implements OrderDao {
 		OrderDao mapper = sqlSessionTemplate.getMapper(OrderDao.class);
 		mapper.deleteWorkout(orderId);
 	}
-
-
 }
 
-}
+

@@ -1,5 +1,6 @@
 package com.dms.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -44,7 +45,7 @@ public interface OrderDao {
 	void updatepicker(@Param("Id")Integer Id,@Param("picker")Integer picker);      //领料人变更
 	void dedeletepart(@Param("Id")Integer Id);          //根据中间表Id删除单个零件
 	void addpartonOrder(@Param("orderId")String orderId,@Param("partId")String partId,@Param("picker")int picker);
-	void complete(String orderId);
+	void complete(@Param("orderId")String orderId,@Param("date")Date date);    //完工
 	void deleteWorkout(@Param("orderId")String orderId);     //取消完工
 
 

@@ -148,7 +148,7 @@
     </update>
     
     <update id="complete">
-    	update orders set orderStateId = 2 where orderId=#{orderId}
+    	update orders set orderStateId = 2,completedDate=#{date} where orderId=#{orderId}
     </update>
     <delete id="dedeletepart">
     	delete from order_part where Id = ${Id}

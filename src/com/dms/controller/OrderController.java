@@ -481,7 +481,7 @@ public class OrderController {
 				response.getWriter().print("0");
 				return null;
 			}else{
-				service.complete(orderId);
+				service.complete(orderId,new Date());
 				response.getWriter().print("1");
 				return null;
 			}

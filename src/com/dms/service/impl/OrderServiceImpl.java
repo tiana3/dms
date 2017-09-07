@@ -165,8 +165,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void complete(String orderId) {
-		orderDao.complete(orderId);
+	public void complete(String orderId,Date date) {
+		orderDao.complete(orderId,date);
 	}
 
 }
